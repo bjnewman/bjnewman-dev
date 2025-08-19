@@ -1,0 +1,22 @@
+:root {
+  --pastel-pink: #FFD1DC;
+  --pastel-blue: #BFDFFF;
+  --pastel-yellow: #FFFFD1;
+  --pastel-green: #CCFFCC;
+  --pastel-purple: #E6D1FF;
+  
+  --text-primary: #4A4A4A;
+  --text-secondary: #757575;
+  
+  --font-main: 'Nunito', sans-serif;
+  --font-accent: 'Comic Neue', cursive;
+}
+
+body {
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--pastel-blue) 0%, var(--pastel-pink) 100%);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
