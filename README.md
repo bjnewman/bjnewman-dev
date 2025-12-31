@@ -8,11 +8,13 @@ A hybrid static site using Eleventy for content and React for interactive compon
 # Install dependencies
 bun install
 
-# Develop Eleventy site (recommended for content work)
-bun run dev:eleventy
+# Start local development server
+bun dev
+# or
+bun run serve
 
 # Develop React components in isolation
-bun dev
+bun run dev:react
 
 # Build for production
 bun run build
@@ -59,8 +61,8 @@ See [ARCHITECTURE.md](./ARCHITECTURE.md) for detailed documentation on:
 
 ## Scripts
 
-- `bun dev` - Vite dev server for React components
-- `bun run dev:eleventy` - Eleventy dev server with live reload
+- `bun dev` / `bun run serve` - Start Eleventy dev server with live reload
+- `bun run dev:react` - Vite dev server for React components
 - `bun run build` - Production build (Vite + Eleventy)
 - `bun run build:vite` - Build React app only
 - `bun run build:eleventy` - Build Eleventy site only

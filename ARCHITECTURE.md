@@ -42,8 +42,8 @@ This site uses a hybrid Eleventy + React architecture where:
 
 ### Development
 
-- `bun dev` - Develop React components in isolation with Vite HMR
-- `bun run dev:eleventy` - Develop Eleventy site with live reload
+- `bun dev` / `bun run serve` - Start Eleventy dev server with live reload
+- `bun run dev:react` - Develop React components in isolation with Vite HMR
 
 ### Production
 
@@ -167,8 +167,8 @@ Imported by React components via `import './styles/components.css'`.
    - If it needs interactivity: Create React component in `/src/components/`
 
 2. **Testing locally:**
-   - Eleventy site: `bun run dev:eleventy` (http://localhost:8080)
-   - React components: `bun dev` (http://localhost:5173)
+   - Eleventy site: `bun dev` or `bun run serve` (http://localhost:8080)
+   - React components: `bun run dev:react` (http://localhost:5173)
 
 3. **Building for production:**
    - `bun run build` - Creates production build in `/public/`

@@ -4,13 +4,12 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "dev:eleventy": "eleventy --serve",
+    "dev": "eleventy --serve",
+    "serve": "eleventy --serve",
+    "dev:react": "vite",
     "build": "bun run build:vite && bun run build:eleventy",
     "build:vite": "tsc -b && vite build",
     "build:eleventy": "eleventy",
-    "eleventy": "eleventy",
-    "eleventy:serve": "eleventy --serve",
     "lint": "eslint .",
     "preview": "vite preview",
     "clean": "rm -rf public dist"
