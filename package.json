@@ -5,15 +5,22 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev:eleventy": "eleventy --serve",
+    "build": "bun run build:vite && bun run build:eleventy",
+    "build:vite": "tsc -b && vite build",
+    "build:eleventy": "eleventy",
+    "eleventy": "eleventy",
+    "eleventy:serve": "eleventy --serve",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean": "rm -rf public dist"
   },
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
     "@eslint/js": "^9.33.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",

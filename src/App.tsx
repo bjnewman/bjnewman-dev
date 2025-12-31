@@ -1,11 +1,12 @@
-import { Layout } from './components/Layout'
+import { ProjectFilter } from './components/ProjectFilter'
 import './styles/theme.css'
+import './styles/components.css'
 
 function App() {
   return (
-    <Layout>
-      <h1>Welcome to my site!</h1>
-    </Layout>
+    <div>
+      <ProjectFilter />
+    </div>
   )
 }
 

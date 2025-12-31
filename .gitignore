@@ -7,6 +7,11 @@ dist-ssr/
 .vite/
 .build/
 /.cache
+public/
+_site/
+
+# Claude context (local development notes and context)
+.claude/
 
 # Logs
 logs
