@@ -31,7 +31,6 @@ export const gradients = [
 
 export const useGradientSwitcher = () => {
   const switchGradient = (gradientValue: string) => {
-    console.log('🌈 Switching gradient to:', gradientValue);
     // Use setProperty with important to override CSS
     document.body.style.setProperty('background', gradientValue, 'important');
     document.body.style.setProperty('background-attachment', 'fixed', 'important');
@@ -40,7 +39,6 @@ export const useGradientSwitcher = () => {
     if (index !== -1) {
       document.body.dataset.gradientIndex = index.toString();
     }
-    console.log('Body background is now:', document.body.style.background);
   };
 
   const cycleGradient = () => {

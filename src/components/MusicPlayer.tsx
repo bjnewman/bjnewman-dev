@@ -5,9 +5,8 @@ export const useMusicPlayer = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Create audio element with a royalty-free elevator music URL
-    // Using a placeholder - you'll need to add your own music file
-    audioRef.current = new Audio();
+    // Create audio element with elevator music
+    audioRef.current = new Audio('/assets/elevator-music.mp3');
     audioRef.current.loop = true;
     audioRef.current.volume = 0.3;
 
@@ -26,11 +25,10 @@ export const useMusicPlayer = () => {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      // For now, we'll just track state without actual audio
-      // You can add a music file later
+      audioRef.current.play().catch(err => {
+        console.error('Audio file not found. Add elevator-music.mp3 to /public/assets/');
+      });
       setIsPlaying(true);
-      console.log('🎵 Elevator music would be playing here!');
-      console.log('Add an MP3 file to /public/music/ to enable audio');
     }
   };
 
@@ -38,7 +36,7 @@ export const useMusicPlayer = () => {
     if (!isPlaying) return null;
 
     return (
-      <div className="music-indicator">
+      <div className="music-indicator" onClick={toggleMusic}>
         <span className="music-note">🎵</span>
         <span className="music-text">Elevator Music Mode</span>
       </div>

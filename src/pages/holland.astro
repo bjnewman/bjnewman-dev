@@ -1,35 +1,36 @@
 ---
-layout: layouts/base.njk
-title: Holland's Secret Page
+import Base from '../layouts/Base.astro';
 ---
 
-<div class="holland-page">
-  <h1>🌟 Welcome Holland! 🌟</h1>
+<Base title="Holland's Secret Page">
+  <div class="holland-page">
+    <h1>🌟 Welcome Holland! 🌟</h1>
 
-  <p>You found the secret page! This is your very own special corner of Uncle Ben's website.</p>
+    <p>You found the secret page! This is your very own special corner of Uncle Ben's website.</p>
 
-  <h2>🎨 Cool Stuff</h2>
+    <h2>🎨 Cool Stuff</h2>
 
-  <p>Here are some fun things you can do:</p>
+    <p>Here are some fun things you can do:</p>
 
-  <ul>
-    <li>Press <kbd>Cmd+K</kbd> (or <kbd>Ctrl+K</kbd>) anywhere on this site to open the secret menu</li>
-    <li>Try the confetti button for a party! 🎉</li>
-    <li>Change the colors with the gradient switcher 🌈</li>
-    <li>Turn on elevator music 🎵</li>
-  </ul>
+    <ul>
+      <li>Press <kbd>Cmd+K</kbd> (or <kbd>Ctrl+K</kbd>) anywhere on this site to open the secret menu</li>
+      <li>Try the confetti button for a party! 🎉</li>
+      <li>Change the colors with the gradient switcher 🌈</li>
+      <li>Turn on elevator music 🎵</li>
+    </ul>
 
-  <h2>✨ Your Message</h2>
+    <h2>✨ Your Message</h2>
 
-  <div class="holland-message">
-    <p>Holland, you're awesome! Keep being curious and exploring cool stuff on the internet.</p>
-    <p>Love, Uncle Ben</p>
+    <div class="holland-message">
+      <p>Holland, you're awesome! Keep being curious and exploring cool stuff on the internet.</p>
+      <p>Love, Uncle Ben</p>
+    </div>
+
+    <div class="holland-footer">
+      <p>🦄 This page is top secret! 🦄</p>
+    </div>
   </div>
-
-  <div class="holland-footer">
-    <p>🦄 This page is top secret! 🦄</p>
-  </div>
-</div>
+</Base>
 
 <style>
 .holland-page {

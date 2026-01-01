@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+
+// Get all markdown files in blog directory
+const posts = await Astro.glob('./*.md');
+const sortedPosts = posts.sort((a, b) =>
+  new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
+);
+---
+
+<Base title="Blog">
+  <h1>Blog Posts</h1>
+
+  {sortedPosts.length === 0 ? (
+    <p>No blog posts yet. Check back soon!</p>
+  ) : (
+    <ul class="blog-list">
+      {sortedPosts.map((post) => (
+        <li>
+          <article>
+            <h2>
+              <a href={post.url}>{post.frontmatter.title}</a>
+            </h2>
+            <time datetime={post.frontmatter.date}>
+              {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </time>
+          </article>
+        </li>
+      ))}
+    </ul>
+  )}
+</Base>
+
+<style>
+.blog-list {
+  list-style: none;
+  padding: 0;
+}
+
+.blog-list li {
+  margin: 2rem 0;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--pastel-purple);
+}
+
+.blog-list article h2 {
+  margin: 0 0 0.5rem 0;
+}
+
+.blog-list article h2 a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.blog-list article h2 a:hover {
+  color: var(--pastel-purple);
+}
+
+.blog-list time {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+</style>

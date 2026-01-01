@@ -2,9 +2,6 @@ import { SecretMenu } from './components/SecretMenu';
 import { useConfetti } from './components/ConfettiCannon';
 import { useGradientSwitcher } from './components/GradientSwitcher';
 import { useMusicPlayer } from './components/MusicPlayer';
-import './styles/theme.css';
-import './styles/components.css';
-import './styles/secret-menu.css';
 import { useEffect } from 'react';
 
 function SecretFeatures() {
@@ -48,8 +45,7 @@ function SecretFeatures() {
   ];
 
   useEffect(() => {
-    console.log('✨ SecretFeatures mounted! Cmd+K to open menu.');
-    console.log('Menu items configured:', menuItems.length);
+    // SecretFeatures component mounted
   }, []);
 
   return (

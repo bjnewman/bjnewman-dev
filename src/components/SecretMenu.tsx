@@ -47,7 +47,7 @@ export const SecretMenu: React.FC<SecretMenuProps> = ({ items }) => {
               className="secret-menu-item"
               onClick={() => {
                 item.action();
-                setIsOpen(false);
+                // Don't close menu - let user click multiple features
               }}
             >
               <span className="secret-menu-emoji">{item.emoji}</span>

@@ -7,7 +7,7 @@ dist-ssr/
 .vite/
 .build/
 /.cache
-public/
+.astro/
 _site/
 
 # Claude context (local development notes and context)
