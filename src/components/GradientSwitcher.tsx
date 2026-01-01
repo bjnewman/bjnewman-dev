@@ -33,11 +33,17 @@ export const useGradientSwitcher = () => {
   const switchGradient = (gradientValue: string) => {
     document.body.style.background = gradientValue;
     document.body.style.backgroundAttachment = 'fixed';
+    // Store the gradient index to track which one is active
+    const index = gradients.findIndex(g => g.value === gradientValue);
+    if (index !== -1) {
+      document.body.dataset.gradientIndex = index.toString();
+    }
   };
 
   const cycleGradient = () => {
-    const currentBg = document.body.style.background;
-    const currentIndex = gradients.findIndex(g => currentBg.includes(g.value));
+    // Get the stored index from dataset
+    const currentIndexStr = document.body.dataset.gradientIndex;
+    const currentIndex = currentIndexStr ? parseInt(currentIndexStr, 10) : -1;
     const nextIndex = (currentIndex + 1) % gradients.length;
     switchGradient(gradients[nextIndex].value);
   };
