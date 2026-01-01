@@ -11,14 +11,16 @@ interface Confetti {
 
 export const useConfetti = () => {
   const [confetti, setConfetti] = useState<Confetti[]>([]);
+  const [nextId, setNextId] = useState(0);
 
   const fireConfetti = () => {
     const colors = ['#FFD1DC', '#BFDFFF', '#FFFFD1', '#CCFFCC', '#E6D1FF'];
     const newConfetti: Confetti[] = [];
+    const baseId = nextId;
 
     for (let i = 0; i < 50; i++) {
       newConfetti.push({
-        id: Date.now() + i,
+        id: baseId + i,
         x: Math.random() * window.innerWidth,
         y: -10,
         color: colors[Math.floor(Math.random() * colors.length)],
@@ -30,6 +32,7 @@ export const useConfetti = () => {
       });
     }
 
+    setNextId(prev => prev + 50);
     setConfetti(prev => [...prev, ...newConfetti]);
   };
 
@@ -56,7 +59,7 @@ export const useConfetti = () => {
     }, 1000 / 60);
 
     return () => clearInterval(interval);
-  }, [confetti.length > 0]);
+  }, [confetti.length]);
 
   const ConfettiRender = () => (
     <>
