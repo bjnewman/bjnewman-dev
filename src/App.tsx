@@ -1,7 +1,7 @@
-import HooksApp from './HooksApp'
+import SecretFeatures from './SecretFeatures'
 
 function App() {
-  return <HooksApp />
+  return <SecretFeatures />
 }
 
 export default App

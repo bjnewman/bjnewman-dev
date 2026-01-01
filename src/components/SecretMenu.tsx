@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-interface Hook {
+interface MenuItem {
   id: string;
   label: string;
   emoji: string;
@@ -8,10 +8,10 @@ interface Hook {
 }
 
 interface SecretMenuProps {
-  hooks: Hook[];
+  items: MenuItem[];
 }
 
-export const SecretMenu: React.FC<SecretMenuProps> = ({ hooks }) => {
+export const SecretMenu: React.FC<SecretMenuProps> = ({ items }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
@@ -41,17 +41,17 @@ export const SecretMenu: React.FC<SecretMenuProps> = ({ hooks }) => {
           <p className="secret-menu-hint">Press Cmd+K to toggle</p>
         </div>
         <div className="secret-menu-items">
-          {hooks.map(hook => (
+          {items.map(item => (
             <button
-              key={hook.id}
+              key={item.id}
               className="secret-menu-item"
               onClick={() => {
-                hook.action();
+                item.action();
                 setIsOpen(false);
               }}
             >
-              <span className="secret-menu-emoji">{hook.emoji}</span>
-              <span className="secret-menu-label">{hook.label}</span>
+              <span className="secret-menu-emoji">{item.emoji}</span>
+              <span className="secret-menu-label">{item.label}</span>
             </button>
           ))}
         </div>

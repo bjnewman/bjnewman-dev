@@ -4,14 +4,14 @@ import { useGradientSwitcher } from './components/GradientSwitcher';
 import { useMusicPlayer } from './components/MusicPlayer';
 import './styles/theme.css';
 import './styles/components.css';
-import './styles/hooks.css';
+import './styles/secret-menu.css';
 
-function HooksApp() {
+function SecretFeatures() {
   const { fireConfetti, ConfettiRender } = useConfetti();
   const { cycleGradient, resetGradient } = useGradientSwitcher();
   const { toggleMusic, MusicIndicator } = useMusicPlayer();
 
-  const hooks = [
+  const menuItems = [
     {
       id: 'confetti',
       label: 'Party Mode (Confetti!)',
@@ -48,14 +48,14 @@ function HooksApp() {
 
   return (
     <>
-      <SecretMenu hooks={hooks} />
+      <SecretMenu items={menuItems} />
       <MusicIndicator />
       <ConfettiRender />
-      <div className="hooks-hint">
+      <div className="secret-menu-floating-hint">
         <span>💡 Press Cmd+K for secret menu</span>
       </div>
     </>
   );
 }
 
-export default HooksApp;
+export default SecretFeatures;
