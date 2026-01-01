@@ -11,5 +11,6 @@ export default defineConfig({
       headless: true,
     },
     globals: true,
+    setupFiles: ['./src/test/setup.ts'],
   },
 });

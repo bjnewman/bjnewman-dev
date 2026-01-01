@@ -14,6 +14,7 @@ export const useConfetti = () => {
   const [nextId, setNextId] = useState(0);
 
   const fireConfetti = () => {
+    console.log('🎉 Firing confetti!');
     const colors = ['#FFD1DC', '#BFDFFF', '#FFFFD1', '#CCFFCC', '#E6D1FF'];
     const newConfetti: Confetti[] = [];
     const baseId = nextId;
@@ -33,7 +34,10 @@ export const useConfetti = () => {
     }
 
     setNextId(prev => prev + 50);
-    setConfetti(prev => [...prev, ...newConfetti]);
+    setConfetti(prev => {
+      console.log(`Adding ${newConfetti.length} confetti pieces. Total will be: ${prev.length + newConfetti.length}`);
+      return [...prev, ...newConfetti];
+    });
   };
 
   useEffect(() => {

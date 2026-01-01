@@ -31,13 +31,16 @@ export const gradients = [
 
 export const useGradientSwitcher = () => {
   const switchGradient = (gradientValue: string) => {
-    document.body.style.background = gradientValue;
-    document.body.style.backgroundAttachment = 'fixed';
+    console.log('🌈 Switching gradient to:', gradientValue);
+    // Use setProperty with important to override CSS
+    document.body.style.setProperty('background', gradientValue, 'important');
+    document.body.style.setProperty('background-attachment', 'fixed', 'important');
     // Store the gradient index to track which one is active
     const index = gradients.findIndex(g => g.value === gradientValue);
     if (index !== -1) {
       document.body.dataset.gradientIndex = index.toString();
     }
+    console.log('Body background is now:', document.body.style.background);
   };
 
   const cycleGradient = () => {
