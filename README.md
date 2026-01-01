@@ -1,4 +1,4 @@
-# BJ Newman's Personal Website
+# Ben Newman's Personal Website
 
 A hybrid static site using Eleventy for content and React for interactive components.
 
