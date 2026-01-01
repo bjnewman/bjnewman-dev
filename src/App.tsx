@@ -1,13 +1,7 @@
-import { ProjectFilter } from './components/ProjectFilter'
-import './styles/theme.css'
-import './styles/components.css'
+import HooksApp from './HooksApp'
 
 function App() {
-  return (
-    <div>
-      <ProjectFilter />
-    </div>
-  )
+  return <HooksApp />
 }
 
 export default App
