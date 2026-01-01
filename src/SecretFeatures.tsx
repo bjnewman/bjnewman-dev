@@ -1,13 +1,21 @@
 import { SecretMenu } from './components/SecretMenu';
 import { useConfetti } from './components/ConfettiCannon';
-import { useGradientSwitcher } from './components/GradientSwitcher';
 import { useMusicPlayer } from './components/MusicPlayer';
+import { useThemeSwitcher, themes } from './components/ThemeSwitcher';
 import { useEffect } from 'react';
 
 function SecretFeatures() {
   const { fireConfetti, ConfettiRender } = useConfetti();
-  const { cycleGradient, resetGradient } = useGradientSwitcher();
   const { toggleMusic, MusicIndicator } = useMusicPlayer();
+  const { currentTheme, switchTheme } = useThemeSwitcher();
+
+  // Create theme menu items
+  const themeItems = themes.map(theme => ({
+    id: `theme-${theme.id}`,
+    label: theme.name,
+    emoji: theme.emoji,
+    action: () => switchTheme(theme.id),
+  }));
 
   const menuItems = [
     {
@@ -17,22 +25,23 @@ function SecretFeatures() {
       action: fireConfetti,
     },
     {
-      id: 'gradient',
-      label: 'Cycle Background',
-      emoji: '🌈',
-      action: cycleGradient,
-    },
-    {
-      id: 'reset-gradient',
-      label: 'Reset Colors',
-      emoji: '🔄',
-      action: resetGradient,
-    },
-    {
       id: 'music',
       label: 'Elevator Music',
       emoji: '🎵',
       action: toggleMusic,
+    },
+    {
+      id: 'themes-divider',
+      label: '— Themes —',
+      emoji: '🎨',
+      action: () => {}, // Divider, no action
+    },
+    ...themeItems,
+    {
+      id: 'holland-divider',
+      label: '—',
+      emoji: '',
+      action: () => {}, // Divider
     },
     {
       id: 'holland',
@@ -54,7 +63,7 @@ function SecretFeatures() {
       <MusicIndicator />
       <ConfettiRender />
       <div className="secret-menu-floating-hint">
-        <span>💡 Press Cmd+K for secret menu</span>
+        <span>💡 Press Cmd+K for secret menu • Current theme: {currentTheme.emoji} {currentTheme.name}</span>
       </div>
     </>
   );

@@ -41,19 +41,25 @@ export const SecretMenu: React.FC<SecretMenuProps> = ({ items }) => {
           <p className="secret-menu-hint">Press Cmd+K to toggle</p>
         </div>
         <div className="secret-menu-items">
-          {items.map(item => (
-            <button
-              key={item.id}
-              className="secret-menu-item"
-              onClick={() => {
-                item.action();
-                // Don't close menu - let user click multiple features
-              }}
-            >
-              <span className="secret-menu-emoji">{item.emoji}</span>
-              <span className="secret-menu-label">{item.label}</span>
-            </button>
-          ))}
+          {items.map(item => {
+            const isDivider = item.id.includes('divider');
+            return (
+              <button
+                key={item.id}
+                className={`secret-menu-item ${isDivider ? 'divider' : ''}`}
+                onClick={() => {
+                  if (!isDivider) {
+                    item.action();
+                  }
+                  // Don't close menu - let user click multiple features
+                }}
+                disabled={isDivider}
+              >
+                {item.emoji && <span className="secret-menu-emoji">{item.emoji}</span>}
+                <span className="secret-menu-label">{item.label}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>
