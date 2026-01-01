@@ -2,12 +2,28 @@ import { SecretMenu } from './components/SecretMenu';
 import { useConfetti } from './components/ConfettiCannon';
 import { useMusicPlayer } from './components/MusicPlayer';
 import { useThemeSwitcher, themes } from './components/ThemeSwitcher';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function SecretFeatures() {
   const { fireConfetti, ConfettiRender } = useConfetti();
   const { toggleMusic, MusicIndicator } = useMusicPlayer();
   const { currentTheme, switchTheme } = useThemeSwitcher();
+  const [menuDiscovered, setMenuDiscovered] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  useEffect(() => {
+    // Check if user has discovered the menu before
+    const discovered = localStorage.getItem('secret-menu-discovered') === 'true';
+    setMenuDiscovered(discovered);
+  }, []);
+
+  const handleMenuToggle = (open: boolean) => {
+    setIsMenuOpen(open);
+    if (open && !menuDiscovered) {
+      localStorage.setItem('secret-menu-discovered', 'true');
+      setMenuDiscovered(true);
+    }
+  };
 
   // Create theme menu items
   const themeItems = themes.map(theme => ({
@@ -53,18 +69,27 @@ function SecretFeatures() {
     },
   ];
 
-  useEffect(() => {
-    // SecretFeatures component mounted
-  }, []);
-
   return (
     <>
-      <SecretMenu items={menuItems} />
+      <SecretMenu items={menuItems} onToggle={handleMenuToggle} />
       <MusicIndicator />
       <ConfettiRender />
-      <div className="secret-menu-floating-hint">
-        <span>💡 Press Cmd+K for secret menu • Current theme: {currentTheme.emoji} {currentTheme.name}</span>
-      </div>
+
+      {/* Mobile trigger button */}
+      <button
+        className="secret-menu-trigger"
+        onClick={() => handleMenuToggle(!isMenuOpen)}
+        aria-label="Toggle secret menu"
+      >
+        ✨
+      </button>
+
+      {/* Floating hint - only show after discovery */}
+      {menuDiscovered && (
+        <div className="secret-menu-floating-hint">
+          <span>💡 Press Cmd+K for secret menu • Current theme: {currentTheme.emoji} {currentTheme.name}</span>
+        </div>
+      )}
     </>
   );
 }
