@@ -1,11 +1,15 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { ContactForm } from '../../components/ContactForm';
 
 describe('ContactForm', () => {
-  const originalFetch = window.fetch;
+  let originalFetch: typeof fetch;
   const mockWebhookUrl = 'https://script.google.com/mock-webhook';
+
+  beforeEach(() => {
+    originalFetch = window.fetch;
+  });
 
   afterEach(() => {
     window.fetch = originalFetch;
