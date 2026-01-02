@@ -1,7 +1,7 @@
 ---
 title: Migrating from Eleventy + Vite to Astro
 date: 2026-01-01
-layout: ../../layouts/Base.astro
+layout: ../../layouts/BlogPost.astro
 ---
 
 After running a dual-build system with Eleventy handling static pages and Vite bundling React components, I decided to migrate to Astro. Here's why and how it went.

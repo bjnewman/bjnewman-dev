@@ -1,7 +1,7 @@
 ---
 title: Why I Switched to Bun
 date: 2025-12-15
-layout: ../../layouts/Base.astro
+layout: ../../layouts/BlogPost.astro
 ---
 
 I recently switched from npm to Bun for this project, and the difference in speed and simplicity is remarkable.

@@ -2,9 +2,8 @@
 title: "My First Real Open Source Contribution"
 date: "2026-01-02"
 description: "From closed PR to submitted fix: contributing to Stylelint with AI assistance, and what I learned about open source culture along the way."
+layout: ../../layouts/BlogPost.astro
 ---
-
-# My First Real Open Source Contribution
 
 For years, I've been a consumer of open source software. Every project I build stands on the shoulders of giants—Astro, React, TypeScript, Bun, and countless other tools that make modern web development possible. But I've never made a *real* contribution back to the ecosystem.
 
