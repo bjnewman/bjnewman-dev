@@ -1,3 +1,10 @@
+/* Import CSS Zen Garden theme files */
+@import './themes/brutalist.css';
+@import './themes/90s.css';
+@import './themes/vaporwave.css';
+@import './themes/minimalist.css';
+@import './themes/terminal.css';
+
 :root {
   /* Refined color palette - more sophisticated */
   --primary: #6366f1;

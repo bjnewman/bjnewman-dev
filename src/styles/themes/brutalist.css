@@ -1,0 +1,149 @@
+/* Brutalist Theme - Raw, exposed HTML aesthetic */
+
+body.theme-brutalist {
+  --font-main: 'Courier New', 'Courier', monospace;
+  font-family: var(--font-main);
+}
+
+/* Remove all rounded corners */
+.theme-brutalist *,
+.theme-brutalist *::before,
+.theme-brutalist *::after {
+  border-radius: 0 !important;
+}
+
+/* Thick black borders everywhere */
+.theme-brutalist button,
+.theme-brutalist .card,
+.theme-brutalist .project-card,
+.theme-brutalist .secret-menu,
+.theme-brutalist .secret-menu-item,
+.theme-brutalist input,
+.theme-brutalist textarea,
+.theme-brutalist .filter-buttons button {
+  border: 3px solid #000000 !important;
+  box-shadow: 6px 6px 0 #000000 !important;
+}
+
+/* Classic underlined links */
+.theme-brutalist a {
+  text-decoration: underline;
+  color: #0000ff;
+  font-weight: bold;
+}
+
+.theme-brutalist a:visited {
+  color: #551a8b;
+}
+
+.theme-brutalist a:hover {
+  background-color: #ffff00;
+  color: #000000;
+}
+
+/* Uppercase headers */
+.theme-brutalist h1,
+.theme-brutalist h2,
+.theme-brutalist h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 900;
+  border-bottom: 4px solid #000000;
+  padding-bottom: 0.5rem;
+}
+
+/* Boxy navigation */
+.theme-brutalist nav {
+  border: 3px solid #000000;
+  background: #ffffff;
+}
+
+.theme-brutalist nav a {
+  border-right: 3px solid #000000;
+  padding: 1rem;
+  display: inline-block;
+  text-decoration: none;
+  background: #ffffff;
+  transition: none;
+}
+
+.theme-brutalist nav a:hover {
+  background: #000000;
+  color: #ffffff !important;
+}
+
+/* Button styles */
+.theme-brutalist button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0 #000000 !important;
+}
+
+.theme-brutalist button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 2px 2px 0 #000000 !important;
+}
+
+/* Table-like layouts */
+.theme-brutalist .project-filter,
+.theme-brutalist .contact-form-container {
+  background: #f5f5f5;
+  border: 4px solid #000000;
+  box-shadow: 8px 8px 0 #000000;
+}
+
+/* List markers */
+.theme-brutalist ul {
+  list-style-type: square;
+}
+
+.theme-brutalist ul li::marker {
+  color: #ff0000;
+}
+
+/* Code blocks */
+.theme-brutalist code,
+.theme-brutalist pre,
+.theme-brutalist kbd {
+  background: #000000;
+  color: #00ff00;
+  border: 2px solid #333333;
+  font-family: 'Courier New', monospace;
+}
+
+/* Form elements */
+.theme-brutalist input,
+.theme-brutalist textarea,
+.theme-brutalist select {
+  background: #ffffff;
+  border: 3px solid #000000 !important;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+}
+
+.theme-brutalist input:focus,
+.theme-brutalist textarea:focus {
+  outline: 3px solid #ff0000;
+  outline-offset: 2px;
+}
+
+/* Remove smooth transitions */
+.theme-brutalist * {
+  transition: none !important;
+  animation-duration: 0s !important;
+}
+
+/* Secret menu in brutalist style */
+.theme-brutalist .secret-menu-overlay {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.theme-brutalist .secret-menu {
+  border: 4px solid #ffffff;
+  box-shadow: 8px 8px 0 #ffffff;
+}
+
+.theme-brutalist .secret-menu-trigger {
+  border-radius: 0 !important;
+  border: 3px solid #000000;
+  box-shadow: 4px 4px 0 #000000;
+}

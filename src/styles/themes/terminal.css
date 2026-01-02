@@ -1,0 +1,340 @@
+/* Hacker Terminal Theme - Green phosphor CRT aesthetic */
+
+body.theme-terminal {
+  --font-main: 'Fira Code', 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+  font-family: var(--font-main);
+  background: #000000 !important;
+  color: #00ff00 !important;
+}
+
+/* Green phosphor glow effect */
+.theme-terminal * {
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+/* Scanline effect overlay */
+body.theme-terminal::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanline 10s linear infinite !important;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(10px);
+  }
+}
+
+/* CRT flicker effect */
+body.theme-terminal::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 255, 0, 0.02);
+  pointer-events: none;
+  z-index: 9998;
+  animation: flicker 0.15s infinite !important;
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.93;
+  }
+}
+
+/* Terminal-style headers */
+.theme-terminal h1,
+.theme-terminal h2,
+.theme-terminal h3 {
+  color: #00ff00 !important;
+  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  border-bottom: 2px solid #00ff00;
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+}
+
+.theme-terminal h1::before {
+  content: '> ';
+  color: #00aa00 !important;
+}
+
+.theme-terminal h2::before {
+  content: '>> ';
+  color: #00aa00 !important;
+}
+
+.theme-terminal h3::before {
+  content: '>>> ';
+  color: #00aa00 !important;
+}
+
+/* Terminal prompt style for paragraphs */
+.theme-terminal p::before {
+  content: '$ ';
+  color: #00aa00 !important;
+  font-weight: bold;
+}
+
+/* Terminal-style borders */
+.theme-terminal .card,
+.theme-terminal .project-card,
+.theme-terminal .project-filter,
+.theme-terminal .secret-menu {
+  background: rgba(0, 20, 0, 0.9) !important;
+  border: 2px solid #00ff00 !important;
+  box-shadow:
+    0 0 10px rgba(0, 255, 0, 0.3),
+    inset 0 0 20px rgba(0, 255, 0, 0.05) !important;
+  backdrop-filter: blur(5px);
+}
+
+/* Green terminal buttons */
+.theme-terminal button,
+.theme-terminal .filter-buttons button {
+  background: rgba(0, 50, 0, 0.8) !important;
+  border: 2px solid #00ff00 !important;
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px #00ff00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3) !important;
+  font-family: var(--font-main);
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease !important;
+}
+
+.theme-terminal button:hover {
+  background: rgba(0, 100, 0, 0.9) !important;
+  box-shadow:
+    0 0 20px rgba(0, 255, 0, 0.6),
+    inset 0 0 10px rgba(0, 255, 0, 0.2) !important;
+  transform: translateY(-2px);
+}
+
+.theme-terminal button::before {
+  content: '[';
+  color: #00aa00 !important;
+  margin-right: 4px;
+}
+
+.theme-terminal button::after {
+  content: ']';
+  color: #00aa00 !important;
+  margin-left: 4px;
+}
+
+/* Terminal-style links */
+.theme-terminal a {
+  color: #00ff00 !important;
+  text-decoration: underline;
+  text-shadow: 0 0 5px #00ff00;
+  transition: all 0.2s ease;
+}
+
+.theme-terminal a:hover {
+  color: #66ff66 !important;
+  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+  background: rgba(0, 255, 0, 0.1);
+}
+
+.theme-terminal a::before {
+  content: '> ';
+  color: #00aa00 !important;
+}
+
+/* Form elements */
+.theme-terminal input,
+.theme-terminal textarea {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: 1px solid #00ff00 !important;
+  color: #00ff00 !important;
+  text-shadow: 0 0 3px #00ff00;
+  font-family: var(--font-main);
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1) !important;
+}
+
+.theme-terminal input:focus,
+.theme-terminal textarea:focus {
+  border-color: #66ff66 !important;
+  box-shadow:
+    inset 0 0 10px rgba(0, 255, 0, 0.2),
+    0 0 15px rgba(0, 255, 0, 0.4) !important;
+  outline: none;
+}
+
+.theme-terminal input::placeholder,
+.theme-terminal textarea::placeholder {
+  color: #00aa00 !important;
+  opacity: 0.6;
+}
+
+/* Navigation */
+.theme-terminal nav {
+  background: rgba(0, 20, 0, 0.95) !important;
+  border-bottom: 2px solid #00ff00 !important;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3) !important;
+  backdrop-filter: blur(10px);
+}
+
+.theme-terminal nav a {
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px #00ff00;
+  border-right: 1px solid rgba(0, 255, 0, 0.3) !important;
+  padding: 1rem 1.5rem !important;
+}
+
+.theme-terminal nav a:hover {
+  background: rgba(0, 100, 0, 0.4) !important;
+  text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+}
+
+/* List styling */
+.theme-terminal ul li::marker {
+  content: '> ';
+  color: #00aa00 !important;
+}
+
+.theme-terminal ul li {
+  padding-left: 1rem;
+}
+
+/* Code blocks - extra terminal style */
+.theme-terminal code,
+.theme-terminal pre {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 1px solid #00ff00 !important;
+  color: #00ff00 !important;
+  text-shadow: 0 0 3px #00ff00;
+  font-family: var(--font-main);
+  box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1) !important;
+}
+
+/* Secret menu terminal style */
+.theme-terminal .secret-menu-overlay {
+  background: rgba(0, 0, 0, 0.98) !important;
+}
+
+.theme-terminal .secret-menu {
+  background: rgba(0, 20, 0, 0.98) !important;
+  border: 2px solid #00ff00 !important;
+  box-shadow:
+    0 0 30px rgba(0, 255, 0, 0.5),
+    inset 0 0 20px rgba(0, 255, 0, 0.1) !important;
+}
+
+.theme-terminal .secret-menu-header h3 {
+  color: #00ff00 !important;
+  text-shadow: 0 0 10px #00ff00;
+  margin: 0;
+  font-weight: bold;
+}
+
+.theme-terminal .secret-menu-item {
+  color: #00ff00 !important;
+  border-bottom: 1px solid rgba(0, 255, 0, 0.2) !important;
+  padding: 1rem 2rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.theme-terminal .secret-menu-item:hover {
+  background: rgba(0, 100, 0, 0.3) !important;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+.theme-terminal .secret-menu-item.divider {
+  color: #00aa00 !important;
+  font-weight: bold;
+}
+
+/* Blinking cursor effect for emphasis */
+.theme-terminal strong::after {
+  content: '_';
+  animation: cursor-blink 1s infinite !important;
+  color: #00ff00 !important;
+}
+
+@keyframes cursor-blink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Music indicator */
+.theme-terminal .music-indicator {
+  background: rgba(0, 50, 0, 0.9) !important;
+  border: 2px solid #00ff00 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5) !important;
+  color: #00ff00 !important;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+/* Floating hint */
+.theme-terminal .secret-menu-floating-hint {
+  background: rgba(0, 20, 0, 0.95) !important;
+  border: 1px solid #00ff00 !important;
+  color: #00ff00 !important;
+  text-shadow: 0 0 3px #00ff00;
+  font-family: var(--font-main);
+}
+
+/* Remove border radius for terminal aesthetic */
+.theme-terminal * {
+  border-radius: 0 !important;
+}
+
+/* Matrix-style falling characters (optional decorative element) */
+body.theme-terminal {
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Vignette effect for CRT screen */
+body.theme-terminal {
+  box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
+}
+
+/* Screen curvature simulation */
+.theme-terminal main,
+.theme-terminal header,
+.theme-terminal footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* Boot sequence style for headers */
+.theme-terminal h1::after {
+  content: ' [OK]';
+  color: #00aa00 !important;
+  font-size: 0.6em;
+  margin-left: 1rem;
+}

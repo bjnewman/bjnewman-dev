@@ -43,39 +43,53 @@ describe('MonkeyEyes', () => {
   it('renders two eyes with pupils', () => {
     const { container } = render(<MonkeyEyes />);
 
-    // Find the eye containers
-    const eyes = container.querySelectorAll('div[style*="width: 80px"]');
-    expect(eyes.length).toBe(2);
+    // The component should render the monkey structure
+    expect(container.firstChild).toBeTruthy();
 
-    // Find the pupils
-    const pupils = container.querySelectorAll('div[style*="width: 30px"]');
-    expect(pupils.length).toBe(2);
-  });
-
-  it('renders eyes with pastel-colored borders', () => {
-    const { container } = render(<MonkeyEyes />);
-
-    const eyes = container.querySelectorAll('div[style*="width: 80px"]');
-    const leftEyeStyle = (eyes[0] as HTMLElement).style.border;
-    const rightEyeStyle = (eyes[1] as HTMLElement).style.border;
-
-    // Check that borders reference CSS variables for pastel colors
-    expect(leftEyeStyle).toContain('pastel-pink');
-    expect(rightEyeStyle).toContain('pastel-blue');
-  });
-
-  it('renders pupils with highlight effect', () => {
-    const { container } = render(<MonkeyEyes />);
-
-    // Find the highlight circles (smaller white circles inside pupils)
-    const highlights = container.querySelectorAll('div[style*="width: 10px"]');
-    expect(highlights.length).toBe(2);
-
-    // Check they have white background
-    highlights.forEach((highlight) => {
-      const style = (highlight as HTMLElement).style;
-      expect(style.backgroundColor).toBe('white');
+    // Find elements with border-radius (monkey has many rounded elements)
+    const elements = container.querySelectorAll('div');
+    const roundedElements = Array.from(elements).filter(el => {
+      const style = (el as HTMLElement).style;
+      return style.borderRadius && style.borderRadius.includes('50%');
     });
+
+    // Should have multiple rounded elements (head, ears, eyes, face mask parts)
+    expect(roundedElements.length).toBeGreaterThanOrEqual(5);
+  });
+
+  it('renders eyes with Suzanne Aitchison monkey styling', () => {
+    const { container } = render(<MonkeyEyes />);
+
+    // Check that the component renders the monkey head with brown color
+    const elements = container.querySelectorAll('div');
+    const hasBrownElements = Array.from(elements).some(el => {
+      const style = (el as HTMLElement).style;
+      return style.background === 'rgb(158, 89, 54)' || style.background === '#9E5936';
+    });
+
+    expect(hasBrownElements).toBe(true);
+
+    // Check for face mask elements (light brown)
+    const hasLightBrownElements = Array.from(elements).some(el => {
+      const style = (el as HTMLElement).style;
+      return style.background === 'rgb(234, 190, 127)' || style.background === '#EABE7F';
+    });
+
+    expect(hasLightBrownElements).toBe(true);
+  });
+
+  it('renders eyes with highlight effect', () => {
+    const { container } = render(<MonkeyEyes />);
+
+    // Find elements with white backgrounds (eye highlights)
+    const elements = container.querySelectorAll('div');
+    const whiteElements = Array.from(elements).filter(el => {
+      const style = (el as HTMLElement).style;
+      return style.background === 'white' || style.background === 'rgb(255, 255, 255)';
+    });
+
+    // Should have eye highlights and white eye borders
+    expect(whiteElements.length).toBeGreaterThanOrEqual(2);
   });
 
   it('registers mousemove event listener on mount', () => {
@@ -123,16 +137,16 @@ describe('MonkeyEyes', () => {
     }
   });
 
-  it('positions eyes at top center of viewport', () => {
+  it('positions eyes at center of viewport by default', () => {
     const { container } = render(<MonkeyEyes />);
 
     const eyeContainer = container.firstChild as HTMLElement;
     const style = eyeContainer.style;
 
     expect(style.position).toBe('fixed');
-    expect(style.top).toBe('20px');
+    expect(style.top).toBe('50%');
     expect(style.left).toBe('50%');
-    expect(style.transform).toBe('translateX(-50%)');
+    expect(style.transform).toBe('translate(-50%, -50%)');
   });
 
   it('sets pointer-events to none so eyes do not block interactions', () => {
@@ -142,18 +156,19 @@ describe('MonkeyEyes', () => {
     expect(eyeContainer.style.pointerEvents).toBe('none');
   });
 
-  it('applies smooth transition to pupil movement', () => {
+  it('applies smooth transition to eye movement', () => {
     const { container } = render(<MonkeyEyes />);
 
-    const pupils = container.querySelectorAll(
-      'div[style*="width: 30px"]'
-    ) as NodeListOf<HTMLElement>;
-
-    pupils.forEach((pupil) => {
-      expect(pupil.style.transition).toContain('transform');
-      expect(pupil.style.transition).toContain('0.1s');
-      expect(pupil.style.transition).toContain('ease-out');
+    // Find elements with transitions (the eyes that track the mouse)
+    const elements = container.querySelectorAll('div');
+    const transitionElements = Array.from(elements).filter(el => {
+      const style = (el as HTMLElement).style;
+      return style.transition && style.transition.includes('transform') &&
+             style.transition.includes('0.1s') && style.transition.includes('ease-out');
     });
+
+    // Should have at least 2 eyes with transitions
+    expect(transitionElements.length).toBeGreaterThanOrEqual(2);
   });
 
   it('displays eyes with proper z-index below secret menu', () => {

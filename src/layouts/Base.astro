@@ -68,7 +68,12 @@ const currentPath = Astro.url.pathname;
             'ocean': { primary: '#0ea5e9', primaryLight: '#38bdf8', primaryDark: '#0284c7', accent: '#06b6d4', accentLight: '#22d3ee', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #ddd6fe 100%)', bgPrimary: '#ffffff', bgSecondary: '#f8fafc', bgTertiary: '#f1f5f9' },
             'forest': { primary: '#10b981', primaryLight: '#34d399', primaryDark: '#059669', accent: '#14b8a6', accentLight: '#2dd4bf', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #bfdbfe 100%)', bgPrimary: '#ffffff', bgSecondary: '#f8fafc', bgTertiary: '#f1f5f9' },
             'dark': { primary: '#818cf8', primaryLight: '#a5b4fc', primaryDark: '#6366f1', accent: '#f472b6', accentLight: '#f9a8d4', textPrimary: '#f1f5f9', textSecondary: '#cbd5e1', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)', bgPrimary: '#1e293b', bgSecondary: '#334155', bgTertiary: '#475569' },
-            'pastel': { primary: '#E6D1FF', primaryLight: '#F5E6FF', primaryDark: '#D1B3FF', accent: '#FFD1DC', accentLight: '#FFE6ED', textPrimary: '#4A4A4A', textSecondary: '#757575', textMuted: '#999999', bgGradient: 'linear-gradient(135deg, #BFDFFF 0%, #FFD1DC 100%)', bgPrimary: '#ffffff', bgSecondary: '#f8fafc', bgTertiary: '#f1f5f9' }
+            'pastel': { primary: '#E6D1FF', primaryLight: '#F5E6FF', primaryDark: '#D1B3FF', accent: '#FFD1DC', accentLight: '#FFE6ED', textPrimary: '#4A4A4A', textSecondary: '#757575', textMuted: '#999999', bgGradient: 'linear-gradient(135deg, #BFDFFF 0%, #FFD1DC 100%)', bgPrimary: '#ffffff', bgSecondary: '#f8fafc', bgTertiary: '#f1f5f9' },
+            'brutalist': { primary: '#000000', primaryLight: '#333333', primaryDark: '#000000', accent: '#ff0000', accentLight: '#ff3333', textPrimary: '#000000', textSecondary: '#333333', textMuted: '#666666', bgGradient: 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)', bgPrimary: '#ffffff', bgSecondary: '#f5f5f5', bgTertiary: '#eeeeee', className: 'theme-brutalist' },
+            '90s': { primary: '#ff00ff', primaryLight: '#ff66ff', primaryDark: '#cc00cc', accent: '#00ffff', accentLight: '#66ffff', textPrimary: '#0000ff', textSecondary: '#ff00ff', textMuted: '#00ff00', bgGradient: 'linear-gradient(135deg, #ffff00 0%, #ff00ff 50%, #00ffff 100%)', bgPrimary: '#ffffff', bgSecondary: '#ffffcc', bgTertiary: '#ffccff', className: 'theme-90s' },
+            'vaporwave': { primary: '#ff71ce', primaryLight: '#ff8fd8', primaryDark: '#e653b3', accent: '#01cdfe', accentLight: '#34d9ff', textPrimary: '#ffffff', textSecondary: '#e0e0e0', textMuted: '#b0b0b0', bgGradient: 'linear-gradient(180deg, #2d1b69 0%, #5b2a86 50%, #ff71ce 100%)', bgPrimary: '#2d1b69', bgSecondary: '#3d2b79', bgTertiary: '#4d3b89', className: 'theme-vaporwave' },
+            'minimalist': { primary: '#1a1a1a', primaryLight: '#333333', primaryDark: '#000000', accent: '#666666', accentLight: '#999999', textPrimary: '#333333', textSecondary: '#666666', textMuted: '#999999', bgGradient: 'linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)', bgPrimary: '#ffffff', bgSecondary: '#fafafa', bgTertiary: '#f5f5f5', className: 'theme-minimalist' },
+            'terminal': { primary: '#00ff00', primaryLight: '#66ff66', primaryDark: '#00aa00', accent: '#00ff00', accentLight: '#66ff66', textPrimary: '#00ff00', textSecondary: '#00aa00', textMuted: '#008800', bgGradient: 'linear-gradient(135deg, #000000 0%, #001100 100%)', bgPrimary: '#000000', bgSecondary: '#001100', bgTertiary: '#002200', className: 'theme-terminal' }
           };
           const theme = themes[savedThemeId];
           if (theme) {
@@ -86,6 +91,10 @@ const currentPath = Astro.url.pathname;
             root.style.setProperty('--bg-tertiary', theme.bgTertiary);
             document.body.style.background = theme.bgGradient;
             document.body.style.backgroundAttachment = 'fixed';
+            // Apply theme className if present
+            if (theme.className) {
+              document.body.classList.add(theme.className);
+            }
           }
         }
       })();

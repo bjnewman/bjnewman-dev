@@ -3,6 +3,7 @@ import { useConfetti } from './components/ConfettiCannon';
 import { useMusicPlayer } from './components/MusicPlayer';
 import { useThemeSwitcher, themes } from './components/ThemeSwitcher';
 import { useHollandDecorations } from './components/HollandDecorations';
+import { MonkeyEyes } from './components/MonkeyEyes';
 import { useState, useEffect } from 'react';
 
 function SecretFeatures() {
@@ -12,6 +13,7 @@ function SecretFeatures() {
   const { spawnUnicorns, spawnRainbows, spawnIceCream, spawnStars, spawnHearts, DecorationsRender } = useHollandDecorations();
   const [menuDiscovered, setMenuDiscovered] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [monkeyEyesVisible, setMonkeyEyesVisible] = useState(false);
 
   useEffect(() => {
     // Check if user has discovered the menu before
@@ -92,6 +94,12 @@ function SecretFeatures() {
       action: spawnHearts,
     },
     {
+      id: 'holland-monkey-eyes',
+      label: 'Toggle Monkey Eyes',
+      emoji: '🙈',
+      action: () => setMonkeyEyesVisible(!monkeyEyesVisible),
+    },
+    {
       id: 'holland-page-divider',
       label: '—',
       emoji: '',
@@ -113,6 +121,7 @@ function SecretFeatures() {
       <MusicIndicator />
       <ConfettiRender />
       <DecorationsRender />
+      <MonkeyEyes visible={monkeyEyesVisible} position="bottom" />
 
       {/* Mobile trigger button */}
       <button

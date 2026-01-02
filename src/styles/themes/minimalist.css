@@ -1,0 +1,240 @@
+/* Minimalist Theme - Less is more */
+
+body.theme-minimalist {
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--font-main);
+  background: #fafafa !important;
+  background-attachment: fixed !important;
+}
+
+/* Subtle, refined typography */
+.theme-minimalist h1,
+.theme-minimalist h2,
+.theme-minimalist h3 {
+  font-weight: 200;
+  letter-spacing: -0.02em;
+  color: #1a1a1a !important;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+
+.theme-minimalist h1 {
+  font-size: 3rem;
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 1rem;
+}
+
+.theme-minimalist h2 {
+  font-size: 2rem;
+}
+
+.theme-minimalist h3 {
+  font-size: 1.5rem;
+}
+
+/* Maximum white space */
+.theme-minimalist p,
+.theme-minimalist li {
+  line-height: 2;
+  color: #666666 !important;
+  margin: 1.5rem 0;
+}
+
+/* Barely-there borders */
+.theme-minimalist .card,
+.theme-minimalist .project-card,
+.theme-minimalist .project-filter {
+  background: #ffffff !important;
+  border: 1px solid #e5e5e5 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02) !important;
+  padding: 3rem !important;
+  margin: 2rem 0;
+}
+
+/* Understated buttons */
+.theme-minimalist button,
+.theme-minimalist .filter-buttons button {
+  background: transparent !important;
+  border: 1px solid #333333 !important;
+  color: #333333 !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  box-shadow: none !important;
+  transition: all 0.2s ease !important;
+}
+
+.theme-minimalist button:hover {
+  background: #333333 !important;
+  color: #ffffff !important;
+  transform: none;
+}
+
+/* Refined links */
+.theme-minimalist a {
+  color: #333333 !important;
+  text-decoration: none;
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+
+.theme-minimalist a:hover {
+  border-bottom-color: #333333;
+}
+
+/* Clean navigation */
+.theme-minimalist nav {
+  background: transparent !important;
+  border-bottom: 1px solid #e5e5e5 !important;
+  padding: 2rem 0;
+}
+
+.theme-minimalist nav a {
+  color: #666666 !important;
+  border: none !important;
+  padding: 0.5rem 1.5rem !important;
+  margin: 0 0.5rem;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+.theme-minimalist nav a:hover {
+  color: #1a1a1a !important;
+  background: transparent !important;
+}
+
+/* Subtle form elements */
+.theme-minimalist input,
+.theme-minimalist textarea {
+  background: #ffffff !important;
+  border: none !important;
+  border-bottom: 1px solid #e5e5e5 !important;
+  border-radius: 0 !important;
+  padding: 1rem 0 !important;
+  color: #333333 !important;
+  font-size: 1rem;
+}
+
+.theme-minimalist input:focus,
+.theme-minimalist textarea:focus {
+  border-bottom-color: #333333 !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.theme-minimalist input::placeholder,
+.theme-minimalist textarea::placeholder {
+  color: #999999 !important;
+}
+
+/* Minimal list styling */
+.theme-minimalist ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.theme-minimalist ul li {
+  padding-left: 2rem;
+  position: relative;
+}
+
+.theme-minimalist ul li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: #cccccc;
+}
+
+/* Clean secret menu */
+.theme-minimalist .secret-menu-overlay {
+  background: rgba(250, 250, 250, 0.98) !important;
+}
+
+.theme-minimalist .secret-menu {
+  background: #ffffff !important;
+  border: 1px solid #e5e5e5 !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08) !important;
+}
+
+.theme-minimalist .secret-menu-header h3 {
+  font-weight: 200;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.theme-minimalist .secret-menu-item {
+  color: #666666 !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  transition: all 0.2s ease !important;
+}
+
+.theme-minimalist .secret-menu-item:hover {
+  background: #fafafa !important;
+  color: #1a1a1a !important;
+}
+
+.theme-minimalist .secret-menu-item.divider {
+  color: #cccccc !important;
+  font-weight: 300;
+  font-size: 0.75rem;
+}
+
+/* Generous spacing */
+.theme-minimalist main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.theme-minimalist section {
+  margin: 4rem 0;
+}
+
+/* Subtle hover effects */
+.theme-minimalist .card:hover,
+.theme-minimalist .project-card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+  transform: translateY(-2px);
+  transition: all 0.2s ease !important;
+}
+
+/* Clean code blocks */
+.theme-minimalist code,
+.theme-minimalist pre {
+  background: #f5f5f5 !important;
+  border: none !important;
+  color: #666666 !important;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace !important;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+/* Subtle music indicator */
+.theme-minimalist .music-indicator {
+  background: #ffffff !important;
+  border: 1px solid #e5e5e5 !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+  color: #333333 !important;
+}
+
+/* Minimal floating hint */
+.theme-minimalist .secret-menu-floating-hint {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #e5e5e5 !important;
+  color: #999999 !important;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* Remove all unnecessary decoration */
+.theme-minimalist * {
+  animation: none !important;
+}
+
+/* Subtle focus indicators */
+.theme-minimalist *:focus-visible {
+  outline: 1px solid #333333;
+  outline-offset: 2px;
+}

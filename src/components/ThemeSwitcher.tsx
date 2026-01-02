@@ -4,6 +4,7 @@ export interface Theme {
   id: string;
   name: string;
   emoji: string;
+  className?: string; // Optional CSS class for radical theme transformations
   colors: {
     primary: string;
     primaryLight: string;
@@ -114,6 +115,91 @@ export const themes: Theme[] = [
       bgGradient: 'linear-gradient(135deg, #BFDFFF 0%, #FFD1DC 100%)',
     },
   },
+  {
+    id: 'brutalist',
+    name: 'Brutalist',
+    emoji: '🔲',
+    className: 'theme-brutalist',
+    colors: {
+      primary: '#000000',
+      primaryLight: '#333333',
+      primaryDark: '#000000',
+      accent: '#ff0000',
+      accentLight: '#ff3333',
+      textPrimary: '#000000',
+      textSecondary: '#333333',
+      textMuted: '#666666',
+      bgGradient: 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)',
+    },
+  },
+  {
+    id: '90s',
+    name: '90s Geocities',
+    emoji: '💾',
+    className: 'theme-90s',
+    colors: {
+      primary: '#00ff00',
+      primaryLight: '#66ff66',
+      primaryDark: '#00cc00',
+      accent: '#ff00ff',
+      accentLight: '#ff66ff',
+      textPrimary: '#0000ff',
+      textSecondary: '#ff00ff',
+      textMuted: '#00ffff',
+      bgGradient: 'linear-gradient(135deg, #ffff00 0%, #ff00ff 50%, #00ffff 100%)',
+    },
+  },
+  {
+    id: 'vaporwave',
+    name: 'Vaporwave',
+    emoji: '🌴',
+    className: 'theme-vaporwave',
+    colors: {
+      primary: '#ff71ce',
+      primaryLight: '#ff8fd8',
+      primaryDark: '#ff53c4',
+      accent: '#01cdfe',
+      accentLight: '#33d7fe',
+      textPrimary: '#ffffff',
+      textSecondary: '#b967ff',
+      textMuted: '#05ffa1',
+      bgGradient: 'linear-gradient(180deg, #2d1b69 0%, #5b2a86 50%, #ff71ce 100%)',
+    },
+  },
+  {
+    id: 'minimalist',
+    name: 'Minimalist',
+    emoji: '⬜',
+    className: 'theme-minimalist',
+    colors: {
+      primary: '#1a1a1a',
+      primaryLight: '#4a4a4a',
+      primaryDark: '#000000',
+      accent: '#666666',
+      accentLight: '#999999',
+      textPrimary: '#333333',
+      textSecondary: '#666666',
+      textMuted: '#999999',
+      bgGradient: 'linear-gradient(135deg, #fafafa 0%, #ffffff 100%)',
+    },
+  },
+  {
+    id: 'terminal',
+    name: 'Hacker Terminal',
+    emoji: '💻',
+    className: 'theme-terminal',
+    colors: {
+      primary: '#00ff00',
+      primaryLight: '#33ff33',
+      primaryDark: '#00cc00',
+      accent: '#00aa00',
+      accentLight: '#00dd00',
+      textPrimary: '#00ff00',
+      textSecondary: '#00cc00',
+      textMuted: '#008800',
+      bgGradient: 'linear-gradient(135deg, #000000 0%, #001100 100%)',
+    },
+  },
 ];
 
 const THEME_STORAGE_KEY = 'bjnewman-theme';
@@ -137,6 +223,7 @@ export const useThemeSwitcher = () => {
     const root = document.documentElement;
     const { colors } = theme;
 
+    // Apply CSS custom properties
     root.style.setProperty('--primary', colors.primary);
     root.style.setProperty('--primary-light', colors.primaryLight);
     root.style.setProperty('--primary-dark', colors.primaryDark);
@@ -159,6 +246,19 @@ export const useThemeSwitcher = () => {
       root.style.setProperty('--bg-primary', '#ffffff');
       root.style.setProperty('--bg-secondary', '#f8fafc');
       root.style.setProperty('--bg-tertiary', '#f1f5f9');
+    }
+
+    // Handle theme class name for radical theme transformations
+    // Remove all existing theme classes
+    themes.forEach(t => {
+      if (t.className) {
+        document.body.classList.remove(t.className);
+      }
+    });
+
+    // Add new theme class if present
+    if (theme.className) {
+      document.body.classList.add(theme.className);
     }
   };
 
