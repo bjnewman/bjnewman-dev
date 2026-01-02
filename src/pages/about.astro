@@ -1,5 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
+import { ContactForm } from '../components/ContactForm';
+import '../styles/contact-form.css';
 ---
 
 <Base title="About">
@@ -13,7 +15,7 @@ import Base from '../layouts/Base.astro';
 
   <p>Started as a lawyer, realized I enjoyed solving logical puzzles more than arguing about them. Made the jump to software development and haven't looked back.</p>
 
-  <p>Joined Availity as a developer and spent seven years building the infrastructure that helps healthcare providers and insurance companies actually talk to each other. Turns out American healthcare runs on some truly wild data formats (looking at you, ANSI X12), and someone has to make sense of them.</p>
+  <p>Joined Availity as a developer and spent seven years building the infrastructure that helps healthcare providers and insurance companies actually talk to each other. Turns out American healthcare runs on some truly wild data formats (looking at you, ANSI X12), and someone has to make sense of them. Worked across multiple teams handling different ANSI X12 transaction types — 837s for claim submissions, 276/277 for claim status, 275s for attachments, and 277CAs for claim acknowledgments.</p>
 
   <p>Got promoted multiple times as I took on bigger challenges — from individual contributor to Tech Lead. Built configuration-driven systems that replaced dozens of one-off custom solutions, architected workflows that handle millions of transactions daily, and led teams through complex technical challenges.</p>
 
@@ -34,11 +36,11 @@ import Base from '../layouts/Base.astro';
 
   <h2>Beyond Code</h2>
 
-  <p>When I'm not debugging production issues or refactoring that one file everyone's afraid to touch, I'm probably exploring new technologies, contributing to open source, or spending time with family in the Pacific Northwest.</p>
+  <p>When I'm not debugging production issues or refactoring that one file everyone's afraid to touch, I'm spending time with family in the Pacific Northwest.</p>
 
   <h2>Let's Connect</h2>
 
-  <p>Always interested in connecting with other developers, discussing interesting technical challenges, or collaborating on side projects.</p>
+  <p>Interested in connecting with other developers or discussing interesting technical challenges? Send me a message using the form below, or find me on <a href="https://github.com/bjnewman" target="_blank" rel="noopener">GitHub</a> or <a href="https://linkedin.com/in/bjnewman" target="_blank" rel="noopener">LinkedIn</a>.</p>
 
-  <p>Find me on <a href="https://github.com/bjnewman" target="_blank" rel="noopener">GitHub</a> or <a href="https://linkedin.com/in/bjnewman" target="_blank" rel="noopener">LinkedIn</a>.</p>
+  <ContactForm client:load />
 </Base>

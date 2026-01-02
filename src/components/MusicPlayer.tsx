@@ -25,7 +25,8 @@ export const useMusicPlayer = () => {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current.play().catch(err => {
+      audioRef.current.play().catch((err) => {
+        console.error('Failed to play audio:', err);
         console.error('Audio file not found. Add elevator-music.mp3 to /public/assets/');
       });
       setIsPlaying(true);

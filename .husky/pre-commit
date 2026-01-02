@@ -1,0 +1,10 @@
+#!/bin/sh
+# Run linting
+echo "Running lint checks..."
+bun run lint || exit 1
+
+# Run tests
+echo "Running tests..."
+bun test || exit 1
+
+echo "✓ Pre-commit checks passed"

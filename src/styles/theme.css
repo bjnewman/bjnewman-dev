@@ -41,6 +41,31 @@ body {
   font-size: 16px;
 }
 
+/* Accessibility - Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 1000;
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* Header and Navigation */
 header {
   background-color: rgba(255, 255, 255, 0.9);
@@ -75,6 +100,7 @@ header nav a {
 
 header nav a:hover {
   color: var(--primary);
+  text-decoration: none;
 }
 
 header nav a::after {
@@ -90,6 +116,15 @@ header nav a::after {
 }
 
 header nav a:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+header nav a.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+header nav a.active::after {
   transform: translateX(-50%) scaleX(1);
 }
 

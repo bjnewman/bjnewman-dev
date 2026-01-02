@@ -1,8 +1,13 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-// Get all markdown files in blog directory
-const posts = await Astro.glob('./*.md');
+// Get all markdown files in blog directory using import.meta.glob
+const postFiles = import.meta.glob('./*.md', { eager: true });
+const posts = Object.values(postFiles).map((post: any) => ({
+  url: post.url,
+  frontmatter: post.frontmatter,
+}));
+
 const sortedPosts = posts.sort((a, b) =>
   new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()
 );
@@ -44,20 +49,26 @@ const sortedPosts = posts.sort((a, b) =>
 .blog-list li {
   margin: 2rem 0;
   padding-bottom: 2rem;
-  border-bottom: 1px solid var(--pastel-purple);
+  border-bottom: 1px solid var(--bg-tertiary);
+}
+
+.blog-list li:last-child {
+  border-bottom: none;
 }
 
 .blog-list article h2 {
   margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
 }
 
 .blog-list article h2 a {
   color: var(--text-primary);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 .blog-list article h2 a:hover {
-  color: var(--pastel-purple);
+  color: var(--primary);
 }
 
 .blog-list time {

@@ -59,6 +59,7 @@ export const useConfetti = () => {
     }, 1000 / 60);
 
     return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- We intentionally use confetti.length > 0 to only restart when transitioning between 0 and non-zero confetti, not on every frame
   }, [confetti.length > 0]);
 
   const ConfettiRender = () => (

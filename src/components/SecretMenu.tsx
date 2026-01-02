@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 interface MenuItem {
   id: string;
@@ -15,10 +15,10 @@ interface SecretMenuProps {
 export const SecretMenu: React.FC<SecretMenuProps> = ({ items, onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = (open: boolean) => {
+  const toggleMenu = useCallback((open: boolean) => {
     setIsOpen(open);
     onToggle?.(open);
-  };
+  }, [onToggle]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -35,18 +35,24 @@ export const SecretMenu: React.FC<SecretMenuProps> = ({ items, onToggle }) => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen]);
+  }, [isOpen, toggleMenu]);
 
   if (!isOpen) return null;
 
   return (
-    <div className="secret-menu-overlay" onClick={() => toggleMenu(false)}>
+    <div
+      className="secret-menu-overlay"
+      onClick={() => toggleMenu(false)}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="secret-menu-title"
+    >
       <div className="secret-menu" onClick={(e) => e.stopPropagation()}>
         <div className="secret-menu-header">
-          <h3>Secret Menu</h3>
+          <h3 id="secret-menu-title">Secret Menu</h3>
           <p className="secret-menu-hint">Press Cmd+K or tap ✨ to toggle</p>
         </div>
-        <div className="secret-menu-items">
+        <div className="secret-menu-items" role="menu">
           {items.map(item => {
             const isDivider = item.id.includes('divider');
             return (
@@ -60,8 +66,10 @@ export const SecretMenu: React.FC<SecretMenuProps> = ({ items, onToggle }) => {
                   // Don't close menu - let user click multiple features
                 }}
                 disabled={isDivider}
+                role={isDivider ? 'separator' : 'menuitem'}
+                aria-label={isDivider ? undefined : `${item.label}`}
               >
-                {item.emoji && <span className="secret-menu-emoji">{item.emoji}</span>}
+                {item.emoji && <span className="secret-menu-emoji" aria-hidden="true">{item.emoji}</span>}
                 <span className="secret-menu-label">{item.label}</span>
               </button>
             );

@@ -1,0 +1,259 @@
+.contact-form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 2px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  background: var(--bg-secondary, #ffffff);
+  color: var(--text-primary, #1a1a1a);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.form-field label {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  font-size: 1rem;
+  color: var(--text-secondary, #666);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background: var(--bg-secondary, #ffffff);
+  padding: 0 0.25rem;
+}
+
+/* Floating label animation */
+.form-field.focused label,
+.form-field.has-value label {
+  top: -0.5rem;
+  left: 0.75rem;
+  font-size: 0.875rem;
+  color: var(--primary, #007bff);
+  font-weight: 600;
+}
+
+/* Glowing effect on focus */
+.form-field.focused input,
+.form-field.focused textarea {
+  border-color: var(--primary, #007bff);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1),
+              0 0 20px rgba(0, 123, 255, 0.2);
+}
+
+/* Glowing animation */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1),
+                0 0 20px rgba(0, 123, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15),
+                0 0 30px rgba(0, 123, 255, 0.3);
+  }
+}
+
+.form-field.focused input,
+.form-field.focused textarea {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Error states */
+.form-field input[aria-invalid="true"],
+.form-field textarea[aria-invalid="true"] {
+  border-color: #dc3545;
+}
+
+.error-message {
+  margin-top: 0.5rem;
+  padding-left: 0.25rem;
+  font-size: 0.875rem;
+  color: #dc3545;
+  font-weight: 500;
+}
+
+/* Message field specific styles */
+.textarea-field {
+  margin-bottom: 0.5rem;
+}
+
+.message-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  min-height: 1.5rem;
+}
+
+.char-counter {
+  font-size: 0.875rem;
+  color: var(--text-secondary, #666);
+  margin-left: auto;
+}
+
+.char-counter.warning {
+  color: #ff9800;
+  font-weight: 600;
+}
+
+/* Submit button */
+.submit-button {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #ffffff;
+  background: var(--primary, #007bff);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: var(--primary-dark, #0056b3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Loading state */
+.submit-button.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Status messages */
+.status-message {
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-align: center;
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.status-message.success {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.status-message.error {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-form-container {
+    max-width: 100%;
+  }
+
+  .form-field input,
+  .form-field textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .message-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .char-counter {
+    margin-left: 0;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .form-field input,
+  .form-field textarea {
+    background: var(--bg-secondary, #2a2a2a);
+    color: var(--text-primary, #f0f0f0);
+    border-color: var(--border-color, #444);
+  }
+
+  .form-field label {
+    background: var(--bg-secondary, #2a2a2a);
+  }
+
+  .status-message.success {
+    background: #1e4620;
+    color: #c3e6cb;
+    border-color: #2e5f31;
+  }
+
+  .status-message.error {
+    background: #4a1c1c;
+    color: #f5c6cb;
+    border-color: #5f2a2a;
+  }
+}

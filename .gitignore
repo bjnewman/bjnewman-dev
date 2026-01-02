@@ -23,6 +23,7 @@ pnpm-debug.log*
 
 # TypeScript
 *.tsbuildinfo
+vite.config.d.ts
 
 # Editor and OS files
 .vscode/
