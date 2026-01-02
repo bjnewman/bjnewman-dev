@@ -14,33 +14,103 @@ const sortedPosts = posts.sort((a, b) =>
 ---
 
 <Base title="Blog">
-  <h1>Blog Posts</h1>
+  <div class="blog-container">
+    <div class="blog-main">
+      <h1>Blog Posts</h1>
 
-  {sortedPosts.length === 0 ? (
-    <p>No blog posts yet. Check back soon!</p>
-  ) : (
-    <ul class="blog-list">
-      {sortedPosts.map((post) => (
-        <li>
-          <article>
-            <h2>
-              <a href={post.url}>{post.frontmatter.title}</a>
-            </h2>
-            <time datetime={post.frontmatter.date}>
-              {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </time>
-          </article>
-        </li>
-      ))}
-    </ul>
-  )}
+      {sortedPosts.length === 0 ? (
+        <p>No blog posts yet. Check back soon!</p>
+      ) : (
+        <ul class="blog-list">
+          {sortedPosts.map((post) => (
+            <li>
+              <article>
+                <h2>
+                  <a href={post.url}>{post.frontmatter.title}</a>
+                </h2>
+                <time datetime={post.frontmatter.date}>
+                  {new Date(post.frontmatter.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </time>
+              </article>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+
+    <aside class="blogroll">
+      <h3>🔗 Blogroll</h3>
+
+      <section class="links-section">
+        <h4>Tech Blogs</h4>
+        <ul>
+          <li><a href="https://overreacted.io" target="_blank" rel="noopener noreferrer">Overreacted</a> <span class="link-meta">Dan Abramov</span></li>
+          <li><a href="https://kentcdodds.com/blog" target="_blank" rel="noopener noreferrer">Kent C. Dodds</a> <span class="link-meta">React & Testing</span></li>
+          <li><a href="https://css-tricks.com" target="_blank" rel="noopener noreferrer">CSS-Tricks</a> <span class="link-meta">Web Design</span></li>
+          <li><a href="https://www.joshwcomeau.com" target="_blank" rel="noopener noreferrer">Josh Comeau</a> <span class="link-meta">Interactive Tutorials</span></li>
+          <li><a href="https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e" target="_blank" rel="noopener noreferrer">My LLM Coding Workflow</a> <span class="link-meta">Addy Osmani</span></li>
+        </ul>
+      </section>
+
+      <section class="links-section">
+        <h4>Tools & Resources</h4>
+        <ul>
+          <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://stackoverflow.com" target="_blank" rel="noopener noreferrer">Stack Overflow</a></li>
+          <li><a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">MDN Web Docs</a></li>
+          <li><a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> <span class="link-meta">This site!</span></li>
+        </ul>
+      </section>
+
+      <section class="links-section">
+        <h4>Inspiration</h4>
+        <ul>
+          <li><a href="https://www.csszengarden.com" target="_blank" rel="noopener noreferrer">CSS Zen Garden</a></li>
+          <li><a href="https://codepen.io" target="_blank" rel="noopener noreferrer">CodePen</a></li>
+          <li><a href="https://www.smashingmagazine.com" target="_blank" rel="noopener noreferrer">Smashing Magazine</a></li>
+        </ul>
+      </section>
+
+      <div class="blogroll-footer">
+        <p class="retro-note">Est. 2026 • Updated regularly</p>
+        <a href="/rss.xml" class="rss-badge">
+          <span class="rss-icon">📡</span>
+          <span>RSS Feed</span>
+        </a>
+      </div>
+    </aside>
+  </div>
 </Base>
 
 <style>
+/* Two-column layout */
+.blog-container {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .blog-container {
+    grid-template-columns: 1fr;
+  }
+
+  .blogroll {
+    order: -1; /* Move sidebar above posts on mobile */
+  }
+}
+
+/* Blog posts */
+.blog-main h1 {
+  margin-bottom: 2rem;
+}
+
 .blog-list {
   list-style: none;
   padding: 0;
@@ -74,5 +144,135 @@ const sortedPosts = posts.sort((a, b) =>
 .blog-list time {
   color: var(--text-secondary);
   font-size: 0.9rem;
+}
+
+/* Blogroll sidebar */
+.blogroll {
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+  background: var(--bg-secondary);
+  border: 2px solid var(--bg-tertiary);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.blogroll h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.3rem;
+  color: var(--primary);
+  border-bottom: 2px solid var(--bg-tertiary);
+  padding-bottom: 0.5rem;
+}
+
+.links-section {
+  margin-bottom: 1.5rem;
+}
+
+.links-section:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.links-section h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem 0;
+  font-weight: 600;
+}
+
+.links-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.links-section li {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.links-section a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.links-section a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.link-meta {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-left: 0.25rem;
+}
+
+/* Blogroll footer */
+.blogroll-footer {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 2px solid var(--bg-tertiary);
+}
+
+.retro-note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: 0 0 0.75rem 0;
+  text-align: center;
+  font-style: italic;
+}
+
+.rss-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.rss-badge:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rss-icon {
+  font-size: 1.1rem;
+}
+
+/* Theme-specific blogroll styles */
+.theme-90s .blogroll {
+  border: 4px ridge #0000ff;
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.4);
+  background: rgba(255,255,255,0.95);
+}
+
+.theme-brutalist .blogroll {
+  border: 3px solid #000000;
+  box-shadow: 6px 6px 0 #000000;
+  border-radius: 0;
+}
+
+.theme-vaporwave .blogroll {
+  background: rgba(45, 27, 105, 0.85);
+  border: 2px solid #01cdfe;
+  box-shadow: 0 0 20px rgba(255, 113, 206, 0.5);
+}
+
+.theme-terminal .blogroll {
+  background: rgba(0, 20, 0, 0.9);
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 </style>

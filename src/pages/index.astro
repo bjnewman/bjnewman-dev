@@ -1,27 +1,37 @@
 ---
 import Base from '../layouts/Base.astro';
+import { TypewriterCode } from '../components/TypewriterCode';
+import { StatCards } from '../components/StatCards';
+import '../styles/hero.css';
 ---
 
 <Base title="Home">
-  <h1>Hey, I'm Ben Newman</h1>
-
-  <p>I'm a software developer who builds scalable web applications and solves complex business problems.</p>
+  <section class="hero">
+    <div class="hero-top">
+      <div class="hero-content">
+        <h1 class="hero-title">Hello, I'm Ben Newman</h1>
+        <p class="hero-subtitle">Tech Lead building systems at scale.</p>
+      </div>
+      <TypewriterCode client:load />
+    </div>
+    <StatCards client:load />
+  </section>
 
   <h2>What I Do</h2>
 
   <p>I specialize in full-stack development with React and Java, building systems that handle millions of daily transactions. My sweet spot is translating messy business requirements into clean, maintainable solutions that actually work in production.</p>
 
-  <p>Former lawyer turned developer — which means I'm annoyingly good at documentation and asking "but what if..." questions.</p>
+  <p>Former lawyer turned developer — which means I'm annoyingly good at documentation and asking hypothetical questions.</p>
 
   <h2>Work</h2>
 
-  <p>I'm a Tech Lead at Availity, building healthcare technology that connects providers and insurance companies. My work involves parsing ANSI X12 transaction formats (the 275, 276, 277 gang), architecting configuration-based solutions that scale across dozens of payers and thousands of providers, and making sure millions of healthcare transactions flow reliably every day.</p>
+  <p>I'm a tech lead at Availity, building healthcare technology that connects providers and insurance companies. My work involves parsing ANSI X12 transaction formats (claim submissions - 837 and 277CA, claim status 276 and 277s, attachments 275 and 277RFAIs), architecting configuration-based solutions that scale across dozens of payers and thousands of providers, and making sure millions of healthcare transactions flow reliably every day.</p>
 
-  <p>I lead a team building applications that serve 100k+ daily users and contribute over 10% of our web portal's traffic. The work involves technical leadership, architecture decisions, and solving complex problems at scale.</p>
+  <p>I lead a team building applications that serve 100k+ daily users and contribute over 10% of Availity's traffic. The work involves technical leadership, architecture decisions, and solving complex problems at scale.</p>
 
   <h2>Side Projects</h2>
 
-  <p>Outside of work, I'm exploring new technologies and building things from scratch — a nice change from the enterprise systems I work with daily.</p>
+  <p>Outside of work, I'm building this page and exploring new technologies and techniques to get a change from the enterprise systems I work with daily.</p>
 
-  <p>Check out my <a href="/resume/">resume</a> for the full work history, or <a href="/projects/">projects</a> to see what I'm building on the side.</p>
+  <p>Check out my <a href="/resume/">resume</a> for the full work history, or <a href="/projects/">projects</a> to see what I'm working on currently.</p>
 </Base>
