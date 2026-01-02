@@ -2,12 +2,14 @@ import { SecretMenu } from './components/SecretMenu';
 import { useConfetti } from './components/ConfettiCannon';
 import { useMusicPlayer } from './components/MusicPlayer';
 import { useThemeSwitcher, themes } from './components/ThemeSwitcher';
+import { useHollandDecorations } from './components/HollandDecorations';
 import { useState, useEffect } from 'react';
 
 function SecretFeatures() {
   const { fireConfetti, ConfettiRender } = useConfetti();
   const { toggleMusic, MusicIndicator } = useMusicPlayer();
   const { currentTheme, switchTheme } = useThemeSwitcher();
+  const { spawnUnicorns, spawnRainbows, spawnIceCream, spawnStars, spawnHearts, DecorationsRender } = useHollandDecorations();
   const [menuDiscovered, setMenuDiscovered] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -55,6 +57,42 @@ function SecretFeatures() {
     ...themeItems,
     {
       id: 'holland-divider',
+      label: "— Holland's Magic —",
+      emoji: '✨',
+      action: () => {}, // Divider
+    },
+    {
+      id: 'holland-unicorns',
+      label: 'Spawn Unicorns',
+      emoji: '🦄',
+      action: spawnUnicorns,
+    },
+    {
+      id: 'holland-rainbows',
+      label: 'Spawn Rainbows',
+      emoji: '🌈',
+      action: spawnRainbows,
+    },
+    {
+      id: 'holland-icecream',
+      label: 'Spawn Ice Cream',
+      emoji: '🍦',
+      action: spawnIceCream,
+    },
+    {
+      id: 'holland-stars',
+      label: 'Spawn Stars',
+      emoji: '⭐',
+      action: spawnStars,
+    },
+    {
+      id: 'holland-hearts',
+      label: 'Spawn Hearts',
+      emoji: '💕',
+      action: spawnHearts,
+    },
+    {
+      id: 'holland-page-divider',
       label: '—',
       emoji: '',
       action: () => {}, // Divider
@@ -62,7 +100,7 @@ function SecretFeatures() {
     {
       id: 'holland',
       label: "Holland's Secret Page",
-      emoji: '🦄',
+      emoji: '🚪',
       action: () => {
         window.location.href = '/holland/';
       },
@@ -74,6 +112,7 @@ function SecretFeatures() {
       <SecretMenu items={menuItems} onToggle={handleMenuToggle} />
       <MusicIndicator />
       <ConfettiRender />
+      <DecorationsRender />
 
       {/* Mobile trigger button */}
       <button
