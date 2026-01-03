@@ -69,7 +69,7 @@ export const MonkeyEyes: React.FC<MonkeyEyesProps> = ({ visible = true, position
 
   if (!visible) return null;
 
-  // CSS variables matching Suzanne Aitchison's design
+  // CSS variables matching existing art
   const brown = '#9E5936';
   const brownLight = '#EABE7F';
   const vmin = Math.min(window.innerWidth, window.innerHeight) / 100;
