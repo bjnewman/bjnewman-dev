@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Code tokens with syntax highlighting classes
 interface Token {
@@ -94,7 +94,7 @@ export function TypewriterCode({ restartKey = 0 }: TypewriterCodeProps) {
   // Render tokens up to current character index
   const renderCode = () => {
     let remainingChars = charIndex;
-    const elements: JSX.Element[] = [];
+    const elements: React.ReactElement[] = [];
 
     for (let i = 0; i < codeTokens.length && remainingChars > 0; i++) {
       const token = codeTokens[i];
@@ -117,7 +117,14 @@ export function TypewriterCode({ restartKey = 0 }: TypewriterCodeProps) {
       className="typewriter-container typewriter-clickable"
       role="img"
       aria-label="Code snippet showing: building reliable systems at scale, Tech Lead focused on React, Java, and AWS, handling 10M+ daily transactions"
+      tabIndex={0}
       onClick={restartAnimation}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          restartAnimation();
+        }
+      }}
       title="Click to replay animation"
     >
       <code className="typewriter-code">

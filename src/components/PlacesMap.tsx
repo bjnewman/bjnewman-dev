@@ -123,10 +123,12 @@ export const PlacesMap = () => {
       {/* Timeline list for mobile/accessibility */}
       <div className="places-map__list">
         {places.map((place, index) => (
-          <div
+          <button
             key={place.name}
+            type="button"
             className={`places-map__list-item ${activePlace === index ? 'places-map__list-item--active' : ''}`}
             onClick={() => setActivePlace(activePlace === index ? null : index)}
+            aria-expanded={activePlace === index}
           >
             <div className="places-map__list-marker">
               <span className="places-map__list-dot" />
@@ -143,7 +145,7 @@ export const PlacesMap = () => {
                 <p className="places-map__list-description">{place.description}</p>
               )}
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>

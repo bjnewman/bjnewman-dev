@@ -248,8 +248,8 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
         <div className="urgency-slider__description">{getUrgencyDescription(urgency)}</div>
       </div>
 
-      <div className="fun-field">
-        <label className="fun-field__label">Preferred Contact Method</label>
+      <fieldset className="fun-field">
+        <legend className="fun-field__label">Preferred Contact Method</legend>
         <div className="contact-methods">
           {contactMethods.map((method) => (
             <button
@@ -257,22 +257,23 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
               type="button"
               className={`contact-method ${contactMethod === method.value ? 'contact-method--selected' : ''}`}
               onClick={() => setContactMethod(method.value)}
+              aria-pressed={contactMethod === method.value}
             >
               <span className="contact-method__emoji">{method.emoji}</span>
               <span className="contact-method__label">{method.label}</span>
             </button>
           ))}
         </div>
-      </div>
+      </fieldset>
 
-      <div className="fun-field">
-        <label className="fun-field__label">
+      <fieldset className="fun-field">
+        <legend className="fun-field__label">
           World's Worst Phone Input
           <span className="fun-field__hint">(Good luck!)</span>
-        </label>
-        <div className={`rotary-phone ${isJackpot ? 'rotary-phone--jackpot' : ''}`}>
+        </legend>
+        <div className={`slot-phone ${isJackpot ? 'slot-phone--jackpot' : ''}`}>
           <div
-            className={`rotary-phone__display ${isJackpot ? 'rotary-phone__display--jackpot' : ''}`}
+            className={`slot-phone__display ${isJackpot ? 'slot-phone__display--jackpot' : ''}`}
           >
             {isJackpot ? '🎰 JACKPOT! 🎰' : formattedPhone}
           </div>
@@ -330,7 +331,7 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
             Click digits to spin individually, or go for broke!
           </div>
         </div>
-      </div>
+      </fieldset>
     </div>
   );
 };

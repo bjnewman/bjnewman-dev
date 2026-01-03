@@ -6,21 +6,21 @@
   margin-bottom: 3rem;
 }
 
-.hero-top {
+.hero__top {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: center;
 }
 
-.hero-content {
+.hero__content {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
 /* Bold Typography */
-.hero-title {
+.hero__title {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
   line-height: 1.1;
@@ -28,7 +28,7 @@
   color: var(--text-primary);
 }
 
-.hero-subtitle {
+.hero__subtitle {
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
   font-weight: 400;
   line-height: 1.4;
@@ -155,12 +155,12 @@
 
 /* Mobile Layout */
 @media (max-width: 768px) {
-  .hero-top {
+  .hero__top {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  .hero-content {
+  .hero__content {
     order: 1;
   }
 

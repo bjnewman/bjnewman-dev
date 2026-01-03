@@ -52,10 +52,14 @@ export const SecretMenu: React.FC<SecretMenuProps> = ({ items, isOpen: controlle
     <div
       className="secret-menu-overlay"
       onClick={() => toggleMenu(false)}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') toggleMenu(false);
+      }}
       role="dialog"
       aria-modal="true"
       aria-labelledby="secret-menu-title"
     >
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- stopPropagation only, not interactive */}
       <div className="secret-menu" onClick={(e) => e.stopPropagation()}>
         <div className="secret-menu-header">
           <h3 id="secret-menu-title">Secret Menu</h3>

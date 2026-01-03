@@ -14,13 +14,22 @@ export function StatCards() {
     setRestartKeys((prev) => ({ ...prev, [key]: prev[key] + 1 }));
   };
 
+  const handleKeyDown = (key: keyof typeof restartKeys) => (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      restartAnimation(key);
+    }
+  };
+
   return (
     <div className="stat-cards" role="list" aria-label="Key statistics">
       {/* Transactions - Sparkline */}
       <div
         className="stat-card stat-card-clickable"
         role="listitem"
+        tabIndex={0}
         onClick={() => restartAnimation('transactions')}
+        onKeyDown={handleKeyDown('transactions')}
         title="Click to replay animation"
       >
         <div className="stat-sparkline">
@@ -38,7 +47,9 @@ export function StatCards() {
       <div
         className="stat-card stat-card-clickable"
         role="listitem"
+        tabIndex={0}
         onClick={() => restartAnimation('users')}
+        onKeyDown={handleKeyDown('users')}
         title="Click to replay animation"
       >
         <div className="stat-sparkline">
@@ -52,7 +63,9 @@ export function StatCards() {
       <div
         className="stat-card stat-card-clickable"
         role="listitem"
+        tabIndex={0}
         onClick={() => restartAnimation('years')}
+        onKeyDown={handleKeyDown('years')}
         title="Click to replay animation"
       >
         <div className="stat-sparkline">
