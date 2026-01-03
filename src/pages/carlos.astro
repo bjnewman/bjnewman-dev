@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/carlos.css';
+---
+
+<Base title="Carlos">
+  <article class="carlos-page">
+    <header class="carlos-hero">
+      <div class="carlos-hero__photo-placeholder">
+        <span class="carlos-hero__emoji">🐕</span>
+        <p class="carlos-hero__photo-hint">Photo coming soon</p>
+      </div>
+      <h1 class="carlos-hero__title">Carlos</h1>
+      <p class="carlos-hero__subtitle">The Good Boy</p>
+    </header>
+
+    <section class="carlos-intro">
+      <p>
+        Every developer needs a reliable companion to supervise their work,
+        provide unsolicited code reviews (usually in the form of demanding treats),
+        and ensure adequate break times for walks.
+      </p>
+      <p>
+        Carlos fulfills this role admirably.
+      </p>
+    </section>
+
+    <section class="carlos-stats">
+      <h2>Stats</h2>
+      <div class="carlos-stats__grid">
+        <div class="carlos-stat">
+          <span class="carlos-stat__emoji">🏷️</span>
+          <span class="carlos-stat__label">Breed</span>
+          <span class="carlos-stat__value">TBD</span>
+        </div>
+        <div class="carlos-stat">
+          <span class="carlos-stat__emoji">🎂</span>
+          <span class="carlos-stat__label">Age</span>
+          <span class="carlos-stat__value">Young at heart</span>
+        </div>
+        <div class="carlos-stat">
+          <span class="carlos-stat__emoji">⭐</span>
+          <span class="carlos-stat__label">Favorite Activity</span>
+          <span class="carlos-stat__value">Being a good boy</span>
+        </div>
+        <div class="carlos-stat">
+          <span class="carlos-stat__emoji">🦸</span>
+          <span class="carlos-stat__label">Special Skills</span>
+          <span class="carlos-stat__value">Looking cute, naps</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="carlos-facts">
+      <h2>Fun Facts</h2>
+      <ul class="carlos-facts__list">
+        <li>Has never written a single line of production code, and yet has never caused a production outage</li>
+        <li>Believes every meal is the most important meal of his life</li>
+        <li>Offers emotional support during difficult debugging sessions</li>
+        <li>Has a 100% success rate at getting belly rubs</li>
+        <li>Professional napper with years of experience</li>
+      </ul>
+    </section>
+
+    <section class="carlos-gallery">
+      <h2>Gallery</h2>
+      <div class="carlos-gallery__placeholder">
+        <span class="carlos-gallery__emoji">📸</span>
+        <p>Photos coming soon!</p>
+        <p class="carlos-gallery__hint">Check back later for Carlos content.</p>
+      </div>
+    </section>
+
+    <footer class="carlos-footer">
+      <a href="/about" class="carlos-back">← Back to About</a>
+    </footer>
+  </article>
+</Base>

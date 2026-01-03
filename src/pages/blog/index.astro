@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { PageCollectible } from '../../components/ScavengerHunt';
 
 // Get all markdown files in blog directory using import.meta.glob
 const postFiles = import.meta.glob('./*.md', { eager: true });
@@ -76,7 +77,7 @@ const sortedPosts = posts.sort((a, b) =>
       </section>
 
       <div class="blogroll-footer">
-        <p class="retro-note">Est. 2026 • Updated regularly</p>
+        <p class="retro-note">Est. 2026 • Updated regularly <PageCollectible id="hidden_key" client:load /></p>
         <a href="/rss.xml" class="rss-badge">
           <span class="rss-icon">📡</span>
           <span>RSS Feed</span>

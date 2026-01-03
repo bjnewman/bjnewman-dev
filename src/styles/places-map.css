@@ -1,0 +1,256 @@
+/* Places Map */
+.places-map {
+  margin: 1.5rem 0;
+}
+
+.places-map__container {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  aspect-ratio: 3 / 2;
+}
+
+.places-map__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.4;
+  filter: grayscale(100%);
+}
+
+/* Location pins */
+.places-map__pin {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1;
+  transition: z-index 0s 0.2s;
+}
+
+.places-map__pin:hover,
+.places-map__pin--active {
+  z-index: 10;
+  transition: z-index 0s;
+}
+
+.places-map__pin-dot {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: var(--primary);
+  border: 2px solid var(--bg-primary);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.places-map__pin:hover .places-map__pin-dot,
+.places-map__pin--active .places-map__pin-dot {
+  background: var(--primary-light);
+  box-shadow: 0 0 0 6px rgba(var(--primary-rgb, 99, 102, 241), 0.3);
+}
+
+.places-map__pin-label {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  padding-top: 0.25rem;
+}
+
+.places-map__pin:hover .places-map__pin-label,
+.places-map__pin--active .places-map__pin-label {
+  opacity: 1;
+}
+
+/* Details card */
+.places-map__details {
+  min-height: 100px;
+  margin-bottom: 1rem;
+}
+
+.places-map__card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--primary);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  animation: fadeSlideIn 0.2s ease;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.places-map__card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.places-map__card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.places-map__card-years {
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.places-map__card-description {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.places-map__hint {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  margin: 0;
+  padding: 1.5rem 0;
+}
+
+/* Timeline list for mobile/accessibility */
+.places-map__list {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .places-map__container {
+    display: none;
+  }
+
+  .places-map__details {
+    display: none;
+  }
+
+  .places-map__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .places-map__list-item {
+    display: flex;
+    gap: 1rem;
+    cursor: pointer;
+    padding: 0.75rem 0;
+    transition: background 0.2s ease;
+  }
+
+  .places-map__list-item:hover {
+    background: var(--bg-secondary);
+    margin: 0 -1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+  }
+
+  .places-map__list-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20px;
+    flex-shrink: 0;
+  }
+
+  .places-map__list-dot {
+    width: 12px;
+    height: 12px;
+    background: var(--primary);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .places-map__list-item--active .places-map__list-dot {
+    box-shadow: 0 0 0 4px rgba(var(--primary-rgb, 99, 102, 241), 0.3);
+  }
+
+  .places-map__list-line {
+    width: 2px;
+    flex: 1;
+    background: var(--bg-tertiary);
+    margin-top: 0.5rem;
+  }
+
+  .places-map__list-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .places-map__list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .places-map__list-header strong {
+    color: var(--text-primary);
+  }
+
+  .places-map__list-header span {
+    font-size: 0.85rem;
+    color: var(--primary);
+  }
+
+  .places-map__list-description {
+    margin: 0.5rem 0 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    animation: fadeSlideIn 0.2s ease;
+  }
+}
+
+/* Theme overrides */
+.theme-brutalist .places-map__card {
+  border: 2px solid #000;
+  border-radius: 0;
+}
+
+.theme-brutalist .places-map__pin-dot {
+  border-radius: 0;
+}
+
+.theme-terminal .places-map__card {
+  border-color: #00ff00;
+  background: rgba(0, 20, 0, 0.8);
+}
+
+.theme-terminal .places-map__pin-dot {
+  background: #00ff00;
+}
+
+.theme-vaporwave .places-map__card {
+  border-color: #ff71ce;
+  background: rgba(45, 27, 105, 0.8);
+}
+
+.theme-vaporwave .places-map__pin-dot {
+  background: #ff71ce;
+}

@@ -1,0 +1,380 @@
+/* Fun Mode Toggle */
+.fun-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px dashed var(--text-muted);
+  border-radius: 2rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  opacity: 0.7;
+}
+
+.fun-mode-toggle:hover {
+  opacity: 1;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.fun-mode-toggle--active {
+  opacity: 1;
+  background: var(--primary);
+  border-color: var(--primary);
+  border-style: solid;
+  color: white;
+}
+
+.fun-mode-toggle__icon {
+  font-size: 1rem;
+}
+
+/* Fun Fields Container */
+.fun-fields {
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: 2px dashed var(--primary);
+  border-radius: 1rem;
+  animation: funFieldsIn 0.3s ease;
+}
+
+@keyframes funFieldsIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fun-fields__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.fun-fields__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background: var(--primary);
+  color: white;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fun-fields__subtitle {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Individual Fun Field */
+.fun-field {
+  margin-bottom: 1.5rem;
+}
+
+.fun-field:last-child {
+  margin-bottom: 0;
+}
+
+.fun-field__label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.fun-field__hint {
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+/* Urgency Slider */
+.urgency-slider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.urgency-slider__input {
+  flex: 1;
+  height: 0.5rem;
+  border-radius: 0.25rem;
+  background: var(--bg-tertiary);
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.urgency-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.urgency-slider__input::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.urgency-slider__input::-moz-range-thumb {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--primary);
+  cursor: pointer;
+  border: none;
+}
+
+.urgency-slider__value {
+  min-width: 3rem;
+  padding: 0.25rem 0.5rem;
+  background: var(--bg-tertiary);
+  border-radius: 0.25rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.urgency-slider__description {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--bg-tertiary);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Contact Methods */
+.contact-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: 0.5rem;
+}
+
+.contact-method {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--bg-tertiary);
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  text-align: left;
+}
+
+.contact-method:hover {
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.contact-method--selected {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: white;
+}
+
+.contact-method__emoji {
+  font-size: 1.25rem;
+}
+
+.contact-method__label {
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+/* World's Worst Phone Input - Slot Machine Style */
+.rotary-phone {
+  padding: 1rem;
+  background: var(--bg-tertiary);
+  border-radius: 0.5rem;
+}
+
+.rotary-phone__display {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: monospace;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 0.75rem;
+  background: var(--bg-primary);
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+}
+
+.slot-phone__dials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.slot-phone__group {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.slot-phone__separator {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-muted);
+  padding: 0 0.25rem;
+}
+
+.slot-phone__hint {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: center;
+}
+
+/* Individual Slot Digit */
+.slot-digit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.slot-digit__nudge {
+  width: 28px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-tertiary);
+  border-radius: 4px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 0;
+  font-family: inherit;
+}
+
+.slot-digit__nudge:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.slot-digit__display {
+  width: 32px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: monospace;
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  border: 2px solid var(--bg-tertiary);
+  border-radius: 6px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.slot-digit__display:hover {
+  border-color: var(--primary);
+  box-shadow: 0 0 8px rgba(var(--primary-rgb, 99, 102, 241), 0.3);
+}
+
+.slot-digit__display--spinning {
+  animation: slot-spin 0.1s linear infinite;
+  border-color: var(--primary);
+}
+
+@keyframes slot-spin {
+  0% { transform: translateY(-2px); }
+  50% { transform: translateY(2px); }
+  100% { transform: translateY(-2px); }
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .fun-fields {
+    padding: 1rem;
+  }
+
+  .contact-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .rotary-phone__display {
+    font-size: 1.1rem;
+  }
+
+  .slot-digit__display {
+    width: 26px;
+    height: 34px;
+    font-size: 1rem;
+  }
+
+  .slot-digit__nudge {
+    width: 24px;
+    height: 14px;
+    font-size: 0.5rem;
+  }
+
+  .slot-phone__separator {
+    font-size: 1.25rem;
+    padding: 0 0.125rem;
+  }
+}
+
+/* Theme-specific styles */
+.theme-brutalist .fun-fields {
+  border: 3px solid #000;
+  border-radius: 0;
+}
+
+.theme-brutalist .fun-mode-toggle--active {
+  border-color: #000;
+  background: #000;
+}
+
+.theme-terminal .fun-fields {
+  border-color: #00ff00;
+  background: rgba(0, 20, 0, 0.8);
+}
+
+.theme-terminal .fun-mode-toggle--active {
+  background: #00ff00;
+  color: #000;
+}
+
+.theme-vaporwave .fun-fields {
+  border-color: #ff71ce;
+  background: rgba(45, 27, 105, 0.8);
+}
+
+.theme-vaporwave .fun-mode-toggle--active {
+  background: linear-gradient(135deg, #ff71ce, #01cdfe);
+}

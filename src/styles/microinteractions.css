@@ -1,0 +1,181 @@
+/* Microinteractions - Subtle animations and hover effects */
+
+/*
+ * Global transition smoothness for interactive elements
+ */
+a,
+button,
+input,
+textarea,
+select {
+  transition: all 0.2s ease;
+}
+
+/*
+ * Link hover effects - animated underline for content links
+ */
+main a:not([class]) {
+  position: relative;
+  text-decoration: none;
+}
+
+main a:not([class])::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease;
+}
+
+main a:not([class]):hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/*
+ * Button hover effects
+ */
+button:not([disabled]):not(.places-map__pin):hover {
+  transform: translateY(-1px);
+}
+
+button:not([disabled]):not(.places-map__pin):active {
+  transform: translateY(0);
+}
+
+/*
+ * Footer social links - subtle lift effect
+ */
+footer .social-links a {
+  display: inline-block;
+}
+
+footer .social-links a:hover {
+  transform: translateY(-2px);
+}
+
+/*
+ * Card-like elements - lift on hover
+ */
+.card,
+[class*="teaser"],
+[class*="stat"] {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/*
+ * Input focus enhancement
+ */
+input:focus,
+textarea:focus,
+select:focus {
+  transform: translateY(-1px);
+}
+
+/*
+ * List item hover effects for styled lists
+ */
+main li {
+  transition: transform 0.2s ease;
+}
+
+main li:hover {
+  transform: translateX(4px);
+}
+
+/*
+ * Emoji bounce on hover for elements with emoji
+ */
+.emoji,
+[class*="emoji"] {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.emoji:hover,
+[class*="emoji"]:hover {
+  animation: emoji-bounce 0.6s ease;
+}
+
+@keyframes emoji-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-4px) rotate(-5deg); }
+  75% { transform: translateY(-2px) rotate(5deg); }
+}
+
+/*
+ * Smooth scroll behavior
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/*
+ * Subtle pulse for active/focused interactive elements
+ */
+@keyframes subtle-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  50% { box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1); }
+}
+
+button:focus-visible,
+a:focus-visible {
+  animation: subtle-pulse 2s ease infinite;
+}
+
+/*
+ * Header nav link shimmer on hover (optional enhancement)
+ */
+header nav a {
+  overflow: hidden;
+}
+
+header nav a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+header nav a:hover::before {
+  left: 100%;
+}
+
+/*
+ * Footer year transition
+ */
+footer p {
+  transition: transform 0.2s ease;
+}
+
+footer:hover p {
+  transform: scale(1.02);
+}

@@ -4,16 +4,28 @@ import { useMusicPlayer } from './components/MusicPlayer';
 import { useThemeSwitcher, themes } from './components/ThemeSwitcher';
 import { useHollandDecorations } from './components/HollandDecorations';
 import { MonkeyEyes } from './components/MonkeyEyes';
-import { useState, useEffect } from 'react';
+import { useScavengerHunt, ProgressIndicator } from './components/ScavengerHunt';
+import { useState, useEffect, useRef } from 'react';
 
 function SecretFeatures() {
   const { fireConfetti, ConfettiRender } = useConfetti();
-  const { toggleMusic, MusicIndicator } = useMusicPlayer();
+  const { toggleMusic, isPlaying, MusicIndicator } = useMusicPlayer();
   const { currentTheme, switchTheme } = useThemeSwitcher();
   const { spawnUnicorns, spawnRainbows, spawnIceCream, spawnStars, spawnHearts, DecorationsRender } = useHollandDecorations();
+  const {
+    state: huntState,
+    isLoaded: huntLoaded,
+    trackSecretMenuOpened,
+    trackConfettiFired,
+    trackThemeExplored,
+    trackMusicListenTime,
+  } = useScavengerHunt();
+
   const [menuDiscovered, setMenuDiscovered] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [monkeyEyesVisible, setMonkeyEyesVisible] = useState(false);
+  const musicTimeRef = useRef<number>(0);
+  const musicIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     // Check if user has discovered the menu before
@@ -21,12 +33,49 @@ function SecretFeatures() {
     setMenuDiscovered(discovered);
   }, []);
 
+  // Track music listen time
+  useEffect(() => {
+    if (isPlaying) {
+      musicIntervalRef.current = setInterval(() => {
+        musicTimeRef.current += 1;
+        // Update every 5 seconds to avoid too many updates
+        if (musicTimeRef.current % 5 === 0) {
+          trackMusicListenTime(5);
+        }
+      }, 1000);
+    } else {
+      if (musicIntervalRef.current) {
+        clearInterval(musicIntervalRef.current);
+        musicIntervalRef.current = null;
+      }
+    }
+    return () => {
+      if (musicIntervalRef.current) {
+        clearInterval(musicIntervalRef.current);
+      }
+    };
+  }, [isPlaying, trackMusicListenTime]);
+
   const handleMenuToggle = (open: boolean) => {
     setIsMenuOpen(open);
-    if (open && !menuDiscovered) {
-      localStorage.setItem('secret-menu-discovered', 'true');
-      setMenuDiscovered(true);
+    if (open) {
+      // Always call - the hook handles deduplication
+      trackSecretMenuOpened();
+      if (!menuDiscovered) {
+        localStorage.setItem('secret-menu-discovered', 'true');
+        setMenuDiscovered(true);
+      }
     }
+  };
+
+  const handleConfetti = () => {
+    fireConfetti();
+    trackConfettiFired();
+  };
+
+  const handleSwitchTheme = (themeId: string) => {
+    switchTheme(themeId);
+    trackThemeExplored(themeId);
   };
 
   // Create theme menu items
@@ -34,7 +83,7 @@ function SecretFeatures() {
     id: `theme-${theme.id}`,
     label: theme.name,
     emoji: theme.emoji,
-    action: () => switchTheme(theme.id),
+    action: () => handleSwitchTheme(theme.id),
   }));
 
   const menuItems = [
@@ -42,7 +91,7 @@ function SecretFeatures() {
       id: 'confetti',
       label: 'Party Mode (Confetti!)',
       emoji: '🎉',
-      action: fireConfetti,
+      action: handleConfetti,
     },
     {
       id: 'music',
@@ -122,6 +171,7 @@ function SecretFeatures() {
       <ConfettiRender />
       <DecorationsRender />
       <MonkeyEyes visible={monkeyEyesVisible} position="bottom" />
+      <ProgressIndicator state={huntState} isLoaded={huntLoaded} />
 
       {/* Mobile trigger button */}
       <button

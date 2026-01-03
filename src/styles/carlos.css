@@ -1,0 +1,260 @@
+/* Carlos Page */
+.carlos-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Hero Section */
+.carlos-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.carlos-hero__photo-placeholder {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border: 3px dashed var(--bg-tertiary);
+  border-radius: 50%;
+}
+
+.carlos-hero__emoji {
+  font-size: 4rem;
+}
+
+.carlos-hero__photo-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.carlos-hero__title {
+  font-size: 3rem;
+  margin: 0 0 0.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.carlos-hero__subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Intro Section */
+.carlos-intro {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+.carlos-intro p {
+  margin: 0 0 1rem;
+}
+
+.carlos-intro p:last-child {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Stats Section */
+.carlos-stats {
+  margin-bottom: 3rem;
+}
+
+.carlos-stats h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.carlos-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.carlos-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-tertiary);
+  border-radius: 0.75rem;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.carlos-stat:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-light);
+}
+
+.carlos-stat__emoji {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.carlos-stat__label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.carlos-stat__value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Fun Facts Section */
+.carlos-facts {
+  margin-bottom: 3rem;
+}
+
+.carlos-facts h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.carlos-facts__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.carlos-facts__list li {
+  padding: 1rem 1rem 1rem 3rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--bg-tertiary);
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.carlos-facts__list li::before {
+  content: '🐾';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carlos-facts__list li:hover {
+  transform: translateX(4px);
+  border-color: var(--primary-light);
+}
+
+/* Gallery Section */
+.carlos-gallery {
+  margin-bottom: 3rem;
+}
+
+.carlos-gallery h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.carlos-gallery__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  background: var(--bg-secondary);
+  border: 2px dashed var(--bg-tertiary);
+  border-radius: 1rem;
+  text-align: center;
+}
+
+.carlos-gallery__emoji {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.carlos-gallery__placeholder p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.carlos-gallery__hint {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem !important;
+}
+
+/* Footer */
+.carlos-footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--bg-tertiary);
+}
+
+.carlos-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.carlos-back:hover {
+  color: var(--primary);
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .carlos-hero__photo-placeholder {
+    width: 150px;
+    height: 150px;
+  }
+
+  .carlos-hero__emoji {
+    font-size: 3rem;
+  }
+
+  .carlos-hero__title {
+    font-size: 2.5rem;
+  }
+
+  .carlos-stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .carlos-facts__list li {
+    padding-left: 2.5rem;
+  }
+}
+
+/* Theme-specific styles */
+.theme-brutalist .carlos-stat,
+.theme-brutalist .carlos-facts__list li,
+.theme-brutalist .carlos-gallery__placeholder {
+  border: 2px solid #000;
+  border-radius: 0;
+}
+
+.theme-terminal .carlos-stat,
+.theme-terminal .carlos-facts__list li,
+.theme-terminal .carlos-gallery__placeholder {
+  border-color: #00ff00;
+  background: rgba(0, 20, 0, 0.8);
+}
+
+.theme-vaporwave .carlos-stat,
+.theme-vaporwave .carlos-facts__list li,
+.theme-vaporwave .carlos-gallery__placeholder {
+  border-color: #ff71ce;
+  background: rgba(45, 27, 105, 0.8);
+}

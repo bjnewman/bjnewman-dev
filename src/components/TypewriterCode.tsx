@@ -116,7 +116,7 @@ export function TypewriterCode({ restartKey = 0 }: TypewriterCodeProps) {
     <div
       className="typewriter-container typewriter-clickable"
       role="img"
-      aria-label="Code snippet showing: building reliable systems at scale, Tech Lead focused on React, Java, and Healthcare, handling 10M+ daily transactions"
+      aria-label="Code snippet showing: building reliable systems at scale, Tech Lead focused on React, Java, and AWS, handling 10M+ daily transactions"
       onClick={restartAnimation}
       title="Click to replay animation"
     >

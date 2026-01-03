@@ -1,10 +1,13 @@
 import { useState, FormEvent, useEffect } from 'react';
+import { FunFormFields, FunModeToggle } from './FunFormFields';
 
 interface FormData {
   name: string;
   email: string;
   subject: string;
   message: string;
+  // Honeypot field - should always be empty for real users
+  website: string;
 }
 
 interface FormErrors {
@@ -28,6 +31,7 @@ export const useContactForm = () => {
     email: '',
     subject: '',
     message: '',
+    website: '', // Honeypot field
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -72,6 +76,18 @@ export const useContactForm = () => {
       return;
     }
 
+    // Honeypot check - if filled, it's a bot. Fake success silently.
+    if (formData.website) {
+      console.log('Honeypot triggered, silently rejecting');
+      setIsSubmitting(true);
+      // Simulate a brief delay to make it look real
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '', website: '' });
+      setIsSubmitting(false);
+      return;
+    }
+
     console.log('Validation passed, submitting to:', webhookUrl);
     setIsSubmitting(true);
     setSubmitStatus('idle');
@@ -103,7 +119,7 @@ export const useContactForm = () => {
 
       // With no-cors mode, we can't read the response, so we assume success
       setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      setFormData({ name: '', email: '', subject: '', message: '', website: '' });
       setErrors({});
     } catch (error) {
       console.error('Form submission error:', error);
@@ -155,6 +171,7 @@ export const ContactForm = ({ webhookUrl: propWebhookUrl, onSuccess, onError }: 
     setFocusedField,
   } = useContactForm();
 
+  const [funModeActive, setFunModeActive] = useState(false);
   const webhookUrl = propWebhookUrl || import.meta.env.PUBLIC_FORM_WEBHOOK_URL || '';
 
   // Call callbacks when submit status changes
@@ -228,6 +245,15 @@ export const ContactForm = ({ webhookUrl: propWebhookUrl, onSuccess, onError }: 
           <label htmlFor="subject">Subject</label>
         </div>
 
+        <div className="fun-mode-section">
+          <FunModeToggle
+            isActive={funModeActive}
+            onToggle={() => setFunModeActive(!funModeActive)}
+          />
+        </div>
+
+        <FunFormFields isVisible={funModeActive} />
+
         <div className={`form-field textarea-field ${focusedField === 'message' ? 'focused' : ''} ${formData.message ? 'has-value' : ''}`}>
           <textarea
             id="message"
@@ -255,6 +281,34 @@ export const ContactForm = ({ webhookUrl: propWebhookUrl, onSuccess, onError }: 
               {messageCharsRemaining} characters remaining
             </span>
           </div>
+        </div>
+
+        {/* Honeypot field - hidden from humans, visible to bots */}
+        <div
+          className="form-field honeypot-field"
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            left: '-9999px',
+            top: '-9999px',
+            opacity: 0,
+            height: 0,
+            overflow: 'hidden',
+            pointerEvents: 'none',
+          }}
+        >
+          <label htmlFor="website">
+            Required only for robots and advanced super intelligences
+          </label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={formData.website}
+            onChange={(e) => handleChange('website', e.target.value)}
+            tabIndex={-1}
+            autoComplete="off"
+          />
         </div>
 
         <button

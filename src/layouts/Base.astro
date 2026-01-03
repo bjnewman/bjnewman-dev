@@ -1,9 +1,13 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import SecretFeatures from '../SecretFeatures';
+import ThemeToggle from '../components/ThemeToggle';
+import { PageCollectible } from '../components/ScavengerHunt';
 import '../styles/theme.css';
 import '../styles/components.css';
+import '../styles/microinteractions.css';
 import '../styles/secret-menu.css';
+import '../styles/scavenger-hunt.css';
 
 interface Props {
   title?: string;
@@ -39,12 +43,7 @@ const currentPath = Astro.url.pathname;
     <meta property="og:title" content={pageTitle}>
     <meta property="og:description" content={description}>
     <meta property="og:site_name" content="Ben Newman">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:url" content={canonicalURL}>
-    <meta property="twitter:title" content={pageTitle}>
-    <meta property="twitter:description" content={description}>
+    <meta property="og:image" content={`${Astro.site}og-image.png`}>
 
     <!-- Fonts with optimized loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,6 +111,7 @@ const currentPath = Astro.url.pathname;
         <a href="/resume" class={currentPath.startsWith('/resume') ? 'active' : ''}>Resume</a>
         <a href="/blog" class={currentPath.startsWith('/blog') ? 'active' : ''}>Blog</a>
       </nav>
+      <ThemeToggle client:load />
     </header>
 
     <main id="main-content" role="main">
@@ -125,7 +125,7 @@ const currentPath = Astro.url.pathname;
         <a href="https://linkedin.com/in/bjnewman" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">LinkedIn</a>
         <a href="/rss.xml" aria-label="RSS feed">RSS</a>
       </div>
-      <p>© 2026 Ben Newman</p>
+      <p>© 2026 Ben Newman <PageCollectible id="magic_crystal" client:load /></p>
     </footer>
     <SecretFeatures client:load />
   </body>

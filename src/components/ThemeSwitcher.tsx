@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export interface Theme {
   id: string;
@@ -206,8 +206,13 @@ const THEME_STORAGE_KEY = 'bjnewman-theme';
 
 export const useThemeSwitcher = () => {
   const [currentTheme, setCurrentTheme] = useState<Theme>(themes[0]);
+  // Use a ref to track the previous light theme - refs don't have closure issues
+  const previousLightThemeRef = useRef<string>('professional');
 
   useEffect(() => {
+    // Clean up stale localStorage key from previous implementation
+    localStorage.removeItem('bjnewman-previous-theme');
+
     // Load saved theme on mount
     const savedThemeId = localStorage.getItem(THEME_STORAGE_KEY);
     if (savedThemeId) {
@@ -215,6 +220,11 @@ export const useThemeSwitcher = () => {
       if (savedTheme) {
         applyTheme(savedTheme);
         setCurrentTheme(savedTheme);
+
+        // If we're on a light theme, remember it for the toggle
+        if (savedThemeId !== 'dark') {
+          previousLightThemeRef.current = savedThemeId;
+        }
       }
     }
   }, []);
@@ -271,5 +281,21 @@ export const useThemeSwitcher = () => {
     }
   };
 
-  return { currentTheme, switchTheme, themes };
+  const toggleDarkMode = () => {
+    // Read current theme directly from localStorage to avoid stale state issues
+    const currentThemeId = localStorage.getItem(THEME_STORAGE_KEY) || 'professional';
+
+    if (currentThemeId === 'dark') {
+      // Switch back to previous light theme
+      switchTheme(previousLightThemeRef.current);
+    } else {
+      // Remember current theme and switch to dark
+      previousLightThemeRef.current = currentThemeId;
+      switchTheme('dark');
+    }
+  };
+
+  const isDarkMode = currentTheme.id === 'dark';
+
+  return { currentTheme, switchTheme, toggleDarkMode, isDarkMode, themes };
 };
