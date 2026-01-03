@@ -157,8 +157,14 @@
   .places-map__list-item {
     display: flex;
     gap: 1rem;
+    width: 100%;
     cursor: pointer;
     padding: 0.75rem 0;
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
     transition: background 0.2s ease;
   }
 

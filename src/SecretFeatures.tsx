@@ -3,6 +3,7 @@ import { useConfetti } from './components/ConfettiCannon';
 import { useMusicPlayer } from './components/MusicPlayer';
 import { useThemeSwitcher, themes } from './components/ThemeSwitcher';
 import { useHollandDecorations } from './components/HollandDecorations';
+import { useHollandSounds } from './components/HollandSounds';
 import { MonkeyEyes } from './components/MonkeyEyes';
 import { useScavengerHunt, ProgressIndicator } from './components/ScavengerHunt';
 import { useState, useEffect, useRef } from 'react';
@@ -19,6 +20,29 @@ function SecretFeatures() {
     spawnHearts,
     DecorationsRender,
   } = useHollandDecorations();
+  const { playSound, toggleSounds, soundsEnabled, isSupported: soundsSupported } = useHollandSounds();
+
+  // Wrap decoration spawners with sound effects
+  const handleSpawnUnicorns = () => {
+    spawnUnicorns();
+    playSound('unicorn');
+  };
+  const handleSpawnRainbows = () => {
+    spawnRainbows();
+    playSound('rainbow');
+  };
+  const handleSpawnIceCream = () => {
+    spawnIceCream();
+    playSound('icecream');
+  };
+  const handleSpawnStars = () => {
+    spawnStars();
+    playSound('stars');
+  };
+  const handleSpawnHearts = () => {
+    spawnHearts();
+    playSound('hearts');
+  };
   const {
     state: huntState,
     isLoaded: huntLoaded,
@@ -121,35 +145,45 @@ function SecretFeatures() {
       emoji: '✨',
       action: () => {}, // Divider
     },
+    ...(soundsSupported
+      ? [
+          {
+            id: 'holland-sounds',
+            label: soundsEnabled ? 'Silly Sounds: ON' : 'Silly Sounds: OFF',
+            emoji: soundsEnabled ? '🔊' : '🔇',
+            action: toggleSounds,
+          },
+        ]
+      : []),
     {
       id: 'holland-unicorns',
       label: 'Spawn Unicorns',
       emoji: '🦄',
-      action: spawnUnicorns,
+      action: handleSpawnUnicorns,
     },
     {
       id: 'holland-rainbows',
       label: 'Spawn Rainbows',
       emoji: '🌈',
-      action: spawnRainbows,
+      action: handleSpawnRainbows,
     },
     {
       id: 'holland-icecream',
       label: 'Spawn Ice Cream',
       emoji: '🍦',
-      action: spawnIceCream,
+      action: handleSpawnIceCream,
     },
     {
       id: 'holland-stars',
       label: 'Spawn Stars',
       emoji: '⭐',
-      action: spawnStars,
+      action: handleSpawnStars,
     },
     {
       id: 'holland-hearts',
       label: 'Spawn Hearts',
       emoji: '💕',
-      action: spawnHearts,
+      action: handleSpawnHearts,
     },
     {
       id: 'holland-monkey-eyes',
