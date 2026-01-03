@@ -48,11 +48,7 @@ export function Sparkline({
   const pathLength = data.length * 20; // Approximate
 
   return (
-    <svg
-      viewBox={`0 0 ${width} ${height}`}
-      className="sparkline"
-      aria-hidden="true"
-    >
+    <svg viewBox={`0 0 ${width} ${height}`} className="sparkline" aria-hidden="true">
       <path
         d={pathData}
         fill="none"

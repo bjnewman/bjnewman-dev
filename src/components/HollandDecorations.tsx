@@ -48,17 +48,17 @@ export const useHollandDecorations = () => {
       });
     }
 
-    setNextId(prev => prev + count);
-    setDecorations(prev => [...prev, ...newDecorations]);
+    setNextId((prev) => prev + count);
+    setDecorations((prev) => [...prev, ...newDecorations]);
   };
 
   useEffect(() => {
     if (decorations.length === 0) return;
 
     const interval = setInterval(() => {
-      setDecorations(prev => {
+      setDecorations((prev) => {
         const updated = prev
-          .map(d => ({
+          .map((d) => ({
             ...d,
             x: d.x + d.velocity.x,
             y: d.y + d.velocity.y,
@@ -66,19 +66,19 @@ export const useHollandDecorations = () => {
             life: d.life - 1,
             opacity: Math.min(1, d.life / 60), // Fade out in last second
           }))
-          .filter(d => d.life > 0); // Remove when life expires
+          .filter((d) => d.life > 0); // Remove when life expires
 
         return updated;
       });
     }, 1000 / 60);
 
     return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- We intentionally use decorations.length > 0 to only restart when transitioning between 0 and non-zero decorations
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We intentionally use decorations.length > 0 to only restart when transitioning between 0 and non-zero decorations
   }, [decorations.length > 0]);
 
   const DecorationsRender = () => (
     <>
-      {decorations.map(d => (
+      {decorations.map((d) => (
         <div
           key={d.id}
           className="holland-decoration"

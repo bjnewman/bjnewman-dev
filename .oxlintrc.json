@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "jsx-a11y"],
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "Astro": "readonly"
+  },
+  "rules": {
+    "no-unused-vars": "error",
+    "no-undef": "error",
+    "eqeqeq": "error",
+    "no-var": "error",
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "error",
+    "react/rules-of-hooks": "error",
+    "react/jsx-key": "error",
+    "react/jsx-no-duplicate-props": "error",
+    "react/no-direct-mutation-state": "error",
+    "typescript/no-explicit-any": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/aria-proptypes": "off",
+    "jsx-a11y/label-has-associated-control": "warn"
+  },
+  "ignorePatterns": ["dist", "public", "node_modules", ".astro"]
+}

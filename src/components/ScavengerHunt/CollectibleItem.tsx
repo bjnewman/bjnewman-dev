@@ -16,7 +16,7 @@ export const CollectibleItem = ({
   className = '',
 }: CollectibleItemProps) => {
   const [showCelebration, setShowCelebration] = useState(false);
-  const collectible = collectibles.find(c => c.id === id) as Collectible;
+  const collectible = collectibles.find((c) => c.id === id) as Collectible;
 
   const handleClick = () => {
     if (isCollected) return;

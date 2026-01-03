@@ -129,9 +129,7 @@ export const SkillsGrid = () => {
                   </span>
                 ))}
                 {category.skills.length > 3 && (
-                  <span className="skill-tag skill-tag--more">
-                    +{category.skills.length - 3}
-                  </span>
+                  <span className="skill-tag skill-tag--more">+{category.skills.length - 3}</span>
                 )}
               </div>
             )}

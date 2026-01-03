@@ -57,14 +57,14 @@ describe('ThemeToggle', () => {
     const { container } = render(<ThemeToggle />);
     const icons = container.querySelectorAll('.theme-toggle-icon');
     expect(icons[0]).toHaveClass('visible'); // Moon icon visible
-    expect(icons[1]).toHaveClass('hidden');  // Sun icon hidden
+    expect(icons[1]).toHaveClass('hidden'); // Sun icon hidden
   });
 
   it('should show sun icon as visible in dark mode', () => {
     mockIsDarkMode = true;
     const { container } = render(<ThemeToggle />);
     const icons = container.querySelectorAll('.theme-toggle-icon');
-    expect(icons[0]).toHaveClass('hidden');  // Moon icon hidden
+    expect(icons[0]).toHaveClass('hidden'); // Moon icon hidden
     expect(icons[1]).toHaveClass('visible'); // Sun icon visible
   });
 

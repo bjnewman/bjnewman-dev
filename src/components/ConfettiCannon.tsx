@@ -32,17 +32,17 @@ export const useConfetti = () => {
       });
     }
 
-    setNextId(prev => prev + 50);
-    setConfetti(prev => [...prev, ...newConfetti]);
+    setNextId((prev) => prev + 50);
+    setConfetti((prev) => [...prev, ...newConfetti]);
   };
 
   useEffect(() => {
     if (confetti.length === 0) return;
 
     const interval = setInterval(() => {
-      setConfetti(prev => {
+      setConfetti((prev) => {
         const updated = prev
-          .map(c => ({
+          .map((c) => ({
             ...c,
             x: c.x + c.velocity.x,
             y: c.y + c.velocity.y,
@@ -52,19 +52,19 @@ export const useConfetti = () => {
               y: c.velocity.y + 0.1, // gravity
             },
           }))
-          .filter(c => c.y < window.innerHeight + 10);
+          .filter((c) => c.y < window.innerHeight + 10);
 
         return updated;
       });
     }, 1000 / 60);
 
     return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- We intentionally use confetti.length > 0 to only restart when transitioning between 0 and non-zero confetti, not on every frame
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- We intentionally use confetti.length > 0 to only restart when transitioning between 0 and non-zero confetti, not on every frame
   }, [confetti.length > 0]);
 
   const ConfettiRender = () => (
     <>
-      {confetti.map(c => (
+      {confetti.map((c) => (
         <div
           key={c.id}
           className="confetti-piece"

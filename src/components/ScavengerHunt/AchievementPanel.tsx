@@ -9,11 +9,7 @@ interface AchievementPanelProps {
   onClose: () => void;
 }
 
-export const AchievementPanel = ({
-  state,
-  isOpen,
-  onClose,
-}: AchievementPanelProps) => {
+export const AchievementPanel = ({ state, isOpen, onClose }: AchievementPanelProps) => {
   const panelRef = useRef<HTMLDivElement>(null);
 
   // Close on escape key
@@ -45,7 +41,7 @@ export const AchievementPanel = ({
 
   if (!isOpen) return null;
 
-  const unlockedAchievements = Object.values(state.achievements).filter(a => a.unlocked).length;
+  const unlockedAchievements = Object.values(state.achievements).filter((a) => a.unlocked).length;
   const collectedItems = Object.values(state.collectibles).filter(Boolean).length;
   const latestClue = getLatestClue(state.unlockedClues);
 
@@ -80,7 +76,7 @@ export const AchievementPanel = ({
         <div className="achievement-panel__section">
           <h3>Achievements</h3>
           <div className="achievement-panel__grid">
-            {achievements.map(achievement => (
+            {achievements.map((achievement) => (
               <AchievementBadge
                 key={achievement.id}
                 achievement={achievement}
@@ -92,9 +88,11 @@ export const AchievementPanel = ({
         </div>
 
         <div className="achievement-panel__section">
-          <h3>Collectibles ({collectedItems}/{collectibles.length})</h3>
+          <h3>
+            Collectibles ({collectedItems}/{collectibles.length})
+          </h3>
           <div className="achievement-panel__collectibles">
-            {collectibles.map(collectible => {
+            {collectibles.map((collectible) => {
               const isCollected = state.collectibles[collectible.id];
               return (
                 <div
@@ -102,12 +100,8 @@ export const AchievementPanel = ({
                   className={`achievement-panel__collectible ${isCollected ? 'collected' : 'missing'}`}
                   title={isCollected ? collectible.name : `Hidden on ${collectible.page} page`}
                 >
-                  <span className="collectible-emoji">
-                    {isCollected ? collectible.emoji : '?'}
-                  </span>
-                  <span className="collectible-name">
-                    {isCollected ? collectible.name : '???'}
-                  </span>
+                  <span className="collectible-emoji">{isCollected ? collectible.emoji : '?'}</span>
+                  <span className="collectible-name">{isCollected ? collectible.name : '???'}</span>
                 </div>
               );
             })}
@@ -121,5 +115,5 @@ export const AchievementPanel = ({
 function getLatestClue(unlockedClues: string[]): Clue | null {
   if (unlockedClues.length === 0) return null;
   const latestClueId = unlockedClues[unlockedClues.length - 1];
-  return clues.find(c => c.id === latestClueId) || null;
+  return clues.find((c) => c.id === latestClueId) || null;
 }

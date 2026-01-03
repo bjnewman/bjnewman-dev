@@ -15,13 +15,13 @@ interface FunFormFieldsProps {
 }
 
 const urgencyDescriptions: Record<number, string> = {
-  1: "Whenever you get around to it, no rush",
-  10: "This week would be nice",
-  25: "Pretty important, actually",
-  50: "Getting urgent now",
+  1: 'Whenever you get around to it, no rush',
+  10: 'This week would be nice',
+  25: 'Pretty important, actually',
+  50: 'Getting urgent now',
   75: "I'm refreshing my inbox every 5 minutes",
-  90: "My keyboard is smoking from all the typing",
-  100: "THE BUILDING IS ON FIRE (metaphorically)",
+  90: 'My keyboard is smoking from all the typing',
+  100: 'THE BUILDING IS ON FIRE (metaphorically)',
 };
 
 const getUrgencyDescription = (value: number): string => {
@@ -194,7 +194,10 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
               setSpinningAll(false);
               // Get fresh digits via callback and check jackpot
               setPhoneDigits((currentDigits) => {
-                const jackpotTimeout = setTimeout(() => checkJackpot(currentDigits), JACKPOT_CHECK_DELAY_MS);
+                const jackpotTimeout = setTimeout(
+                  () => checkJackpot(currentDigits),
+                  JACKPOT_CHECK_DELAY_MS
+                );
                 timeoutRefs.current.push(jackpotTimeout);
                 return currentDigits;
               });
@@ -242,9 +245,7 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
           />
           <div className="urgency-slider__value">{urgency}</div>
         </div>
-        <div className="urgency-slider__description">
-          {getUrgencyDescription(urgency)}
-        </div>
+        <div className="urgency-slider__description">{getUrgencyDescription(urgency)}</div>
       </div>
 
       <div className="fun-field">
@@ -270,7 +271,9 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
           <span className="fun-field__hint">(Good luck!)</span>
         </label>
         <div className={`rotary-phone ${isJackpot ? 'rotary-phone--jackpot' : ''}`}>
-          <div className={`rotary-phone__display ${isJackpot ? 'rotary-phone__display--jackpot' : ''}`}>
+          <div
+            className={`rotary-phone__display ${isJackpot ? 'rotary-phone__display--jackpot' : ''}`}
+          >
             {isJackpot ? '🎰 JACKPOT! 🎰' : formattedPhone}
           </div>
           <div className="slot-phone__dials">
@@ -347,9 +350,7 @@ export const FunModeToggle = ({ isActive, onToggle }: FunModeToggleProps) => {
       title="Toggle Fun Mode"
     >
       <span className="fun-mode-toggle__icon">{isActive ? '🎉' : '✨'}</span>
-      <span className="fun-mode-toggle__text">
-        {isActive ? 'Fun Mode: ON' : 'Boring Form?'}
-      </span>
+      <span className="fun-mode-toggle__text">{isActive ? 'Fun Mode: ON' : 'Boring Form?'}</span>
     </button>
   );
 };

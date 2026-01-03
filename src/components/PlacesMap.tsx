@@ -14,7 +14,8 @@ const places: Place[] = [
     name: 'Evanston',
     state: 'IL',
     years: 'Born & Raised',
-    description: "Where I was born and raised. The only place I can actually give people directions.",
+    description:
+      'Where I was born and raised. The only place I can actually give people directions.',
     x: 63,
     y: 38,
   },
@@ -22,7 +23,8 @@ const places: Place[] = [
     name: 'Claremont',
     state: 'CA',
     years: '2003-2007',
-    description: "Southern California will always have my heart, and the theme song for The OC makes me cry with nostalgia.",
+    description:
+      'Southern California will always have my heart, and the theme song for The OC makes me cry with nostalgia.',
     x: 10,
     y: 58,
   },
@@ -30,7 +32,8 @@ const places: Place[] = [
     name: 'Phoenix',
     state: 'AZ',
     years: '2008',
-    description: "Spent a year campaigning for my uncle. Learned a lot about politics, desert heat, and why people move to Arizona for the winter.",
+    description:
+      'Spent a year campaigning for my uncle. Learned a lot about politics, desert heat, and why people move to Arizona for the winter.',
     x: 22,
     y: 55,
   },
@@ -38,7 +41,8 @@ const places: Place[] = [
     name: 'Chicago',
     state: 'IL',
     years: '2010-2018',
-    description: "My favorite city in the world. The best people and my closest friends are still there. Will always talk to you about my love for public transit.",
+    description:
+      'My favorite city in the world. The best people and my closest friends are still there. Will always talk to you about my love for public transit.',
     x: 61,
     y: 40,
   },
@@ -46,7 +50,7 @@ const places: Place[] = [
     name: 'Asheville',
     state: 'NC',
     years: '2018-2019',
-    description: "Beautiful city in the mountains. Was only there for a few months.",
+    description: 'Beautiful city in the mountains. Was only there for a few months.',
     x: 74,
     y: 56,
   },
@@ -54,7 +58,8 @@ const places: Place[] = [
     name: 'St Augustine',
     state: 'FL',
     years: '2019-2023',
-    description: "Followed my parents to Florida after their retirement. Gorgeous beaches, too many gator fumes.",
+    description:
+      'Followed my parents to Florida after their retirement. Gorgeous beaches, too many gator fumes.',
     x: 76,
     y: 76,
   },
@@ -62,7 +67,8 @@ const places: Place[] = [
     name: 'Happy Valley',
     state: 'OR',
     years: '2023-Now',
-    description: "Moved to be closer to my brother, niece, and in-laws. Love the hills and the trees and the river and the gorge. Can't stand the rain like Missy Elliott.",
+    description:
+      "Moved to be closer to my brother, niece, and in-laws. Love the hills and the trees and the river and the gorge. Can't stand the rain like Missy Elliott.",
     x: 8,
     y: 20,
   },
@@ -128,7 +134,9 @@ export const PlacesMap = () => {
             </div>
             <div className="places-map__list-content">
               <div className="places-map__list-header">
-                <strong>{place.name}, {place.state}</strong>
+                <strong>
+                  {place.name}, {place.state}
+                </strong>
                 <span>{place.years}</span>
               </div>
               {activePlace === index && (

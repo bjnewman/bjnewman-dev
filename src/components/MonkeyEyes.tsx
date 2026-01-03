@@ -14,10 +14,7 @@ interface MonkeyEyesProps {
   position?: 'top' | 'bottom' | 'center';
 }
 
-export const MonkeyEyes: React.FC<MonkeyEyesProps> = ({
-  visible = true,
-  position = 'center'
-}) => {
+export const MonkeyEyes: React.FC<MonkeyEyesProps> = ({ visible = true, position = 'center' }) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const eyeLeftRef = useRef<HTMLDivElement>(null);
   const eyeRightRef = useRef<HTMLDivElement>(null);
@@ -39,10 +36,7 @@ export const MonkeyEyes: React.FC<MonkeyEyesProps> = ({
     const eyeCenterY = eyeRect.top + eyeRect.height / 2;
 
     // Calculate angle from eye center to mouse
-    const angle = Math.atan2(
-      mousePosition.y - eyeCenterY,
-      mousePosition.x - eyeCenterX
-    );
+    const angle = Math.atan2(mousePosition.y - eyeCenterY, mousePosition.x - eyeCenterX);
 
     // Calculate distance, constrained to 2vmin radius
     const maxDistance = 8; // Constrained movement in pixels
@@ -65,7 +59,7 @@ export const MonkeyEyes: React.FC<MonkeyEyesProps> = ({
   const positionStyles = {
     top: { top: '20px', bottom: 'auto' },
     bottom: { bottom: '20px', top: 'auto' },
-    center: { top: '50%', bottom: 'auto' }
+    center: { top: '50%', bottom: 'auto' },
   };
 
   if (!visible) return null;

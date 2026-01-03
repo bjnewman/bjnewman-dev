@@ -52,7 +52,7 @@ describe('useConfetti', () => {
     const { container } = render(<result.current.ConfettiRender />);
     const confettiPieces = container.querySelectorAll('.confetti-piece');
 
-    confettiPieces.forEach(piece => {
+    confettiPieces.forEach((piece) => {
       const bgColor = (piece as HTMLElement).style.backgroundColor;
       // Browser converts colors to rgb format - just check it exists
       expect(bgColor).toBeTruthy();
@@ -70,7 +70,7 @@ describe('useConfetti', () => {
     const { container } = render(<result.current.ConfettiRender />);
     const confettiPieces = container.querySelectorAll('.confetti-piece');
 
-    confettiPieces.forEach(piece => {
+    confettiPieces.forEach((piece) => {
       const style = (piece as HTMLElement).getAttribute('style');
       // Check that top is close to -10px
       expect(style).toContain('top: -10px');
@@ -88,7 +88,7 @@ describe('useConfetti', () => {
     const confettiPieces = container.querySelectorAll('.confetti-piece');
     const xPositions = new Set<number>();
 
-    confettiPieces.forEach(piece => {
+    confettiPieces.forEach((piece) => {
       const left = (piece as HTMLElement).style.left;
       const xPos = parseFloat(left);
       xPositions.add(xPos);
@@ -108,7 +108,7 @@ describe('useConfetti', () => {
     const { container } = render(<result.current.ConfettiRender />);
     const confettiPieces = container.querySelectorAll('.confetti-piece');
 
-    confettiPieces.forEach(piece => {
+    confettiPieces.forEach((piece) => {
       const transform = (piece as HTMLElement).style.transform;
       expect(transform).toMatch(/rotate\(\d+(\.\d+)?deg\)/);
     });
@@ -122,8 +122,7 @@ describe('useConfetti', () => {
     });
 
     const { container: container1 } = render(<result.current.ConfettiRender />);
-    const initialTop = (container1.querySelector('.confetti-piece') as HTMLElement)
-      ?.style.top;
+    const initialTop = (container1.querySelector('.confetti-piece') as HTMLElement)?.style.top;
 
     // Advance time by one animation frame (1000/60 ms)
     act(() => {
@@ -131,8 +130,7 @@ describe('useConfetti', () => {
     });
 
     const { container: container2 } = render(<result.current.ConfettiRender />);
-    const updatedTop = (container2.querySelector('.confetti-piece') as HTMLElement)
-      ?.style.top;
+    const updatedTop = (container2.querySelector('.confetti-piece') as HTMLElement)?.style.top;
 
     // Y position should have increased (moved down)
     const initialY = parseFloat(initialTop || '0');

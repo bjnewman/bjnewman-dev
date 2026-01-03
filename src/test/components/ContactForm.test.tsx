@@ -17,7 +17,7 @@ describe('ContactForm', () => {
   });
 
   it('should render all form fields', () => {
-    render(<ContactForm webhookUrl={mockWebhookUrl} webhookUrl={mockWebhookUrl} />);
+    render(<ContactForm webhookUrl={mockWebhookUrl} />);
 
     expect(screen.getByLabelText('Name *')).toBeInTheDocument();
     expect(screen.getByLabelText('Email *')).toBeInTheDocument();

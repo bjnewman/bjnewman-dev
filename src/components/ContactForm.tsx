@@ -134,11 +134,11 @@ export const useContactForm = () => {
   };
 
   const handleChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
 
     // Clear error for this field when user starts typing
     if (errors[field as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [field]: undefined }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     }
   };
 
@@ -158,7 +158,11 @@ export const useContactForm = () => {
   };
 };
 
-export const ContactForm = ({ webhookUrl: propWebhookUrl, onSuccess, onError }: ContactFormProps) => {
+export const ContactForm = ({
+  webhookUrl: propWebhookUrl,
+  onSuccess,
+  onError,
+}: ContactFormProps) => {
   const {
     formData,
     errors,
@@ -192,7 +196,9 @@ export const ContactForm = ({ webhookUrl: propWebhookUrl, onSuccess, onError }: 
   return (
     <div className="contact-form-container">
       <form className="contact-form" onSubmit={onSubmit} noValidate>
-        <div className={`form-field ${focusedField === 'name' ? 'focused' : ''} ${formData.name ? 'has-value' : ''}`}>
+        <div
+          className={`form-field ${focusedField === 'name' ? 'focused' : ''} ${formData.name ? 'has-value' : ''}`}
+        >
           <input
             type="text"
             id="name"
@@ -212,7 +218,9 @@ export const ContactForm = ({ webhookUrl: propWebhookUrl, onSuccess, onError }: 
           )}
         </div>
 
-        <div className={`form-field ${focusedField === 'email' ? 'focused' : ''} ${formData.email ? 'has-value' : ''}`}>
+        <div
+          className={`form-field ${focusedField === 'email' ? 'focused' : ''} ${formData.email ? 'has-value' : ''}`}
+        >
           <input
             type="email"
             id="email"
@@ -232,7 +240,9 @@ export const ContactForm = ({ webhookUrl: propWebhookUrl, onSuccess, onError }: 
           )}
         </div>
 
-        <div className={`form-field ${focusedField === 'subject' ? 'focused' : ''} ${formData.subject ? 'has-value' : ''}`}>
+        <div
+          className={`form-field ${focusedField === 'subject' ? 'focused' : ''} ${formData.subject ? 'has-value' : ''}`}
+        >
           <input
             type="text"
             id="subject"
@@ -254,7 +264,9 @@ export const ContactForm = ({ webhookUrl: propWebhookUrl, onSuccess, onError }: 
 
         <FunFormFields isVisible={funModeActive} />
 
-        <div className={`form-field textarea-field ${focusedField === 'message' ? 'focused' : ''} ${formData.message ? 'has-value' : ''}`}>
+        <div
+          className={`form-field textarea-field ${focusedField === 'message' ? 'focused' : ''} ${formData.message ? 'has-value' : ''}`}
+        >
           <textarea
             id="message"
             value={formData.message}
@@ -297,9 +309,7 @@ export const ContactForm = ({ webhookUrl: propWebhookUrl, onSuccess, onError }: 
             pointerEvents: 'none',
           }}
         >
-          <label htmlFor="website">
-            Required only for robots and advanced super intelligences
-          </label>
+          <label htmlFor="website">Required only for robots and advanced super intelligences</label>
           <input
             type="text"
             id="website"

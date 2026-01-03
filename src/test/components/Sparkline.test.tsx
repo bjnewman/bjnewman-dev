@@ -29,9 +29,7 @@ describe('Sparkline', () => {
   });
 
   it('should apply custom color', () => {
-    const { container } = render(
-      <Sparkline data={sampleData} color="#ff0000" />
-    );
+    const { container } = render(<Sparkline data={sampleData} color="#ff0000" />);
 
     const path = container.querySelector('path');
     expect(path).toHaveAttribute('stroke', '#ff0000');

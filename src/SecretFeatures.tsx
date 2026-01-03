@@ -11,7 +11,14 @@ function SecretFeatures() {
   const { fireConfetti, ConfettiRender } = useConfetti();
   const { toggleMusic, isPlaying, MusicIndicator } = useMusicPlayer();
   const { currentTheme, switchTheme } = useThemeSwitcher();
-  const { spawnUnicorns, spawnRainbows, spawnIceCream, spawnStars, spawnHearts, DecorationsRender } = useHollandDecorations();
+  const {
+    spawnUnicorns,
+    spawnRainbows,
+    spawnIceCream,
+    spawnStars,
+    spawnHearts,
+    DecorationsRender,
+  } = useHollandDecorations();
   const {
     state: huntState,
     isLoaded: huntLoaded,
@@ -79,7 +86,7 @@ function SecretFeatures() {
   };
 
   // Create theme menu items
-  const themeItems = themes.map(theme => ({
+  const themeItems = themes.map((theme) => ({
     id: `theme-${theme.id}`,
     label: theme.name,
     emoji: theme.emoji,
@@ -185,7 +192,9 @@ function SecretFeatures() {
       {/* Floating hint - only show after discovery */}
       {menuDiscovered && (
         <div className="secret-menu-floating-hint">
-          <span>💡 Press Cmd+K for secret menu • Current theme: {currentTheme.emoji} {currentTheme.name}</span>
+          <span>
+            💡 Press Cmd+K for secret menu • Current theme: {currentTheme.emoji} {currentTheme.name}
+          </span>
         </div>
       )}
     </>

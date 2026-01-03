@@ -29,7 +29,9 @@ describe('FunModeToggle', () => {
   it('calls onToggle when clicked', async () => {
     const user = userEvent.setup();
     let toggleCount = 0;
-    const onToggle = () => { toggleCount++; };
+    const onToggle = () => {
+      toggleCount++;
+    };
 
     render(<FunModeToggle isActive={false} onToggle={onToggle} />);
 

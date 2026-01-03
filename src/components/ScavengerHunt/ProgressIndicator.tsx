@@ -15,7 +15,7 @@ export const ProgressIndicator = ({ state, isLoaded }: ProgressIndicatorProps) =
 
   if (!isLoaded) return null;
 
-  const unlockedCount = Object.values(state.achievements).filter(a => a.unlocked).length;
+  const unlockedCount = Object.values(state.achievements).filter((a) => a.unlocked).length;
   const totalAchievements = achievements.length;
 
   // Show subtle hint when no achievements unlocked yet
@@ -29,11 +29,7 @@ export const ProgressIndicator = ({ state, isLoaded }: ProgressIndicatorProps) =
         aria-label="Discover secrets hidden on this site"
       >
         <span aria-hidden="true">✨</span>
-        {showHintTooltip && (
-          <span className="discovery-hint__tooltip">
-            Secrets await...
-          </span>
-        )}
+        {showHintTooltip && <span className="discovery-hint__tooltip">Secrets await...</span>}
         <AchievementPanel
           state={state}
           isOpen={isPanelOpen}
@@ -63,11 +59,7 @@ export const ProgressIndicator = ({ state, isLoaded }: ProgressIndicatorProps) =
         )}
       </button>
 
-      <AchievementPanel
-        state={state}
-        isOpen={isPanelOpen}
-        onClose={() => setIsPanelOpen(false)}
-      />
+      <AchievementPanel state={state} isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} />
     </>
   );
 };

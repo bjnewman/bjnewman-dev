@@ -11,21 +11,24 @@ interface ProjectTeaser {
 const teasers: ProjectTeaser[] = [
   {
     title: 'React Server Components',
-    description: 'Exploring the new React paradigm with Next.js App Router. Building something that showcases streaming, suspense, and server actions.',
+    description:
+      'Exploring the new React paradigm with Next.js App Router. Building something that showcases streaming, suspense, and server actions.',
     icon: '⚛️',
     tags: ['React 19', 'Next.js', 'Server Components'],
     status: 'exploring',
   },
   {
     title: 'Open Source Contribution',
-    description: 'Contributing to developer tools I use daily. Looking at Astro plugins, testing libraries, and accessibility tooling.',
+    description:
+      'Contributing to developer tools I use daily. Looking at Astro plugins, testing libraries, and accessibility tooling.',
     icon: '🔧',
     tags: ['Open Source', 'TypeScript', 'Community'],
     status: 'planning',
   },
   {
     title: 'CLI Tool',
-    description: 'A command-line utility for something I do repeatedly. Probably involving Git workflows or project scaffolding.',
+    description:
+      'A command-line utility for something I do repeatedly. Probably involving Git workflows or project scaffolding.',
     icon: '⌨️',
     tags: ['Node.js', 'CLI', 'Developer Experience'],
     status: 'exploring',
@@ -66,10 +69,7 @@ export const ProjectTeasers = () => {
                 <span className="project-teaser__icon">{teaser.icon}</span>
                 <div className="project-teaser__info">
                   <h4 className="project-teaser__title">{teaser.title}</h4>
-                  <span
-                    className="project-teaser__status"
-                    style={{ color: status.color }}
-                  >
+                  <span className="project-teaser__status" style={{ color: status.color }}>
                     {status.label}
                   </span>
                 </div>

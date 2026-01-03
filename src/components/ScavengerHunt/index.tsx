@@ -28,8 +28,9 @@ const updateState = (updater: (prev: ScavengerHuntState) => ScavengerHuntState) 
   const newState = updater(currentState);
   if (newState !== currentState) {
     currentState = newState;
-    if (typeof window !== 'undefined') localStorage.setItem(STORAGE_KEY, JSON.stringify(currentState));
-    listeners.forEach(l => l());
+    if (typeof window !== 'undefined')
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentState));
+    listeners.forEach((l) => l());
   }
 };
 
@@ -40,13 +41,16 @@ const withAchievement = (
   value: number,
   threshold: number
 ): Pick<ScavengerHuntState, 'achievements' | 'totalPoints'> => {
-  if (prev.achievements[id].unlocked) return { achievements: prev.achievements, totalPoints: prev.totalPoints };
+  if (prev.achievements[id].unlocked)
+    return { achievements: prev.achievements, totalPoints: prev.totalPoints };
   const shouldUnlock = value >= threshold;
-  const points = shouldUnlock ? (achievements.find(a => a.id === id)?.points || 0) : 0;
+  const points = shouldUnlock ? achievements.find((a) => a.id === id)?.points || 0 : 0;
   return {
     achievements: {
       ...prev.achievements,
-      [id]: shouldUnlock ? { unlocked: true, unlockedAt: Date.now() } : { ...prev.achievements[id], progress: value },
+      [id]: shouldUnlock
+        ? { unlocked: true, unlockedAt: Date.now() }
+        : { ...prev.achievements[id], progress: value },
     },
     totalPoints: prev.totalPoints + points,
   };
@@ -63,7 +67,7 @@ export const useScavengerHunt = () => {
   const state = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
 
   const collectItem = useCallback((id: CollectibleId) => {
-    updateState(prev => {
+    updateState((prev) => {
       if (prev.collectibles[id]) return prev;
       const newCollectibles = { ...prev.collectibles, [id]: true };
       const count = Object.values(newCollectibles).filter(Boolean).length;
@@ -77,7 +81,7 @@ export const useScavengerHunt = () => {
   }, []);
 
   const trackSecretMenuOpened = useCallback(() => {
-    updateState(prev => {
+    updateState((prev) => {
       if (prev.secretMenuOpened) return prev;
       return {
         ...prev,
@@ -89,7 +93,7 @@ export const useScavengerHunt = () => {
   }, []);
 
   const trackConfettiFired = useCallback(() => {
-    updateState(prev => ({
+    updateState((prev) => ({
       ...prev,
       confettiCount: prev.confettiCount + 1,
       ...withAchievement(prev, 'confetti_king', prev.confettiCount + 1, 10),
@@ -97,7 +101,7 @@ export const useScavengerHunt = () => {
   }, []);
 
   const trackThemeExplored = useCallback((themeId: string) => {
-    updateState(prev => {
+    updateState((prev) => {
       if (prev.themesExplored.includes(themeId)) return prev;
       const newThemes = [...prev.themesExplored, themeId];
       const result = withAchievement(prev, 'theme_explorer', newThemes.length, 5);
@@ -111,7 +115,7 @@ export const useScavengerHunt = () => {
   }, []);
 
   const trackMusicListenTime = useCallback((seconds: number) => {
-    updateState(prev => ({
+    updateState((prev) => ({
       ...prev,
       musicListenTime: prev.musicListenTime + seconds,
       ...withAchievement(prev, 'music_lover', Math.floor(prev.musicListenTime + seconds), 30),
@@ -119,19 +123,23 @@ export const useScavengerHunt = () => {
   }, []);
 
   const trackHollandVisited = useCallback(() => {
-    updateState(prev => {
+    updateState((prev) => {
       if (prev.achievements.holland_friend.unlocked) return prev;
       const collectCount = Object.values(prev.collectibles).filter(Boolean).length;
       return {
         ...prev,
         ...withAchievement(prev, 'holland_friend', 1, 1),
-        unlockedClues: maybeAddClue(prev, 'clue_4', collectCount >= 3 && prev.achievements.music_lover.unlocked),
+        unlockedClues: maybeAddClue(
+          prev,
+          'clue_4',
+          collectCount >= 3 && prev.achievements.music_lover.unlocked
+        ),
       };
     });
   }, []);
 
   const checkCompletionist = useCallback(() => {
-    updateState(prev => {
+    updateState((prev) => {
       if (prev.achievements.completionist.unlocked) return prev;
       const othersDone = Object.entries(prev.achievements)
         .filter(([id]) => id !== 'completionist')
@@ -142,18 +150,21 @@ export const useScavengerHunt = () => {
     });
   }, []);
 
-  const getProgress = useCallback(() => ({
-    achievements: Object.values(state.achievements).filter(a => a.unlocked).length,
-    totalAchievements: achievements.length,
-    collectibles: Object.values(state.collectibles).filter(Boolean).length,
-    totalCollectibles: collectibles.length,
-    points: state.totalPoints,
-    maxPoints: achievements.reduce((sum, a) => sum + a.points, 0),
-  }), [state]);
+  const getProgress = useCallback(
+    () => ({
+      achievements: Object.values(state.achievements).filter((a) => a.unlocked).length,
+      totalAchievements: achievements.length,
+      collectibles: Object.values(state.collectibles).filter(Boolean).length,
+      totalCollectibles: collectibles.length,
+      points: state.totalPoints,
+      maxPoints: achievements.reduce((sum, a) => sum + a.points, 0),
+    }),
+    [state]
+  );
 
   const getLatestClue = useCallback(() => {
     const id = state.unlockedClues[state.unlockedClues.length - 1];
-    return id ? clues.find(c => c.id === id) || null : null;
+    return id ? clues.find((c) => c.id === id) || null : null;
   }, [state.unlockedClues]);
 
   const resetProgress = useCallback(() => {
@@ -178,7 +189,16 @@ export const useScavengerHunt = () => {
 };
 
 // Re-export types and data
-export type { AchievementId, CollectibleId, ClueId, Achievement, Collectible, Clue, AchievementState, ScavengerHuntState } from './types';
+export type {
+  AchievementId,
+  CollectibleId,
+  ClueId,
+  Achievement,
+  Collectible,
+  Clue,
+  AchievementState,
+  ScavengerHuntState,
+} from './types';
 // eslint-disable-next-line react-refresh/only-export-components
 export { initialScavengerHuntState } from './types';
 // eslint-disable-next-line react-refresh/only-export-components

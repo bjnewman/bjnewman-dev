@@ -35,7 +35,7 @@ const codeTokens: Token[] = [
 ];
 
 // Pre-compute full text for length calculation
-const fullText = codeTokens.map(t => t.text).join('');
+const fullText = codeTokens.map((t) => t.text).join('');
 
 // Character typing speed in ms
 const TYPING_SPEED = 40;
@@ -85,7 +85,7 @@ export function TypewriterCode({ restartKey = 0 }: TypewriterCodeProps) {
     }
 
     const timeout = setTimeout(() => {
-      setCharIndex(prev => prev + 1);
+      setCharIndex((prev) => prev + 1);
     }, TYPING_SPEED);
 
     return () => clearTimeout(timeout);

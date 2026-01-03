@@ -15,21 +15,9 @@ export function ClockIcon({ restartKey = 0 }: ClockIconProps) {
   }, [restartKey]);
 
   return (
-    <svg
-      viewBox="0 0 100 100"
-      className="clock-icon"
-      aria-hidden="true"
-    >
+    <svg viewBox="0 0 100 100" className="clock-icon" aria-hidden="true">
       {/* Clock face */}
-      <circle
-        cx="50"
-        cy="50"
-        r="45"
-        fill="none"
-        stroke="#8b5cf6"
-        strokeWidth="3"
-        opacity="0.3"
-      />
+      <circle cx="50" cy="50" r="45" fill="none" stroke="#8b5cf6" strokeWidth="3" opacity="0.3" />
 
       {/* Hour markers */}
       {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((angle) => (

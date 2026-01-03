@@ -15,10 +15,13 @@ interface SecretMenuProps {
 export const SecretMenu: React.FC<SecretMenuProps> = ({ items, onToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = useCallback((open: boolean) => {
-    setIsOpen(open);
-    onToggle?.(open);
-  }, [onToggle]);
+  const toggleMenu = useCallback(
+    (open: boolean) => {
+      setIsOpen(open);
+      onToggle?.(open);
+    },
+    [onToggle]
+  );
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -53,7 +56,7 @@ export const SecretMenu: React.FC<SecretMenuProps> = ({ items, onToggle }) => {
           <p className="secret-menu-hint">Press Cmd+K or tap ✨ to toggle</p>
         </div>
         <div className="secret-menu-items" role="menu">
-          {items.map(item => {
+          {items.map((item) => {
             const isDivider = item.id.includes('divider');
             return (
               <button
@@ -69,7 +72,11 @@ export const SecretMenu: React.FC<SecretMenuProps> = ({ items, onToggle }) => {
                 role={isDivider ? 'separator' : 'menuitem'}
                 aria-label={isDivider ? undefined : `${item.label}`}
               >
-                {item.emoji && <span className="secret-menu-emoji" aria-hidden="true">{item.emoji}</span>}
+                {item.emoji && (
+                  <span className="secret-menu-emoji" aria-hidden="true">
+                    {item.emoji}
+                  </span>
+                )}
                 <span className="secret-menu-label">{item.label}</span>
               </button>
             );

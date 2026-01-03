@@ -216,7 +216,7 @@ export const useThemeSwitcher = () => {
     // Load saved theme on mount
     const savedThemeId = localStorage.getItem(THEME_STORAGE_KEY);
     if (savedThemeId) {
-      const savedTheme = themes.find(t => t.id === savedThemeId);
+      const savedTheme = themes.find((t) => t.id === savedThemeId);
       if (savedTheme) {
         applyTheme(savedTheme);
         setCurrentTheme(savedTheme);
@@ -260,7 +260,7 @@ export const useThemeSwitcher = () => {
 
     // Handle theme class name for radical theme transformations
     // Remove all existing theme classes
-    themes.forEach(t => {
+    themes.forEach((t) => {
       if (t.className) {
         document.body.classList.remove(t.className);
       }
@@ -273,7 +273,7 @@ export const useThemeSwitcher = () => {
   };
 
   const switchTheme = (themeId: string) => {
-    const theme = themes.find(t => t.id === themeId);
+    const theme = themes.find((t) => t.id === themeId);
     if (theme) {
       applyTheme(theme);
       setCurrentTheme(theme);

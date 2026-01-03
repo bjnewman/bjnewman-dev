@@ -57,10 +57,9 @@ describe('Blog Posts', () => {
       }
     }
 
-    expect(
-      postsWithoutTitle,
-      `Posts missing title: ${postsWithoutTitle.join(', ')}`
-    ).toHaveLength(0);
+    expect(postsWithoutTitle, `Posts missing title: ${postsWithoutTitle.join(', ')}`).toHaveLength(
+      0
+    );
   });
 
   it('all blog posts should have a date', () => {
@@ -81,10 +80,7 @@ describe('Blog Posts', () => {
       }
     }
 
-    expect(
-      postsWithoutDate,
-      `Posts missing date: ${postsWithoutDate.join(', ')}`
-    ).toHaveLength(0);
+    expect(postsWithoutDate, `Posts missing date: ${postsWithoutDate.join(', ')}`).toHaveLength(0);
   });
 
   it('all blog posts should use BlogPost layout', () => {

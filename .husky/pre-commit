@@ -1,5 +1,5 @@
 #!/bin/sh
-# Run linting
+# Run oxlint (fast enough to run on whole project)
 echo "Running lint checks..."
 bun run lint || exit 1
 

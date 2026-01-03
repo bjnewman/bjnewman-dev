@@ -25,19 +25,13 @@ export const AchievementBadge = ({
       className={`achievement-badge ${sizeClasses[size]} ${isUnlocked ? 'achievement-badge--unlocked' : 'achievement-badge--locked'}`}
       title={isUnlocked ? achievement.description : achievement.trigger}
     >
-      <div className="achievement-badge__icon">
-        {isUnlocked ? achievement.emoji : '?'}
-      </div>
+      <div className="achievement-badge__icon">{isUnlocked ? achievement.emoji : '?'}</div>
       <div className="achievement-badge__info">
-        <div className="achievement-badge__name">
-          {isUnlocked ? achievement.name : '???'}
-        </div>
+        <div className="achievement-badge__name">{isUnlocked ? achievement.name : '???'}</div>
         {isUnlocked ? (
           <div className="achievement-badge__points">+{achievement.points} pts</div>
         ) : progress !== undefined ? (
-          <div className="achievement-badge__progress">
-            Progress: {progress}
-          </div>
+          <div className="achievement-badge__progress">Progress: {progress}</div>
         ) : null}
       </div>
     </div>
