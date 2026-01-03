@@ -19,7 +19,7 @@ describe('MonkeyEyes', () => {
         eventListeners.set(event, []);
       }
       eventListeners.get(event)!.push(handler);
-    });
+    }) as typeof window.addEventListener;
 
     window.removeEventListener = vi.fn((event: string, handler: EventListener) => {
       const handlers = eventListeners.get(event);
@@ -29,7 +29,7 @@ describe('MonkeyEyes', () => {
           handlers.splice(index, 1);
         }
       }
-    });
+    }) as typeof window.removeEventListener;
   });
 
   afterEach(() => {
@@ -55,7 +55,7 @@ describe('MonkeyEyes', () => {
     expect(roundedElements.length).toBeGreaterThanOrEqual(5);
   });
 
-  it('renders eyes with Suzanne Aitchison monkey styling', () => {
+  it('renders eyes with cartoon monkey styling', () => {
     const { container } = render(<MonkeyEyes />);
 
     // Check that the component renders the monkey head with brown color
