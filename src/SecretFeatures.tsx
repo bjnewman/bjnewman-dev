@@ -9,7 +9,7 @@ import { useState, useEffect, useRef } from 'react';
 
 function SecretFeatures() {
   const { fireConfetti, ConfettiRender } = useConfetti();
-  const { toggleMusic, isPlaying, MusicIndicator } = useMusicPlayer();
+  const { toggleMusic, isPlaying, MusicIndicator, preloadAudio } = useMusicPlayer();
   const { currentTheme, switchTheme } = useThemeSwitcher();
   const {
     spawnUnicorns,
@@ -66,6 +66,8 @@ function SecretFeatures() {
   const handleMenuToggle = (open: boolean) => {
     setIsMenuOpen(open);
     if (open) {
+      // Preload music when menu opens (lazy load)
+      preloadAudio();
       // Always call - the hook handles deduplication
       trackSecretMenuOpened();
       if (!menuDiscovered) {
