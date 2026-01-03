@@ -36,6 +36,14 @@
   color: var(--text-secondary);
 }
 
+.hero__tagline {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
 /* Code Block */
 .typewriter-container {
   background: #1e1e1e;

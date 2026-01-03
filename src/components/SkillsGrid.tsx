@@ -17,20 +17,20 @@ const skillCategories: SkillCategory[] = [
     emoji: '⚛️',
     skills: [
       { name: 'React', level: 5 },
-      { name: 'TypeScript', level: 5 },
-      { name: 'JavaScript', level: 5 },
-      { name: 'CSS', level: 4 },
-      { name: 'HTML5', level: 5 },
+      { name: 'TypeScript', level: 4 },
+      { name: 'JavaScript', level: 4 },
+      { name: 'CSS', level: 3 },
+      { name: 'HTML5', level: 4 },
     ],
   },
   {
     name: 'Backend',
     emoji: '⚙️',
     skills: [
-      { name: 'Java', level: 4 },
-      { name: 'Spring Boot', level: 4 },
       { name: 'Node.js', level: 3 },
-      { name: 'SQL', level: 4 },
+      { name: 'SQL', level: 3 },
+      { name: 'Java', level: 2 },
+      { name: 'Spring Boot', level: 2 },
     ],
   },
   {
@@ -38,18 +38,18 @@ const skillCategories: SkillCategory[] = [
     emoji: '☁️',
     skills: [
       { name: 'AWS', level: 4 },
-      { name: 'Kubernetes', level: 3 },
       { name: 'Docker', level: 4 },
       { name: 'CI/CD', level: 4 },
+      { name: 'Kubernetes', level: 2 },
     ],
   },
   {
     name: 'Architecture',
     emoji: '🏗️',
     skills: [
-      { name: 'Microservices', level: 4 },
-      { name: 'REST APIs', level: 5 },
-      { name: 'System Design', level: 4 },
+      { name: 'Microservices', level: 3 },
+      { name: 'REST APIs', level: 4 },
+      { name: 'System Design', level: 3 },
     ],
   },
   {
@@ -57,13 +57,20 @@ const skillCategories: SkillCategory[] = [
     emoji: '👥',
     skills: [
       { name: 'Team Lead', level: 4 },
-      { name: 'Mentoring', level: 5 },
-      { name: 'Code Review', level: 5 },
+      { name: 'Mentoring', level: 4 },
+      { name: 'Code Review', level: 4 },
     ],
   },
 ];
 
-const levelLabels = ['', 'Learning', 'Familiar', 'Proficient', 'Expert', 'Master'];
+const levelLabels = [
+  '',
+  'Enthusiastic beginner',
+  'Dangerous enough',
+  'Production-ready',
+  'Go-to person',
+  "Send help, I'm the expert now",
+];
 
 export const SkillsGrid = () => {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);

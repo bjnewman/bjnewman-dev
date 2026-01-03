@@ -2,12 +2,23 @@
 import Base from '../../layouts/Base.astro';
 import { PageCollectible } from '../../components/ScavengerHunt';
 
+interface MarkdownPost {
+  url: string;
+  frontmatter: {
+    title: string;
+    date: string;
+  };
+}
+
 // Get all markdown files in blog directory using import.meta.glob
 const postFiles = import.meta.glob('./*.md', { eager: true });
-const posts = Object.values(postFiles).map((post: any) => ({
-  url: post.url,
-  frontmatter: post.frontmatter,
-}));
+const posts = Object.values(postFiles).map((post) => {
+  const mdPost = post as MarkdownPost;
+  return {
+    url: mdPost.url,
+    frontmatter: mdPost.frontmatter,
+  };
+});
 
 const sortedPosts = posts.sort((a, b) =>
   new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf()

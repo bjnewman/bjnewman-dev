@@ -1,6 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
 import { PageCollectible } from '../components/ScavengerHunt';
+import { ProjectTeasers } from '../components/ProjectTeasers';
+import '../styles/project-teasers.css';
 ---
 
 <Base title="Projects">
@@ -9,6 +11,9 @@ import { PageCollectible } from '../components/ScavengerHunt';
   <p>My main project is the one that pays my bills — building healthcare systems at scale. I don't have a graveyard of half-finished todo apps to show you, and I'm at peace with that.</p>
 
   <p>This site is the current side project. More to come if inspiration strikes and my team stops shipping features.</p>
+
+  <h2>What's Next</h2>
+  <ProjectTeasers client:visible />
 
   <h2>This Website</h2>
   <p><em>Personal site built with Astro + React</em></p>
