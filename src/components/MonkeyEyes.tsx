@@ -18,9 +18,14 @@ export const MonkeyEyes: React.FC<MonkeyEyesProps> = ({ visible = true, position
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const eyeLeftRef = useRef<HTMLDivElement>(null);
   const eyeRightRef = useRef<HTMLDivElement>(null);
+  const lastUpdateRef = useRef(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      // Throttle to ~60fps for performance
+      const now = Date.now();
+      if (now - lastUpdateRef.current < 16) return;
+      lastUpdateRef.current = now;
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
@@ -28,7 +33,7 @@ export const MonkeyEyes: React.FC<MonkeyEyesProps> = ({ visible = true, position
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const calculateEyePosition = (eyeRef: React.RefObject<HTMLDivElement>) => {
+  const calculateEyePosition = (eyeRef: React.RefObject<HTMLDivElement | null>) => {
     if (!eyeRef.current) return { x: 0, y: 0 };
 
     const eyeRect = eyeRef.current.getBoundingClientRect();

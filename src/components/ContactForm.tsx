@@ -69,16 +69,13 @@ export const useContactForm = () => {
 
   const handleSubmit = async (e: FormEvent, webhookUrl: string) => {
     e.preventDefault();
-    console.log('handleSubmit called, webhook URL:', webhookUrl);
 
     if (!validateForm()) {
-      console.log('Validation failed');
       return;
     }
 
     // Honeypot check - if filled, it's a bot. Fake success silently.
     if (formData.website) {
-      console.log('Honeypot triggered, silently rejecting');
       setIsSubmitting(true);
       // Simulate a brief delay to make it look real
       await new Promise((resolve) => setTimeout(resolve, 500));
@@ -88,7 +85,6 @@ export const useContactForm = () => {
       return;
     }
 
-    console.log('Validation passed, submitting to:', webhookUrl);
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
@@ -97,7 +93,6 @@ export const useContactForm = () => {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-      console.log('About to fetch...');
       await fetch(webhookUrl, {
         method: 'POST',
         mode: 'no-cors',
@@ -115,20 +110,17 @@ export const useContactForm = () => {
       });
 
       clearTimeout(timeoutId);
-      console.log('Fetch completed');
 
       // With no-cors mode, we can't read the response, so we assume success
       setSubmitStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '', website: '' });
       setErrors({});
     } catch (error) {
-      console.error('Form submission error:', error);
       if ((error as Error).name === 'AbortError') {
-        console.error('Request timed out after 10 seconds');
+        console.error('Form submission timed out');
       }
       setSubmitStatus('error');
     } finally {
-      console.log('Finally block, setting isSubmitting to false');
       setIsSubmitting(false);
     }
   };
@@ -188,8 +180,6 @@ export const ContactForm = ({
   }, [submitStatus, onSuccess, onError]);
 
   const onSubmit = async (e: FormEvent) => {
-    console.log('Form submitted, webhook URL:', webhookUrl);
-    console.log('Env variable:', import.meta.env.PUBLIC_FORM_WEBHOOK_URL);
     await handleSubmit(e, webhookUrl);
   };
 
