@@ -16,7 +16,10 @@
     "test:watch": "vitest --browser",
     "test:ui": "vitest --ui --browser",
     "clean": "rm -rf dist .astro",
-    "prepare": "husky"
+    "prepare": "husky",
+    "lighthouse": "lhci autorun",
+    "lighthouse:api": "bun run scripts/lighthouse.ts",
+    "lighthouse:api:desktop": "bun run scripts/lighthouse.ts --desktop"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
@@ -28,6 +31,7 @@
   "devDependencies": {
     "@astrojs/react": "^4.1.1",
     "@eslint/js": "^9.33.0",
+    "@lhci/cli": "^0.15.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",

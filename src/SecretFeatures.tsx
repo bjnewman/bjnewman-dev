@@ -173,7 +173,7 @@ function SecretFeatures() {
 
   return (
     <>
-      <SecretMenu items={menuItems} onToggle={handleMenuToggle} />
+      <SecretMenu items={menuItems} isOpen={isMenuOpen} onToggle={handleMenuToggle} />
       <MusicIndicator />
       <ConfettiRender />
       <DecorationsRender />
@@ -183,7 +183,7 @@ function SecretFeatures() {
       {/* Mobile trigger button */}
       <button
         className="secret-menu-trigger"
-        onClick={() => handleMenuToggle(!isMenuOpen)}
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
         aria-label="Toggle secret menu"
       >
         ✨

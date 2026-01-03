@@ -10,6 +10,9 @@ dist-ssr/
 .astro/
 _site/
 
+# Lighthouse CI reports
+.lighthouseci/
+
 # Claude context (local development notes and context)
 .claude/
 

@@ -9,18 +9,24 @@ interface MenuItem {
 
 interface SecretMenuProps {
   items: MenuItem[];
+  isOpen?: boolean;
   onToggle?: (isOpen: boolean) => void;
 }
 
-export const SecretMenu: React.FC<SecretMenuProps> = ({ items, onToggle }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const SecretMenu: React.FC<SecretMenuProps> = ({ items, isOpen: controlledIsOpen, onToggle }) => {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+
+  // Support both controlled and uncontrolled modes
+  const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : internalIsOpen;
 
   const toggleMenu = useCallback(
     (open: boolean) => {
-      setIsOpen(open);
+      if (controlledIsOpen === undefined) {
+        setInternalIsOpen(open);
+      }
       onToggle?.(open);
     },
-    [onToggle]
+    [onToggle, controlledIsOpen]
   );
 
   useEffect(() => {

@@ -24,5 +24,5 @@
     "jsx-a11y/aria-proptypes": "off",
     "jsx-a11y/label-has-associated-control": "warn"
   },
-  "ignorePatterns": ["dist", "public", "node_modules", ".astro"]
+  "ignorePatterns": ["dist", "public", "node_modules", ".astro", "scripts", "*.config.js", "lighthouserc.js"]
 }
