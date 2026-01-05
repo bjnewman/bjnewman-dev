@@ -1,4 +1,4 @@
-import { useState, FormEvent, useEffect } from 'react';
+import { useState, FormEvent, useEffect, useRef } from 'react';
 import { FunFormFields, FunModeToggle } from './FunFormFields';
 
 interface FormData {
@@ -168,7 +168,28 @@ export const ContactForm = ({
   } = useContactForm();
 
   const [funModeActive, setFunModeActive] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const webhookUrl = propWebhookUrl || import.meta.env.PUBLIC_FORM_WEBHOOK_URL || '';
+
+  // Trigger entrance animation when form scrolls into view
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Call callbacks when submit status changes
   useEffect(() => {
@@ -184,7 +205,7 @@ export const ContactForm = ({
   };
 
   return (
-    <div className="contact-form-container">
+    <div ref={containerRef} className={`contact-form-container ${isVisible ? 'is-visible' : ''}`}>
       <form className="contact-form" onSubmit={onSubmit} noValidate>
         <div
           className={`form-field ${focusedField === 'name' ? 'focused' : ''} ${formData.name ? 'has-value' : ''}`}

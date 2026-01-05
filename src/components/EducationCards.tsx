@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { flushSync } from 'react-dom';
 
 // Animated SVG icons
-const ComputerIcon = ({ isHovered }: { isHovered: boolean }) => (
+const ComputerIcon = ({ isExpanded }: { isExpanded: boolean }) => (
   <svg
     viewBox="0 0 64 64"
-    className={`education-icon ${isHovered ? 'education-icon--animated' : ''}`}
+    className={`education-icon ${isExpanded ? 'education-icon--animated' : ''}`}
     aria-hidden="true"
   >
     {/* Monitor */}
@@ -43,10 +44,10 @@ const ComputerIcon = ({ isHovered }: { isHovered: boolean }) => (
   </svg>
 );
 
-const GavelIcon = ({ isHovered }: { isHovered: boolean }) => (
+const GavelIcon = ({ isExpanded }: { isExpanded: boolean }) => (
   <svg
     viewBox="0 0 64 64"
-    className={`education-icon ${isHovered ? 'education-icon--animated' : ''}`}
+    className={`education-icon ${isExpanded ? 'education-icon--animated' : ''}`}
     aria-hidden="true"
   >
     {/* Gavel head */}
@@ -109,10 +110,10 @@ const GavelIcon = ({ isHovered }: { isHovered: boolean }) => (
   </svg>
 );
 
-const ThinkerIcon = ({ isHovered }: { isHovered: boolean }) => (
+const ThinkerIcon = ({ isExpanded }: { isExpanded: boolean }) => (
   <svg
     viewBox="0 0 64 64"
-    className={`education-icon ${isHovered ? 'education-icon--animated' : ''}`}
+    className={`education-icon ${isExpanded ? 'education-icon--animated' : ''}`}
     aria-hidden="true"
   >
     {/* Simplified seated figure */}
@@ -190,6 +191,7 @@ interface Education {
   year: string;
   icon: 'computer' | 'gavel' | 'thinker';
   note?: string;
+  highlights?: string[];
 }
 
 const education: Education[] = [
@@ -200,6 +202,12 @@ const education: Education[] = [
     year: '2016',
     icon: 'computer',
     note: 'Where the pivot happened',
+    highlights: [
+      'Intensive 19-week full-stack program',
+      'Ruby, Rails, JavaScript, React',
+      'Pair programming and agile methodologies',
+      'Built several production-ready apps',
+    ],
   },
   {
     degree: 'Juris Doctor (J.D.)',
@@ -208,6 +216,12 @@ const education: Education[] = [
     year: '2010-2012',
     icon: 'gavel',
     note: 'Learned to think in edge cases',
+    highlights: [
+      'Focus on intellectual property law',
+      'Moot court competitor',
+      'Legal writing and research training',
+      'Passed Illinois Bar Exam',
+    ],
   },
   {
     degree: 'B.A. in Philosophy',
@@ -216,6 +230,12 @@ const education: Education[] = [
     year: '2003-2007',
     icon: 'thinker',
     note: 'Learned to ask "but why?"',
+    highlights: [
+      'Focus on logic and philosophy of mind',
+      'Liberal arts foundation',
+      'Critical thinking and argumentation',
+      'Senior thesis on consciousness',
+    ],
   },
 ];
 
@@ -226,34 +246,73 @@ const IconMap = {
 };
 
 export const EducationCards = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
+    const newValue = expandedIndex === index ? null : index;
+
+    // Use View Transitions API if available for smooth animations
+    // Skip in automated browser environments (Playwright sets navigator.webdriver = true)
+    const isAutomatedBrowser = typeof navigator !== 'undefined' && navigator.webdriver === true;
+    if (document.startViewTransition && !isAutomatedBrowser) {
+      document.startViewTransition(() => {
+        flushSync(() => {
+          setExpandedIndex(newValue);
+        });
+      });
+    } else {
+      setExpandedIndex(newValue);
+    }
+  };
 
   return (
     <div className="education-cards">
       {education.map((edu, index) => {
         const Icon = IconMap[edu.icon];
-        const isHovered = hoveredIndex === index;
+        const isExpanded = expandedIndex === index;
 
         return (
           <div
             key={index}
-            className="education-card"
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
+            style={{ viewTransitionName: `education-card-${index}` }}
+            className={`education-card ${isExpanded ? 'education-card--expanded' : ''}`}
           >
-            <div className="education-card__icon-wrapper">
-              <Icon isHovered={isHovered} />
-            </div>
-            <div className="education-card__content">
-              <h4 className="education-card__degree">{edu.degree}</h4>
-              <p className="education-card__school">{edu.school}</p>
-              <div className="education-card__meta">
-                <span>{edu.location}</span>
-                <span>•</span>
-                <span>{edu.year}</span>
+            <button
+              className="education-card__header"
+              onClick={() => handleToggle(index)}
+              aria-expanded={isExpanded}
+            >
+              <div className="education-card__icon-wrapper">
+                <Icon isExpanded={isExpanded} />
               </div>
-              {edu.note && <p className="education-card__note">{edu.note}</p>}
-            </div>
+              <div className="education-card__content">
+                <div className="education-card__row">
+                  <h4 className="education-card__degree">{edu.degree}</h4>
+                  <span className="education-card__year">{edu.year}</span>
+                </div>
+                <p className="education-card__school">{edu.school}</p>
+              </div>
+            </button>
+            {isExpanded && (
+              <div className="education-card__details">
+                <div className="education-card__meta">
+                  <span>{edu.location}</span>
+                  {edu.note && (
+                    <>
+                      <span>•</span>
+                      <span className="education-card__note">{edu.note}</span>
+                    </>
+                  )}
+                </div>
+                {edu.highlights && (
+                  <ul className="education-card__highlights">
+                    {edu.highlights.map((highlight, i) => (
+                      <li key={i}>{highlight}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
           </div>
         );
       })}

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { flushSync } from 'react-dom';
 
 interface Role {
   title: string;
@@ -87,6 +88,24 @@ const roles: Role[] = [
 export const ResumeTimeline = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
+  // Handle expand/collapse with View Transitions API
+  const handleToggle = (index: number) => {
+    const newValue = expandedIndex === index ? null : index;
+
+    // Use View Transitions API if available for smooth animations
+    // Skip in automated browser environments (Playwright sets navigator.webdriver = true)
+    const isAutomatedBrowser = typeof navigator !== 'undefined' && navigator.webdriver === true;
+    if (document.startViewTransition && !isAutomatedBrowser) {
+      document.startViewTransition(() => {
+        flushSync(() => {
+          setExpandedIndex(newValue);
+        });
+      });
+    } else {
+      setExpandedIndex(newValue);
+    }
+  };
+
   return (
     <div className="timeline">
       {roles.map((role, index) => {
@@ -97,11 +116,12 @@ export const ResumeTimeline = () => {
         return (
           <div
             key={index}
+            style={{ viewTransitionName: `timeline-item-${index}` }}
             className={`timeline__item ${isExpanded ? 'timeline__item--expanded' : ''} ${showPromotionLine ? 'timeline__item--promoted' : ''}`}
           >
             <button
               className="timeline__header"
-              onClick={() => setExpandedIndex(isExpanded ? null : index)}
+              onClick={() => handleToggle(index)}
               aria-expanded={isExpanded}
             >
               <span className="timeline__emoji">{role.emoji}</span>

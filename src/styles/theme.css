@@ -98,6 +98,14 @@ header {
   position: sticky;
   top: 0;
   z-index: var(--z-sticky);
+  /* Prevent header from flickering during View Transitions */
+  view-transition-name: header;
+}
+
+/* Keep header stable during view transitions */
+::view-transition-old(header),
+::view-transition-new(header) {
+  animation: none;
 }
 
 header nav {
@@ -254,6 +262,14 @@ footer {
   backdrop-filter: blur(20px);
   margin-top: 5rem;
   border-top: 1px solid rgba(99, 102, 241, 0.1);
+  /* Prevent footer from flickering during View Transitions */
+  view-transition-name: footer;
+}
+
+/* Keep footer stable during view transitions */
+::view-transition-old(footer),
+::view-transition-new(footer) {
+  animation: none;
 }
 
 footer .social-links {
