@@ -217,9 +217,8 @@ const education: Education[] = [
     icon: 'gavel',
     note: 'Learned to think in edge cases',
     highlights: [
-      'Focus on intellectual property law',
-      'Moot court competitor',
-      'Legal writing and research training',
+      'VP, American Constitution Society student chapter',
+      'Legal aid at Daley Center Courthouse and Tax Clinic',
       'Passed Illinois Bar Exam',
     ],
   },
@@ -234,9 +233,8 @@ const education: Education[] = [
       'Focus on logic and philosophy of mind',
       'Liberal arts foundation',
       'Critical thinking and argumentation',
-      'Senior thesis on consciousness',
     ],
-  },
+  }
 ];
 
 const IconMap = {
