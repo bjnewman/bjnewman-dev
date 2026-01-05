@@ -1,5 +1,7 @@
 import { useCallback, useState, useEffect } from 'react';
-import { sfxr } from 'jsfxr';
+import jsfxr from 'jsfxr';
+
+const { sfxr } = jsfxr;
 
 // Retro 8-bit sound effects using jsfxr
 // Maps each decoration type to an sfxr preset

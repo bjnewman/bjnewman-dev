@@ -8,41 +8,42 @@ import '../styles/project-teasers.css';
 <Base title="Projects">
   <h1>Projects</h1>
 
-  <p>My main project is the one that pays my bills — building healthcare systems at scale. I don't have a graveyard of half-finished todo apps to show you, and I'm at peace with that.</p>
+  <p>My main project is the one that pays my bills — building healthcare systems at scale. I don't have a graveyard of half-finished todo apps and I'm at peace with that.</p>
 
-  <p>This site is the current side project. More to come if inspiration strikes and my team stops shipping features.</p>
+  <h2>The Work</h2>
 
-  <h2>What's Next</h2>
-  <ProjectTeasers client:visible />
+  <p>Most of what I build is proprietary, but the scale is real: millions of daily transactions, 100k+ users, systems that healthcare providers actually depend on. I can't show you the code, but I'm happy to talk architecture, tradeoffs, and how it feels to be L3 pager support 24/7/365.</p>
+
+  <p>Check out my <a href="/resume/">resume</a> for the details, or <a href="/about#lets-connect">reach out</a> if you want to dig into specifics.</p>
 
   <h2>This Website</h2>
+
   <p><em>Personal site built with Astro + React</em></p>
 
-  <p>Meta, right? Built this site to showcase my work and prove I can still build things from scratch after years of working on legacy enterprise systems.</p>
-
-  <p><strong>The Challenge:</strong> Haven't built much frontend from scratch lately at work. Wanted to use modern tools and demonstrate I can set up a full development environment and architecture.</p>
+  <p>Built this site to have a home on the internet and prove I can still spin something up from scratch after years of enterprise work.</p>
 
   <p><strong>Tech Stack:</strong></p>
   <ul>
     <li>Astro for static site generation</li>
     <li>React for interactive components</li>
     <li>Bun for package management</li>
-    <li>TypeScript for type safety</li>
-    <li>Custom CSS (no frameworks — keeping it simple)</li>
+    <li>TypeScript throughout</li>
+    <li>Custom CSS (no frameworks)</li>
   </ul>
-
-  <p><strong>Architecture Decision:</strong> Astro-first approach with Islands architecture where most pages are static HTML, with React components available for interactive features when needed.</p>
 
   <p><a href="https://github.com/bjnewman/bjnewman-dev" target="_blank" rel="noopener">View on GitHub</a> <PageCollectible id="secret_star" client:visible /></p>
 
-  <hr>
-
   <h2>Open Source</h2>
 
-  <p>Contributions to projects I use and care about:</p>
+  <p>Contributions to projects I use:</p>
 
   <h3>Stylelint</h3>
-  <p>Contributed to the popular CSS linter, helping maintain the tools that make our stylesheets better.</p>
+
+  <p>Contributed to the popular CSS linter, helping maintain the tools that keep our stylesheets in line.</p>
+
   <p><a href="https://github.com/stylelint/stylelint" target="_blank" rel="noopener">View on GitHub</a></p>
+
+  <h2>What's Next</h2>
+  <ProjectTeasers client:visible />
 
 </Base>

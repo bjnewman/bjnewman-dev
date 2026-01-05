@@ -8,5 +8,10 @@ declare module 'jsfxr' {
     play(sound: SfxrSound): void;
   }
 
-  export const sfxr: Sfxr;
+  interface Jsfxr {
+    sfxr: Sfxr;
+  }
+
+  const jsfxr: Jsfxr;
+  export default jsfxr;
 }
