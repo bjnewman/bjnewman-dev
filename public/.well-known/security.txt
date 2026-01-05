@@ -1,0 +1,9 @@
+# Security contact for bjnewman.dev
+# https://securitytxt.org/
+
+Contact: https://bjnewman.dev/about/
+Expires: 2027-01-01T00:00:00.000Z
+Preferred-Languages: en
+
+# This is a static portfolio site. If you find a vulnerability,
+# I'd appreciate a heads up before you put it on social media

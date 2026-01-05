@@ -332,6 +332,11 @@ export const ContactForm = ({
           />
         </div>
 
+        <p className="privacy-notice">
+          Your information is stored privately and used only to respond to your message.
+          You may request deletion at any time.
+        </p>
+
         <button
           type="submit"
           className={`submit-button ${isSubmitting ? 'loading' : ''}`}
