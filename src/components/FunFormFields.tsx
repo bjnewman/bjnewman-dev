@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
+import { Mail, Bird, Wind, Brain, Wine, Megaphone, Dices, PartyPopper, Sparkles, LucideIcon } from 'lucide-react';
 
 // Animation constants
 const SPIN_BASE = 12;
@@ -34,13 +35,13 @@ const getUrgencyDescription = (value: number): string => {
   return urgencyDescriptions[1];
 };
 
-const contactMethods = [
-  { value: 'email', label: 'Email (boring but effective)', emoji: '📧' },
-  { value: 'carrier_pigeon', label: 'Carrier Pigeon', emoji: '🐦' },
-  { value: 'smoke_signals', label: 'Smoke Signals', emoji: '💨' },
-  { value: 'telepathy', label: 'Telepathy', emoji: '🧠' },
-  { value: 'message_in_bottle', label: 'Message in a Bottle', emoji: '🍾' },
-  { value: 'yelling', label: 'Just Yell Really Loud', emoji: '📢' },
+const contactMethods: { value: string; label: string; icon: LucideIcon }[] = [
+  { value: 'email', label: 'Email (boring but effective)', icon: Mail },
+  { value: 'carrier_pigeon', label: 'Carrier Pigeon', icon: Bird },
+  { value: 'smoke_signals', label: 'Smoke Signals', icon: Wind },
+  { value: 'telepathy', label: 'Telepathy', icon: Brain },
+  { value: 'message_in_bottle', label: 'Message in a Bottle', icon: Wine },
+  { value: 'yelling', label: 'Just Yell Really Loud', icon: Megaphone },
 ];
 
 // Slot Machine Digit - Spin to randomize, nudge to adjust
@@ -259,7 +260,7 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
               onClick={() => setContactMethod(method.value)}
               aria-pressed={contactMethod === method.value}
             >
-              <span className="contact-method__emoji">{method.emoji}</span>
+              <method.icon size={20} className="contact-method__icon" aria-hidden="true" />
               <span className="contact-method__label">{method.label}</span>
             </button>
           ))}
@@ -275,7 +276,9 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
           <div
             className={`slot-phone__display ${isJackpot ? 'slot-phone__display--jackpot' : ''}`}
           >
-            {isJackpot ? '🎰 JACKPOT! 🎰' : formattedPhone}
+            {isJackpot ? (
+              <><Dices size={16} aria-hidden="true" /> JACKPOT! <Dices size={16} aria-hidden="true" /></>
+            ) : formattedPhone}
           </div>
           <div className="slot-phone__dials">
             {/* First 3 digits */}
@@ -324,7 +327,7 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
               onClick={spinAll}
               disabled={spinningAll}
             >
-              {spinningAll ? '🎰 Spinning...' : '🎰 Spin All!'}
+              <Dices size={16} aria-hidden="true" /> {spinningAll ? 'Spinning...' : 'Spin All!'}
             </button>
           </div>
           <div className="slot-phone__hint">
@@ -350,7 +353,9 @@ export const FunModeToggle = ({ isActive, onToggle }: FunModeToggleProps) => {
       aria-pressed={isActive}
       title="Toggle Fun Mode"
     >
-      <span className="fun-mode-toggle__icon">{isActive ? '🎉' : '✨'}</span>
+      <span className="fun-mode-toggle__icon">
+        {isActive ? <PartyPopper size={18} aria-hidden="true" /> : <Sparkles size={18} aria-hidden="true" />}
+      </span>
       <span className="fun-mode-toggle__text">{isActive ? 'Fun Mode: ON' : 'Boring Form?'}</span>
     </button>
   );

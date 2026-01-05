@@ -96,9 +96,10 @@
   border-color: var(--primary);
 }
 
-.timeline__emoji {
-  font-size: 1.75rem;
-  line-height: 1;
+.timeline__icon {
+  width: 24px;
+  height: 24px;
+  color: var(--primary);
   flex-shrink: 0;
 }
 
@@ -187,8 +188,9 @@
     gap: 0.75rem;
   }
 
-  .timeline__emoji {
-    font-size: 1.5rem;
+  .timeline__icon {
+    width: 20px;
+    height: 20px;
   }
 
   .timeline__title {
@@ -325,8 +327,11 @@
   display: flex;
 }
 
-.skills-category__emoji {
-  font-size: 1.5rem;
+.skills-category__icon {
+  width: 20px;
+  height: 20px;
+  color: var(--primary);
+  flex-shrink: 0;
 }
 
 .skills-category__name {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { flushSync } from 'react-dom';
+import { Code, Server, Cloud, Layers, Users, LucideIcon } from 'lucide-react';
 
 interface Skill {
   name: string;
@@ -8,14 +9,14 @@ interface Skill {
 
 interface SkillCategory {
   name: string;
-  emoji: string;
+  icon: LucideIcon;
   skills: Skill[];
 }
 
 const skillCategories: SkillCategory[] = [
   {
     name: 'Frontend',
-    emoji: '⚛️',
+    icon: Code,
     skills: [
       { name: 'React', level: 5 },
       { name: 'TypeScript', level: 4 },
@@ -26,7 +27,7 @@ const skillCategories: SkillCategory[] = [
   },
   {
     name: 'Backend',
-    emoji: '⚙️',
+    icon: Server,
     skills: [
       { name: 'Node.js', level: 3 },
       { name: 'SQL', level: 3 },
@@ -36,7 +37,7 @@ const skillCategories: SkillCategory[] = [
   },
   {
     name: 'Cloud & DevOps',
-    emoji: '☁️',
+    icon: Cloud,
     skills: [
       { name: 'AWS', level: 4 },
       { name: 'Docker', level: 4 },
@@ -46,7 +47,7 @@ const skillCategories: SkillCategory[] = [
   },
   {
     name: 'Architecture',
-    emoji: '🏗️',
+    icon: Layers,
     skills: [
       { name: 'Microservices', level: 3 },
       { name: 'REST APIs', level: 4 },
@@ -55,7 +56,7 @@ const skillCategories: SkillCategory[] = [
   },
   {
     name: 'Leadership',
-    emoji: '👥',
+    icon: Users,
     skills: [
       { name: 'Team Lead', level: 4 },
       { name: 'Mentoring', level: 4 },
@@ -127,7 +128,7 @@ export const SkillsGrid = () => {
               aria-expanded={isExpanded}
             >
               <span className="skills-category__header-content">
-                <span className="skills-category__emoji">{category.emoji}</span>
+                <category.icon size={20} className="skills-category__icon" aria-hidden="true" />
                 <h4 className="skills-category__name">{category.name}</h4>
                 <span className="skills-category__toggle">{isExpanded ? '−' : '+'}</span>
               </span>

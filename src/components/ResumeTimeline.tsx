@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { flushSync } from 'react-dom';
+import { UserCog, Rocket, Atom, MessageSquare, Bug, LucideIcon } from 'lucide-react';
 
 interface Role {
   title: string;
   company: string;
   period: string;
   location: string;
-  emoji: string;
+  icon: LucideIcon;
   vibe: string;
   highlights: string[];
   isPromotion?: boolean;
@@ -18,7 +19,7 @@ const roles: Role[] = [
     company: 'Availity',
     period: '2023 - Now',
     location: 'Remote',
-    emoji: '👨‍💻',
+    icon: UserCog,
     vibe: 'Leading a team, breaking up monoliths, trying to make healthcare IT slightly less painful',
     isPromotion: true,
     highlights: [
@@ -34,7 +35,7 @@ const roles: Role[] = [
     company: 'Availity',
     period: '2021 - 2023',
     location: 'Remote',
-    emoji: '🚀',
+    icon: Rocket,
     vibe: 'Owned a product, fixed performance nightmares, modernized builds',
     isPromotion: true,
     highlights: [
@@ -49,7 +50,7 @@ const roles: Role[] = [
     company: 'Availity',
     period: '2019 - 2021',
     location: 'Remote',
-    emoji: '⚛️',
+    icon: Atom,
     vibe: 'Solo dev, rewrote Angular apps to React, learned healthcare domain',
     highlights: [
       'Solo UI dev on clinical software team',
@@ -62,7 +63,7 @@ const roles: Role[] = [
     company: 'Prevail Health',
     period: '2017 - 2018',
     location: 'Chicago',
-    emoji: '💬',
+    icon: MessageSquare,
     vibe: 'Full-stack on a mental health startup, video chat + real-time features',
     highlights: [
       'Built video and chat features for mental health platform',
@@ -75,7 +76,7 @@ const roles: Role[] = [
     company: 'Prevail Health',
     period: '2017',
     location: 'Chicago',
-    emoji: '🐛',
+    icon: Bug,
     vibe: 'Started in QA, automated myself into a dev role',
     highlights: [
       'Sole QA for multiple apps',
@@ -124,7 +125,7 @@ export const ResumeTimeline = () => {
               onClick={() => handleToggle(index)}
               aria-expanded={isExpanded}
             >
-              <span className="timeline__emoji">{role.emoji}</span>
+              <role.icon size={20} className="timeline__icon" aria-hidden="true" />
               <div className="timeline__content">
                 <div className="timeline__row">
                   <h3 className="timeline__title">{role.title}</h3>
