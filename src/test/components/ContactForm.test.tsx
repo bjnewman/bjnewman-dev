@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { ContactForm } from '../../components/ContactForm';
 
@@ -43,12 +43,11 @@ describe('ContactForm', () => {
   });
 
   it('should show warning when character count is low', async () => {
-    const user = userEvent.setup();
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
 
     const messageField = screen.getByLabelText('Message *');
-    const longMessage = 'a'.repeat(950);
-    await user.type(messageField, longMessage);
+    // Use fireEvent for long text - much faster than typing 950 keystrokes
+    fireEvent.change(messageField, { target: { value: 'a'.repeat(950) } });
 
     const counter = screen.getByText(/50 characters remaining/i);
     expect(counter).toHaveClass('warning');
@@ -277,8 +276,8 @@ describe('ContactForm', () => {
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
 
     const messageField = screen.getByLabelText('Message *');
-    const longMessage = 'a'.repeat(1001);
-    await user.type(messageField, longMessage);
+    // Use fireEvent for long text - much faster than typing 1001 keystrokes
+    fireEvent.change(messageField, { target: { value: 'a'.repeat(1001) } });
 
     const submitButton = screen.getByRole('button', { name: /send message/i });
     await user.click(submitButton);

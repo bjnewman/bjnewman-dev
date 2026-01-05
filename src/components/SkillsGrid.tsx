@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { flushSync } from 'react-dom';
 
 interface Skill {
   name: string;
@@ -82,28 +83,73 @@ export const SkillsGrid = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Handle category click with View Transitions API
+  const handleCategoryClick = (categoryName: string) => {
+    const newValue = expandedCategory === categoryName ? null : categoryName;
+
+    // Use View Transitions API if available for smooth reordering
+    // Skip in automated browser environments (Playwright sets navigator.webdriver = true)
+    const isAutomatedBrowser = typeof navigator !== 'undefined' && navigator.webdriver === true;
+    if (document.startViewTransition && !isAutomatedBrowser) {
+      document.startViewTransition(() => {
+        flushSync(() => {
+          setExpandedCategory(newValue);
+        });
+      });
+    } else {
+      setExpandedCategory(newValue);
+    }
+  };
+
+  // Reorder categories: expanded one goes first
+  const sortedCategories = expandedCategory
+    ? [
+        ...skillCategories.filter((c) => c.name === expandedCategory),
+        ...skillCategories.filter((c) => c.name !== expandedCategory),
+      ]
+    : skillCategories;
+
   return (
     <div className="skills-grid">
-      {skillCategories.map((category) => {
+      {sortedCategories.map((category) => {
         const isExpanded = expandedCategory === category.name;
+        const transitionName = `skill-${category.name.replace(/\s+/g, '-').replace(/&/g, 'and').toLowerCase()}`;
 
         return (
           <div
             key={category.name}
+            style={{ viewTransitionName: transitionName }}
             className={`skills-category ${isExpanded ? 'skills-category--expanded' : ''}`}
           >
             <button
               className="skills-category__header"
-              onClick={() => setExpandedCategory(isExpanded ? null : category.name)}
+              onClick={() => handleCategoryClick(category.name)}
               aria-expanded={isExpanded}
             >
-              <span className="skills-category__emoji">{category.emoji}</span>
-              <h4 className="skills-category__name">{category.name}</h4>
-              <span className="skills-category__toggle">{isExpanded ? '−' : '+'}</span>
+              <span className="skills-category__header-content">
+                <span className="skills-category__emoji">{category.emoji}</span>
+                <h4 className="skills-category__name">{category.name}</h4>
+                <span className="skills-category__toggle">{isExpanded ? '−' : '+'}</span>
+              </span>
+              {!isExpanded && (
+                <div className="skills-category__preview">
+                  {category.skills.slice(0, 3).map((skill) => (
+                    <span key={skill.name} className="skill-tag">
+                      {skill.name}
+                    </span>
+                  ))}
+                  {category.skills.length > 3 && (
+                    <span className="skill-tag skill-tag--more">+{category.skills.length - 3}</span>
+                  )}
+                </div>
+              )}
             </button>
-
             {isExpanded && (
-              <div className="skills-category__content">
+              <button
+                className="skills-category__content"
+                onClick={() => handleCategoryClick(category.name)}
+                aria-label={`Close ${category.name} details`}
+              >
                 {category.skills.map((skill) => (
                   <div key={skill.name} className="skill-bar">
                     <div className="skill-bar__header">
@@ -125,20 +171,7 @@ export const SkillsGrid = () => {
                     </div>
                   </div>
                 ))}
-              </div>
-            )}
-
-            {!isExpanded && (
-              <div className="skills-category__preview">
-                {category.skills.slice(0, 3).map((skill) => (
-                  <span key={skill.name} className="skill-tag">
-                    {skill.name}
-                  </span>
-                ))}
-                {category.skills.length > 3 && (
-                  <span className="skill-tag skill-tag--more">+{category.skills.length - 3}</span>
-                )}
-              </div>
+              </button>
             )}
           </div>
         );

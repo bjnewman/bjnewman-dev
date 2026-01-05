@@ -246,12 +246,34 @@
   gap: 1rem;
 }
 
+/* View Transitions for smooth skill category reordering */
+::view-transition-group(skill-frontend),
+::view-transition-group(skill-backend),
+::view-transition-group(skill-cloud-and-devops),
+::view-transition-group(skill-architecture),
+::view-transition-group(skill-leadership) {
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+}
+
 .skills-category {
   background: var(--bg-secondary);
   border: 1px solid var(--bg-tertiary);
   border-radius: 0.75rem;
   overflow: hidden;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+  animation: skillCategoryIn 0.3s ease;
+}
+
+@keyframes skillCategoryIn {
+  from {
+    opacity: 0.8;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .skills-category:hover {
@@ -265,7 +287,7 @@
 
 .skills-category__header {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.75rem;
   width: 100%;
   padding: 1rem;
@@ -274,6 +296,23 @@
   cursor: pointer;
   font-family: inherit;
   text-align: left;
+}
+
+/* Header content row - always on one line */
+.skills-category__header-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* Hide skill bars by default, show only when expanded */
+.skills-category__header .skill-bar {
+  display: none;
+}
+
+.skills-category--expanded .skills-category__header .skill-bar {
+  display: flex;
 }
 
 .skills-category__emoji {
@@ -297,7 +336,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  padding: 0 1rem 1rem;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
 .skill-tag {
@@ -319,6 +359,13 @@
   flex-direction: column;
   gap: 1rem;
   animation: expandIn 0.2s ease;
+  cursor: pointer;
+  /* Button reset */
+  background: transparent;
+  border: none;
+  font: inherit;
+  text-align: left;
+  width: 100%;
 }
 
 .skill-bar {
