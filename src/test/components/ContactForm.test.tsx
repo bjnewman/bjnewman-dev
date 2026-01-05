@@ -3,6 +3,22 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { userEvent } from '@testing-library/user-event';
 import { ContactForm } from '../../components/ContactForm';
 
+// Helper to fill form fields quickly (use fireEvent instead of slow userEvent.type)
+const fillForm = (fields: { name?: string; email?: string; subject?: string; message?: string }) => {
+  if (fields.name) {
+    fireEvent.change(screen.getByLabelText('Name *'), { target: { value: fields.name } });
+  }
+  if (fields.email) {
+    fireEvent.change(screen.getByLabelText('Email *'), { target: { value: fields.email } });
+  }
+  if (fields.subject) {
+    fireEvent.change(screen.getByLabelText('Subject'), { target: { value: fields.subject } });
+  }
+  if (fields.message) {
+    fireEvent.change(screen.getByLabelText('Message *'), { target: { value: fields.message } });
+  }
+};
+
 describe('ContactForm', () => {
   let originalFetch: typeof fetch;
   const mockWebhookUrl = 'https://script.google.com/mock-webhook';
@@ -79,14 +95,7 @@ describe('ContactForm', () => {
     window.fetch = mockFetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
-
-    const nameField = screen.getByLabelText('Name *');
-    const emailField = screen.getByLabelText('Email *');
-    const messageField = screen.getByLabelText('Message *');
-
-    await user.type(nameField, 'John Doe');
-    await user.type(emailField, 'john@example.com');
-    await user.type(messageField, 'Test message');
+    fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
 
     const submitButton = screen.getByRole('button', { name: /send message/i });
     await user.click(submitButton);
@@ -147,12 +156,7 @@ describe('ContactForm', () => {
     window.fetch = mockFetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
-
-    // Fill out form
-    await user.type(screen.getByLabelText('Name *'), 'John Doe');
-    await user.type(screen.getByLabelText('Email *'), 'john@example.com');
-    await user.type(screen.getByLabelText('Subject'), 'Test Subject');
-    await user.type(screen.getByLabelText('Message *'), 'Test message content');
+    fillForm({ name: 'John Doe', email: 'john@example.com', subject: 'Test Subject', message: 'Test message content' });
 
     // Submit form
     const submitButton = screen.getByRole('button', { name: /send message/i });
@@ -177,11 +181,7 @@ describe('ContactForm', () => {
     window.fetch = vi.fn().mockResolvedValue({ ok: true });
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
-
-    // Fill out form
-    await user.type(screen.getByLabelText('Name *'), 'John Doe');
-    await user.type(screen.getByLabelText('Email *'), 'john@example.com');
-    await user.type(screen.getByLabelText('Message *'), 'Test message');
+    fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
 
     // Submit form
     await user.click(screen.getByRole('button', { name: /send message/i }));
@@ -198,14 +198,11 @@ describe('ContactForm', () => {
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
 
-    // Fill out form
     const nameField = screen.getByLabelText('Name *') as HTMLInputElement;
     const emailField = screen.getByLabelText('Email *') as HTMLInputElement;
     const messageField = screen.getByLabelText('Message *') as HTMLTextAreaElement;
 
-    await user.type(nameField, 'John Doe');
-    await user.type(emailField, 'john@example.com');
-    await user.type(messageField, 'Test message');
+    fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
 
     // Submit form
     await user.click(screen.getByRole('button', { name: /send message/i }));
@@ -223,11 +220,7 @@ describe('ContactForm', () => {
     window.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
-
-    // Fill out form
-    await user.type(screen.getByLabelText('Name *'), 'John Doe');
-    await user.type(screen.getByLabelText('Email *'), 'john@example.com');
-    await user.type(screen.getByLabelText('Message *'), 'Test message');
+    fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
 
     // Submit form
     await user.click(screen.getByRole('button', { name: /send message/i }));
@@ -247,11 +240,7 @@ describe('ContactForm', () => {
     window.fetch = vi.fn().mockReturnValue(fetchPromise);
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
-
-    // Fill out form
-    await user.type(screen.getByLabelText('Name *'), 'John Doe');
-    await user.type(screen.getByLabelText('Email *'), 'john@example.com');
-    await user.type(screen.getByLabelText('Message *'), 'Test message');
+    fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
 
     // Submit form
     const submitButton = screen.getByRole('button', { name: /send message/i });
@@ -291,11 +280,7 @@ describe('ContactForm', () => {
     window.fetch = mockFetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
-
-    // Fill out form WITHOUT subject
-    await user.type(screen.getByLabelText('Name *'), 'John Doe');
-    await user.type(screen.getByLabelText('Email *'), 'john@example.com');
-    await user.type(screen.getByLabelText('Message *'), 'Test message');
+    fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
 
     // Submit form
     await user.click(screen.getByRole('button', { name: /send message/i }));
@@ -313,11 +298,7 @@ describe('ContactForm', () => {
     window.fetch = vi.fn().mockResolvedValue({ ok: true });
 
     render(<ContactForm webhookUrl={mockWebhookUrl} onSuccess={onSuccess} />);
-
-    // Fill out form
-    await user.type(screen.getByLabelText('Name *'), 'John Doe');
-    await user.type(screen.getByLabelText('Email *'), 'john@example.com');
-    await user.type(screen.getByLabelText('Message *'), 'Test message');
+    fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
 
     // Submit form
     await user.click(screen.getByRole('button', { name: /send message/i }));
@@ -333,11 +314,7 @@ describe('ContactForm', () => {
     window.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
 
     render(<ContactForm webhookUrl={mockWebhookUrl} onError={onError} />);
-
-    // Fill out form
-    await user.type(screen.getByLabelText('Name *'), 'John Doe');
-    await user.type(screen.getByLabelText('Email *'), 'john@example.com');
-    await user.type(screen.getByLabelText('Message *'), 'Test message');
+    fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
 
     // Submit form
     await user.click(screen.getByRole('button', { name: /send message/i }));

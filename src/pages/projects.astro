@@ -1,8 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import { PageCollectible } from '../components/ScavengerHunt';
-import { ProjectTeasers } from '../components/ProjectTeasers';
-import '../styles/project-teasers.css';
 ---
 
 <Base title="Projects">
@@ -42,8 +40,4 @@ import '../styles/project-teasers.css';
   <p>Contributed to the popular CSS linter, helping maintain the tools that keep our stylesheets in line.</p>
 
   <p><a href="https://github.com/stylelint/stylelint" target="_blank" rel="noopener">View on GitHub</a></p>
-
-  <h2>What's Next</h2>
-  <ProjectTeasers client:visible />
-
 </Base>
