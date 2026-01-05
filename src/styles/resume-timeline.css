@@ -452,6 +452,14 @@
   animation-timing-function: ease-in-out;
 }
 
+/* Icon view transitions - scale and rotate on expand */
+::view-transition-group(education-icon-0),
+::view-transition-group(education-icon-1),
+::view-transition-group(education-icon-2) {
+  animation-duration: 0.4s;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 .education-card {
   position: relative;
 }
@@ -487,12 +495,16 @@
   flex-shrink: 0;
   width: 3.5rem;
   height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--text-primary);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .education-card--expanded .education-card__icon-wrapper {
-  transform: scale(1.1);
+  transform: scale(1.15) rotate(5deg);
+  color: var(--primary);
 }
 
 .education-icon {
