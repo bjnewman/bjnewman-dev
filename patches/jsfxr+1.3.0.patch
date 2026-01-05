@@ -1,0 +1,113 @@
+diff --git a/node_modules/jsfxr/riffwave.js b/node_modules/jsfxr/riffwave.js
+index 54dfaee..a4418bf 100644
+--- a/node_modules/jsfxr/riffwave.js
++++ b/node_modules/jsfxr/riffwave.js
+@@ -32,6 +32,7 @@ var FastBase64 = {
+     var len = src.length;
+     var dst = '';
+     var i = 0;
++    var n;
+     while (len > 2) {
+       n = (src[i] << 16) | (src[i+1]<<8) | src[i+2];
+       dst+= this.encLookup[n >> 12] + this.encLookup[n & 0xFFF];
+@@ -130,23 +131,29 @@ var RIFFWAVE = function(data) {
+ }; // end RIFFWAVE
+ 
+ (function (root, factory) {
++  // Handle ESM where 'this' is undefined
++  var globalRoot = root || (typeof globalThis !== 'undefined' ? globalThis : (typeof window !== 'undefined' ? window : {}));
+   if(typeof define === "function" && define.amd) {
+     // Now we're wrapping the factory and assigning the return
+     // value to the root (window) and returning it as well to
+     // the AMD loader.
+     define([], function(){
+-      return (root.RIFFWAVE = factory());
++      return (globalRoot.RIFFWAVE = factory());
+     });
+   } else if(typeof module === "object" && module.exports) {
+     // I've not encountered a need for this yet, since I haven't
+     // run into a scenario where plain modules depend on CommonJS
+     // *and* I happen to be loading in a CJS browser environment
+     // but I'm including it for the sake of being thorough
+-    module.exports = (root.RIFFWAVE = factory());
++    module.exports = (globalRoot.RIFFWAVE = factory());
+   } else {
+-    root.RIFFWAVE = factory();
++    globalRoot.RIFFWAVE = factory();
+   }
+ }(this, function() {
+   // module code here....
+   return RIFFWAVE;
+ }));
++
++// ESM export for bundler compatibility
++export { RIFFWAVE };
++export default RIFFWAVE;
+diff --git a/node_modules/jsfxr/sfxr.js b/node_modules/jsfxr/sfxr.js
+index 4edbbf1..79179c2 100644
+--- a/node_modules/jsfxr/sfxr.js
++++ b/node_modules/jsfxr/sfxr.js
+@@ -1,3 +1,6 @@
++// ESM import for bundler compatibility
++import { RIFFWAVE } from './riffwave.js';
++
+ // Wave shapes
+ var SQUARE = 0;
+ var SAWTOOTH = 1;
+@@ -9,6 +12,9 @@ var masterVolume = 1;
+ 
+ var OVERSAMPLING = 8;
+ 
++// Declare sfxr in module scope for ESM compatibility
++var sfxr;
++
+ /*** Core data structure ***/
+ 
+ // Sound generation parameters are on [0,1] unless noted SIGNED & thus
+@@ -531,6 +537,9 @@ sfxr.generate = function(algorithm, options) {
+   return p[algorithm]();
+ }
+ 
++// Preserve implicit global for backwards compatibility
++if (typeof window !== "undefined") window.sfxr = sfxr;
++
+ /*** Main entry point ***/
+ 
+ function SoundEffect(ps) {
+@@ -1086,22 +1095,25 @@ var units = {
+ /*** Plumbing ***/
+ 
+ (function (root, factory) {
++  // Handle ESM where 'this' is undefined
++  var globalRoot = root || (typeof globalThis !== 'undefined' ? globalThis : (typeof window !== 'undefined' ? window : {}));
+   if(typeof define === "function" && define.amd) {
+     // Now we're wrapping the factory and assigning the return
+     // value to the root (window) and returning it as well to
+     // the AMD loader.
+     define(["./riffwave"], function(RIFFWAVE){
+-      return (root.jsfxr = factory(RIFFWAVE));
++      return (globalRoot.jsfxr = factory(RIFFWAVE));
+     });
+   } else if(typeof module === "object" && module.exports) {
++    var RIFFWAVE;
+     // I've not encountered a need for this yet, since I haven't
+     // run into a scenario where plain modules depend on CommonJS
+     // *and* I happen to be loading in a CJS browser environment
+     // but I'm including it for the sake of being thorough
+     RIFFWAVE = require("./riffwave.js");
+-    module.exports = (root.jsfxr = factory(RIFFWAVE));
++    module.exports = (globalRoot.jsfxr = factory(RIFFWAVE));
+   } else {
+-    root.jsfxr = factory(root.RIFFWAVE);
++    globalRoot.jsfxr = factory(globalRoot.RIFFWAVE);
+   }
+ }(this, function(RIFFWAVE) {
+   // module code here....
+@@ -1128,3 +1140,7 @@ var units = {
+     }
+   };
+ }));
++
++// ESM exports for bundler compatibility
++export { sfxr };
++export default { sfxr };

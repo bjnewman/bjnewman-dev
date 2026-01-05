@@ -1,4 +1,4 @@
-import { useCallback, useSyncExternalStore } from 'react';
+import { useCallback, useSyncExternalStore, useState, useEffect } from 'react';
 import type { ScavengerHuntState, AchievementId, CollectibleId, ClueId } from './types';
 import { initialScavengerHuntState } from './types';
 import { achievements, collectibles, clues } from './achievements';
@@ -23,6 +23,8 @@ const initializeStore = () => {
 
 const subscribe = (cb: () => void) => (listeners.add(cb), () => listeners.delete(cb));
 const getSnapshot = () => (initializeStore(), currentState);
+// Server snapshot returns initial state without side effects
+const getServerSnapshot = () => initialScavengerHuntState;
 
 const updateState = (updater: (prev: ScavengerHuntState) => ScavengerHuntState) => {
   const newState = updater(currentState);
@@ -64,7 +66,12 @@ const maybeAddClue = (prev: ScavengerHuntState, clueId: ClueId, condition = true
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useScavengerHunt = () => {
-  const state = useSyncExternalStore(subscribe, getSnapshot, getSnapshot);
+  const state = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  // Track mounted state to avoid hydration mismatch
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const collectItem = useCallback((id: CollectibleId) => {
     updateState((prev) => {
@@ -174,7 +181,7 @@ export const useScavengerHunt = () => {
 
   return {
     state,
-    isLoaded: isInitialized,
+    isLoaded: isMounted && isInitialized,
     collectItem,
     trackSecretMenuOpened,
     trackConfettiFired,
