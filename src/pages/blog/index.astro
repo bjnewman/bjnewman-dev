@@ -55,44 +55,23 @@ const sortedPosts = posts.sort((a, b) =>
     </div>
 
     <aside class="blogroll">
-      <h3>🔗 Blogroll</h3>
+      <h3>Blogroll</h3>
 
-      <section class="links-section">
-        <h4>Tech Blogs</h4>
-        <ul>
-          <li><a href="https://overreacted.io" target="_blank" rel="noopener noreferrer">Overreacted</a> <span class="link-meta">Dan Abramov</span></li>
-          <li><a href="https://kentcdodds.com/blog" target="_blank" rel="noopener noreferrer">Kent C. Dodds</a> <span class="link-meta">React & Testing</span></li>
-          <li><a href="https://css-tricks.com" target="_blank" rel="noopener noreferrer">CSS-Tricks</a> <span class="link-meta">Web Design</span></li>
-          <li><a href="https://www.joshwcomeau.com" target="_blank" rel="noopener noreferrer">Josh Comeau</a> <span class="link-meta">Interactive Tutorials</span></li>
-          <li><a href="https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e" target="_blank" rel="noopener noreferrer">My LLM Coding Workflow</a> <span class="link-meta">Addy Osmani</span></li>
-        </ul>
-      </section>
-
-      <section class="links-section">
-        <h4>Tools & Resources</h4>
-        <ul>
-          <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-          <li><a href="https://stackoverflow.com" target="_blank" rel="noopener noreferrer">Stack Overflow</a></li>
-          <li><a href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">MDN Web Docs</a></li>
-          <li><a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> <span class="link-meta">This site!</span></li>
-        </ul>
-      </section>
-
-      <section class="links-section">
-        <h4>Inspiration</h4>
-        <ul>
-          <li><a href="https://www.csszengarden.com" target="_blank" rel="noopener noreferrer">CSS Zen Garden</a></li>
-          <li><a href="https://codepen.io" target="_blank" rel="noopener noreferrer">CodePen</a></li>
-          <li><a href="https://www.smashingmagazine.com" target="_blank" rel="noopener noreferrer">Smashing Magazine</a></li>
-        </ul>
-      </section>
+      <ul class="blogroll-links">
+        <li><a href="https://overreacted.io" target="_blank" rel="noopener noreferrer">Overreacted</a> <span class="link-meta">Dan Abramov</span></li>
+        <li><a href="https://www.joshwcomeau.com" target="_blank" rel="noopener noreferrer">Josh Comeau</a></li>
+        <li><a href="https://kentcdodds.com/blog" target="_blank" rel="noopener noreferrer">Kent C. Dodds</a></li>
+        <li><a href="https://lea.verou.me" target="_blank" rel="noopener noreferrer">Lea Verou</a> <span class="link-meta">CSS WG</span></li>
+        <li><a href="https://www.sarasoueidan.com/blog" target="_blank" rel="noopener noreferrer">Sara Soueidan</a> <span class="link-meta">Accessibility</span></li>
+        <li><a href="https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e" target="_blank" rel="noopener noreferrer">My LLM Coding Workflow</a> <span class="link-meta">Addy Osmani</span></li>
+      </ul>
 
       <div class="blogroll-footer">
-        <p class="retro-note">Est. 2026 • Updated regularly <PageCollectible id="hidden_key" client:visible /></p>
         <a href="/rss.xml" class="rss-badge">
           <span class="rss-icon">📡</span>
           <span>RSS Feed</span>
         </a>
+        <PageCollectible id="hidden_key" client:visible />
       </div>
     </aside>
   </div>
