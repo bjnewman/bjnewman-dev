@@ -145,11 +145,11 @@ a:focus-visible {
 /*
  * Header nav link shimmer on hover (optional enhancement)
  */
-header nav a {
+header[role="banner"] nav a {
   overflow: hidden;
 }
 
-header nav a::before {
+header[role="banner"] nav a::before {
   content: '';
   position: absolute;
   top: 0;
@@ -165,7 +165,7 @@ header nav a::before {
   transition: left 0.5s ease;
 }
 
-header nav a:hover::before {
+header[role="banner"] nav a:hover::before {
   left: 100%;
 }
 
