@@ -7,15 +7,11 @@ interface Token {
 }
 
 const codeTokens: Token[] = [
-  { text: '// building reliable systems at scale\n', className: 'code-comment' },
+  { text: '// building reliable systems\n', className: 'code-comment' },
   { text: 'const ', className: 'code-keyword' },
   { text: 'ben', className: 'code-property' },
   { text: ' = {\n' },
-  { text: '  role', className: 'code-property' },
-  { text: ': ' },
-  { text: '"Tech Lead"', className: 'code-string' },
-  { text: ',\n' },
-  { text: '  focus', className: 'code-property' },
+  { text: '  stack', className: 'code-property' },
   { text: ': [' },
   { text: '"React"', className: 'code-string' },
   { text: ', ' },
@@ -23,15 +19,22 @@ const codeTokens: Token[] = [
   { text: ', ' },
   { text: '"AWS"', className: 'code-string' },
   { text: '],\n' },
-  { text: '  daily', className: 'code-property' },
+  { text: '  solve', className: 'code-function' },
   { text: ': ' },
-  { text: '"10M+ transactions"', className: 'code-string' },
+  { text: 'async ', className: 'code-keyword' },
+  { text: '(p) => ' },
+  { text: '"🌈🦄💰"', className: 'code-string' },
   { text: '\n};\n\n' },
-  { text: 'export default ', className: 'code-keyword' },
+  { text: 'const ', className: 'code-keyword' },
+  { text: 'problem', className: 'code-property' },
+  { text: ' = ' },
+  { text: '"🐛🔥💀"', className: 'code-string' },
+  { text: ';\n' },
+  { text: 'await ', className: 'code-keyword' },
   { text: 'ben', className: 'code-property' },
   { text: '.' },
   { text: 'solve', className: 'code-function' },
-  { text: '(complexProblems);' },
+  { text: '(problem);' },
 ];
 
 // Pre-compute full text for length calculation
@@ -116,7 +119,7 @@ export function TypewriterCode({ restartKey = 0 }: TypewriterCodeProps) {
     <div
       className="typewriter-container typewriter-clickable"
       role="img"
-      aria-label="Code snippet showing: building reliable systems at scale, Tech Lead focused on React, Java, and AWS, handling 10M+ daily transactions"
+      aria-label="Code snippet showing: building reliable systems with React, Java, and AWS stack, handling 10M+ transactions per day"
       tabIndex={0}
       onClick={restartAnimation}
       onKeyDown={(e) => {

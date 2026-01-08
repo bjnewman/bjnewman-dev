@@ -86,6 +86,10 @@
   color: #dcdcaa;
 }
 
+.code-class {
+  color: #4ec9b0;
+}
+
 /* Blinking Cursor */
 .typewriter-cursor {
   display: inline-block;

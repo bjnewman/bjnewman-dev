@@ -30,7 +30,7 @@ describe('TypewriterCode', () => {
 
     const container = screen.getByRole('img');
     expect(container).toHaveAttribute('aria-label');
-    expect(container.getAttribute('aria-label')).toContain('Tech Lead');
+    expect(container.getAttribute('aria-label')).toContain('React');
   });
 
   it('should show cursor during typing', () => {
@@ -85,8 +85,8 @@ describe('TypewriterCode', () => {
     const codeElement = container.querySelector('.typewriter-code');
 
     // Should show full text immediately - check for content near the end
-    expect(codeElement?.textContent).toContain('Tech Lead');
-    expect(codeElement?.textContent).toContain('complexProblems');
+    expect(codeElement?.textContent).toContain('const ben');
+    expect(codeElement?.textContent).toContain('await ben.solve(problem)');
   });
 
   it('should not show cursor when prefers-reduced-motion is enabled', () => {
