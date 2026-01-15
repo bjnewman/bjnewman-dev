@@ -259,15 +259,67 @@ function normalizeNodeEscaping(node) {
 
 4. **Fix your environment first** - We spent time on fnm setup and broken VS Code symlinks before we could even commit.
 
+## Update: jsfxr ESM Compatibility Fix
+
+**2026-01-15**: A different kind of contribution—fixing a bug I discovered while building this site.
+
+### The Problem
+
+I added retro 8-bit sound effects to [Holland's secret mode](/blog/hello-world) using [jsfxr](https://github.com/chr15m/jsfxr). It worked in development, but broke in production builds with Vite:
+
+```
+ReferenceError: n is not defined
+ReferenceError: RIFFWAVE is not defined
+```
+
+The library was written before ES modules became standard. Its UMD wrapper assumed `this` would be the global object—but in ESM strict mode, `this` is `undefined`.
+
+### Testing Locally First
+
+Rather than blindly submitting a PR, I used [patch-package](https://github.com/ds300/patch-package) to test fixes directly in my project. This let me iterate quickly and verify the sounds actually worked before touching upstream.
+
+### The Fix
+
+[Issue #17](https://github.com/chr15m/jsfxr/issues/17) had been open since 2023. The maintainer's key concern: *"make sure [the] fix will not break legacy code using the cjs require."*
+
+The solution maintains full backwards compatibility:
+
+1. **Fix strict mode errors** - Add `var n;` and `var sfxr;` declarations
+2. **Handle undefined `this`** - Add a `globalRoot` fallback in the UMD wrapper
+3. **New ESM entry points** - Add `.mjs` wrappers that set up globals before loading the UMD modules
+4. **Conditional exports** - Update `package.json` so bundlers use `.mjs` while `require()` still works
+
+The tricky part: jsfxr's `SoundEffect.generate()` expects `RIFFWAVE` to exist as a global. ESM bundlers don't set up globals automatically. The `.mjs` wrapper explicitly sets `globalThis.RIFFWAVE = RIFFWAVE` *before* importing `sfxr.js`.
+
+### The Result
+
+- All 3100 existing tests pass
+- CommonJS `require('jsfxr')` works unchanged
+- AMD and browser `<script>` tags work unchanged
+- ESM `import jsfxr from 'jsfxr'` now works with Vite, Rollup, esbuild
+- PR submitted: [#18](https://github.com/chr15m/jsfxr/pull/18)
+
+### Lessons
+
+1. **Use your own projects as test beds** - Real usage reveals real bugs
+2. **patch-package is invaluable** - Test fixes locally before submitting upstream
+3. **Backwards compatibility matters** - Especially for libraries with existing users
+4. **ESM migration is tricky** - The global scope differences between CJS and ESM catch many libraries
+
 ## What's Next
 
-The PR is submitted. We'll follow up on feedback, address any review comments, and see it through. What I've learned so far:
+Two PRs now submitted:
+- Stylelint [#8953](https://github.com/stylelint/stylelint/pull/8953) - CSS escape normalization
+- jsfxr [#18](https://github.com/chr15m/jsfxr/pull/18) - ESM bundler compatibility
+
+What I've learned so far:
 
 1. Find projects with welcoming contribution cultures
 2. Look for issues where maintainers have already outlined the approach
 3. Start small and focused
 4. Let tests validate the work
 5. Be prepared for build/CI requirements
+6. Test fixes locally before submitting PRs
 
 More updates to come.
 
