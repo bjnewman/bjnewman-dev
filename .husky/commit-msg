@@ -1,0 +1,49 @@
+#!/bin/sh
+
+# Validate commit message format
+# - Must follow Angular conventions (feat:, fix:, etc.)
+# - Must be single line, less than 80 characters
+# - Must not contain LLM attribution
+
+COMMIT_MSG_FILE="$1"
+COMMIT_MSG=$(head -n 1 "$COMMIT_MSG_FILE")
+
+# Valid Angular commit types
+VALID_TYPES="feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert"
+
+# Check for Angular convention format
+if ! echo "$COMMIT_MSG" | grep -qE "^($VALID_TYPES)(\(.+\))?: .+"; then
+  echo "❌ Commit message must follow Angular conventions:"
+  echo "   <type>: <description>"
+  echo "   or <type>(<scope>): <description>"
+  echo ""
+  echo "   Valid types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert"
+  echo ""
+  echo "   Your message: $COMMIT_MSG"
+  exit 1
+fi
+
+# Check length (less than 80 characters)
+MSG_LENGTH=${#COMMIT_MSG}
+if [ "$MSG_LENGTH" -ge 80 ]; then
+  echo "❌ Commit message must be less than 80 characters"
+  echo "   Current length: $MSG_LENGTH characters"
+  echo "   Your message: $COMMIT_MSG"
+  exit 1
+fi
+
+# Check for LLM attribution (case insensitive)
+if echo "$COMMIT_MSG" | grep -qiE "(claude|anthropic|gpt|openai|llm|co-authored-by.*claude|co-authored-by.*anthropic|co-authored-by.*noreply@anthropic)"; then
+  echo "❌ Commit message must not contain LLM attribution"
+  echo "   Your message: $COMMIT_MSG"
+  exit 1
+fi
+
+# Check that first line doesn't end with a period
+if echo "$COMMIT_MSG" | grep -qE "\.$"; then
+  echo "❌ Commit message should not end with a period"
+  echo "   Your message: $COMMIT_MSG"
+  exit 1
+fi
+
+echo "✓ Commit message format valid"
