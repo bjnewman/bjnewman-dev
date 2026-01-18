@@ -2,6 +2,7 @@ import { SecretMenu } from './components/SecretMenu';
 import { useConfetti } from './components/ConfettiCannon';
 import { useMusicPlayer } from './components/MusicPlayer';
 import { useThemeSwitcher, themes } from './components/ThemeSwitcher';
+import { useNavStyleSwitcher, navStyles } from './components/NavStyleSwitcher';
 import { useHollandDecorations } from './components/HollandDecorations';
 import { useHollandSounds } from './components/HollandSounds';
 import { MonkeyEyes } from './components/MonkeyEyes';
@@ -12,6 +13,13 @@ function SecretFeatures() {
   const { fireConfetti, ConfettiRender } = useConfetti();
   const { toggleMusic, isPlaying, MusicIndicator, preloadAudio } = useMusicPlayer();
   const { currentTheme, switchTheme } = useThemeSwitcher();
+  const {
+    currentNavStyle,
+    switchNavStyle,
+    setNavStyleFromTheme,
+    resetToThemeDefault,
+    isOverridden,
+  } = useNavStyleSwitcher();
   const {
     spawnUnicorns,
     spawnRainbows,
@@ -108,6 +116,7 @@ function SecretFeatures() {
 
   const handleSwitchTheme = (themeId: string) => {
     switchTheme(themeId);
+    setNavStyleFromTheme(themeId);
     trackThemeExplored(themeId);
   };
 
@@ -117,6 +126,14 @@ function SecretFeatures() {
     label: theme.name,
     emoji: theme.emoji,
     action: () => handleSwitchTheme(theme.id),
+  }));
+
+  // Create nav style menu items
+  const navStyleItems = navStyles.map((style) => ({
+    id: `nav-${style.id}`,
+    label: `${style.name}${currentNavStyle.id === style.id ? ' ✓' : ''}`,
+    emoji: style.emoji,
+    action: () => switchNavStyle(style.id),
   }));
 
   const menuItems = [
@@ -139,6 +156,23 @@ function SecretFeatures() {
       action: () => {}, // Divider, no action
     },
     ...themeItems,
+    {
+      id: 'nav-styles-divider',
+      label: '— Navigation Style —',
+      emoji: '📑',
+      action: () => {}, // Divider
+    },
+    ...navStyleItems,
+    ...(isOverridden
+      ? [
+          {
+            id: 'nav-reset',
+            label: 'Reset to Theme Default',
+            emoji: '↩️',
+            action: () => resetToThemeDefault(currentTheme.id),
+          },
+        ]
+      : []),
     {
       id: 'holland-divider',
       label: "— Holland's Magic —",
@@ -229,7 +263,7 @@ function SecretFeatures() {
       {menuDiscovered && (
         <div className="secret-menu-floating-hint">
           <span>
-            💡 Press Cmd+K for secret menu • Current theme: {currentTheme.emoji} {currentTheme.name}
+            💡 Press Cmd+K for secret menu • {currentTheme.emoji} {currentTheme.name} • {currentNavStyle.emoji} {currentNavStyle.name}
           </span>
         </div>
       )}

@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { Dashboard } from '../components/Dashboard';
+import '../styles/dashboard.css';
+---
+
+<Base
+  title="Dashboard"
+  description="A data visualization playground featuring personal metrics, family fun, and Chicago sports fandom."
+>
+  <Dashboard client:load />
+</Base>

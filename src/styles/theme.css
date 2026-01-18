@@ -5,6 +5,10 @@
 @import './themes/minimalist.css';
 @import './themes/terminal.css';
 
+/* Legal pad theme and navigation styles - disabled for now, work in progress */
+/* @import './legal-pad.css'; */
+/* @import './nav-styles.css'; */
+
 :root {
   /* Refined color palette - more sophisticated */
   --primary: #6366f1;

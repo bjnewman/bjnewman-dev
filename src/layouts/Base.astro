@@ -56,9 +56,10 @@ const currentPath = Astro.url.pathname;
     <!-- View Transitions -->
     <ViewTransitions />
 
-    <!-- Prevent FOUC by applying saved theme before render -->
+    <!-- Prevent FOUC by applying saved theme and nav style before render -->
     <script is:inline>
       (function() {
+        // Theme handling
         const savedThemeId = localStorage.getItem('bjnewman-theme');
         if (savedThemeId) {
           const themes = {
@@ -96,6 +97,25 @@ const currentPath = Astro.url.pathname;
             }
           }
         }
+
+        // Nav style handling - apply once nav element exists
+        const savedNavStyle = localStorage.getItem('bjnewman-nav-style');
+        if (savedNavStyle) {
+          const navStyles = ['nav-filing-tabs', 'nav-index-cards', 'nav-cli-prompt', 'nav-neon-float', 'nav-win95', 'nav-minimal'];
+          const applyNavStyle = () => {
+            const nav = document.querySelector('.site-nav');
+            if (nav) {
+              navStyles.forEach(cls => nav.classList.remove(cls));
+              nav.classList.add('nav-' + savedNavStyle);
+            }
+          };
+          // Try immediately (for cached pages), or wait for DOM
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', applyNavStyle);
+          } else {
+            applyNavStyle();
+          }
+        }
       })();
     </script>
   </head>
@@ -103,22 +123,23 @@ const currentPath = Astro.url.pathname;
     <!-- Skip to main content link for keyboard navigation -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <header role="banner">
-      <nav role="navigation" aria-label="Main navigation">
-        <a href="/" class={currentPath === '/' ? 'active' : ''}>Home</a>
-        <a href="/about" class={currentPath.startsWith('/about') ? 'active' : ''}>About</a>
-        <a href="/projects" class={currentPath.startsWith('/projects') ? 'active' : ''}>Projects</a>
-        <a href="/resume" class={currentPath.startsWith('/resume') ? 'active' : ''}>Resume</a>
-        <a href="/blog" class={currentPath.startsWith('/blog') ? 'active' : ''}>Blog</a>
+    <header role="banner" class="site-header">
+      <nav role="navigation" aria-label="Main navigation" class="site-nav nav-filing-tabs">
+        <a href="/" class={`nav-link ${currentPath === '/' ? 'active' : ''}`}>Home</a>
+        <a href="/about" class={`nav-link ${currentPath.startsWith('/about') ? 'active' : ''}`}>About</a>
+        <a href="/projects" class={`nav-link ${currentPath.startsWith('/projects') ? 'active' : ''}`}>Projects</a>
+        <a href="/resume" class={`nav-link ${currentPath.startsWith('/resume') ? 'active' : ''}`}>Resume</a>
+        <a href="/blog" class={`nav-link ${currentPath.startsWith('/blog') ? 'active' : ''}`}>Blog</a>
+        <a href="/dashboard" class={`nav-link ${currentPath.startsWith('/dashboard') ? 'active' : ''}`}>Dashboard</a>
       </nav>
       <ThemeToggle client:load />
     </header>
 
-    <main id="main-content" role="main">
+    <main id="main-content" role="main" class="page-content">
       <slot />
     </main>
 
-    <footer role="contentinfo">
+    <footer role="contentinfo" class="site-footer">
       <div class="social-links">
         <a href="https://github.com/bjnewman" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">GitHub</a>
         <a href="https://gitlab.com/bjnewman" target="_blank" rel="noopener noreferrer" aria-label="GitLab profile">GitLab</a>

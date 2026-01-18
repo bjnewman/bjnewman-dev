@@ -1,0 +1,513 @@
+/* =============================================================================
+   Navigation Styles
+
+   6 navigation patterns that can be mixed with any theme:
+   1. filing-tabs - Manila folder tabs (default for legal pad)
+   2. index-cards - Numbered entries (brutalist)
+   3. cli-prompt - Terminal style (terminal)
+   4. neon-float - Glowing outlines (vaporwave)
+   5. win95-buttons - Beveled 3D buttons (90s)
+   6. minimal-underline - Plain text (minimalist)
+============================================================================= */
+
+/* =============================================================================
+   CSS Custom Properties for Nav Styles
+============================================================================= */
+:root {
+  /* Filing tabs (manila folder) */
+  --nav-manila: oklch(88% 0.06 80);
+  --nav-manila-light: oklch(92% 0.04 80);
+  --nav-manila-dark: oklch(75% 0.08 80);
+  --nav-manila-shadow: oklch(60% 0.05 80 / 0.3);
+
+  /* Tab dimensions */
+  --nav-tab-height: 2.5rem;
+  --nav-tab-overlap: 0.5rem;
+
+  /* Terminal green */
+  --nav-terminal-green: oklch(80% 0.25 145);
+  --nav-terminal-green-dim: oklch(60% 0.20 145);
+
+  /* Vaporwave neon */
+  --nav-neon-pink: oklch(70% 0.25 350);
+  --nav-neon-cyan: oklch(80% 0.15 200);
+
+  /* Win95 colors */
+  --nav-win95-face: #c0c0c0;
+  --nav-win95-light: #ffffff;
+  --nav-win95-dark: #808080;
+  --nav-win95-darker: #000000;
+}
+
+/* =============================================================================
+   Base Site Header & Nav Structure
+============================================================================= */
+.site-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 2rem 0;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: transparent;
+}
+
+.site-nav {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  position: relative;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--primary, #6366f1);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   1. Filing Tabs - Manila folder aesthetic
+============================================================================= */
+.site-nav.nav-filing-tabs {
+  gap: 0;
+  padding-bottom: 0;
+}
+
+.nav-filing-tabs .nav-link {
+  /* Tab shape - trapezoid */
+  clip-path: polygon(
+    8% 0%,
+    92% 0%,
+    100% 100%,
+    0% 100%
+  );
+
+  background-color: var(--nav-manila);
+  color: oklch(30% 0.02 80);
+  padding: 0.6rem 1.5rem 0.5rem;
+  font-size: 0.95rem;
+  position: relative;
+
+  /* Overlap effect */
+  margin-inline-end: calc(-1 * var(--nav-tab-overlap));
+
+  /* Shadow for depth */
+  filter: drop-shadow(1px 1px 2px var(--nav-manila-shadow));
+}
+
+/* Staggered heights for realistic folder look */
+.nav-filing-tabs .nav-link:nth-child(1) {
+  z-index: 5;
+}
+.nav-filing-tabs .nav-link:nth-child(2) {
+  z-index: 4;
+  margin-block-start: 0.2rem;
+}
+.nav-filing-tabs .nav-link:nth-child(3) {
+  z-index: 3;
+  margin-block-start: 0.4rem;
+}
+.nav-filing-tabs .nav-link:nth-child(4) {
+  z-index: 2;
+  margin-block-start: 0.2rem;
+}
+.nav-filing-tabs .nav-link:nth-child(5) {
+  z-index: 1;
+  margin-inline-end: 0;
+}
+
+/* Hover - lift slightly */
+.nav-filing-tabs .nav-link:hover {
+  background-color: var(--nav-manila-light);
+  transform: translateY(-3px);
+  z-index: 10;
+}
+
+/* Active tab - connects to paper below */
+.nav-filing-tabs .nav-link.active {
+  background-color: var(--lp-yellow, oklch(95% 0.08 95));
+  z-index: 20;
+
+  /* Extend bottom to overlap with content */
+  clip-path: polygon(
+    8% 0%,
+    92% 0%,
+    100% calc(100% + 4px),
+    0% calc(100% + 4px)
+  );
+
+  transform: translateY(-2px);
+  filter: drop-shadow(2px 2px 4px var(--nav-manila-shadow));
+}
+
+/* Focus for filing tabs */
+.nav-filing-tabs .nav-link:focus-visible {
+  outline: 2px solid oklch(30% 0.02 80);
+  outline-offset: -4px;
+}
+
+/* =============================================================================
+   2. Index Cards - Brutalist numbered entries
+============================================================================= */
+.site-nav.nav-index-cards {
+  gap: 0;
+  counter-reset: nav-counter;
+  font-family: var(--font-mono, monospace);
+}
+
+.nav-index-cards .nav-link {
+  counter-increment: nav-counter;
+  background: var(--bg-primary, #ffffff);
+  color: #000000;
+  border: 3px solid #000000;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  /* Overlap borders */
+  margin-inline-start: -3px;
+}
+
+.nav-index-cards .nav-link:first-child {
+  margin-inline-start: 0;
+}
+
+.nav-index-cards .nav-link::before {
+  content: "0" counter(nav-counter) " ";
+  font-weight: 700;
+}
+
+.nav-index-cards .nav-link:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+.nav-index-cards .nav-link.active {
+  background: #000000;
+  color: #ffffff;
+  border-width: 4px;
+}
+
+.nav-index-cards .nav-link:focus-visible {
+  outline: 3px solid #000000;
+  outline-offset: 3px;
+}
+
+/* =============================================================================
+   3. CLI Prompt - Terminal style navigation
+============================================================================= */
+.site-nav.nav-cli-prompt {
+  background: #000000;
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  font-family: var(--font-mono, monospace);
+  gap: 0;
+  align-items: center;
+}
+
+.nav-cli-prompt::before {
+  content: "$";
+  color: var(--nav-terminal-green);
+  margin-inline-end: 0.75rem;
+  font-weight: 700;
+}
+
+.nav-cli-prompt .nav-link {
+  color: var(--nav-terminal-green);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.nav-cli-prompt .nav-link::before {
+  content: "~/";
+  opacity: 0.5;
+}
+
+/* Separator between links */
+.nav-cli-prompt .nav-link:not(:last-child)::after {
+  content: " |";
+  color: var(--nav-terminal-green-dim);
+  margin-inline-start: 0.5rem;
+}
+
+.nav-cli-prompt .nav-link:hover {
+  color: #ffffff;
+  text-shadow: 0 0 8px var(--nav-terminal-green);
+}
+
+.nav-cli-prompt .nav-link.active {
+  color: #ffffff;
+}
+
+/* Blinking cursor after active link */
+.nav-cli-prompt .nav-link.active::after {
+  content: " \2588";
+  animation: cli-blink 1s step-end infinite;
+  margin-inline-start: 0.25rem;
+}
+
+@keyframes cli-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.nav-cli-prompt .nav-link:focus-visible {
+  outline: 1px solid var(--nav-terminal-green);
+  outline-offset: 2px;
+}
+
+/* =============================================================================
+   4. Neon Float - Vaporwave glowing tabs
+============================================================================= */
+.site-nav.nav-neon-float {
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.nav-neon-float .nav-link {
+  background: transparent;
+  color: var(--nav-neon-pink);
+  border: 2px solid var(--nav-neon-pink);
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  /* Neon glow */
+  box-shadow:
+    0 0 5px var(--nav-neon-pink),
+    inset 0 0 5px oklch(70% 0.25 350 / 0.3);
+
+  transition:
+    box-shadow 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.nav-neon-float .nav-link:hover {
+  color: var(--nav-neon-cyan);
+  border-color: var(--nav-neon-cyan);
+  box-shadow:
+    0 0 10px var(--nav-neon-cyan),
+    0 0 20px var(--nav-neon-cyan),
+    inset 0 0 10px oklch(80% 0.15 200 / 0.3);
+  transform: translateY(-2px);
+}
+
+.nav-neon-float .nav-link.active {
+  color: #ffffff;
+  border-color: #ffffff;
+  background: oklch(70% 0.25 350 / 0.2);
+  box-shadow:
+    0 0 10px var(--nav-neon-pink),
+    0 0 20px var(--nav-neon-pink),
+    0 0 30px var(--nav-neon-cyan),
+    inset 0 0 15px oklch(70% 0.25 350 / 0.4);
+}
+
+.nav-neon-float .nav-link:focus-visible {
+  outline: 2px solid var(--nav-neon-cyan);
+  outline-offset: 4px;
+}
+
+/* =============================================================================
+   5. Win95 Buttons - Retro 3D beveled style
+============================================================================= */
+.site-nav.nav-win95 {
+  gap: 0.25rem;
+  background: var(--nav-win95-face);
+  padding: 0.5rem;
+  border: 2px solid;
+  border-color: var(--nav-win95-light) var(--nav-win95-darker) var(--nav-win95-darker) var(--nav-win95-light);
+}
+
+.nav-win95 .nav-link {
+  background: var(--nav-win95-face);
+  color: #000000;
+  padding: 0.4rem 1rem;
+  font-family: 'MS Sans Serif', 'Segoe UI', Tahoma, sans-serif;
+  font-size: 0.85rem;
+
+  /* 3D outset border */
+  border: 2px solid;
+  border-color: var(--nav-win95-light) var(--nav-win95-darker) var(--nav-win95-darker) var(--nav-win95-light);
+}
+
+.nav-win95 .nav-link:hover {
+  background: linear-gradient(
+    to bottom,
+    var(--nav-win95-light) 0%,
+    var(--nav-win95-face) 50%,
+    var(--nav-win95-dark) 100%
+  );
+}
+
+/* Pressed/active state - inset border */
+.nav-win95 .nav-link:active,
+.nav-win95 .nav-link.active {
+  border-color: var(--nav-win95-darker) var(--nav-win95-light) var(--nav-win95-light) var(--nav-win95-darker);
+  background: var(--nav-win95-dark);
+  padding: 0.5rem 0.9rem 0.3rem 1.1rem; /* Shift content for pressed effect */
+}
+
+.nav-win95 .nav-link:focus-visible {
+  outline: 1px dotted #000000;
+  outline-offset: -4px;
+}
+
+/* =============================================================================
+   6. Minimal Underline - Clean, simple text navigation
+============================================================================= */
+.site-nav.nav-minimal {
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+.nav-minimal .nav-link {
+  background: transparent;
+  color: var(--text-secondary, #64748b);
+  padding: 0.25rem 0;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid transparent;
+
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.nav-minimal .nav-link:hover {
+  color: var(--text-primary, #1e293b);
+  border-bottom-color: var(--text-muted, #94a3b8);
+}
+
+.nav-minimal .nav-link.active {
+  color: var(--text-primary, #1e293b);
+  border-bottom-color: var(--text-primary, #1e293b);
+  font-weight: 500;
+}
+
+.nav-minimal .nav-link:focus-visible {
+  outline: 1px solid var(--text-primary, #1e293b);
+  outline-offset: 4px;
+}
+
+/* =============================================================================
+   Responsive Adjustments
+============================================================================= */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0.75rem 1rem 0;
+  }
+
+  .site-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* Filing tabs - flatten on mobile */
+  .nav-filing-tabs .nav-link {
+    margin-block-start: 0 !important;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem 0.4rem;
+  }
+
+  /* Index cards - stack */
+  .nav-index-cards .nav-link {
+    margin-inline-start: 0;
+    margin-block-start: -3px;
+  }
+
+  .nav-index-cards .nav-link:first-child {
+    margin-block-start: 0;
+  }
+
+  /* CLI - allow wrap */
+  .nav-cli-prompt {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .nav-cli-prompt .nav-link:not(:last-child)::after {
+    content: "";
+  }
+
+  /* Neon - tighter spacing */
+  .nav-neon-float {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  .nav-neon-float .nav-link {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  /* Win95 - wrap */
+  .nav-win95 {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  /* Minimal - tighter gaps */
+  .nav-minimal {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-nav {
+    width: 100%;
+  }
+
+  /* Filing tabs - horizontal scroll */
+  .site-nav.nav-filing-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-inline: 0.5rem;
+  }
+
+  .nav-filing-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-filing-tabs .nav-link {
+    flex-shrink: 0;
+  }
+}
+
+/* =============================================================================
+   Reduced Motion
+============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .nav-link {
+    transition: none;
+  }
+
+  .nav-cli-prompt .nav-link.active::after {
+    animation: none;
+    opacity: 1;
+  }
+
+  .nav-neon-float .nav-link {
+    transition: none;
+  }
+}

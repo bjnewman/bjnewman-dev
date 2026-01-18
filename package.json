@@ -25,6 +25,11 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.0",
+    "@visx/group": "^3.12.0",
+    "@visx/responsive": "^3.12.0",
+    "@visx/scale": "^3.12.0",
+    "@visx/shape": "^3.12.0",
+    "@visx/text": "^3.12.0",
     "jsfxr": "^1.3.0",
     "lucide-react": "^0.562.0",
     "patch-package": "^8.0.1",
