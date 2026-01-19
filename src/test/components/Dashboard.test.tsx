@@ -262,12 +262,12 @@ describe('ChicagoSportsIndex', () => {
     expect(screen.getByText('Overall Fan Mood:')).toBeInTheDocument();
   });
 
-  it('should render Bears celebration content', () => {
+  it('should render Bears QB Mountain visualization', () => {
     render(<ChicagoSportsIndex />);
 
-    expect(screen.getByText('Days of Glory')).toBeInTheDocument();
+    expect(screen.getByText('QB Effectiveness Mountain Range')).toBeInTheDocument();
     expect(
-      screen.getByText('Since beating the Packers in the Wild Card')
+      screen.getByText(/Beat the Packers in Wild Card/)
     ).toBeInTheDocument();
   });
 

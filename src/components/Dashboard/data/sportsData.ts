@@ -75,25 +75,26 @@ export function getBullsStatus(): TeamStatus {
 }
 
 /**
- * Get Bears status - CELEBRATION MODE!
- * First playoff win since 2011, baby!
+ * Get Bears status - Cautiously optimistic after playoff heartbreak.
+ * Beat the Packers in Wild Card, lost to Rams in OT in Divisional.
  */
 export function getBearsStatus(): TeamStatus {
-  const playoffWinDate = '2026-01-12'; // Wild Card vs Packers
-  const daysSinceWin = daysSince(playoffWinDate);
+  const calebEraStart = '2024-04-25'; // Draft day
+  const daysSinceDraft = daysSince(calebEraStart);
+  const yearsSinceDraft = Math.floor(daysSinceDraft / 365);
 
   return {
     team: 'bears',
     name: 'Chicago Bears',
     emoji: '🐻',
     metric: {
-      label: 'Days of Glory',
-      value: daysSinceWin,
-      unit: 'days',
-      description: `${daysSinceWin} days since beating the Packers in the playoffs!`,
+      label: 'Years of Caleb',
+      value: yearsSinceDraft,
+      unit: yearsSinceDraft === 1 ? 'year' : 'years',
+      description: `${yearsSinceDraft} year${yearsSinceDraft === 1 ? '' : 's'} into the Caleb Williams era`,
     },
-    sentiment: 'celebration',
-    funFact: 'The drought is over! Beat the Packers in the Wild Card. Caleb Williams era. 15-year playoff win drought: ENDED.',
+    sentiment: 'cautious',
+    funFact: 'Beat the Packers in Wild Card! Lost to Rams in OT after another Caleb comeback. The future is bright.',
     color: '#0b162a', // Bears navy
   };
 }
@@ -106,11 +107,11 @@ export function calculateChicagoMood(
   bulls: TeamStatus,
   bears: TeamStatus
 ): { mood: string; description: string } {
-  // If ANY team is in celebration mode, mood is elevated
-  if (bears.sentiment === 'celebration') {
+  // If Bears are cautious (playoff run, bright future), mood is hopeful
+  if (bears.sentiment === 'cautious') {
     return {
       mood: 'Cautiously Optimistic',
-      description: 'Bears carried us! First playoff win in 15 years!',
+      description: 'The Caleb Williams era has arrived. Playoff heartbreak hurts, but the future is bright.',
     };
   }
 

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
-import { Counter } from './charts/Counter';
 import { CubsTimeline } from './charts/CubsTimeline';
 import { BullsModels } from './charts/BullsModels';
+import { BearsQBMountain } from './charts/BearsQBMountain';
 import { getChicagoSportsIndex } from './data/sportsData';
 
 /**
@@ -45,28 +45,14 @@ export function ChicagoSportsIndex() {
           </div>
         </article>
 
-        {/* Bears - Celebration Mode! (full width) */}
-        <article className="team-card team-card--celebration" aria-labelledby="bears-title">
+        {/* Bears - QB Mountain (full width) */}
+        <article className="team-card team-card--cautious" aria-labelledby="bears-title">
           <header className="team-card__header">
             <span className="team-card__emoji" aria-hidden="true">🐻</span>
             <h3 id="bears-title" className="team-card__name">Chicago Bears</h3>
-            <span className="team-card__badge" aria-label="Celebration mode">🎉</span>
           </header>
-          <div className="team-card__metric team-card__metric--celebration">
-            <div className="bears-celebration">
-              <div className="bears-celebration__trophy">🏆</div>
-              <Counter
-                value={sportsIndex.bears.metric.value}
-                label="Days of Glory"
-                unit="days"
-                description={sportsIndex.bears.metric.description}
-                variant="celebration"
-                size="large"
-              />
-              <p className="bears-celebration__subtitle">
-                Since beating the Packers in the Wild Card
-              </p>
-            </div>
+          <div className="team-card__metric">
+            <BearsQBMountain />
           </div>
           <p className="team-card__fun-fact">{sportsIndex.bears.funFact}</p>
         </article>

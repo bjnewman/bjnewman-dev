@@ -4,7 +4,7 @@ import { Counter } from './charts/Counter';
 import { getCarlosMetrics, type CarlosMetrics } from './data/carlosData';
 
 /**
- * Carlos Status Board - Real-time* monitoring of the goodest boy.
+ * Carlos Status Board - Real-time* monitoring of the best dog.
  * *Real-time accuracy not guaranteed.
  */
 export function CarlosStation() {
@@ -26,7 +26,7 @@ export function CarlosStation() {
           <span aria-hidden="true">🐕</span> Carlos Status Board
         </h2>
         <p className="dashboard-section__subtitle">
-          Real-time monitoring of the goodest boy
+          Real-time monitoring of the best dog
         </p>
       </header>
 
