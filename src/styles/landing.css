@@ -1,0 +1,633 @@
+/* =============================================================================
+   Photo-Realistic Landing Page
+
+   A desk surface with scattered manila folders, each linking to a section.
+   Prioritizes "wow factor" and photo-realism.
+============================================================================= */
+
+/* =============================================================================
+   Custom Properties
+============================================================================= */
+:root {
+  /* Manila folder colors */
+  --folder-base: oklch(82% 0.07 75);
+  --folder-light: oklch(86% 0.06 75);
+  --folder-dark: oklch(75% 0.08 75);
+  --folder-shadow: oklch(35% 0.05 75 / 0.4);
+
+  /* Label colors */
+  --label-text: oklch(25% 0.02 75);
+  --label-bg: oklch(98% 0.01 90);
+
+  /* Desk overlay */
+  --desk-vignette: radial-gradient(
+    ellipse at center,
+    transparent 40%,
+    oklch(15% 0.02 55 / 0.4) 100%
+  );
+}
+
+/* =============================================================================
+   Landing Page Body
+============================================================================= */
+.landing-page {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background:
+    var(--desk-vignette),
+    url('/images/landing/desk-warm.jpg') center/cover no-repeat fixed;
+  overflow-x: hidden;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Skip link styling */
+.landing-page .skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--folder-base);
+  color: var(--label-text);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0 0 8px 8px;
+  text-decoration: none;
+  font-weight: 600;
+  z-index: 100;
+  transition: top 0.2s ease;
+}
+
+.landing-page .skip-link:focus {
+  top: 0;
+}
+
+/* =============================================================================
+   Folder Desk - Container
+============================================================================= */
+.folder-desk {
+  position: relative;
+  min-height: 100vh;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Title and subtitle - positioned like a name plate on desk */
+.desk-title {
+  position: absolute;
+  top: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-family: 'Nunito', 'Inter', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: oklch(98% 0.01 90);
+  text-shadow:
+    0 2px 4px oklch(15% 0.02 55 / 0.6),
+    0 4px 8px oklch(15% 0.02 55 / 0.3);
+  letter-spacing: 0.02em;
+}
+
+.desk-subtitle {
+  position: absolute;
+  top: calc(3% + 2.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  font-weight: 500;
+  color: oklch(90% 0.02 90);
+  text-shadow:
+    0 1px 2px oklch(15% 0.02 55 / 0.5);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* =============================================================================
+   Folder - The Star of the Show
+============================================================================= */
+.folder {
+  position: absolute;
+  left: var(--pos-x, 50%);
+  top: var(--pos-y, 50%);
+  transform: translate(-50%, -50%) rotate(var(--rotation, 0deg));
+
+  /* Sizing */
+  width: clamp(140px, 15vw, 200px);
+  aspect-ratio: 1.35 / 1;
+
+  /* Reset link styles */
+  text-decoration: none;
+  cursor: pointer;
+
+  /* Layering */
+  z-index: 1;
+
+  /* Animation */
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    z-index 0s 0.35s;
+}
+
+/* Folder body - the main rectangle */
+.folder__body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+
+  /* Folder material */
+  background:
+    /* Paper texture overlay */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      oklch(50% 0 0 / 0.02) 1px,
+      transparent 2px,
+      transparent 4px
+    ),
+    /* Base gradient */
+    linear-gradient(
+      160deg,
+      var(--folder-light) 0%,
+      var(--folder-base) 30%,
+      var(--folder-dark) 100%
+    );
+
+  border-radius: 0 0 6px 6px;
+
+  /* Depth */
+  box-shadow:
+    /* Inner highlight */
+    inset 0 1px 0 oklch(95% 0.03 75 / 0.5),
+    /* Soft ambient shadow */
+    0 4px 12px var(--folder-shadow),
+    /* Hard contact shadow */
+    0 2px 4px oklch(25% 0.05 55 / 0.3);
+}
+
+/* Folder tab - the top handle */
+.folder__tab {
+  position: absolute;
+  top: -14px;
+  left: 15%;
+  width: 45%;
+  height: 18px;
+
+  /* Tab material */
+  background:
+    linear-gradient(
+      160deg,
+      var(--folder-light) 0%,
+      var(--folder-base) 60%
+    );
+
+  border-radius: 6px 6px 0 0;
+
+  /* Tab label */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: clamp(0.6rem, 1vw, 0.75rem);
+  font-weight: 600;
+  color: var(--label-text);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  /* Tab shadow */
+  box-shadow:
+    inset 0 1px 0 oklch(95% 0.03 75 / 0.5),
+    0 -1px 3px oklch(25% 0.05 55 / 0.15);
+}
+
+/* Label on folder body */
+.folder__label {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* Label styling - like a typed label */
+  background: var(--label-bg);
+  padding: 0.25em 0.75em;
+  border-radius: 2px;
+
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+  font-weight: 500;
+  color: var(--label-text);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+
+  /* Subtle label shadow */
+  box-shadow: 0 1px 2px oklch(25% 0.05 55 / 0.1);
+}
+
+/* =============================================================================
+   Folder Hover State
+============================================================================= */
+.folder:hover,
+.folder--hover,
+.folder:focus-visible {
+  transform: translate(-50%, -60%) rotate(var(--rotation, 0deg)) scale(1.08);
+  z-index: 10;
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    z-index 0s;
+}
+
+.folder:hover .folder__body,
+.folder--hover .folder__body,
+.folder:focus-visible .folder__body {
+  box-shadow:
+    inset 0 1px 0 oklch(95% 0.03 75 / 0.5),
+    /* Expanded shadow on lift */
+    0 16px 32px var(--folder-shadow),
+    0 8px 16px oklch(25% 0.05 55 / 0.25),
+    /* Contact shadow stays grounded */
+    0 2px 4px oklch(25% 0.05 55 / 0.2);
+}
+
+.folder:hover .folder__tab,
+.folder--hover .folder__tab,
+.folder:focus-visible .folder__tab {
+  background:
+    linear-gradient(
+      160deg,
+      oklch(88% 0.05 75) 0%,
+      var(--folder-light) 60%
+    );
+}
+
+/* Focus outline */
+.folder:focus-visible {
+  outline: none;
+}
+
+.folder:focus-visible .folder__body {
+  outline: 3px solid oklch(65% 0.2 260);
+  outline-offset: 4px;
+}
+
+/* =============================================================================
+   Mobile Layout - Vertical Scroll
+============================================================================= */
+@media (max-width: 768px) {
+  .folder-desk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 6rem 1.5rem 3rem;
+    min-height: auto;
+  }
+
+  .desk-title {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 0.25rem;
+  }
+
+  .desk-subtitle {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 1.5rem;
+  }
+
+  .folder {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: rotate(var(--rotation, 0deg));
+    width: min(280px, 85vw);
+  }
+
+  .folder:hover,
+  .folder--hover,
+  .folder:focus-visible {
+    transform: rotate(var(--rotation, 0deg)) scale(1.05) translateY(-8px);
+  }
+}
+
+/* =============================================================================
+   Reduced Motion
+============================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .folder {
+    transition: none;
+  }
+
+  .folder:hover,
+  .folder--hover,
+  .folder:focus-visible {
+    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg));
+  }
+
+  @media (max-width: 768px) {
+    .folder:hover,
+    .folder--hover,
+    .folder:focus-visible {
+      transform: rotate(var(--rotation, 0deg));
+    }
+  }
+}
+
+/* =============================================================================
+   High Contrast Mode Support
+============================================================================= */
+@media (prefers-contrast: more) {
+  .folder__body {
+    border: 2px solid oklch(25% 0.05 55);
+  }
+
+  .folder__tab {
+    border: 2px solid oklch(25% 0.05 55);
+    border-bottom: none;
+  }
+
+  .folder__label {
+    border: 1px solid oklch(25% 0.05 55);
+  }
+}
+
+/* =============================================================================
+   Welcome Overlay
+============================================================================= */
+.welcome-overlay {
+  position: fixed;
+  inset: 0;
+  background: oklch(15% 0.02 55 / 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1rem;
+  animation: overlay-fade-in 0.3s ease-out;
+}
+
+@keyframes overlay-fade-in {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(8px);
+  }
+}
+
+.welcome-card {
+  position: relative;
+  max-width: 600px;
+  width: 100%;
+  background:
+    /* Paper texture */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      oklch(50% 0 0 / 0.02) 1px,
+      transparent 2px,
+      transparent 28px
+    ),
+    /* Warm paper base */
+    linear-gradient(
+      180deg,
+      oklch(97% 0.02 90) 0%,
+      oklch(95% 0.03 85) 100%
+    );
+  border-radius: 8px;
+  padding: 2.5rem;
+  box-shadow:
+    0 25px 50px oklch(15% 0.02 55 / 0.5),
+    0 10px 20px oklch(15% 0.02 55 / 0.3),
+    inset 0 1px 0 oklch(100% 0 0 / 0.5);
+  animation: card-pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes card-pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.welcome-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: transparent;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: oklch(40% 0.02 55);
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.welcome-close:hover {
+  background: oklch(90% 0.02 55);
+  color: oklch(25% 0.02 55);
+}
+
+.welcome-close:focus-visible {
+  outline: 2px solid oklch(65% 0.2 260);
+  outline-offset: 2px;
+}
+
+.welcome-title {
+  margin: 0 0 1.5rem;
+  font-family: 'Nunito', 'Inter', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: oklch(25% 0.05 55);
+  border-bottom: 2px solid oklch(75% 0.12 250);
+  padding-bottom: 0.75rem;
+}
+
+.welcome-content {
+  margin-bottom: 1.5rem;
+}
+
+.welcome-content p {
+  margin: 0 0 1rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: oklch(30% 0.02 55);
+}
+
+.welcome-content p:last-child {
+  margin-bottom: 0;
+}
+
+.welcome-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-top: 1rem;
+  border-top: 1px solid oklch(80% 0.02 55);
+}
+
+.welcome-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.25rem;
+  background: oklch(92% 0.03 75);
+  color: oklch(30% 0.05 55);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px solid oklch(80% 0.05 75);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.welcome-link:hover {
+  background: oklch(88% 0.05 75);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px oklch(35% 0.05 75 / 0.2);
+}
+
+.welcome-link:focus-visible {
+  outline: 2px solid oklch(65% 0.2 260);
+  outline-offset: 2px;
+}
+
+/* Mobile welcome overlay */
+@media (max-width: 768px) {
+  .welcome-card {
+    padding: 1.5rem;
+  }
+
+  .welcome-title {
+    font-size: 1.5rem;
+  }
+
+  .welcome-content p {
+    font-size: 1rem;
+  }
+
+  .welcome-links {
+    flex-direction: column;
+  }
+
+  .welcome-link {
+    justify-content: center;
+  }
+}
+
+/* =============================================================================
+   Entrance Animations
+============================================================================= */
+@keyframes folder-drop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -80%) rotate(var(--rotation, 0deg)) scale(0.8);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -45%) rotate(var(--rotation, 0deg)) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) scale(1);
+  }
+}
+
+@keyframes title-fade {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes subtitle-fade {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Apply animations */
+.desk-title {
+  animation: title-fade 0.6s ease-out forwards;
+}
+
+.desk-subtitle {
+  animation: subtitle-fade 0.6s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.folder {
+  opacity: 0;
+  animation: folder-drop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Staggered folder entrance */
+.folder:nth-child(3) { animation-delay: 0.3s; }
+.folder:nth-child(4) { animation-delay: 0.4s; }
+.folder:nth-child(5) { animation-delay: 0.5s; }
+.folder:nth-child(6) { animation-delay: 0.6s; }
+.folder:nth-child(7) { animation-delay: 0.7s; }
+.folder:nth-child(8) { animation-delay: 0.8s; }
+
+/* Disable entrance animations for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .desk-title,
+  .desk-subtitle,
+  .folder {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Mobile entrance - simpler vertical drop */
+@media (max-width: 768px) {
+  @keyframes folder-drop-mobile {
+    0% {
+      opacity: 0;
+      transform: rotate(var(--rotation, 0deg)) translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: rotate(var(--rotation, 0deg)) translateY(0);
+    }
+  }
+
+  .folder {
+    animation: folder-drop-mobile 0.4s ease-out forwards;
+  }
+
+  .desk-title {
+    animation: none;
+    opacity: 1;
+  }
+
+  .desk-subtitle {
+    animation: none;
+    opacity: 1;
+  }
+}

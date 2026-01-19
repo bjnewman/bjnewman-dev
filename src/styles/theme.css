@@ -5,9 +5,10 @@
 @import './themes/minimalist.css';
 @import './themes/terminal.css';
 
-/* Legal pad theme and navigation styles - disabled for now, work in progress */
-/* @import './legal-pad.css'; */
-/* @import './nav-styles.css'; */
+/* Legal pad theme - uses text-decoration for ruled lines */
+@import './legal-pad.css';
+/* Navigation styles - filing tabs pairs with legal pad */
+@import './nav-styles.css';
 
 :root {
   /* Refined color palette - more sophisticated */
@@ -49,12 +50,15 @@
   --z-modal: 50;
   --z-popover: 60;
   --z-tooltip: 70;
+
+  /* Default background gradient (overridden by theme) */
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #fce7f3 100%);
 }
 
 body {
   font-family: var(--font-main);
   color: var(--text-primary);
-  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #fce7f3 100%);
+  background: var(--bg-gradient);
   background-attachment: fixed;
   min-height: 100vh;
   margin: 0;
@@ -177,6 +181,12 @@ header[role="banner"] nav a.active {
 
 header[role="banner"] nav a.active::after {
   transform: translateX(-50%) scaleX(1);
+}
+
+/* Manila folder wrapper - invisible by default, styled by themes that need it */
+.manila-folder-wrapper {
+  /* Pass-through container for most themes */
+  display: contents;
 }
 
 /* Main content */

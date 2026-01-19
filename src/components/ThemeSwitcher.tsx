@@ -200,6 +200,23 @@ export const themes: Theme[] = [
       bgGradient: 'linear-gradient(135deg, #000000 0%, #001100 100%)',
     },
   },
+  {
+    id: 'legal-pad',
+    name: 'Legal Pad',
+    emoji: '📝',
+    className: 'theme-legal-pad',
+    colors: {
+      primary: '#4a5568',
+      primaryLight: '#718096',
+      primaryDark: '#2d3748',
+      accent: '#c53030',
+      accentLight: '#e53e3e',
+      textPrimary: '#1a202c',
+      textSecondary: '#4a5568',
+      textMuted: '#718096',
+      bgGradient: 'linear-gradient(180deg, #5d4e37 0%, #4a3f2f 100%)', // Desk color (overridden by CSS)
+    },
+  },
 ];
 
 const THEME_STORAGE_KEY = 'bjnewman-theme';
@@ -233,7 +250,7 @@ export const useThemeSwitcher = () => {
     const root = document.documentElement;
     const { colors } = theme;
 
-    // Apply CSS custom properties
+    // Apply CSS custom properties (including background gradient)
     root.style.setProperty('--primary', colors.primary);
     root.style.setProperty('--primary-light', colors.primaryLight);
     root.style.setProperty('--primary-dark', colors.primaryDark);
@@ -242,10 +259,11 @@ export const useThemeSwitcher = () => {
     root.style.setProperty('--text-primary', colors.textPrimary);
     root.style.setProperty('--text-secondary', colors.textSecondary);
     root.style.setProperty('--text-muted', colors.textMuted);
+    root.style.setProperty('--bg-gradient', colors.bgGradient);
 
-    // Update background gradient
-    document.body.style.background = colors.bgGradient;
-    document.body.style.backgroundAttachment = 'fixed';
+    // Clear any inline background styles (let CSS handle it via --bg-gradient)
+    document.body.style.background = '';
+    document.body.style.backgroundAttachment = '';
 
     // Update special background colors for dark mode
     if (theme.id === 'dark') {

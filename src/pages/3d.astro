@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import { ThreeDScene } from '../components/ThreeDScene';
+import '../styles/3d.css';
+---
+
+<Base
+  title="3D Playground"
+  description="An interactive 3D desk scene built with React Three Fiber. Explore, click, and drag objects on the virtual desk."
+>
+  <div class="three-d-page">
+    <header class="three-d-header">
+      <h1 class="three-d-header__title">3D Desk Scene</h1>
+      <p class="three-d-header__subtitle">
+        An interactive 3D visualization of a workspace.
+        Drag to orbit, scroll to zoom, and click objects to interact.
+      </p>
+    </header>
+
+    <ThreeDScene client:load />
+
+    <div class="three-d-instructions">
+      Drag to rotate &bull; Scroll to zoom &bull; Click objects to interact
+    </div>
+  </div>
+</Base>

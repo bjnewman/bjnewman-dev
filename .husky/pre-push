@@ -3,4 +3,9 @@
 echo "Running production build..."
 bun run build || exit 1
 
+# Check beads sync status if initialized (prevents pushing stale JSONL)
+if command -v bd >/dev/null 2>&1 && [ -d ".beads" ]; then
+  bd hooks run pre-push 2>/dev/null || true
+fi
+
 echo "✓ Pre-push checks passed"

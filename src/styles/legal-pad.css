@@ -1,11 +1,14 @@
 /* =============================================================================
    Legal Pad Theme
 
-   Transforms the page content area into a legal pad aesthetic with:
-   - Yellow paper background
-   - Blue horizontal ruled lines
-   - Red margin line
-   - Handwritten-style link underlines
+   Visual hierarchy (back to front):
+   1. Wood desk background (body)
+   2. Manila folder wrapper (.manila-folder-wrapper)
+   3. Stack of legal pad pages (box-shadows on .page-content)
+   4. Top legal pad sheet (.page-content)
+   5. Filing tabs (.site-nav) connecting folder to content
+
+   All rules scoped to body.theme-legal-pad for proper theme isolation.
 ============================================================================= */
 
 /* =============================================================================
@@ -26,25 +29,181 @@
   --lp-ink-light: oklch(40% 0.02 250);
   --lp-ink-blue: oklch(45% 0.18 250);
 
+  /* Manila folder colors */
+  --lp-manila: oklch(82% 0.07 75);
+  --lp-manila-light: oklch(86% 0.05 78);
+  --lp-manila-dark: oklch(72% 0.09 70);
+  --lp-manila-edge: oklch(68% 0.10 68);
+
+  /* Wood desk colors */
+  --lp-wood-base: oklch(45% 0.08 55);
+  --lp-wood-light: oklch(52% 0.07 58);
+  --lp-wood-dark: oklch(38% 0.09 50);
+  --lp-wood-grain: oklch(40% 0.06 55 / 0.4);
+
   /* Spacing */
   --lp-line-height: 1.75rem;
   --lp-margin-width: 4rem;
-  /* Baseline offset - how far from top of line-height the baseline sits (typically ~80% for most fonts) */
-  --lp-baseline-offset: 0.25rem;
-
-  /* Shadows */
-  --lp-shadow: oklch(30% 0.05 80 / 0.15);
+  --lp-folder-padding: 1.5rem;
 }
 
 /* =============================================================================
-   Page Content - Legal Pad Paper
+   Body Background - Textured Wood Desk Surface
 ============================================================================= */
-.page-content {
-  /* Yellow paper background */
-  background-color: var(--lp-yellow);
+body.theme-legal-pad {
+  /* Rich wood desk with realistic grain texture */
+  background:
+    /* Fine grain lines - horizontal */
+    repeating-linear-gradient(
+      90deg,
+      var(--lp-wood-grain) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    /* Medium grain variation */
+    repeating-linear-gradient(
+      87deg,
+      oklch(42% 0.07 52 / 0.15) 0px,
+      transparent 2px,
+      transparent 15px
+    ),
+    /* Wider grain bands */
+    repeating-linear-gradient(
+      92deg,
+      oklch(48% 0.06 58 / 0.1) 0px,
+      transparent 1px,
+      transparent 40px,
+      oklch(38% 0.08 50 / 0.08) 41px,
+      transparent 42px,
+      transparent 80px
+    ),
+    /* Subtle knot/swirl patterns */
+    radial-gradient(
+      ellipse 120px 70px at 15% 25%,
+      oklch(40% 0.07 52 / 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 90px 55px at 80% 65%,
+      oklch(43% 0.06 55 / 0.12) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 60px 40px at 50% 85%,
+      oklch(38% 0.08 50 / 0.1) 0%,
+      transparent 50%
+    ),
+    /* Base wood color with vertical gradient for depth */
+    linear-gradient(
+      180deg,
+      var(--lp-wood-light) 0%,
+      var(--lp-wood-base) 30%,
+      var(--lp-wood-dark) 100%
+    );
+  background-attachment: fixed;
+}
 
-  /* Ruled lines using gradients */
-  background-image:
+/* =============================================================================
+   Manila Folder Wrapper - The folder that holds everything
+============================================================================= */
+body.theme-legal-pad .manila-folder-wrapper {
+  /* Override display: contents from base theme */
+  display: block;
+
+  /* Folder positioning */
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--lp-folder-padding);
+  padding-top: 0; /* Tabs connect at top */
+
+  /* Manila folder background with paper fiber texture */
+  background:
+    /* Horizontal fiber texture */
+    repeating-linear-gradient(
+      0deg,
+      oklch(80% 0.06 75 / 0.2) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    /* Diagonal fiber texture */
+    repeating-linear-gradient(
+      35deg,
+      oklch(78% 0.07 72 / 0.1) 0px,
+      transparent 1px,
+      transparent 5px
+    ),
+    /* Slight color variation */
+    linear-gradient(
+      180deg,
+      var(--lp-manila-light) 0%,
+      var(--lp-manila) 20%,
+      var(--lp-manila) 80%,
+      var(--lp-manila-dark) 100%
+    );
+
+  /* Folder shape and depth */
+  border-radius: 0 0 6px 6px;
+
+  /* Folder shadow on desk */
+  box-shadow:
+    /* Inner edge highlight */
+    inset 0 0 0 1px oklch(88% 0.04 78 / 0.5),
+    /* Folder thickness - visible edges */
+    0 2px 0 0 var(--lp-manila-edge),
+    2px 2px 0 0 var(--lp-manila-dark),
+    /* Soft shadow on desk */
+    4px 6px 12px oklch(30% 0.06 55 / 0.3),
+    8px 12px 24px oklch(25% 0.05 50 / 0.2);
+
+  /* Position for folder tab pseudo-element */
+  position: relative;
+  margin-top: 0.5rem; /* Space for tabs to connect */
+}
+
+/* Folder reinforcement strip at top (where tabs connect) */
+body.theme-legal-pad .manila-folder-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      oklch(75% 0.08 72 / 0.15) 0px,
+      transparent 1px,
+      transparent 4px
+    ),
+    linear-gradient(
+      180deg,
+      var(--lp-manila-dark) 0%,
+      var(--lp-manila) 100%
+    );
+  border-radius: 0;
+}
+
+/* =============================================================================
+   Page Content - Legal Pad Paper (sits on manila folder)
+============================================================================= */
+body.theme-legal-pad .page-content {
+  position: relative;
+
+  /* Yellow paper background with paper fiber texture */
+  background:
+    /* Subtle paper fiber texture */
+    repeating-linear-gradient(
+      0deg,
+      oklch(94% 0.07 95 / 0.3) 0px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      oklch(96% 0.06 95 / 0.2) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
     /* Red margin line */
     linear-gradient(
       to right,
@@ -54,78 +213,107 @@
       var(--lp-rule-red) var(--lp-margin-width),
       transparent var(--lp-margin-width)
     ),
-    /* Blue horizontal rules */
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent calc(var(--lp-line-height) - 1px),
-      var(--lp-rule-blue) calc(var(--lp-line-height) - 1px),
-      var(--lp-rule-blue) var(--lp-line-height)
-    );
+    /* Base yellow */
+    var(--lp-yellow);
 
-  /* Lines scroll with content */
-  background-attachment: local;
-  /* Offset the lines so they align with text baselines, not through the middle of text */
-  background-position: 0 var(--lp-baseline-offset);
-
-  /* Paper depth and shadow */
-  box-shadow:
-    inset 0 0 0 1px oklch(80% 0.06 80),
-    0 4px 20px var(--lp-shadow),
-    0 8px 40px var(--lp-shadow);
-
-  /* Connect to tabs above */
-  margin-block-start: 0;
-  border-radius: 0 0 0.5rem 0.5rem;
-
-  /* Padding aligned with ruled lines */
+  /* Padding for content */
   padding-block: var(--lp-line-height);
   padding-inline-start: calc(var(--lp-margin-width) + 1.5rem);
   padding-inline-end: 2rem;
 
-  /* Minimum height for visual consistency */
-  min-height: calc(100vh - 8rem);
+  /* Minimum height */
+  min-height: calc(100vh - 12rem);
 
-  /* Performance */
+  /* Legal pad sits slightly inset from folder edges */
+  margin: 0.75rem;
+  margin-top: 1rem;
+  border-radius: 2px 2px 4px 4px;
+
+  /* Paper stack effect - pages beneath top sheet */
+  box-shadow:
+    /* Paper edge highlight */
+    inset 0 0 0 1px oklch(98% 0.04 95 / 0.6),
+    /* Slight curl at top */
+    inset 0 2px 3px oklch(85% 0.06 92 / 0.3),
+    /* Stack of pages beneath */
+    2px 2px 0 0 oklch(94% 0.07 95),
+    2px 2px 0 1px oklch(80% 0.05 90 / 0.4),
+    4px 4px 0 0 oklch(93% 0.06 94),
+    4px 4px 0 1px oklch(75% 0.05 88 / 0.3),
+    6px 6px 0 0 oklch(92% 0.05 93),
+    6px 6px 0 1px oklch(70% 0.04 85 / 0.2),
+    /* Soft shadow on folder */
+    8px 10px 15px oklch(60% 0.06 70 / 0.15);
+
   contain: layout style;
+}
+
+/* Paper top edge highlight */
+body.theme-legal-pad .page-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    to bottom,
+    oklch(99% 0.03 95) 0%,
+    oklch(96% 0.06 95) 100%
+  );
+  border-radius: 2px 2px 0 0;
 }
 
 /* =============================================================================
    Typography on Legal Pad
 ============================================================================= */
-.page-content h1,
-.page-content h2,
-.page-content h3,
-.page-content h4,
-.page-content h5,
-.page-content h6 {
+body.theme-legal-pad .page-content h1,
+body.theme-legal-pad .page-content h2,
+body.theme-legal-pad .page-content h3,
+body.theme-legal-pad .page-content h4,
+body.theme-legal-pad .page-content h5,
+body.theme-legal-pad .page-content h6 {
   color: var(--lp-ink);
-  /* Align to line grid */
   line-height: var(--lp-line-height);
   margin-block: var(--lp-line-height);
+
+  /* Ruled lines via text-decoration */
+  text-decoration: underline;
+  text-decoration-color: var(--lp-rule-blue);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.15em;
+  text-decoration-skip-ink: none;
 }
 
-.page-content h1 {
+body.theme-legal-pad .page-content h1 {
   font-size: 2rem;
   line-height: calc(var(--lp-line-height) * 2);
   margin-block-end: calc(var(--lp-line-height) * 0.5);
 }
 
-.page-content h2 {
+body.theme-legal-pad .page-content h2 {
   font-size: 1.5rem;
   margin-block-start: calc(var(--lp-line-height) * 1.5);
 }
 
-.page-content p,
-.page-content li,
-.page-content dd {
+body.theme-legal-pad .page-content p,
+body.theme-legal-pad .page-content li,
+body.theme-legal-pad .page-content dd,
+body.theme-legal-pad .page-content dt {
   color: var(--lp-ink);
   line-height: var(--lp-line-height);
   margin-block: calc(var(--lp-line-height) * 0.5);
+
+  /* Ruled lines via text-decoration */
+  text-decoration: underline;
+  text-decoration-color: var(--lp-rule-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: none;
 }
 
 /* Links - blue pen, wavy underline */
-.page-content a:not(.nav-link) {
+body.theme-legal-pad .page-content a:not(.nav-link) {
   color: var(--lp-ink-blue);
   text-decoration: underline;
   text-decoration-style: wavy;
@@ -134,37 +322,39 @@
   transition: color 0.2s ease;
 }
 
-.page-content a:not(.nav-link):hover {
+body.theme-legal-pad .page-content a:not(.nav-link):hover {
   color: oklch(35% 0.22 250);
 }
 
-/* Code blocks - slightly darker paper */
-.page-content pre,
-.page-content code {
+/* Code blocks - slightly darker paper, NO legal pad styling */
+body.theme-legal-pad .page-content pre,
+body.theme-legal-pad .page-content code {
   background-color: var(--lp-yellow-dark);
   border: 1px solid oklch(80% 0.08 95);
   border-radius: 4px;
+  /* Remove underline from code */
+  text-decoration: none;
 }
 
-.page-content pre {
+body.theme-legal-pad .page-content pre {
   padding: var(--lp-line-height);
   margin-block: var(--lp-line-height);
   overflow-x: auto;
 }
 
-.page-content code {
+body.theme-legal-pad .page-content code {
   padding: 0.1em 0.3em;
   font-size: 0.9em;
 }
 
-.page-content pre code {
+body.theme-legal-pad .page-content pre code {
   padding: 0;
   border: none;
   background: transparent;
 }
 
 /* Blockquotes - indented from margin */
-.page-content blockquote {
+body.theme-legal-pad .page-content blockquote {
   border-inline-start: 3px solid var(--lp-rule-red);
   margin-inline-start: 0;
   padding-inline-start: 1rem;
@@ -173,66 +363,66 @@
 }
 
 /* Horizontal rules - match the blue lines */
-.page-content hr {
+body.theme-legal-pad .page-content hr {
   border: none;
   border-top: 2px solid var(--lp-rule-blue);
   margin-block: calc(var(--lp-line-height) * 2);
 }
 
 /* Lists */
-.page-content ul,
-.page-content ol {
+body.theme-legal-pad .page-content ul,
+body.theme-legal-pad .page-content ol {
   padding-inline-start: 1.5rem;
 }
 
-.page-content li::marker {
+body.theme-legal-pad .page-content li::marker {
   color: var(--lp-ink-light);
 }
 
 /* =============================================================================
-   Site Footer - Bottom of Legal Pad
+   Site Footer - Bottom of Legal Pad (inside folder)
 ============================================================================= */
-.site-footer {
-  background-color: var(--lp-yellow-dark);
+body.theme-legal-pad .site-footer {
+  position: relative;
+  background:
+    /* Paper fiber texture */
+    repeating-linear-gradient(
+      0deg,
+      oklch(88% 0.09 95 / 0.3) 0px,
+      transparent 1px,
+      transparent 2px
+    ),
+    var(--lp-yellow-dark);
   color: var(--lp-ink-light);
   text-align: center;
   padding: var(--lp-line-height) 2rem calc(var(--lp-line-height) * 1.5);
 
-  /* Continue ruled lines */
-  background-image:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent calc(var(--lp-line-height) - 1px),
-      var(--lp-rule-blue) calc(var(--lp-line-height) - 1px),
-      var(--lp-rule-blue) var(--lp-line-height)
-    );
-  background-attachment: local;
-  background-position: 0 var(--lp-baseline-offset);
+  /* Footer sits on folder, aligned with legal pad */
+  margin: 0 0.75rem 0.75rem;
+  border-radius: 0 0 4px 4px;
 
-  /* Top border - edge of pad */
-  border-block-start: 2px solid oklch(75% 0.08 80);
+  /* Continuation of paper stack */
+  box-shadow:
+    inset 0 1px 0 oklch(85% 0.07 92 / 0.5),
+    2px 2px 0 0 oklch(87% 0.07 94),
+    2px 2px 0 1px oklch(70% 0.05 85 / 0.3),
+    4px 6px 10px oklch(60% 0.06 70 / 0.12);
 
-  /* Match content area width */
-  border-radius: 0 0 0.5rem 0.5rem;
-  margin-block-start: 0;
-
-  /* Performance */
   contain: layout style;
 }
 
-.site-footer a {
+body.theme-legal-pad .site-footer a {
   color: var(--lp-ink-blue);
   text-decoration: underline;
   text-decoration-style: wavy;
   text-decoration-thickness: 1px;
 }
 
-.site-footer a:hover {
+body.theme-legal-pad .site-footer a:hover {
   color: oklch(35% 0.22 250);
 }
 
-.site-footer .social-links {
+body.theme-legal-pad .site-footer .social-links {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
@@ -240,28 +430,133 @@
   margin-block-end: var(--lp-line-height);
 }
 
-.site-footer p {
+body.theme-legal-pad .site-footer p {
   color: var(--lp-ink-light);
   margin-block: calc(var(--lp-line-height) * 0.5);
   line-height: var(--lp-line-height);
+
+  /* Ruled lines via text-decoration */
+  text-decoration: underline;
+  text-decoration-color: var(--lp-rule-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-skip-ink: none;
 }
 
-.site-footer .disclaimer {
+body.theme-legal-pad .site-footer .disclaimer {
   font-size: 0.85rem;
   color: oklch(50% 0.02 250);
 }
 
 /* =============================================================================
-   Body Background - Desk/Surface
+   Site Header - Transparent, tabs connect to folder
 ============================================================================= */
-body {
-  /* Muted surface behind the legal pad */
-  background: linear-gradient(
-    180deg,
-    oklch(92% 0.02 80) 0%,
-    oklch(88% 0.03 80) 100%
+body.theme-legal-pad .site-header {
+  background: transparent;
+  padding-block-end: 0;
+  position: relative;
+  z-index: 15;
+}
+
+body.theme-legal-pad .site-header .theme-toggle-button {
+  position: absolute;
+  inset-inline-end: 1rem;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+}
+
+/* =============================================================================
+   Filing Tabs - Connect to the manila folder
+============================================================================= */
+body.theme-legal-pad .site-nav.nav-filing-tabs {
+  position: relative;
+  z-index: 20;
+}
+
+body.theme-legal-pad .site-nav.nav-filing-tabs .nav-link {
+  /* Manila folder tab with texture */
+  background:
+    repeating-linear-gradient(
+      35deg,
+      oklch(84% 0.05 75 / 0.15) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    linear-gradient(
+      180deg,
+      var(--lp-manila-light) 0%,
+      var(--lp-manila) 50%,
+      var(--lp-manila-dark) 100%
+    );
+  color: oklch(30% 0.04 70);
+
+  /* Tab shape */
+  clip-path: polygon(
+    6% 0%,
+    94% 0%,
+    100% 100%,
+    0% 100%
   );
-  background-attachment: fixed;
+
+  /* Shadow for depth */
+  filter: drop-shadow(1px 2px 3px oklch(35% 0.05 60 / 0.35));
+  border-top: 1px solid var(--lp-manila-light);
+
+  padding: 0.65rem 1.6rem 0.55rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Hover - lift tab */
+body.theme-legal-pad .site-nav.nav-filing-tabs .nav-link:hover {
+  background:
+    repeating-linear-gradient(
+      35deg,
+      oklch(87% 0.04 78 / 0.15) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    linear-gradient(
+      180deg,
+      oklch(90% 0.04 80) 0%,
+      var(--lp-manila-light) 50%,
+      var(--lp-manila) 100%
+    );
+  transform: translateY(-4px);
+  filter: drop-shadow(2px 4px 5px oklch(35% 0.05 60 / 0.4));
+}
+
+/* Active tab - connects to legal pad paper */
+body.theme-legal-pad .site-nav.nav-filing-tabs .nav-link.active {
+  /* Match legal pad yellow with texture */
+  background:
+    repeating-linear-gradient(
+      0deg,
+      oklch(94% 0.07 95 / 0.3) 0px,
+      transparent 1px,
+      transparent 2px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      oklch(96% 0.06 95 / 0.2) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    var(--lp-yellow);
+  color: var(--lp-ink);
+
+  /* Extend to connect with content below */
+  clip-path: polygon(
+    6% 0%,
+    94% 0%,
+    100% calc(100% + 8px),
+    0% calc(100% + 8px)
+  );
+
+  transform: translateY(-2px);
+  z-index: 25;
+  filter: drop-shadow(2px 3px 4px oklch(35% 0.05 60 / 0.25));
+  border-top: 1px solid oklch(98% 0.04 95);
 }
 
 /* =============================================================================
@@ -269,49 +564,78 @@ body {
 ============================================================================= */
 @media (max-width: 768px) {
   :root {
+    --lp-folder-padding: 1rem;
+  }
+
+  body.theme-legal-pad {
     --lp-margin-width: 2.5rem;
     --lp-line-height: 1.5rem;
   }
 
-  .page-content {
+  body.theme-legal-pad .manila-folder-wrapper {
+    margin: 0 0.5rem;
+    padding: 0.75rem;
+    padding-top: 0;
+  }
+
+  body.theme-legal-pad .page-content {
+    margin: 0.5rem;
+    margin-top: 0.75rem;
     padding-inline-start: calc(var(--lp-margin-width) + 1rem);
     padding-inline-end: 1rem;
     border-radius: 0;
   }
 
-  .site-footer {
+  body.theme-legal-pad .site-footer {
+    margin: 0 0.5rem 0.5rem;
     padding-inline: 1rem;
     border-radius: 0;
   }
 }
 
 @media (max-width: 480px) {
-  :root {
+  body.theme-legal-pad {
     --lp-margin-width: 1.5rem;
   }
 
-  .page-content {
-    padding-inline-start: calc(var(--lp-margin-width) + 0.75rem);
-    padding-inline-end: 0.75rem;
+  body.theme-legal-pad .manila-folder-wrapper {
+    margin: 0 0.25rem;
+    padding: 0.5rem;
+    padding-top: 0;
+    border-radius: 0 0 4px 4px;
   }
 
-  .page-content h1 {
+  body.theme-legal-pad .page-content {
+    margin: 0.25rem;
+    margin-top: 0.5rem;
+    padding-inline-start: calc(var(--lp-margin-width) + 0.75rem);
+    padding-inline-end: 0.75rem;
+    /* Simplified shadows on mobile */
+    box-shadow:
+      inset 0 0 0 1px oklch(98% 0.04 95 / 0.6),
+      2px 2px 0 0 oklch(93% 0.06 94),
+      4px 5px 10px oklch(60% 0.06 70 / 0.15);
+  }
+
+  body.theme-legal-pad .page-content h1 {
     font-size: 1.5rem;
     line-height: calc(var(--lp-line-height) * 1.5);
+  }
+
+  body.theme-legal-pad .site-footer {
+    margin: 0 0.25rem 0.25rem;
   }
 }
 
 /* =============================================================================
-   Theme Toggle Position
+   Reduced Motion
 ============================================================================= */
-.site-header .theme-toggle-button {
-  position: absolute;
-  inset-inline-end: 1rem;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
-}
+@media (prefers-reduced-motion: reduce) {
+  body.theme-legal-pad .site-nav.nav-filing-tabs .nav-link {
+    transition: none;
+  }
 
-/* When header doesn't use position: relative, add it */
-.site-header {
-  position: relative;
+  body.theme-legal-pad .site-nav.nav-filing-tabs .nav-link:hover {
+    transform: none;
+  }
 }
