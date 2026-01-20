@@ -72,36 +72,200 @@
   padding: 2rem;
 }
 
-/* Title and subtitle - positioned like a name plate on desk */
-.desk-title {
+/* =============================================================================
+   Desk Pad - Open Legal Pad with Hero Content
+============================================================================= */
+.desk-pad {
   position: absolute;
-  top: 3%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  font-family: 'Nunito', 'Inter', sans-serif;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
-  font-weight: 700;
-  color: oklch(98% 0.01 90);
-  text-shadow:
-    0 2px 4px oklch(15% 0.02 55 / 0.6),
-    0 4px 8px oklch(15% 0.02 55 / 0.3);
-  letter-spacing: 0.02em;
+  transform: translate(-50%, -50%) rotate(-1deg);
+
+  /* Legal pad sizing */
+  width: clamp(320px, 45vw, 500px);
+  aspect-ratio: 8.5 / 11;
+
+  /* Layering - above folders */
+  z-index: 5;
+
+  /* Animation */
+  animation: pad-drop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
+  opacity: 0;
 }
 
-.desk-subtitle {
+.desk-pad__page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem 2rem 2rem 3.5rem;
+
+  /* Legal pad yellow paper */
+  background:
+    /* Horizontal ruled lines */
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(1.75rem - 1px),
+      oklch(70% 0.08 200 / 0.25) calc(1.75rem - 1px),
+      oklch(70% 0.08 200 / 0.25) 1.75rem
+    ),
+    /* Paper texture */
+    linear-gradient(
+      180deg,
+      oklch(95% 0.08 95) 0%,
+      oklch(93% 0.09 95) 100%
+    );
+
+  /* Red margin line */
+  border-left: 2px solid oklch(65% 0.2 25 / 0.5);
+  margin-left: 1.5rem;
+
+  /* Paper edges */
+  border-radius: 0 4px 4px 0;
+
+  /* Depth */
+  box-shadow:
+    /* Inner highlight */
+    inset 0 1px 0 oklch(98% 0.04 95 / 0.5),
+    /* Page shadow */
+    0 8px 24px oklch(25% 0.05 55 / 0.35),
+    0 4px 8px oklch(25% 0.05 55 / 0.2),
+    /* Contact shadow */
+    0 2px 4px oklch(25% 0.05 55 / 0.15);
+}
+
+/* Binding edge - top spiral binding */
+.desk-pad__binding {
   position: absolute;
-  top: calc(3% + 2.5rem);
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  width: 1.5rem;
+  height: 100%;
+
+  /* Cardboard backing */
+  background:
+    linear-gradient(
+      90deg,
+      oklch(55% 0.06 75) 0%,
+      oklch(60% 0.06 75) 50%,
+      oklch(50% 0.07 75) 100%
+    );
+
+  border-radius: 4px 0 0 4px;
+
+  /* Spiral holes */
+  background-image:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 1.5rem,
+      oklch(30% 0.03 75 / 0.4) 1.5rem,
+      oklch(30% 0.03 75 / 0.4) 1.75rem
+    );
+}
+
+/* Typography on the pad - clean monospace */
+.desk-pad__title {
+  margin: 0 0 0.75rem 0;
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: oklch(25% 0.12 250); /* Blue pen */
+  line-height: 1.75rem;
+}
+
+.desk-pad__subtitle {
+  margin: 0 0 1rem 0;
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+  font-weight: 400;
+  color: oklch(30% 0.1 250);
+  line-height: 1.75rem;
+}
+
+.desk-pad__tagline {
   margin: 0;
-  font-size: clamp(0.875rem, 2vw, 1.125rem);
-  font-weight: 500;
-  color: oklch(90% 0.02 90);
-  text-shadow:
-    0 1px 2px oklch(15% 0.02 55 / 0.5);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: clamp(0.65rem, 1.1vw, 0.8rem);
+  font-weight: 400;
+  color: oklch(40% 0.08 250);
+  line-height: 1.75rem;
+}
+
+/* Typewriter code on legal pad - handwritten style */
+.desk-pad__code {
+  margin-top: 1.5rem;
+}
+
+.desk-pad__code .typewriter-container {
+  /* No background - just text on the paper */
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+
+  /* Clean monospace - like typed notes */
+  font-family: 'Menlo', 'Monaco', 'Consolas', monospace;
+  font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+}
+
+.desk-pad__code .typewriter-code {
+  /* Blue ballpoint pen */
+  color: oklch(35% 0.15 250);
+  line-height: 1.75rem; /* Match ruled lines */
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Override syntax highlighting for handwritten look */
+.desk-pad__code .code-comment {
+  /* Lighter pencil for comments */
+  color: oklch(50% 0.05 250);
+  font-style: italic;
+}
+
+.desk-pad__code .code-keyword {
+  /* Slightly bolder pen stroke */
+  color: oklch(30% 0.18 250);
+  font-weight: 700;
+}
+
+.desk-pad__code .code-string {
+  /* Green pen for strings */
+  color: oklch(40% 0.12 145);
+}
+
+.desk-pad__code .code-property {
+  color: oklch(35% 0.15 250);
+}
+
+.desk-pad__code .code-function {
+  /* Purple pen for functions */
+  color: oklch(40% 0.15 300);
+  font-weight: 600;
+}
+
+/* Cursor styled as pen tip */
+.desk-pad__code .typewriter-cursor {
+  background: oklch(35% 0.15 250);
+  width: 2px;
+  height: 1.1em;
+}
+
+/* Pad entrance animation */
+@keyframes pad-drop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -60%) rotate(-1deg) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(-50%, -48%) rotate(-1deg) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(-1deg) scale(1);
+  }
 }
 
 /* =============================================================================
@@ -203,28 +367,22 @@
     0 -1px 3px oklch(25% 0.05 55 / 0.15);
 }
 
-/* Label on folder body */
-.folder__label {
+/* Hand-drawn doodle on folder body (rough.js SVG) */
+.folder__doodle {
   position: absolute;
-  bottom: 15%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 
-  /* Label styling - like a typed label */
-  background: var(--label-bg);
-  padding: 0.25em 0.75em;
-  border-radius: 2px;
+  /* SVG sizing - responsive (50% larger) */
+  width: clamp(3.375rem, 7.5vw, 4.5rem);
+  height: clamp(3.375rem, 7.5vw, 4.5rem);
 
-  font-family: 'JetBrains Mono', 'Courier New', monospace;
-  font-size: clamp(0.65rem, 1.1vw, 0.8rem);
-  font-weight: 500;
-  color: var(--label-text);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  white-space: nowrap;
+  /* Slight opacity to look like pencil sketch */
+  opacity: 0.65;
 
-  /* Subtle label shadow */
-  box-shadow: 0 1px 2px oklch(25% 0.05 55 / 0.1);
+  /* No interaction */
+  pointer-events: none;
 }
 
 /* =============================================================================
@@ -282,24 +440,45 @@
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    padding: 6rem 1.5rem 3rem;
+    padding: 2rem 1.5rem 3rem;
     min-height: auto;
   }
 
-  .desk-title {
+  /* Legal pad stacks at top on mobile */
+  .desk-pad {
     position: relative;
     top: auto;
     left: auto;
-    transform: none;
-    margin-bottom: 0.25rem;
+    transform: rotate(-1deg);
+    width: min(340px, 90vw);
+    aspect-ratio: 8.5 / 9; /* Shorter on mobile */
+    order: -1; /* Ensure pad comes first */
+    margin-bottom: 1rem;
   }
 
-  .desk-subtitle {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin-bottom: 1.5rem;
+  .desk-pad__page {
+    padding: 1.5rem 1.5rem 1.5rem 2.5rem;
+  }
+
+  .desk-pad__binding {
+    width: 1rem;
+  }
+
+  .desk-pad__title {
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .desk-pad__subtitle {
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .desk-pad__tagline {
+    font-size: 0.7rem;
+    line-height: 1.5rem;
   }
 
   .folder {
@@ -331,6 +510,11 @@
     transform: translate(-50%, -50%) rotate(var(--rotation, 0deg));
   }
 
+  .desk-pad {
+    animation: none;
+    opacity: 1;
+  }
+
   @media (max-width: 768px) {
     .folder:hover,
     .folder--hover,
@@ -353,181 +537,9 @@
     border-bottom: none;
   }
 
-  .folder__label {
-    border: 1px solid oklch(25% 0.05 55);
-  }
-}
-
-/* =============================================================================
-   Welcome Overlay
-============================================================================= */
-.welcome-overlay {
-  position: fixed;
-  inset: 0;
-  background: oklch(15% 0.02 55 / 0.85);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100;
-  padding: 1rem;
-  animation: overlay-fade-in 0.3s ease-out;
-}
-
-@keyframes overlay-fade-in {
-  from {
-    opacity: 0;
-    backdrop-filter: blur(0);
-  }
-  to {
+  .folder__doodle {
+    /* High contrast: make doodle more visible */
     opacity: 1;
-    backdrop-filter: blur(8px);
-  }
-}
-
-.welcome-card {
-  position: relative;
-  max-width: 600px;
-  width: 100%;
-  background:
-    /* Paper texture */
-    repeating-linear-gradient(
-      0deg,
-      transparent 0,
-      oklch(50% 0 0 / 0.02) 1px,
-      transparent 2px,
-      transparent 28px
-    ),
-    /* Warm paper base */
-    linear-gradient(
-      180deg,
-      oklch(97% 0.02 90) 0%,
-      oklch(95% 0.03 85) 100%
-    );
-  border-radius: 8px;
-  padding: 2.5rem;
-  box-shadow:
-    0 25px 50px oklch(15% 0.02 55 / 0.5),
-    0 10px 20px oklch(15% 0.02 55 / 0.3),
-    inset 0 1px 0 oklch(100% 0 0 / 0.5);
-  animation: card-pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes card-pop-in {
-  from {
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-.welcome-close {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 2.5rem;
-  height: 2.5rem;
-  border: none;
-  background: transparent;
-  font-size: 1.75rem;
-  line-height: 1;
-  color: oklch(40% 0.02 55);
-  cursor: pointer;
-  border-radius: 50%;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.welcome-close:hover {
-  background: oklch(90% 0.02 55);
-  color: oklch(25% 0.02 55);
-}
-
-.welcome-close:focus-visible {
-  outline: 2px solid oklch(65% 0.2 260);
-  outline-offset: 2px;
-}
-
-.welcome-title {
-  margin: 0 0 1.5rem;
-  font-family: 'Nunito', 'Inter', sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: oklch(25% 0.05 55);
-  border-bottom: 2px solid oklch(75% 0.12 250);
-  padding-bottom: 0.75rem;
-}
-
-.welcome-content {
-  margin-bottom: 1.5rem;
-}
-
-.welcome-content p {
-  margin: 0 0 1rem;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: oklch(30% 0.02 55);
-}
-
-.welcome-content p:last-child {
-  margin-bottom: 0;
-}
-
-.welcome-links {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding-top: 1rem;
-  border-top: 1px solid oklch(80% 0.02 55);
-}
-
-.welcome-link {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.6rem 1.25rem;
-  background: oklch(92% 0.03 75);
-  color: oklch(30% 0.05 55);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  border-radius: 6px;
-  border: 1px solid oklch(80% 0.05 75);
-  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.welcome-link:hover {
-  background: oklch(88% 0.05 75);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px oklch(35% 0.05 75 / 0.2);
-}
-
-.welcome-link:focus-visible {
-  outline: 2px solid oklch(65% 0.2 260);
-  outline-offset: 2px;
-}
-
-/* Mobile welcome overlay */
-@media (max-width: 768px) {
-  .welcome-card {
-    padding: 1.5rem;
-  }
-
-  .welcome-title {
-    font-size: 1.5rem;
-  }
-
-  .welcome-content p {
-    font-size: 1rem;
-  }
-
-  .welcome-links {
-    flex-direction: column;
-  }
-
-  .welcome-link {
-    justify-content: center;
   }
 }
 
@@ -549,55 +561,22 @@
   }
 }
 
-@keyframes title-fade {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-@keyframes subtitle-fade {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
 /* Apply animations */
-.desk-title {
-  animation: title-fade 0.6s ease-out forwards;
-}
-
-.desk-subtitle {
-  animation: subtitle-fade 0.6s ease-out 0.2s forwards;
-  opacity: 0;
-}
-
 .folder {
   opacity: 0;
   animation: folder-drop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
-/* Staggered folder entrance */
-.folder:nth-child(3) { animation-delay: 0.3s; }
-.folder:nth-child(4) { animation-delay: 0.4s; }
-.folder:nth-child(5) { animation-delay: 0.5s; }
-.folder:nth-child(6) { animation-delay: 0.6s; }
-.folder:nth-child(7) { animation-delay: 0.7s; }
-.folder:nth-child(8) { animation-delay: 0.8s; }
+/* Staggered folder entrance - starts at nth-child(2) because desk-pad is first */
+.folder:nth-child(2) { animation-delay: 0.25s; }
+.folder:nth-child(3) { animation-delay: 0.35s; }
+.folder:nth-child(4) { animation-delay: 0.45s; }
+.folder:nth-child(5) { animation-delay: 0.55s; }
+.folder:nth-child(6) { animation-delay: 0.65s; }
 
 /* Disable entrance animations for reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .desk-title,
-  .desk-subtitle,
+  .desk-pad,
   .folder {
     animation: none;
     opacity: 1;
@@ -621,13 +600,85 @@
     animation: folder-drop-mobile 0.4s ease-out forwards;
   }
 
-  .desk-title {
-    animation: none;
-    opacity: 1;
-  }
-
-  .desk-subtitle {
+  .desk-pad {
     animation: none;
     opacity: 1;
   }
 }
+
+/* =============================================================================
+   View Transitions - Landing Page Elements
+   (Folder transitions are in view-transitions.css, shared with Base.astro)
+============================================================================= */
+
+/* View transition names for landing page elements */
+.desk-pad {
+  view-transition-name: desk-pad;
+}
+
+.folder-desk {
+  view-transition-name: desk-surface;
+}
+
+/* Desk pad fades and shrinks when navigating away */
+::view-transition-old(desk-pad) {
+  animation: desk-pad-out 0.4s ease-out forwards;
+}
+
+::view-transition-new(desk-pad) {
+  animation: desk-pad-in 0.4s ease-out forwards;
+}
+
+@keyframes desk-pad-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+}
+
+@keyframes desk-pad-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Desk surface - subtle zoom/fade during transition */
+::view-transition-old(desk-surface) {
+  animation: desk-out 0.5s ease-out forwards;
+}
+
+::view-transition-new(desk-surface) {
+  animation: desk-in 0.5s ease-out forwards;
+}
+
+@keyframes desk-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes desk-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

@@ -1,4 +1,8 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback } from 'react';
+import { FolderDoodle } from './FolderDoodle';
+import { TypewriterCode } from './TypewriterCode';
+
+type DoodleType = 'home' | 'computer' | 'pencil' | 'document' | 'chart';
 
 interface Folder {
   id: string;
@@ -7,66 +11,60 @@ interface Folder {
   rotation: number;
   position: { x: string; y: string };
   description: string;
-  isSpecial?: boolean;
+  doodle: DoodleType;
 }
 
+// Folders positioned around the legal pad, closer to center
 const folders: Folder[] = [
-  {
-    id: 'welcome',
-    label: 'Welcome',
-    href: '#welcome',
-    rotation: -3,
-    position: { x: '20%', y: '25%' },
-    description: 'Introduction and overview',
-    isSpecial: true,
-  },
   {
     id: 'about',
     label: 'About',
     href: '/about',
-    rotation: 5,
-    position: { x: '55%', y: '18%' },
+    rotation: -5,
+    position: { x: '15%', y: '28%' },
     description: 'Learn more about me',
+    doodle: 'home',
   },
   {
     id: 'projects',
     label: 'Projects',
     href: '/projects',
-    rotation: -2,
-    position: { x: '30%', y: '55%' },
-    description: 'View my work',
-  },
-  {
-    id: 'resume',
-    label: 'Resume',
-    href: '/resume',
     rotation: 4,
-    position: { x: '65%', y: '42%' },
-    description: 'My professional experience',
+    position: { x: '85%', y: '25%' },
+    description: 'View my work',
+    doodle: 'computer',
   },
   {
     id: 'blog',
     label: 'Blog',
     href: '/blog',
-    rotation: -4,
-    position: { x: '45%', y: '78%' },
+    rotation: -3,
+    position: { x: '12%', y: '62%' },
     description: 'Thoughts and tutorials',
+    doodle: 'pencil',
+  },
+  {
+    id: 'resume',
+    label: 'Resume',
+    href: '/resume',
+    rotation: 6,
+    position: { x: '88%', y: '58%' },
+    description: 'My professional experience',
+    doodle: 'document',
   },
   {
     id: 'dashboard',
     label: 'Dashboard',
     href: '/dashboard',
-    rotation: 2,
-    position: { x: '78%', y: '68%' },
+    rotation: -2,
+    position: { x: '82%', y: '82%' },
     description: 'Stats and metrics',
+    doodle: 'chart',
   },
 ];
 
 export default function FolderNav() {
   const [hoveredFolder, setHoveredFolder] = useState<string | null>(null);
-  const [showWelcome, setShowWelcome] = useState(false);
-  const overlayRef = useRef<HTMLDivElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleMouseEnter = useCallback((id: string) => {
     setHoveredFolder(id);
@@ -76,146 +74,50 @@ export default function FolderNav() {
     setHoveredFolder(null);
   }, []);
 
-  const handleFolderClick = useCallback(
-    (e: React.MouseEvent, folder: Folder) => {
-      if (folder.isSpecial) {
-        e.preventDefault();
-        setShowWelcome(true);
-      }
-    },
-    []
-  );
-
-  const closeWelcome = useCallback(() => {
-    setShowWelcome(false);
-  }, []);
-
-  // Handle escape key and focus trap
-  useEffect(() => {
-    if (!showWelcome) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeWelcome();
-      }
-    };
-
-    // Focus the close button when overlay opens
-    closeButtonRef.current?.focus();
-
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [showWelcome, closeWelcome]);
-
-  // Prevent body scroll when overlay is open
-  useEffect(() => {
-    if (showWelcome) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [showWelcome]);
-
   return (
-    <>
-      <nav className="folder-desk" aria-label="Site navigation">
-        <h1 className="desk-title">Ben Newman</h1>
-        <p className="desk-subtitle">Software Engineer</p>
-
-        {folders.map((folder) => (
-          <a
-            key={folder.id}
-            href={folder.href}
-            className={`folder ${hoveredFolder === folder.id ? 'folder--hover' : ''}`}
-            style={
-              {
-                '--rotation': `${folder.rotation}deg`,
-                '--pos-x': folder.position.x,
-                '--pos-y': folder.position.y,
-              } as React.CSSProperties
-            }
-            onMouseEnter={() => handleMouseEnter(folder.id)}
-            onMouseLeave={handleMouseLeave}
-            onFocus={() => handleMouseEnter(folder.id)}
-            onBlur={handleMouseLeave}
-            onClick={(e) => handleFolderClick(e, folder)}
-            aria-label={`${folder.label}: ${folder.description}`}
-          >
-            <span className="folder__tab">{folder.label}</span>
-            <span className="folder__body">
-              <span className="folder__label">{folder.label}</span>
-            </span>
-          </a>
-        ))}
-      </nav>
-
-      {/* Welcome Overlay */}
-      {showWelcome && (
-        <div
-          className="welcome-overlay"
-          ref={overlayRef}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="welcome-title"
-          onClick={(e) => {
-            if (e.target === overlayRef.current) closeWelcome();
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              if (e.target === overlayRef.current) closeWelcome();
-            }
-          }}
-        >
-          <div className="welcome-card">
-            <button
-              ref={closeButtonRef}
-              className="welcome-close"
-              onClick={closeWelcome}
-              aria-label="Close welcome message"
-            >
-              &times;
-            </button>
-
-            <h2 id="welcome-title" className="welcome-title">
-              Welcome
-            </h2>
-
-            <div className="welcome-content">
-              <p>
-                I'm Ben Newman — a former lawyer turned software engineer. Now I
-                build systems that handle millions of healthcare transactions
-                daily.
-              </p>
-
-              <p>
-                As a Tech Lead at Availity, I work with React, TypeScript, and
-                AWS to create the infrastructure that helps healthcare providers
-                and insurance companies exchange information.
-              </p>
-
-              <p>
-                Explore the folders on my desk to learn more about my work,
-                projects, and thoughts on software development.
-              </p>
-            </div>
-
-            <div className="welcome-links">
-              <a href="/about" className="welcome-link">
-                About Me
-              </a>
-              <a href="/projects" className="welcome-link">
-                My Projects
-              </a>
-              <a href="/blog" className="welcome-link">
-                Read the Blog
-              </a>
-            </div>
+    <nav className="folder-desk" aria-label="Site navigation">
+      {/* Open legal pad with hero content */}
+      <article className="desk-pad" aria-label="Welcome">
+        <div className="desk-pad__page">
+          <h1 className="desk-pad__title">Ben Newman</h1>
+          <p className="desk-pad__subtitle">
+            Former lawyer. Now I build systems that handle millions of healthcare transactions daily.
+          </p>
+          <p className="desk-pad__tagline">
+            Tech Lead at Availity · React · TypeScript · AWS
+          </p>
+          <div className="desk-pad__code">
+            <TypewriterCode />
           </div>
         </div>
-      )}
-    </>
+        <div className="desk-pad__binding" aria-hidden="true" />
+      </article>
+
+      {folders.map((folder) => (
+        <a
+          key={folder.id}
+          href={folder.href}
+          className={`folder ${hoveredFolder === folder.id ? 'folder--hover' : ''}`}
+          data-folder-id={folder.id}
+          style={
+            {
+              '--rotation': `${folder.rotation}deg`,
+              '--pos-x': folder.position.x,
+              '--pos-y': folder.position.y,
+            } as React.CSSProperties
+          }
+          onMouseEnter={() => handleMouseEnter(folder.id)}
+          onMouseLeave={handleMouseLeave}
+          onFocus={() => handleMouseEnter(folder.id)}
+          onBlur={handleMouseLeave}
+          aria-label={`${folder.label}: ${folder.description}`}
+        >
+          <span className="folder__tab">{folder.label}</span>
+          <span className="folder__body">
+            <FolderDoodle type={folder.doodle} />
+          </span>
+        </a>
+      ))}
+    </nav>
   );
 }

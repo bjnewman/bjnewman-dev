@@ -1,6 +1,8 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/landing.css';
+import '../styles/hero.css';
+import '../styles/view-transitions.css';
 
 interface Props {
   title?: string;
@@ -39,13 +41,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Fonts with optimized loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <!-- RSS Feed -->
     <link rel="alternate" type="application/rss+xml" title="Ben Newman's Blog" href="/rss.xml">
 
-    <!-- View Transitions -->
-    <ViewTransitions />
+    <!-- Client Router for View Transitions -->
+    <ClientRouter />
   </head>
   <body class="landing-page">
     <!-- Skip to main content link for keyboard navigation -->
@@ -54,5 +56,215 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <main id="main-content" role="main">
       <slot />
     </main>
+
+    <!-- View transition logic (inline to run on every navigation) -->
+    <script is:inline>
+      // Only set up listeners once
+      if (!window.__viewTransitionListenersSet) {
+        window.__viewTransitionListenersSet = true;
+
+        // Debug mode - set to true to see transition logs
+        const DEBUG_TRANSITIONS = false;
+        function logTransition(event, details) {
+          if (DEBUG_TRANSITIONS) {
+            console.log('[ViewTransition]', event, details);
+          }
+        }
+
+        // Log bounding box for debugging
+        function logBoundingBox(label, element) {
+          if (DEBUG_TRANSITIONS && element) {
+            const rect = element.getBoundingClientRect();
+            const styles = getComputedStyle(element);
+            console.log('[ViewTransition] ' + label + ' bounding box:', {
+              width: rect.width,
+              height: rect.height,
+              top: rect.top,
+              left: rect.left,
+              viewTransitionName: styles.viewTransitionName,
+              display: styles.display,
+              opacity: styles.opacity
+            });
+          }
+        }
+
+        // Track which folder was clicked
+        let clickedFolderId = null;
+
+        // Listen for clicks on folders to track which one was clicked
+        document.addEventListener('click', function(e) {
+          const folder = e.target.closest('[data-folder-id]');
+          if (folder) {
+            clickedFolderId = folder.getAttribute('data-folder-id');
+            logTransition('click', { clickedFolderId });
+          }
+        }, true);
+
+        // Map paths to folder IDs
+        const pathToFolderId = {
+          '/about': 'about',
+          '/projects': 'projects',
+          '/blog': 'blog',
+          '/resume': 'resume',
+          '/dashboard': 'dashboard',
+        };
+
+        function getFolderIdFromPath(path) {
+          for (const prefix in pathToFolderId) {
+            if (path.startsWith(prefix)) return pathToFolderId[prefix];
+          }
+          return null;
+        }
+
+        // Helper to disable child view-transition-names during folder morphing
+        // (Elements can't have view-transition-name if an ancestor has one)
+        function disableChildTransitionNames(doc) {
+          const selectors = ['.folder-tabs', '.page-content', '.site-footer'];
+          selectors.forEach(function(sel) {
+            const el = doc.querySelector(sel);
+            if (el) el.style.viewTransitionName = 'none';
+          });
+        }
+
+        // Helper to restore child view-transition-names after transition
+        function restoreChildTransitionNames() {
+          const selectors = ['.folder-tabs', '.page-content', '.site-footer'];
+          selectors.forEach(function(sel) {
+            const el = document.querySelector(sel);
+            if (el) el.style.viewTransitionName = '';
+          });
+        }
+
+        // Before preparation: set up view-transition-names on CURRENT document
+        // (astro:after-preparation has no attributes, so we use before-preparation)
+        document.addEventListener('astro:before-preparation', function(event) {
+          const fromPath = event.from.pathname;
+          const toPath = event.to.pathname;
+          const isFromLanding = fromPath === '/';
+          const isToLanding = toPath === '/';
+          const fromFolderId = getFolderIdFromPath(fromPath);
+
+          logTransition('before-preparation', { fromPath, toPath, isFromLanding, isToLanding, fromFolderId, clickedFolderId });
+
+          // Landing → Content: Set view-transition-name on the clicked folder
+          // Using data attribute + CSS rule instead of inline style for more reliable capture
+          if (isFromLanding && clickedFolderId) {
+            const clickedFolder = document.querySelector('[data-folder-id="' + clickedFolderId + '"]');
+            if (clickedFolder) {
+              // Set data attribute - CSS will apply view-transition-name
+              clickedFolder.setAttribute('data-vt-active', 'true');
+              // Force style recalculation before view transition captures
+              void clickedFolder.offsetHeight;
+              logTransition('set-name-on-folder', { folderId: clickedFolderId, element: clickedFolder });
+              logBoundingBox('OLD folder (landing)', clickedFolder);
+            }
+          }
+
+          // Content → Landing: Set view-transition-name on manila-folder-wrapper
+          // Using data attribute + CSS rule instead of inline style for more reliable capture
+          if (isToLanding && fromFolderId) {
+            const currentWrapper = document.querySelector('.manila-folder-wrapper');
+            if (currentWrapper) {
+              // Force display: block (required for view transitions - display: contents has no box)
+              currentWrapper.style.display = 'block';
+              // Set data attribute - CSS will apply view-transition-name
+              currentWrapper.setAttribute('data-vt-folder', fromFolderId);
+              // Force style recalculation before view transition captures
+              void currentWrapper.offsetHeight;
+              // Disable child view-transition-names (can't nest them)
+              disableChildTransitionNames(document);
+              logTransition('set-name-on-wrapper', { folderId: fromFolderId, display: currentWrapper.style.display });
+              logBoundingBox('OLD wrapper (content page)', currentWrapper);
+            }
+          }
+        });
+
+        // Before DOM swap: add view-transition-name to new page's wrapper/folder
+        document.addEventListener('astro:before-swap', function(event) {
+          const fromPath = event.from.pathname;
+          const toPath = event.to.pathname;
+          const isFromLanding = fromPath === '/';
+          const isToLanding = toPath === '/';
+          const toFolderId = getFolderIdFromPath(toPath);
+          const fromFolderId = getFolderIdFromPath(fromPath);
+
+          logTransition('before-swap', { fromPath, toPath, isFromLanding, isToLanding, toFolderId, fromFolderId });
+
+          // Landing → Content: Add folder ID to NEW page's wrapper
+          // Using data attribute + CSS rule instead of inline style for more reliable capture
+          if (isFromLanding && toFolderId) {
+            const newWrapper = event.newDocument.querySelector('.manila-folder-wrapper');
+            logTransition('searching-for-new-wrapper', {
+              found: !!newWrapper,
+              toFolderId: toFolderId,
+              newDocumentBody: event.newDocument.body ? event.newDocument.body.className : 'NO BODY'
+            });
+            if (newWrapper) {
+              // Force display: block for transition
+              newWrapper.style.display = 'block';
+              // Set data attribute - CSS will apply view-transition-name
+              newWrapper.setAttribute('data-vt-folder', toFolderId);
+              // Disable child view-transition-names on new page
+              disableChildTransitionNames(event.newDocument);
+              logTransition('set-name-on-new-wrapper', {
+                folderId: toFolderId,
+                dataAttr: newWrapper.getAttribute('data-vt-folder')
+              });
+            } else {
+              // Debug: list all elements in new document to see what's there
+              const allDivs = event.newDocument.querySelectorAll('div');
+              logTransition('ERROR: new wrapper not found', {
+                divCount: allDivs.length,
+                bodyClasses: event.newDocument.body ? event.newDocument.body.className : 'none'
+              });
+            }
+          }
+
+          // Content → Landing: Add folder ID to the matching folder on landing page
+          // Using data attribute + CSS rule instead of inline style for more reliable capture
+          if (isToLanding && fromFolderId) {
+            const targetFolder = event.newDocument.querySelector('[data-folder-id="' + fromFolderId + '"]');
+            if (targetFolder) {
+              // Set data attribute - CSS will apply view-transition-name
+              targetFolder.setAttribute('data-vt-active', 'true');
+              logTransition('set-name-on-target-folder', { folderId: fromFolderId });
+            } else {
+              logTransition('ERROR: target folder not found', { fromFolderId });
+            }
+          }
+        });
+
+        // After swap: clean up view-transition-names and restore display
+        document.addEventListener('astro:after-swap', function() {
+          // Log what we ended up with AFTER the swap
+          const wrapper = document.querySelector('.manila-folder-wrapper');
+          const folders = document.querySelectorAll('[data-folder-id]');
+          logTransition('after-swap', {
+            cleaning: true,
+            wrapperExists: !!wrapper,
+            wrapperTransitionName: wrapper ? getComputedStyle(wrapper).viewTransitionName : 'N/A',
+            folderCount: folders.length
+          });
+          if (wrapper) {
+            logBoundingBox('NEW wrapper (after swap)', wrapper);
+          }
+          if (folders.length > 0) {
+            logBoundingBox('NEW folder (after swap)', folders[0]);
+          }
+
+          // Clean up data attributes and inline styles
+          clickedFolderId = null;
+          if (wrapper) {
+            wrapper.removeAttribute('data-vt-folder');
+            wrapper.style.display = '';
+          }
+          folders.forEach(function(f) {
+            f.removeAttribute('data-vt-active');
+          });
+          // Restore child view-transition-names for content↔content transitions
+          restoreChildTransitionNames();
+        });
+      }
+    </script>
   </body>
 </html>

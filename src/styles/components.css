@@ -3,7 +3,7 @@
 .project-filter {
   background-color: rgba(255, 255, 255, 0.9);
   padding: 2rem;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   max-width: 600px;
   margin: 2rem auto;
@@ -28,12 +28,12 @@
   border: 2px solid var(--pastel-purple);
   background: white;
   color: var(--text-primary);
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   cursor: pointer;
   font-family: var(--font-main);
   font-weight: 600;
   font-size: 1rem;
-  transition: all 0.2s ease;
+  transition: all var(--transition-base) ease;
 }
 
 .filter-buttons button:hover {

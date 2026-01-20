@@ -1,0 +1,81 @@
+/* =============================================================================
+   View Transitions - Morph effect inspired by Adam Argyle
+   https://codepen.io/argyleink/pen/qEWeYzd
+============================================================================= */
+
+/* Disable default root transition - we only want named element morphs */
+html {
+  view-transition-name: none;
+}
+
+/* The morph transition for folder ↔ content page wrapper */
+::view-transition-group(folder-morph) {
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); /* ease-out-quint */
+  z-index: 1;
+}
+
+::view-transition-image-pair(folder-morph) {
+  /* Enable 3D perspective for depth */
+  perspective: 800px;
+  overflow: hidden;
+}
+
+::view-transition-old(folder-morph) {
+  animation: morph-out 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  object-fit: cover;
+  z-index: 1;
+}
+
+::view-transition-new(folder-morph) {
+  animation: morph-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  object-fit: cover;
+}
+
+@keyframes morph-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes morph-in {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Apply view-transition-name via data attributes (set by JS) */
+[data-vt-active="true"] {
+  view-transition-name: folder-morph;
+}
+
+.manila-folder-wrapper[data-vt-folder] {
+  view-transition-name: folder-morph;
+}
+
+/* Fallback crossfade for content ↔ content (no folder involved) */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.25s;
+}
+
+/* Reduced motion - instant transition */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(folder-morph),
+  ::view-transition-old(folder-morph),
+  ::view-transition-new(folder-morph),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

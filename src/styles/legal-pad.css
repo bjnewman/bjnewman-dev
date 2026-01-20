@@ -51,56 +51,15 @@
    Body Background - Textured Wood Desk Surface
 ============================================================================= */
 body.theme-legal-pad {
-  /* Rich wood desk with realistic grain texture */
+  /* Photo-realistic wood desk with vignette */
   background:
-    /* Fine grain lines - horizontal */
-    repeating-linear-gradient(
-      90deg,
-      var(--lp-wood-grain) 0px,
-      transparent 1px,
-      transparent 3px
-    ),
-    /* Medium grain variation */
-    repeating-linear-gradient(
-      87deg,
-      oklch(42% 0.07 52 / 0.15) 0px,
-      transparent 2px,
-      transparent 15px
-    ),
-    /* Wider grain bands */
-    repeating-linear-gradient(
-      92deg,
-      oklch(48% 0.06 58 / 0.1) 0px,
-      transparent 1px,
-      transparent 40px,
-      oklch(38% 0.08 50 / 0.08) 41px,
-      transparent 42px,
-      transparent 80px
-    ),
-    /* Subtle knot/swirl patterns */
+    /* Warm vignette overlay */
     radial-gradient(
-      ellipse 120px 70px at 15% 25%,
-      oklch(40% 0.07 52 / 0.15) 0%,
-      transparent 50%
+      ellipse at center,
+      transparent 40%,
+      oklch(15% 0.02 55 / 0.4) 100%
     ),
-    radial-gradient(
-      ellipse 90px 55px at 80% 65%,
-      oklch(43% 0.06 55 / 0.12) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse 60px 40px at 50% 85%,
-      oklch(38% 0.08 50 / 0.1) 0%,
-      transparent 50%
-    ),
-    /* Base wood color with vertical gradient for depth */
-    linear-gradient(
-      180deg,
-      var(--lp-wood-light) 0%,
-      var(--lp-wood-base) 30%,
-      var(--lp-wood-dark) 100%
-    );
-  background-attachment: fixed;
+    url('/images/landing/desk-warm.jpg') center/cover no-repeat fixed;
 }
 
 /* =============================================================================
@@ -181,6 +140,206 @@ body.theme-legal-pad .manila-folder-wrapper::before {
       var(--lp-manila) 100%
     );
   border-radius: 0;
+}
+
+/* =============================================================================
+   Hide Standard Header - Legal pad uses folder tabs instead
+============================================================================= */
+body.theme-legal-pad .site-header {
+  display: none;
+}
+
+/* =============================================================================
+   Folder Tabs - Physical tabs attached to the manila folder
+============================================================================= */
+body.theme-legal-pad .folder-tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.25rem;
+  padding: 1.5rem 1rem 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--lp-manila-dark) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar but keep functionality on mobile */
+body.theme-legal-pad .folder-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+body.theme-legal-pad .folder-tabs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body.theme-legal-pad .folder-tabs::-webkit-scrollbar-thumb {
+  background: var(--lp-manila-dark);
+  border-radius: 2px;
+}
+
+/* Home icon - back to desk */
+body.theme-legal-pad .folder-tabs__home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2rem;
+  margin-right: 0.5rem;
+  background: var(--lp-manila);
+  border-radius: 6px 6px 0 0;
+  color: oklch(40% 0.05 70);
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+body.theme-legal-pad .folder-tabs__home:hover {
+  background: var(--lp-manila-light);
+  transform: translateY(-2px);
+}
+
+body.theme-legal-pad .folder-tabs__home:focus-visible {
+  outline: 2px solid oklch(65% 0.2 260);
+  outline-offset: 2px;
+}
+
+/* Individual folder tab */
+body.theme-legal-pad .folder-tabs__tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem 0.4rem;
+  min-width: max-content;
+
+  /* Manila folder tab appearance */
+  background:
+    repeating-linear-gradient(
+      35deg,
+      oklch(80% 0.05 75 / 0.1) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    linear-gradient(
+      180deg,
+      var(--lp-manila-light) 0%,
+      var(--lp-manila) 60%,
+      var(--lp-manila-dark) 100%
+    );
+
+  /* Tab shape - rounded top, connects to folder at bottom */
+  border-radius: 6px 6px 0 0;
+
+  /* Typography - matches folder labels */
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: oklch(35% 0.04 70);
+  text-decoration: none;
+
+  /* Depth - tab sits slightly behind folder */
+  box-shadow:
+    inset 0 1px 0 oklch(90% 0.03 78 / 0.5),
+    0 -1px 2px oklch(30% 0.05 55 / 0.15);
+
+  /* Inactive tabs recede */
+  transform: translateY(2px);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.theme-legal-pad .folder-tabs__tab:hover {
+  background:
+    repeating-linear-gradient(
+      35deg,
+      oklch(84% 0.04 78 / 0.1) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    linear-gradient(
+      180deg,
+      oklch(90% 0.04 80) 0%,
+      var(--lp-manila-light) 60%,
+      var(--lp-manila) 100%
+    );
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 oklch(92% 0.02 80 / 0.6),
+    0 2px 6px oklch(30% 0.05 55 / 0.2);
+}
+
+body.theme-legal-pad .folder-tabs__tab:focus-visible {
+  outline: 2px solid oklch(65% 0.2 260);
+  outline-offset: 2px;
+  z-index: 10;
+}
+
+/* Active tab - pulls forward and connects to folder body */
+body.theme-legal-pad .folder-tabs__tab--active,
+body.theme-legal-pad .folder-tabs__tab--active:hover {
+  /* Match folder body color for seamless connection */
+  background:
+    repeating-linear-gradient(
+      0deg,
+      oklch(80% 0.06 75 / 0.15) 0px,
+      transparent 1px,
+      transparent 3px
+    ),
+    linear-gradient(
+      180deg,
+      var(--lp-manila-light) 0%,
+      var(--lp-manila) 100%
+    );
+
+  /* Stay connected - never lift */
+  transform: translateY(0);
+  z-index: 5;
+
+  /* Stronger text */
+  color: oklch(25% 0.04 70);
+
+  /* Connected shadow - no bottom shadow */
+  box-shadow:
+    inset 0 1px 0 oklch(90% 0.03 78 / 0.5),
+    -2px 0 4px oklch(30% 0.05 55 / 0.1),
+    2px 0 4px oklch(30% 0.05 55 / 0.1);
+}
+
+/* Curved wings connecting active tab to folder body */
+body.theme-legal-pad .folder-tabs__tab--active::before,
+body.theme-legal-pad .folder-tabs__tab--active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+  /* Transparent - shows desk behind */
+  background: transparent;
+}
+
+/* Left wing - curved cutout */
+body.theme-legal-pad .folder-tabs__tab--active::before {
+  left: -8px;
+  /* Round the corner that faces the tab */
+  border-bottom-right-radius: 8px;
+  /* Fill the corner with folder color */
+  box-shadow: 4px 4px 0 0 var(--lp-manila);
+}
+
+/* Right wing - curved cutout */
+body.theme-legal-pad .folder-tabs__tab--active::after {
+  right: -8px;
+  /* Round the corner that faces the tab */
+  border-bottom-left-radius: 8px;
+  /* Fill the corner with folder color */
+  box-shadow: -4px 4px 0 0 var(--lp-manila);
+}
+
+/* Theme toggle in folder tabs */
+body.theme-legal-pad .folder-tabs .theme-toggle {
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 /* =============================================================================
@@ -637,5 +796,76 @@ body.theme-legal-pad .site-nav.nav-filing-tabs .nav-link.active {
 
   body.theme-legal-pad .site-nav.nav-filing-tabs .nav-link:hover {
     transform: none;
+  }
+}
+
+/* =============================================================================
+   View Transitions - Content to Content
+============================================================================= */
+
+/* Folder tabs stay stable during content transitions */
+body.theme-legal-pad .folder-tabs {
+  view-transition-name: folder-tabs;
+}
+
+/* Page content slides/fades between pages */
+body.theme-legal-pad .page-content {
+  view-transition-name: page-content;
+}
+
+/* Footer stays stable */
+body.theme-legal-pad .site-footer {
+  view-transition-name: site-footer;
+}
+
+/* Folder tabs - persist across pages (no animation) */
+::view-transition-old(folder-tabs),
+::view-transition-new(folder-tabs) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Page content - smooth slide transition */
+::view-transition-old(page-content) {
+  animation: content-slide-out 0.3s ease-out forwards;
+}
+
+::view-transition-new(page-content) {
+  animation: content-slide-in 0.3s ease-out forwards;
+}
+
+@keyframes content-slide-out {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+@keyframes content-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Footer - stays in place */
+::view-transition-old(site-footer),
+::view-transition-new(site-footer) {
+  animation: none;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(page-content),
+  ::view-transition-new(page-content) {
+    animation: none;
   }
 }
