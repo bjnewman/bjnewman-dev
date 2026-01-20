@@ -46,7 +46,7 @@ describe('MonkeyEyes', () => {
 
     // Find elements with border-radius (monkey has many rounded elements)
     const elements = container.querySelectorAll('div');
-    const roundedElements = Array.from(elements).filter((el) => {
+    const roundedElements = [...elements].filter((el) => {
       const style = (el as HTMLElement).style;
       return style.borderRadius && style.borderRadius.includes('50%');
     });
@@ -60,7 +60,7 @@ describe('MonkeyEyes', () => {
 
     // Check that the component renders the monkey head with brown color
     const elements = container.querySelectorAll('div');
-    const hasBrownElements = Array.from(elements).some((el) => {
+    const hasBrownElements = [...elements].some((el) => {
       const style = (el as HTMLElement).style;
       return style.background === 'rgb(158, 89, 54)' || style.background === '#9E5936';
     });
@@ -68,7 +68,7 @@ describe('MonkeyEyes', () => {
     expect(hasBrownElements).toBe(true);
 
     // Check for face mask elements (light brown)
-    const hasLightBrownElements = Array.from(elements).some((el) => {
+    const hasLightBrownElements = [...elements].some((el) => {
       const style = (el as HTMLElement).style;
       return style.background === 'rgb(234, 190, 127)' || style.background === '#EABE7F';
     });
@@ -81,7 +81,7 @@ describe('MonkeyEyes', () => {
 
     // Find elements with white backgrounds (eye highlights)
     const elements = container.querySelectorAll('div');
-    const whiteElements = Array.from(elements).filter((el) => {
+    const whiteElements = [...elements].filter((el) => {
       const style = (el as HTMLElement).style;
       return style.background === 'white' || style.background === 'rgb(255, 255, 255)';
     });
@@ -153,7 +153,7 @@ describe('MonkeyEyes', () => {
 
     // Find elements with transitions (the eyes that track the mouse)
     const elements = container.querySelectorAll('div');
-    const transitionElements = Array.from(elements).filter((el) => {
+    const transitionElements = [...elements].filter((el) => {
       const style = (el as HTMLElement).style;
       return (
         style.transition &&

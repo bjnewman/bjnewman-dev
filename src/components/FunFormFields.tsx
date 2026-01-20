@@ -159,7 +159,7 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
     const allSame = digits.every((d) => d === digits[0]);
     if (allSame) {
       setIsJackpot(true);
-      const timeout = setTimeout(() => setIsJackpot(false), JACKPOT_DISPLAY_MS);
+      const timeout = setTimeout(setIsJackpot, JACKPOT_DISPLAY_MS, false);
       timeoutRefs.current.push(timeout);
     }
   };
@@ -195,10 +195,7 @@ export const FunFormFields = ({ isVisible }: FunFormFieldsProps) => {
               setSpinningAll(false);
               // Get fresh digits via callback and check jackpot
               setPhoneDigits((currentDigits) => {
-                const jackpotTimeout = setTimeout(
-                  () => checkJackpot(currentDigits),
-                  JACKPOT_CHECK_DELAY_MS
-                );
+                const jackpotTimeout = setTimeout(checkJackpot, JACKPOT_CHECK_DELAY_MS, currentDigits);
                 timeoutRefs.current.push(jackpotTimeout);
                 return currentDigits;
               });

@@ -23,7 +23,7 @@ export function Sparkline({
     if (animate) {
       setIsVisible(false);
       // Small delay before starting animation
-      const timer = setTimeout(() => setIsVisible(true), 100);
+      const timer = setTimeout(setIsVisible, 100, true);
       return () => clearTimeout(timer);
     }
   }, [animate, restartKey]);

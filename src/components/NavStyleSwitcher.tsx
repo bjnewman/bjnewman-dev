@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { STORAGE_KEYS } from '../constants/storage';
 
 export interface NavStyle {
   id: string;
@@ -61,8 +62,6 @@ export const themeNavDefaults: Record<string, string> = {
   minimalist: 'minimal',
 };
 
-const NAV_STYLE_STORAGE_KEY = 'bjnewman-nav-style';
-const NAV_STYLE_OVERRIDE_KEY = 'bjnewman-nav-style-override';
 
 export const useNavStyleSwitcher = () => {
   const [currentNavStyle, setCurrentNavStyle] = useState<NavStyle>(navStyles[0]);
@@ -70,8 +69,8 @@ export const useNavStyleSwitcher = () => {
 
   useEffect(() => {
     // Load saved nav style on mount
-    const savedNavStyleId = localStorage.getItem(NAV_STYLE_STORAGE_KEY);
-    const hasOverride = localStorage.getItem(NAV_STYLE_OVERRIDE_KEY) === 'true';
+    const savedNavStyleId = localStorage.getItem(STORAGE_KEYS.NAV_STYLE);
+    const hasOverride = localStorage.getItem(STORAGE_KEYS.NAV_STYLE_OVERRIDE) === 'true';
 
     if (savedNavStyleId) {
       const savedNavStyle = navStyles.find((n) => n.id === savedNavStyleId);
@@ -100,18 +99,18 @@ export const useNavStyleSwitcher = () => {
     if (navStyle) {
       applyNavStyle(navStyle);
       setCurrentNavStyle(navStyle);
-      localStorage.setItem(NAV_STYLE_STORAGE_KEY, navStyleId);
+      localStorage.setItem(STORAGE_KEYS.NAV_STYLE, navStyleId);
 
       if (isUserOverride) {
         setIsOverridden(true);
-        localStorage.setItem(NAV_STYLE_OVERRIDE_KEY, 'true');
+        localStorage.setItem(STORAGE_KEYS.NAV_STYLE_OVERRIDE, 'true');
       }
     }
   };
 
   const setNavStyleFromTheme = (themeId: string) => {
     // Only update if user hasn't manually overridden
-    const hasOverride = localStorage.getItem(NAV_STYLE_OVERRIDE_KEY) === 'true';
+    const hasOverride = localStorage.getItem(STORAGE_KEYS.NAV_STYLE_OVERRIDE) === 'true';
     if (hasOverride) return;
 
     const defaultNavStyleId = themeNavDefaults[themeId] || 'filing-tabs';
@@ -119,13 +118,13 @@ export const useNavStyleSwitcher = () => {
     if (navStyle) {
       applyNavStyle(navStyle);
       setCurrentNavStyle(navStyle);
-      localStorage.setItem(NAV_STYLE_STORAGE_KEY, defaultNavStyleId);
+      localStorage.setItem(STORAGE_KEYS.NAV_STYLE, defaultNavStyleId);
     }
   };
 
   const resetToThemeDefault = (currentThemeId: string) => {
     // Clear the override flag
-    localStorage.removeItem(NAV_STYLE_OVERRIDE_KEY);
+    localStorage.removeItem(STORAGE_KEYS.NAV_STYLE_OVERRIDE);
     setIsOverridden(false);
 
     // Apply the default nav style for the current theme
@@ -134,7 +133,7 @@ export const useNavStyleSwitcher = () => {
     if (navStyle) {
       applyNavStyle(navStyle);
       setCurrentNavStyle(navStyle);
-      localStorage.setItem(NAV_STYLE_STORAGE_KEY, defaultNavStyleId);
+      localStorage.setItem(STORAGE_KEYS.NAV_STYLE, defaultNavStyleId);
     }
   };
 

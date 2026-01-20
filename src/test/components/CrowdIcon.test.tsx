@@ -42,12 +42,12 @@ describe('CrowdIcon', () => {
 
     // Initially some should be hidden (opacity 0)
     const groups = container.querySelectorAll('g');
-    const initialVisible = Array.from(groups).filter((g) => g.style.opacity === '1').length;
+    const initialVisible = [...groups].filter((g) => g.style.opacity === '1').length;
 
     // Wait for animation to progress
     await waitFor(
       () => {
-        const visibleNow = Array.from(groups).filter((g) => g.style.opacity === '1').length;
+        const visibleNow = [...groups].filter((g) => g.style.opacity === '1').length;
         expect(visibleNow).toBeGreaterThan(initialVisible);
       },
       { timeout: 500 }

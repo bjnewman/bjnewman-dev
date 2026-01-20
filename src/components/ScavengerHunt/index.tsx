@@ -170,7 +170,7 @@ export const useScavengerHunt = () => {
   );
 
   const getLatestClue = useCallback(() => {
-    const id = state.unlockedClues[state.unlockedClues.length - 1];
+    const id = state.unlockedClues.at(-1);
     return id ? clues.find((c) => c.id === id) || null : null;
   }, [state.unlockedClues]);
 

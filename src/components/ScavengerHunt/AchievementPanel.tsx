@@ -114,6 +114,6 @@ export const AchievementPanel = ({ state, isOpen, onClose }: AchievementPanelPro
 
 function getLatestClue(unlockedClues: string[]): Clue | null {
   if (unlockedClues.length === 0) return null;
-  const latestClueId = unlockedClues[unlockedClues.length - 1];
+  const latestClueId = unlockedClues.at(-1);
   return clues.find((c) => c.id === latestClueId) || null;
 }

@@ -80,7 +80,7 @@ export const SkillsGrid = () => {
 
   useEffect(() => {
     // Trigger animation after mount
-    const timer = setTimeout(() => setAnimated(true), 100);
+    const timer = setTimeout(setAnimated, 100, true);
     return () => clearTimeout(timer);
   }, []);
 

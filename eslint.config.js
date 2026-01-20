@@ -4,6 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
+import e18e from '@e18e/eslint-plugin';
 
 // ESLint config focused on catching bugs, not formatting
 // Guardrails for AI-assisted development
@@ -17,6 +18,7 @@ export default tseslint.config([
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
       jsxA11y.flatConfigs.recommended,
+      e18e.configs.recommended,
     ],
     languageOptions: {
       ecmaVersion: 2020,

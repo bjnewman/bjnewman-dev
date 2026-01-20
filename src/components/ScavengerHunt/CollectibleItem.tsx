@@ -27,7 +27,7 @@ export const CollectibleItem = ({
 
   useEffect(() => {
     if (showCelebration) {
-      const timer = setTimeout(() => setShowCelebration(false), 2000);
+      const timer = setTimeout(setShowCelebration, 2000, false);
       return () => clearTimeout(timer);
     }
   }, [showCelebration]);

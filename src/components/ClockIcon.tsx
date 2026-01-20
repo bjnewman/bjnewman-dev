@@ -10,7 +10,7 @@ export function ClockIcon({ restartKey = 0 }: ClockIconProps) {
 
   useEffect(() => {
     setIsAnimating(false);
-    const timer = setTimeout(() => setIsAnimating(true), 100);
+    const timer = setTimeout(setIsAnimating, 100, true);
     return () => clearTimeout(timer);
   }, [restartKey]);
 

@@ -219,7 +219,7 @@ export const themes: Theme[] = [
   },
 ];
 
-const THEME_STORAGE_KEY = 'bjnewman-theme';
+import { STORAGE_KEYS } from '../constants/storage';
 
 export const useThemeSwitcher = () => {
   const [currentTheme, setCurrentTheme] = useState<Theme>(themes[0]);
@@ -231,7 +231,7 @@ export const useThemeSwitcher = () => {
     localStorage.removeItem('bjnewman-previous-theme');
 
     // Load saved theme on mount
-    const savedThemeId = localStorage.getItem(THEME_STORAGE_KEY);
+    const savedThemeId = localStorage.getItem(STORAGE_KEYS.THEME);
     if (savedThemeId) {
       const savedTheme = themes.find((t) => t.id === savedThemeId);
       if (savedTheme) {
@@ -295,13 +295,13 @@ export const useThemeSwitcher = () => {
     if (theme) {
       applyTheme(theme);
       setCurrentTheme(theme);
-      localStorage.setItem(THEME_STORAGE_KEY, themeId);
+      localStorage.setItem(STORAGE_KEYS.THEME, themeId);
     }
   };
 
   const toggleDarkMode = () => {
     // Read current theme directly from localStorage to avoid stale state issues
-    const currentThemeId = localStorage.getItem(THEME_STORAGE_KEY) || 'professional';
+    const currentThemeId = localStorage.getItem(STORAGE_KEYS.THEME) || 'professional';
 
     if (currentThemeId === 'dark') {
       // Switch back to previous light theme
