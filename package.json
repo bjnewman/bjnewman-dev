@@ -20,7 +20,8 @@
     "prepare": "husky",
     "lighthouse": "lhci autorun",
     "lighthouse:api": "bun run scripts/lighthouse.ts",
-    "lighthouse:api:desktop": "bun run scripts/lighthouse.ts --desktop"
+    "lighthouse:api:desktop": "bun run scripts/lighthouse.ts --desktop",
+    "e18e:analyze": "bun run scripts/e18e-analyzer/index.ts"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.14",

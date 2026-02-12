@@ -131,6 +131,7 @@ const currentPath = Astro.url.pathname;
         <a href="/resume" class={`nav-link ${currentPath.startsWith('/resume') ? 'active' : ''}`}>Resume</a>
         <a href="/blog" class={`nav-link ${currentPath.startsWith('/blog') ? 'active' : ''}`}>Blog</a>
         <a href="/dashboard" class={`nav-link ${currentPath.startsWith('/dashboard') ? 'active' : ''}`}>Dashboard</a>
+        <a href="/oss-analyzer" class={`nav-link ${currentPath.startsWith('/oss-analyzer') ? 'active' : ''}`}>OSS Analyzer</a>
       </nav>
       <ThemeToggle client:load />
     </header>

@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import { E18eAnalyzer } from '../components/E18eAnalyzer';
+import '../styles/e18e.css';
+---
+
+<Base
+  title="OSS Analyzer | npm Ecosystem Modernization"
+  description="Find the highest-impact PRs to modernize the npm ecosystem. Interactive leaderboard ranked by downloads, dependents, maintainer health, and fix complexity."
+>
+  <E18eAnalyzer client:idle />
+</Base>

@@ -1,14 +1,14 @@
 #!/bin/sh
 # Fail fast: typecheck first (catches fundamental errors)
 echo "Running type checks..."
-bun run typecheck || exit 1
+npm run typecheck || exit 1
 
 # Run oxlint (fast enough to run on whole project)
 echo "Running lint checks..."
-bun run lint || exit 1
+npm run lint || exit 1
 
 # Run tests
 echo "Running tests..."
-bun run test || exit 1
+npm run test || exit 1
 
 echo "✓ Pre-commit checks passed"
