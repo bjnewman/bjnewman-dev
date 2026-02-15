@@ -10,6 +10,7 @@
  * Usage:
  *   bun run scripts/e18e-analyzer/index.ts              # full run (~20 min)
  *   bun run scripts/e18e-analyzer/index.ts --limit 20   # dev mode (~30 sec)
+ *   bun run scripts/e18e-analyzer/index.ts --yes        # auto-approve BigQuery cost
  *
  * Environment:
  *   LIBRARIES_IO_API_KEY  — for reverse dependency lookups (optional but recommended)
@@ -23,7 +24,9 @@ import { expandGraph } from "./expand-graph.ts";
 import { enrich } from "./enrich.ts";
 import { scorePackages } from "./score.ts";
 import { generateOutputs } from "./output.ts";
+import { computeTargetRepos } from "./target-repos.ts";
 import { LibrariesIoCache } from "./cache.ts";
+import { isBqAvailable, fetchDirectDependents } from "./bigquery.ts";
 
 const PROJECT_ROOT = resolve(import.meta.dirname!, "../..");
 const CACHE_PATH = resolve(PROJECT_ROOT, ".cache/e18e/libraries-io.json");
@@ -31,11 +34,13 @@ const CACHE_PATH = resolve(PROJECT_ROOT, ".cache/e18e/libraries-io.json");
 const { values: args } = parseArgs({
   options: {
     limit: { type: "string", short: "l" },
+    yes: { type: "boolean", short: "y" },
   },
   strict: false,
 });
 
 const LIMIT = args.limit ? parseInt(args.limit, 10) : 0;
+const AUTO_APPROVE_BQ = args.yes ?? false;
 
 function estimateTime(count: number): string {
   // ~1 sec per libraries.io call + ~0.5 sec per npm metadata call + GitHub
@@ -54,7 +59,7 @@ async function main() {
     console.log(`Loaded libraries.io cache: ${cache.validCount} valid entries\n`);
   }
 
-  console.log("Step 1/5: Gathering candidates from all sources...");
+  console.log("Step 1/7: Gathering candidates from all sources...");
   let candidates = await gatherCandidates();
 
   if (LIMIT > 0) {
@@ -83,7 +88,7 @@ async function main() {
 
   console.log(`  Processing ${candidates.length} candidates (est. ${estimateTime(candidates.length)})\n`);
 
-  console.log("Step 2/5: Expanding dependency graph...");
+  console.log("Step 2/7: Expanding dependency graph...");
   const graph = await expandGraph(candidates, cache);
   const withDeps = [...graph.values()].filter(
     (g) => g.dependentCount > 0,
@@ -92,7 +97,7 @@ async function main() {
     `  ${withDeps}/${candidates.length} packages have known dependents\n`,
   );
 
-  console.log("Step 3/5: Enriching with metrics...");
+  console.log("Step 3/7: Enriching with metrics...");
   const enriched = await enrich(candidates, graph);
   console.log(`  Enriched ${enriched.length} packages\n`);
 
@@ -105,16 +110,44 @@ async function main() {
   cache.save();
   console.log(`  Saved libraries.io cache (${cache.size} entries)\n`);
 
-  console.log("Step 4/5: Computing scores and rankings...");
+  console.log("Step 4/7: Computing scores and rankings...");
   const scored = scorePackages(enriched);
   console.log(`  Scored ${scored.length} packages\n`);
 
-  console.log("Step 5/5: Generating output files...");
-  generateOutputs(scored, {
-    leaderboard: resolve(PROJECT_ROOT, "public/e18e/api/leaderboard.json"),
-    stats: resolve(PROJECT_ROOT, "public/e18e/api/stats.json"),
-    sqlite: resolve(PROJECT_ROOT, "public/e18e/data/ecosystem.db"),
-  });
+  console.log("Step 5/7: Querying BigQuery for direct dependents...");
+  let bigQueryDeps: Map<string, string[]> | undefined;
+  if (await isBqAvailable()) {
+    const replaceableNames = candidates.map((c) => c.moduleName);
+    try {
+      const confirm = AUTO_APPROVE_BQ
+        ? async (msg: string) => { process.stdout.write(msg + "(auto-approved via --yes)\n"); return true; }
+        : undefined;
+      bigQueryDeps = await fetchDirectDependents(replaceableNames, confirm);
+      console.log(
+        `  BigQuery: ${bigQueryDeps.size} packages have known dependents\n`,
+      );
+    } catch (err) {
+      console.warn(`  BigQuery query failed, continuing without: ${err}\n`);
+    }
+  } else {
+    console.log("  bq CLI not available — skipping BigQuery step\n");
+  }
+
+  console.log("Step 6/7: Computing target repo rankings...");
+  const targetRepos = await computeTargetRepos(scored, graph, bigQueryDeps);
+  console.log(`  Ranked ${targetRepos.length} target repos\n`);
+
+  console.log("Step 7/7: Generating output files...");
+  generateOutputs(
+    scored,
+    {
+      leaderboard: resolve(PROJECT_ROOT, "public/e18e/api/leaderboard.json"),
+      stats: resolve(PROJECT_ROOT, "public/e18e/api/stats.json"),
+      sqlite: resolve(PROJECT_ROOT, "public/e18e/data/ecosystem.db"),
+      targetRepos: resolve(PROJECT_ROOT, "public/e18e/api/target-repos.json"),
+    },
+    targetRepos,
+  );
   console.log();
 
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
@@ -124,7 +157,7 @@ async function main() {
   console.log(
     `  Top score: ${scored[0]?.compositeScore.toFixed(4) ?? "N/A"}`,
   );
-  console.log(`  Top 5:`);
+  console.log(`  Top 5 packages:`);
   for (const pkg of scored.slice(0, 5)) {
     console.log(
       `    ${pkg.rank}. ${pkg.moduleName} — score: ${pkg.compositeScore.toFixed(4)}, ` +
@@ -132,6 +165,17 @@ async function main() {
         `dependents: ${pkg.dependentCount}, ` +
         `status: ${pkg.status}`,
     );
+  }
+
+  if (targetRepos.length > 0) {
+    console.log(`  Top 5 target repos:`);
+    for (const repo of targetRepos.slice(0, 5)) {
+      console.log(
+        `    ${repo.rank}. ${repo.repoFullName} — score: ${repo.compositeScore.toFixed(4)}, ` +
+          `stars: ${repo.stars.toLocaleString()}, ` +
+          `opportunities: ${repo.opportunities.length}`,
+      );
+    }
   }
 }
 

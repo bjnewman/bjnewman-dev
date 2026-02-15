@@ -1,24 +1,24 @@
 {
-  "lastUpdated": "2026-02-10T08:33:13.479Z",
-  "totalPackages": 636,
-  "totalDownloadsRepresented": 5463577206,
-  "activeOpportunities": 636,
+  "lastUpdated": "2026-02-15T01:32:55.670Z",
+  "totalPackages": 20,
+  "totalDownloadsRepresented": 199314910,
+  "activeOpportunities": 5,
   "bySource": {
-    "module-replacements": 570,
-    "deprecated": 25,
-    "node-builtin": 20,
-    "polyfill-decay": 21
+    "module-replacements": 5,
+    "deprecated": 5,
+    "node-builtin": 5,
+    "polyfill-decay": 5
   },
   "byTier": {
-    "1": 16,
-    "2": 138,
-    "3": 283,
-    "4": 199
+    "1": 6,
+    "2": 10,
+    "3": 1,
+    "4": 3
   },
   "byStatus": {
-    "active": 0,
-    "stale": 636,
-    "dormant": 0,
+    "active": 1,
+    "stale": 4,
+    "dormant": 15,
     "archived": 0
   }
 }

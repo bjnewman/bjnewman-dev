@@ -27,6 +27,13 @@ export interface GraphData {
   topDependentRepos: Array<{
     name: string;
     stars: number;
+    pushedAt: string | null;
+  }>;
+  /** npm packages that directly depend on this package (from /dependents). */
+  topDependentPackages: Array<{
+    name: string;
+    stars: number;
+    repoUrl: string | null;
   }>;
 }
 
@@ -61,7 +68,7 @@ async function fetchPackageInfo(
  */
 async function fetchTopDependentRepos(
   packageName: string,
-  perPage = 10,
+  perPage = 30,
 ): Promise<DependentRepo[]> {
   if (!LIBRARIES_IO_API_KEY) return [];
 
@@ -99,6 +106,7 @@ export async function expandGraph(
         dependentCount: 0,
         dependentReposCount: 0,
         topDependentRepos: [],
+        topDependentPackages: [],
       });
     }
     return graph;
@@ -133,6 +141,7 @@ export async function expandGraph(
       dependentCount: info?.dependents_count ?? 0,
       dependentReposCount: info?.dependent_repos_count ?? 0,
       topDependentRepos: [],
+      topDependentPackages: [],
     };
     graph.set(candidate.moduleName, data);
     completed++;
@@ -165,6 +174,7 @@ export async function expandGraph(
         .map((r) => ({
           name: r.full_name,
           stars: r.stargazers_count,
+          pushedAt: r.pushed_at ?? null,
         }));
       repoCompleted++;
       if (repoCompleted % 25 === 0) {

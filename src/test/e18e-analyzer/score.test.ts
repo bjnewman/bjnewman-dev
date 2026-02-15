@@ -178,9 +178,11 @@ describe("computeLiveness", () => {
     ).toBe(1.0);
   });
 
-  it("returns 0.5 for null daysSinceLastCommit", () => {
+  it("returns 0.5 for null daysSinceLastCommit and null lastPublishDate", () => {
     expect(
-      computeLiveness(makePackage({ daysSinceLastCommit: null })),
+      computeLiveness(
+        makePackage({ daysSinceLastCommit: null, lastPublishDate: null }),
+      ),
     ).toBe(0.5);
   });
 });
@@ -208,9 +210,11 @@ describe("classifyStatus", () => {
     ).toBe("active");
   });
 
-  it("returns stale when daysSinceLastCommit is null", () => {
+  it("returns stale when daysSinceLastCommit and lastPublishDate are null", () => {
     expect(
-      classifyStatus(makePackage({ daysSinceLastCommit: null })),
+      classifyStatus(
+        makePackage({ daysSinceLastCommit: null, lastPublishDate: null }),
+      ),
     ).toBe("stale");
   });
 });

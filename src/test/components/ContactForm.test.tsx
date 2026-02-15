@@ -92,7 +92,7 @@ describe('ContactForm', () => {
   it('should accept valid email format', async () => {
     const user = userEvent.setup();
     const mockFetch = vi.fn().mockResolvedValue({ ok: true });
-    window.fetch = mockFetch;
+    window.fetch = mockFetch as unknown as typeof fetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
     fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
@@ -153,7 +153,7 @@ describe('ContactForm', () => {
   it('should submit form with valid data', async () => {
     const user = userEvent.setup();
     const mockFetch = vi.fn().mockResolvedValue({ ok: true });
-    window.fetch = mockFetch;
+    window.fetch = mockFetch as unknown as typeof fetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
     fillForm({ name: 'John Doe', email: 'john@example.com', subject: 'Test Subject', message: 'Test message content' });
@@ -178,7 +178,7 @@ describe('ContactForm', () => {
 
   it('should show success message after successful submission', async () => {
     const user = userEvent.setup();
-    window.fetch = vi.fn().mockResolvedValue({ ok: true });
+    window.fetch = vi.fn().mockResolvedValue({ ok: true }) as unknown as typeof fetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
     fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
@@ -194,7 +194,7 @@ describe('ContactForm', () => {
 
   it('should clear form after successful submission', async () => {
     const user = userEvent.setup();
-    window.fetch = vi.fn().mockResolvedValue({ ok: true });
+    window.fetch = vi.fn().mockResolvedValue({ ok: true }) as unknown as typeof fetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
 
@@ -217,7 +217,7 @@ describe('ContactForm', () => {
 
   it('should show error message when submission fails', async () => {
     const user = userEvent.setup();
-    window.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
+    window.fetch = vi.fn().mockRejectedValue(new Error('Network error')) as unknown as typeof fetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
     fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
@@ -237,7 +237,7 @@ describe('ContactForm', () => {
     const fetchPromise = new Promise<Response>((resolve) => {
       resolvePromise = () => resolve({ ok: true } as Response);
     });
-    window.fetch = vi.fn().mockReturnValue(fetchPromise);
+    window.fetch = vi.fn().mockReturnValue(fetchPromise) as unknown as typeof fetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
     fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
@@ -277,7 +277,7 @@ describe('ContactForm', () => {
   it('should handle optional subject field correctly', async () => {
     const user = userEvent.setup();
     const mockFetch = vi.fn().mockResolvedValue({ ok: true });
-    window.fetch = mockFetch;
+    window.fetch = mockFetch as unknown as typeof fetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} />);
     fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
@@ -295,7 +295,7 @@ describe('ContactForm', () => {
   it('should call onSuccess callback after successful submission', async () => {
     const user = userEvent.setup();
     const onSuccess = vi.fn();
-    window.fetch = vi.fn().mockResolvedValue({ ok: true });
+    window.fetch = vi.fn().mockResolvedValue({ ok: true }) as unknown as typeof fetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} onSuccess={onSuccess} />);
     fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });
@@ -311,7 +311,7 @@ describe('ContactForm', () => {
   it('should call onError callback after failed submission', async () => {
     const user = userEvent.setup();
     const onError = vi.fn();
-    window.fetch = vi.fn().mockRejectedValue(new Error('Network error'));
+    window.fetch = vi.fn().mockRejectedValue(new Error('Network error')) as unknown as typeof fetch;
 
     render(<ContactForm webhookUrl={mockWebhookUrl} onError={onError} />);
     fillForm({ name: 'John Doe', email: 'john@example.com', message: 'Test message' });

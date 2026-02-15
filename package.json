@@ -13,9 +13,9 @@
     "lint:eslint": "eslint .",
     "lint:all": "oxlint && eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "vitest --run --browser",
-    "test:watch": "vitest --browser",
-    "test:ui": "vitest --ui --browser",
+    "test": "vitest --run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
     "clean": "rm -rf dist .astro",
     "prepare": "husky",
     "lighthouse": "lhci autorun",
@@ -34,6 +34,7 @@
     "@visx/text": "^3.12.0",
     "jsfxr": "^1.3.0",
     "lucide-react": "^0.562.0",
+    "module-replacements": "^2.11.0",
     "patch-package": "^8.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
@@ -45,6 +46,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",
+    "@types/bun": "^1.3.9",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react-swc": "^4.0.0",
@@ -62,5 +64,18 @@
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2",
     "vitest": "^2.1.8"
-  }
+  },
+  "description": "A modern personal website built with Astro and React, featuring interactive components, theme switching, and secret easter eggs.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bjnewman/bjnewman-dev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bjnewman/bjnewman-dev/issues"
+  },
+  "homepage": "https://github.com/bjnewman/bjnewman-dev#readme"
 }

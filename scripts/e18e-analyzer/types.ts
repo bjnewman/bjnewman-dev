@@ -57,6 +57,45 @@ export interface ScoredPackage extends PackageData {
   computedAt: string;
 }
 
+// ── Target repo types (second pass) ──────────────────────────────────
+
+/** A single replaceable dep found in a target repo */
+export interface ReplacementOpportunity {
+  moduleName: string;
+  replacement: string;
+  replacementType: ReplacementType;
+  effortMultiplier: number;
+  weeklyDownloads: number;
+}
+
+/** Raw target repo before scoring */
+export interface TargetRepo {
+  repoFullName: string;
+  repoUrl: string;
+  stars: number;
+  pushedAt: string | null;
+  opportunities: ReplacementOpportunity[];
+  daysSinceLastCommit: number | null;
+  daysSinceLastRelease: number | null;
+  isArchived: boolean;
+  openPrCount: number;
+  contributorCountRecent: number;
+  hasContributingMd: boolean;
+  externalPrsMerged: number;
+  externalPrsClosed: number;
+}
+
+/** Scored target repo */
+export interface ScoredTargetRepo extends TargetRepo {
+  reachScore: number;
+  receptivenessScore: number;
+  bundleOpportunity: number;
+  aggregateEffort: number;
+  compositeScore: number;
+  rank: number;
+  computedAt: string;
+}
+
 export interface LeaderboardEntry {
   rank: number;
   moduleName: string;

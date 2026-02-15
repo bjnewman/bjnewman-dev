@@ -1,7 +1,12 @@
 import { Database } from "bun:sqlite";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
-import type { ScoredPackage, LeaderboardEntry, Stats } from "./types.ts";
+import type {
+  ScoredPackage,
+  ScoredTargetRepo,
+  LeaderboardEntry,
+  Stats,
+} from "./types.ts";
 
 function ensureDir(filePath: string) {
   mkdirSync(dirname(filePath), { recursive: true });
@@ -207,7 +212,120 @@ function writeSqlite(packages: ScoredPackage[], filePath: string) {
   });
 
   insertAll(packages);
-  db.close();
+
+  return db;
+}
+
+// ── Main output function ────────────────────────────────────────────
+
+// ── Target repo SQLite tables ────────────────────────────────────────
+
+function writeTargetReposSqlite(
+  db: Database,
+  repos: ScoredTargetRepo[],
+) {
+  db.run(`
+    CREATE TABLE target_repos (
+      repo_full_name TEXT PRIMARY KEY,
+      repo_url TEXT NOT NULL,
+      stars INTEGER NOT NULL DEFAULT 0,
+      opportunity_count INTEGER NOT NULL DEFAULT 0,
+
+      days_since_last_commit INTEGER,
+      days_since_last_release INTEGER,
+      is_archived INTEGER NOT NULL DEFAULT 0,
+      open_pr_count INTEGER NOT NULL DEFAULT 0,
+      contributor_count_recent INTEGER NOT NULL DEFAULT 0,
+      has_contributing_md INTEGER NOT NULL DEFAULT 0,
+      external_prs_merged INTEGER NOT NULL DEFAULT 0,
+      external_prs_closed INTEGER NOT NULL DEFAULT 0,
+
+      reach_score REAL NOT NULL,
+      receptiveness_score REAL NOT NULL,
+      bundle_opportunity REAL NOT NULL,
+      aggregate_effort REAL NOT NULL,
+      composite_score REAL NOT NULL,
+
+      rank INTEGER NOT NULL,
+      computed_at TEXT NOT NULL
+    )
+  `);
+
+  db.run(`
+    CREATE TABLE target_repo_opportunities (
+      repo_full_name TEXT NOT NULL,
+      module_name TEXT NOT NULL,
+      replacement TEXT NOT NULL,
+      replacement_type TEXT NOT NULL,
+      effort_multiplier REAL NOT NULL,
+      weekly_downloads INTEGER NOT NULL DEFAULT 0,
+      PRIMARY KEY (repo_full_name, module_name),
+      FOREIGN KEY (repo_full_name) REFERENCES target_repos(repo_full_name)
+    )
+  `);
+
+  db.run(
+    "CREATE INDEX idx_target_composite ON target_repos(composite_score DESC)",
+  );
+  db.run("CREATE INDEX idx_target_stars ON target_repos(stars DESC)");
+
+  const insertRepo = db.prepare(`
+    INSERT INTO target_repos VALUES (
+      $repo_full_name, $repo_url, $stars, $opportunity_count,
+      $days_since_last_commit, $days_since_last_release, $is_archived,
+      $open_pr_count, $contributor_count_recent, $has_contributing_md,
+      $external_prs_merged, $external_prs_closed,
+      $reach_score, $receptiveness_score, $bundle_opportunity,
+      $aggregate_effort, $composite_score,
+      $rank, $computed_at
+    )
+  `);
+
+  const insertOpp = db.prepare(`
+    INSERT OR IGNORE INTO target_repo_opportunities VALUES (
+      $repo_full_name, $module_name, $replacement, $replacement_type,
+      $effort_multiplier, $weekly_downloads
+    )
+  `);
+
+  const insertAll = db.transaction((repoList: ScoredTargetRepo[]) => {
+    for (const repo of repoList) {
+      insertRepo.run({
+        $repo_full_name: repo.repoFullName,
+        $repo_url: repo.repoUrl,
+        $stars: repo.stars,
+        $opportunity_count: repo.opportunities.length,
+        $days_since_last_commit: repo.daysSinceLastCommit,
+        $days_since_last_release: repo.daysSinceLastRelease,
+        $is_archived: repo.isArchived ? 1 : 0,
+        $open_pr_count: repo.openPrCount,
+        $contributor_count_recent: repo.contributorCountRecent,
+        $has_contributing_md: repo.hasContributingMd ? 1 : 0,
+        $external_prs_merged: repo.externalPrsMerged,
+        $external_prs_closed: repo.externalPrsClosed,
+        $reach_score: repo.reachScore,
+        $receptiveness_score: repo.receptivenessScore,
+        $bundle_opportunity: repo.bundleOpportunity,
+        $aggregate_effort: repo.aggregateEffort,
+        $composite_score: repo.compositeScore,
+        $rank: repo.rank,
+        $computed_at: repo.computedAt,
+      });
+
+      for (const opp of repo.opportunities) {
+        insertOpp.run({
+          $repo_full_name: repo.repoFullName,
+          $module_name: opp.moduleName,
+          $replacement: opp.replacement,
+          $replacement_type: opp.replacementType,
+          $effort_multiplier: opp.effortMultiplier,
+          $weekly_downloads: opp.weeklyDownloads,
+        });
+      }
+    }
+  });
+
+  insertAll(repos);
 }
 
 // ── Main output function ────────────────────────────────────────────
@@ -216,11 +334,13 @@ interface OutputPaths {
   leaderboard: string;
   stats: string;
   sqlite: string;
+  targetRepos: string;
 }
 
 export function generateOutputs(
   scored: ScoredPackage[],
   paths: OutputPaths,
+  targetRepos?: ScoredTargetRepo[],
 ) {
   // Leaderboard JSON (top 200)
   const leaderboard = scored.slice(0, 200).map(toLeaderboardEntry);
@@ -234,7 +354,38 @@ export function generateOutputs(
   writeFileSync(paths.stats, JSON.stringify(stats, null, 2));
   console.log(`  Wrote stats to ${paths.stats}`);
 
-  // SQLite
-  writeSqlite(scored, paths.sqlite);
+  // Target repos JSON (top 100)
+  if (targetRepos && targetRepos.length > 0) {
+    const targetEntries = targetRepos.slice(0, 100).map((repo) => ({
+      rank: repo.rank,
+      repoFullName: repo.repoFullName,
+      repoUrl: repo.repoUrl,
+      stars: repo.stars,
+      opportunityCount: repo.opportunities.length,
+      opportunities: repo.opportunities.map((o) => ({
+        moduleName: o.moduleName,
+        replacement: o.replacement,
+        replacementType: o.replacementType,
+        effortMultiplier: o.effortMultiplier,
+      })),
+      reachScore: Math.round(repo.reachScore * 1000) / 1000,
+      receptivenessScore: Math.round(repo.receptivenessScore * 1000) / 1000,
+      bundleOpportunity: Math.round(repo.bundleOpportunity * 1000) / 1000,
+      aggregateEffort: Math.round(repo.aggregateEffort * 1000) / 1000,
+      compositeScore: Math.round(repo.compositeScore * 10000) / 10000,
+    }));
+    ensureDir(paths.targetRepos);
+    writeFileSync(paths.targetRepos, JSON.stringify(targetEntries, null, 2));
+    console.log(
+      `  Wrote ${targetEntries.length} target repos to ${paths.targetRepos}`,
+    );
+  }
+
+  // SQLite (packages + target repos in same DB)
+  const db = writeSqlite(scored, paths.sqlite);
+  if (targetRepos && targetRepos.length > 0) {
+    writeTargetReposSqlite(db, targetRepos);
+  }
+  db.close();
   console.log(`  Wrote SQLite database to ${paths.sqlite}`);
 }

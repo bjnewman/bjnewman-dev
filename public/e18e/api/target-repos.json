@@ -1,0 +1,272 @@
+[
+  {
+    "rank": 1,
+    "repoFullName": "microsoft/TypeScript",
+    "repoUrl": "https://github.com/microsoft/TypeScript",
+    "stars": 107805,
+    "opportunityCount": 5,
+    "opportunities": [
+      {
+        "moduleName": "request",
+        "replacement": "undici or global fetch()",
+        "replacementType": "remove",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "colors",
+        "replacement": "picocolors or chalk",
+        "replacementType": "remove",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-map",
+        "replacement": "Array.prototype.map",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-filter",
+        "replacement": "Array.prototype.filter()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-reduce",
+        "replacement": "Array.prototype.reduce()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      }
+    ],
+    "reachScore": 0.757,
+    "receptivenessScore": 0.275,
+    "bundleOpportunity": 1,
+    "aggregateEffort": 1,
+    "compositeScore": 0.2083
+  },
+  {
+    "rank": 2,
+    "repoFullName": "pnpm/pnpm",
+    "repoUrl": "https://github.com/pnpm/pnpm",
+    "stars": 33944,
+    "opportunityCount": 4,
+    "opportunities": [
+      {
+        "moduleName": "make-fetch-happen",
+        "replacement": "global fetch()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-map",
+        "replacement": "Array.prototype.map",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-filter",
+        "replacement": "Array.prototype.filter()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-reduce",
+        "replacement": "Array.prototype.reduce()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      }
+    ],
+    "reachScore": 0.523,
+    "receptivenessScore": 0.275,
+    "bundleOpportunity": 0.861,
+    "aggregateEffort": 1,
+    "compositeScore": 0.1239
+  },
+  {
+    "rank": 3,
+    "repoFullName": "twbs/bootstrap",
+    "repoUrl": "https://github.com/twbs/bootstrap",
+    "stars": 173969,
+    "opportunityCount": 2,
+    "opportunities": [
+      {
+        "moduleName": "array-includes",
+        "replacement": "Array.prototype.includes",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-buffer-byte-length",
+        "replacement": "ArrayBuffer.prototype.byteLength",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      }
+    ],
+    "reachScore": 0.938,
+    "receptivenessScore": 0.275,
+    "bundleOpportunity": 0.431,
+    "aggregateEffort": 1,
+    "compositeScore": 0.1111
+  },
+  {
+    "rank": 4,
+    "repoFullName": "facebook/react",
+    "repoUrl": "https://github.com/facebook/react",
+    "stars": 242985,
+    "opportunityCount": 2,
+    "opportunities": [
+      {
+        "moduleName": "whatwg-fetch",
+        "replacement": "global fetch()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "isomorphic-fetch",
+        "replacement": "global fetch()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      }
+    ],
+    "reachScore": 0.864,
+    "receptivenessScore": 0.275,
+    "bundleOpportunity": 0.431,
+    "aggregateEffort": 1,
+    "compositeScore": 0.1023
+  },
+  {
+    "rank": 5,
+    "repoFullName": "facebook/create-react-app",
+    "repoUrl": "https://github.com/facebook/create-react-app",
+    "stars": 103969,
+    "opportunityCount": 2,
+    "opportunities": [
+      {
+        "moduleName": "array-includes",
+        "replacement": "Array.prototype.includes",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-find",
+        "replacement": "Array.prototype.find()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      }
+    ],
+    "reachScore": 0.77,
+    "receptivenessScore": 0.275,
+    "bundleOpportunity": 0.431,
+    "aggregateEffort": 1,
+    "compositeScore": 0.0912
+  },
+  {
+    "rank": 6,
+    "repoFullName": "storybookjs/storybook",
+    "repoUrl": "https://github.com/storybookjs/storybook",
+    "stars": 89233,
+    "opportunityCount": 2,
+    "opportunities": [
+      {
+        "moduleName": "tape",
+        "replacement": "node:test",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "unfetch",
+        "replacement": "global fetch()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      }
+    ],
+    "reachScore": 0.556,
+    "receptivenessScore": 0.275,
+    "bundleOpportunity": 0.431,
+    "aggregateEffort": 1,
+    "compositeScore": 0.0658
+  },
+  {
+    "rank": 7,
+    "repoFullName": "npm/cli",
+    "repoUrl": "https://github.com/npm/cli",
+    "stars": 9513,
+    "opportunityCount": 2,
+    "opportunities": [
+      {
+        "moduleName": "make-fetch-happen",
+        "replacement": "global fetch()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array.from",
+        "replacement": "Array.from",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      }
+    ],
+    "reachScore": 0.28,
+    "receptivenessScore": 0.275,
+    "bundleOpportunity": 0.431,
+    "aggregateEffort": 1,
+    "compositeScore": 0.0332
+  },
+  {
+    "rank": 8,
+    "repoFullName": "invertase/react-native-firebase",
+    "repoUrl": "https://github.com/invertase/react-native-firebase",
+    "stars": 12246,
+    "opportunityCount": 3,
+    "opportunities": [
+      {
+        "moduleName": "array-map",
+        "replacement": "Array.prototype.map",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-filter",
+        "replacement": "Array.prototype.filter()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-reduce",
+        "replacement": "Array.prototype.reduce()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      }
+    ],
+    "reachScore": 0.077,
+    "receptivenessScore": 0.275,
+    "bundleOpportunity": 0.683,
+    "aggregateEffort": 1,
+    "compositeScore": 0.0144
+  },
+  {
+    "rank": 9,
+    "repoFullName": "airyland/vux",
+    "repoUrl": "https://github.com/airyland/vux",
+    "stars": 17535,
+    "opportunityCount": 2,
+    "opportunities": [
+      {
+        "moduleName": "array-map",
+        "replacement": "Array.prototype.map",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      },
+      {
+        "moduleName": "array-filter",
+        "replacement": "Array.prototype.filter()",
+        "replacementType": "native",
+        "effortMultiplier": 1
+      }
+    ],
+    "reachScore": 0.113,
+    "receptivenessScore": 0.275,
+    "bundleOpportunity": 0.431,
+    "aggregateEffort": 1,
+    "compositeScore": 0.0134
+  }
+]

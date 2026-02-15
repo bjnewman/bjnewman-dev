@@ -4,8 +4,8 @@ import { createRateLimiter, parallelMap } from "./utils/rate-limiter.ts";
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
-// npm has no documented rate limit, but be polite
-const npmFetch = createRateLimiter(300);
+// npm rate limits aggressively on bursts — stay conservative
+const npmFetch = createRateLimiter(100);
 // GitHub: 5000/hr with token
 const githubFetch = createRateLimiter(GITHUB_TOKEN ? 4500 : 55);
 
@@ -13,27 +13,35 @@ const githubFetch = createRateLimiter(GITHUB_TOKEN ? 4500 : 55);
 
 /**
  * Bulk fetch weekly downloads for up to 128 packages at once.
+ * npm bulk API does NOT support scoped packages (@scope/pkg) —
+ * the slash is interpreted as a path separator and returns 400.
+ * Scoped packages are fetched individually.
  */
 async function fetchBulkDownloads(
   packageNames: string[],
 ): Promise<Map<string, number>> {
   const results = new Map<string, number>();
-  // npm bulk API accepts up to 128 scoped/unscoped names, comma-separated
+
+  // Separate scoped packages — bulk API can't handle them
+  const unscoped = packageNames.filter((n) => !n.startsWith("@"));
+  const scoped = packageNames.filter((n) => n.startsWith("@"));
+
+  // Bulk-fetch unscoped packages in chunks of 128
   const chunks: string[][] = [];
-  for (let i = 0; i < packageNames.length; i += 128) {
-    chunks.push(packageNames.slice(i, i + 128));
+  for (let i = 0; i < unscoped.length; i += 128) {
+    chunks.push(unscoped.slice(i, i + 128));
   }
 
   for (const chunk of chunks) {
-    const names = chunk.map(encodeURIComponent).join(",");
+    // npm downloads API expects raw package names (no URI encoding)
+    const names = chunk.join(",");
     const url = `https://api.npmjs.org/downloads/point/last-week/${names}`;
     try {
       const response = await npmFetch(url);
       if (!response.ok) {
-        // Fallback: fetch individually for this chunk
+        console.warn(`  Bulk download fetch failed (${response.status}), fetching individually...`);
         for (const name of chunk) {
-          const dl = await fetchSingleDownloads(name);
-          results.set(name, dl);
+          results.set(name, await fetchSingleDownloads(name));
         }
         continue;
       }
@@ -49,12 +57,18 @@ async function fetchBulkDownloads(
     }
   }
 
+  // Fetch scoped packages individually
+  for (const name of scoped) {
+    results.set(name, await fetchSingleDownloads(name));
+  }
+
   return results;
 }
 
 async function fetchSingleDownloads(packageName: string): Promise<number> {
   try {
-    const url = `https://api.npmjs.org/downloads/point/last-week/${encodeURIComponent(packageName)}`;
+    // npm downloads API expects raw package names — scoped names use literal @ and /
+    const url = `https://api.npmjs.org/downloads/point/last-week/${packageName}`;
     const response = await npmFetch(url);
     if (!response.ok) return 0;
     const data = (await response.json()) as { downloads: number };
@@ -133,7 +147,7 @@ function normalizeGitUrl(url: string): string | null {
 
 // ── GitHub enrichment ───────────────────────────────────────────────
 
-interface GitHubData {
+export interface GitHubData {
   daysSinceLastCommit: number | null;
   daysSinceLastRelease: number | null;
   isArchived: boolean;
@@ -144,7 +158,7 @@ interface GitHubData {
   externalPrsClosed: number;
 }
 
-const EMPTY_GITHUB: GitHubData = {
+export const EMPTY_GITHUB: GitHubData = {
   daysSinceLastCommit: null,
   daysSinceLastRelease: null,
   isArchived: false,
@@ -185,7 +199,7 @@ function daysSince(dateStr: string | null | undefined): number | null {
   return Math.floor((Date.now() - date.getTime()) / (1000 * 60 * 60 * 24));
 }
 
-async function fetchGitHubData(repoUrl: string): Promise<GitHubData> {
+export async function fetchGitHubData(repoUrl: string): Promise<GitHubData> {
   const parsed = parseGitHubOwnerRepo(repoUrl);
   if (!parsed || !GITHUB_TOKEN) return EMPTY_GITHUB;
 

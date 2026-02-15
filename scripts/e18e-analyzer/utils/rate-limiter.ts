@@ -22,17 +22,18 @@ export function createRateLimiter(requestsPerMinute: number) {
       await new Promise((resolve) => setTimeout(resolve, waitTime));
     }
 
-    const response = await fetch(url, init);
+    let response = await fetch(url, init);
 
-    // If rate limited, wait and retry once
-    if (response.status === 429) {
+    // Retry with exponential backoff on 429
+    for (let attempt = 0; attempt < 3 && response.status === 429; attempt++) {
       const retryAfter = response.headers.get("retry-after");
-      const waitMs = retryAfter ? parseInt(retryAfter, 10) * 1000 : 60_000;
-      console.warn(`  Rate limited, waiting ${waitMs / 1000}s...`);
+      const baseMs = retryAfter ? Math.max(parseInt(retryAfter, 10) * 1000, 1000) : 1000;
+      const waitMs = baseMs * (attempt + 1);
+      console.warn(`  Rate limited, waiting ${waitMs / 1000}s (attempt ${attempt + 1}/3)...`);
       await new Promise((resolve) => setTimeout(resolve, waitMs));
-      // Push future slots out
-      nextAvailableSlot = Date.now() + minDelayMs;
-      return fetch(url, init);
+      // Push future slots out to avoid immediate re-limiting
+      nextAvailableSlot = Date.now() + minDelayMs * 3;
+      response = await fetch(url, init);
     }
 
     return response;

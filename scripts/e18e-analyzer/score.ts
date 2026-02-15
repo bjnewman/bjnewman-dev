@@ -75,19 +75,31 @@ export function computeEffort(pkg: PackageData): number {
 
 // ── Merge probability ───────────────────────────────────────────────
 
+function daysSinceDate(dateStr: string | null): number | null {
+  if (!dateStr) return null;
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return null;
+  return Math.floor((Date.now() - d.getTime()) / (1000 * 60 * 60 * 24));
+}
+
 export function computeMergeProbability(pkg: PackageData): number {
   if (pkg.isArchived) return 0.0;
 
+  // Use lastPublishDate as fallback when GitHub data is unavailable
+  const daysSincePublish = daysSinceDate(pkg.lastPublishDate);
+
   // Activity signal: sigmoid centered at 180 days, width 60
+  const activityDays = pkg.daysSinceLastCommit ?? daysSincePublish;
   const activity =
-    pkg.daysSinceLastCommit !== null
-      ? sigmoid(pkg.daysSinceLastCommit, 180, 60)
+    activityDays !== null
+      ? sigmoid(activityDays, 180, 60)
       : 0.3; // no data = cautious
 
   // Release freshness: sigmoid centered at 365 days, width 120
+  const releaseDays = pkg.daysSinceLastRelease ?? daysSincePublish;
   const release =
-    pkg.daysSinceLastRelease !== null
-      ? sigmoid(pkg.daysSinceLastRelease, 365, 120)
+    releaseDays !== null
+      ? sigmoid(releaseDays, 365, 120)
       : 0.3;
 
   // External PR merge ratio
@@ -120,7 +132,8 @@ export function computeMergeProbability(pkg: PackageData): number {
 export function computeLiveness(pkg: PackageData): number {
   if (pkg.isArchived) return 0.05;
 
-  const days = pkg.daysSinceLastCommit;
+  // Fall back to lastPublishDate when GitHub data unavailable
+  const days = pkg.daysSinceLastCommit ?? daysSinceDate(pkg.lastPublishDate);
   if (days === null) return 0.5; // no data = uncertain
 
   if (days > 730) return 0.10;
@@ -133,7 +146,8 @@ export function computeLiveness(pkg: PackageData): number {
 export function classifyStatus(pkg: PackageData): PackageStatus {
   if (pkg.isArchived) return "archived";
 
-  const days = pkg.daysSinceLastCommit;
+  // Fall back to lastPublishDate when GitHub data unavailable
+  const days = pkg.daysSinceLastCommit ?? daysSinceDate(pkg.lastPublishDate);
   if (days === null) return "stale"; // no data = assume stale
   if (days > 365) return "dormant";
   if (days > 90) return "stale";

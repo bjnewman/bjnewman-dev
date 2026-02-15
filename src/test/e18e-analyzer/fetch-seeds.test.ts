@@ -1,10 +1,6 @@
 import { describe, it, expect } from "vitest";
 import type { Candidate } from "../../../scripts/e18e-analyzer/types.ts";
 
-// Source modules use node:fs/node:module which aren't available in the
-// browser test runner. Instead, test the candidate shape contract and
-// deduplication logic with inline fixtures.
-
 function validateCandidate(c: Candidate) {
   expect(c.moduleName).toBeTruthy();
   expect(["module-replacements", "deprecated", "node-builtin", "polyfill-decay"]).toContain(c.source);
