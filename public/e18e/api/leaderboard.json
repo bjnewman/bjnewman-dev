@@ -1,14 +1,126 @@
 [
   {
     "rank": 1,
+    "moduleName": "core-js",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "target modern engines only",
+    "weeklyDownloads": 47274680,
+    "dependentCount": 90936,
+    "compositeScore": 0.4997,
+    "impactScore": 0.891,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.561,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "active",
+    "repoUrl": "https://github.com/zloirock/core-js",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 2,
+    "moduleName": "chokidar",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "node:fs/promises watch() (Node 20+)",
+    "weeklyDownloads": 115098309,
+    "dependentCount": 25745,
+    "compositeScore": 0.4485,
+    "impactScore": 0.848,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.529,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "active",
+    "repoUrl": "https://github.com/paulmillr/chokidar",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      }
+    ]
+  },
+  {
+    "rank": 3,
+    "moduleName": "whatwg-url",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "global URL",
+    "weeklyDownloads": 127053890,
+    "dependentCount": 2451,
+    "compositeScore": 0.4393,
+    "impactScore": 0.777,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.565,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/jsdom/whatwg-url",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "tailwindlabs/tailwindcss",
+        "downloads": 93436
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "lerna/lerna",
+        "downloads": 36081
+      }
+    ]
+  },
+  {
+    "rank": 4,
+    "moduleName": "minimist",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "node:util parseArgs()",
+    "weeklyDownloads": 115024151,
+    "dependentCount": 40323,
+    "compositeScore": 0.4315,
+    "impactScore": 0.883,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.489,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "stale",
+    "repoUrl": "https://github.com/minimistjs/minimist",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      }
+    ]
+  },
+  {
+    "rank": 5,
     "moduleName": "whatwg-fetch",
     "source": "node-builtin",
     "replacementType": "native",
     "replacement": "global fetch()",
     "weeklyDownloads": 17137008,
     "dependentCount": 11141,
-    "compositeScore": 0.4661,
-    "impactScore": 0.869,
+    "compositeScore": 0.4303,
+    "impactScore": 0.803,
     "effortMultiplier": 1,
     "mergeProbability": 0.536,
     "livenessPenalty": 1,
@@ -23,15 +135,15 @@
     ]
   },
   {
-    "rank": 2,
+    "rank": 6,
     "moduleName": "request",
     "source": "deprecated",
     "replacementType": "remove",
     "replacement": "undici or global fetch()",
     "weeklyDownloads": 14051085,
     "dependentCount": 68156,
-    "compositeScore": 0.4641,
-    "impactScore": 0.95,
+    "compositeScore": 0.4242,
+    "impactScore": 0.868,
     "effortMultiplier": 1,
     "mergeProbability": 0.489,
     "livenessPenalty": 1,
@@ -54,15 +166,112 @@
     ]
   },
   {
-    "rank": 3,
+    "rank": 7,
+    "moduleName": "ini",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "remove or inline parser",
+    "weeklyDownloads": 104646124,
+    "dependentCount": 5114,
+    "compositeScore": 0.4022,
+    "impactScore": 0.808,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.498,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "stale",
+    "repoUrl": "https://github.com/npm/ini",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "vuejs/vue-cli",
+        "downloads": 29658
+      }
+    ]
+  },
+  {
+    "rank": 8,
+    "moduleName": "body-parser",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: body-parser",
+    "weeklyDownloads": 73212537,
+    "dependentCount": 26115,
+    "compositeScore": 0.4017,
+    "impactScore": 0.852,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.555,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "active",
+    "repoUrl": "https://github.com/expressjs/body-parser",
+    "topDependents": [
+      {
+        "name": "axios/axios",
+        "downloads": 108584
+      }
+    ]
+  },
+  {
+    "rank": 9,
+    "moduleName": "string-width",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: string-width",
+    "weeklyDownloads": 342666003,
+    "dependentCount": 8773,
+    "compositeScore": 0.3885,
+    "impactScore": 0.861,
+    "effortMultiplier": 0.8,
+    "mergeProbability": 0.564,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "active",
+    "repoUrl": "https://github.com/sindresorhus/string-width",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "prettier/prettier",
+        "downloads": 51457
+      },
+      {
+        "name": "tailwindlabs/tailwindcss",
+        "downloads": 93436
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      }
+    ]
+  },
+  {
+    "rank": 10,
     "moduleName": "colors",
     "source": "deprecated",
     "replacementType": "remove",
     "replacement": "picocolors or chalk",
     "weeklyDownloads": 21377982,
     "dependentCount": 33453,
-    "compositeScore": 0.4103,
-    "impactScore": 0.923,
+    "compositeScore": 0.3752,
+    "impactScore": 0.844,
     "effortMultiplier": 1,
     "mergeProbability": 0.445,
     "livenessPenalty": 1,
@@ -81,15 +290,134 @@
     ]
   },
   {
-    "rank": 4,
+    "rank": 11,
+    "moduleName": "read-pkg",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: read-pkg",
+    "weeklyDownloads": 44919600,
+    "dependentCount": 2802,
+    "compositeScore": 0.369,
+    "impactScore": 0.765,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.567,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/sindresorhus/read-pkg",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      },
+      {
+        "name": "vuejs/vue-cli",
+        "downloads": 29658
+      }
+    ]
+  },
+  {
+    "rank": 12,
+    "moduleName": "qs",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: qs",
+    "weeklyDownloads": 114244827,
+    "dependentCount": 21954,
+    "compositeScore": 0.3689,
+    "impactScore": 0.865,
+    "effortMultiplier": 0.75,
+    "mergeProbability": 0.568,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "active",
+    "repoUrl": "https://github.com/ljharb/qs",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 13,
+    "moduleName": "rimraf",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: rimraf",
+    "weeklyDownloads": 119539217,
+    "dependentCount": 254133,
+    "compositeScore": 0.3666,
+    "impactScore": 0.777,
+    "effortMultiplier": 0.9,
+    "mergeProbability": 0.524,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/isaacs/rimraf",
+    "topDependents": []
+  },
+  {
+    "rank": 14,
+    "moduleName": "emoji-regex",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: emoji-regex",
+    "weeklyDownloads": 293076141,
+    "dependentCount": 4660,
+    "compositeScore": 0.3612,
+    "impactScore": 0.823,
+    "effortMultiplier": 0.9,
+    "mergeProbability": 0.488,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "stale",
+    "repoUrl": "https://github.com/mathiasbynens/emoji-regex",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "mui/material-ui",
+        "downloads": 97797
+      },
+      {
+        "name": "tailwindlabs/tailwindcss",
+        "downloads": 93436
+      },
+      {
+        "name": "ueberdosis/tiptap",
+        "downloads": 34911
+      }
+    ]
+  },
+  {
+    "rank": 15,
     "moduleName": "make-fetch-happen",
     "source": "node-builtin",
     "replacementType": "native",
     "replacement": "global fetch()",
     "weeklyDownloads": 28346849,
     "dependentCount": 536,
-    "compositeScore": 0.3795,
-    "impactScore": 0.731,
+    "compositeScore": 0.3571,
+    "impactScore": 0.688,
     "effortMultiplier": 1,
     "mergeProbability": 0.519,
     "livenessPenalty": 1,
@@ -116,19 +444,658 @@
     ]
   },
   {
-    "rank": 5,
+    "rank": 16,
+    "moduleName": "ora",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: ora",
+    "weeklyDownloads": 55887049,
+    "dependentCount": 54477,
+    "compositeScore": 0.353,
+    "impactScore": 0.891,
+    "effortMultiplier": 0.7,
+    "mergeProbability": 0.566,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "active",
+    "repoUrl": "https://github.com/sindresorhus/ora",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "facebook/react",
+        "downloads": 242985
+      }
+    ]
+  },
+  {
+    "rank": 17,
+    "moduleName": "tempy",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: tempy",
+    "weeklyDownloads": 12530063,
+    "dependentCount": 2764,
+    "compositeScore": 0.3523,
+    "impactScore": 0.733,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.565,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/sindresorhus/tempy",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 18,
+    "moduleName": "object.getownpropertydescriptors",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.getOwnPropertyDescriptors",
+    "weeklyDownloads": 10131320,
+    "dependentCount": 618,
+    "compositeScore": 0.3521,
+    "impactScore": 0.653,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.54,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/es-shims/object.getownpropertydescriptors",
+    "topDependents": [
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 19,
+    "moduleName": "query-string",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "URLSearchParams",
+    "weeklyDownloads": 15961457,
+    "dependentCount": 5305,
+    "compositeScore": 0.3487,
+    "impactScore": 0.764,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.457,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/query-string",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 20,
+    "moduleName": "md5",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: md5",
+    "weeklyDownloads": 11377765,
+    "dependentCount": 8567,
+    "compositeScore": 0.3279,
+    "impactScore": 0.791,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.488,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/pvorb/node-md5",
+    "topDependents": [
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "ant-design/ant-design",
+        "downloads": 97486
+      },
+      {
+        "name": "n8n-io/n8n",
+        "downloads": 174377
+      }
+    ]
+  },
+  {
+    "rank": 21,
+    "moduleName": "strip-ansi",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: strip-ansi",
+    "weeklyDownloads": 382601700,
+    "dependentCount": 14426,
+    "compositeScore": 0.327,
+    "impactScore": 0.868,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.443,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "stale",
+    "repoUrl": "https://github.com/chalk/strip-ansi",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 22,
+    "moduleName": "uuid",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "crypto.randomUUID()",
+    "weeklyDownloads": 205086851,
+    "dependentCount": 71545,
+    "compositeScore": 0.3267,
+    "impactScore": 0.737,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.443,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/uuidjs/uuid",
+    "topDependents": []
+  },
+  {
+    "rank": 23,
+    "moduleName": "dotenv",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: dotenv",
+    "weeklyDownloads": 93878051,
+    "dependentCount": 118516,
+    "compositeScore": 0.3166,
+    "impactScore": 0.743,
+    "effortMultiplier": 0.75,
+    "mergeProbability": 0.568,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/motdotla/dotenv",
+    "topDependents": []
+  },
+  {
+    "rank": 24,
+    "moduleName": "glob",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: glob",
+    "weeklyDownloads": 270041284,
+    "dependentCount": 71924,
+    "compositeScore": 0.3165,
+    "impactScore": 0.743,
+    "effortMultiplier": 0.75,
+    "mergeProbability": 0.568,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/isaacs/node-glob",
+    "topDependents": []
+  },
+  {
+    "rank": 25,
+    "moduleName": "find-up",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: find-up",
+    "weeklyDownloads": 198733581,
+    "dependentCount": 5422,
+    "compositeScore": 0.3123,
+    "impactScore": 0.812,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.453,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/find-up",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 26,
+    "moduleName": "dot-prop",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: dot-prop",
+    "weeklyDownloads": 31170119,
+    "dependentCount": 2215,
+    "compositeScore": 0.304,
+    "impactScore": 0.748,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.478,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/dot-prop",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "lerna/lerna",
+        "downloads": 36081
+      }
+    ]
+  },
+  {
+    "rank": 27,
+    "moduleName": "make-dir",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: mkdirp",
+    "weeklyDownloads": 102073395,
+    "dependentCount": 2774,
+    "compositeScore": 0.3031,
+    "impactScore": 0.755,
+    "effortMultiplier": 0.9,
+    "mergeProbability": 0.446,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/make-dir",
+    "topDependents": [
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 28,
+    "moduleName": "is-npm",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use process.env.npm_config_user_agent?.startsWith(\"npm\")",
+    "weeklyDownloads": 8808250,
+    "dependentCount": 701,
+    "compositeScore": 0.2871,
+    "impactScore": 0.678,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.446,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/is-npm",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "pnpm/pnpm",
+        "downloads": 33944
+      },
+      {
+        "name": "ionic-team/ionic-framework",
+        "downloads": 52352
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      },
+      {
+        "name": "sindresorhus/update-notifier",
+        "downloads": 1770
+      }
+    ]
+  },
+  {
+    "rank": 29,
+    "moduleName": "axios",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: fetch",
+    "weeklyDownloads": 87009132,
+    "dependentCount": 244509,
+    "compositeScore": 0.2838,
+    "impactScore": 0.77,
+    "effortMultiplier": 0.65,
+    "mergeProbability": 0.567,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/axios/axios",
+    "topDependents": []
+  },
+  {
+    "rank": 30,
+    "moduleName": "swagger-ui",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "@scalar/api-reference or stoplight/elements",
+    "weeklyDownloads": 141527,
+    "dependentCount": 236,
+    "compositeScore": 0.2808,
+    "impactScore": 0.52,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.54,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/swagger-api/swagger-ui",
+    "topDependents": [
+      {
+        "name": "microsoft/typespec",
+        "downloads": 5586
+      },
+      {
+        "name": "scottie1984/swagger-ui-express",
+        "downloads": 1457
+      },
+      {
+        "name": "swagger-api/swagger-editor",
+        "downloads": 9411
+      }
+    ]
+  },
+  {
+    "rank": 31,
+    "moduleName": "chalk",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: chalk",
+    "weeklyDownloads": 400628773,
+    "dependentCount": 184852,
+    "compositeScore": 0.2782,
+    "impactScore": 0.787,
+    "effortMultiplier": 0.7,
+    "mergeProbability": 0.505,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/chalk/chalk",
+    "topDependents": []
+  },
+  {
+    "rank": 32,
+    "moduleName": "npm-run-all",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: npm-run-all",
+    "weeklyDownloads": 3860989,
+    "dependentCount": 66223,
+    "compositeScore": 0.27,
+    "impactScore": 0.842,
+    "effortMultiplier": 0.7,
+    "mergeProbability": 0.458,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "stale",
+    "repoUrl": "https://github.com/mysticatea/npm-run-all",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 33,
+    "moduleName": "read-package-up",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: read-package-up",
+    "weeklyDownloads": 5159302,
+    "dependentCount": 381,
+    "compositeScore": 0.2668,
+    "impactScore": 0.611,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.513,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/read-package-up",
+    "topDependents": [
+      {
+        "name": "semantic-release/semantic-release",
+        "downloads": 23248
+      }
+    ]
+  },
+  {
+    "rank": 34,
+    "moduleName": "js-yaml",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: js-yaml",
+    "weeklyDownloads": 165913806,
+    "dependentCount": 29027,
+    "compositeScore": 0.2538,
+    "impactScore": 0.697,
+    "effortMultiplier": 0.7,
+    "mergeProbability": 0.52,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/nodeca/js-yaml",
+    "topDependents": []
+  },
+  {
+    "rank": 35,
+    "moduleName": "globby",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: globby",
+    "weeklyDownloads": 77774332,
+    "dependentCount": 17384,
+    "compositeScore": 0.2535,
+    "impactScore": 0.663,
+    "effortMultiplier": 0.7,
+    "mergeProbability": 0.546,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/sindresorhus/globby",
+    "topDependents": []
+  },
+  {
+    "rank": 36,
+    "moduleName": "yargs-parser",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "node:util parseArgs()",
+    "weeklyDownloads": 152292480,
+    "dependentCount": 5266,
+    "compositeScore": 0.2421,
+    "impactScore": 0.796,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.304,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/yargs/yargs-parser",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "mochajs/mocha",
+        "downloads": 22872
+      }
+    ]
+  },
+  {
+    "rank": 37,
+    "moduleName": "lint-staged",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lint-staged",
+    "weeklyDownloads": 17203883,
+    "dependentCount": 117101,
+    "compositeScore": 0.242,
+    "impactScore": 0.71,
+    "effortMultiplier": 0.65,
+    "mergeProbability": 0.524,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/lint-staged/lint-staged",
+    "topDependents": []
+  },
+  {
+    "rank": 38,
+    "moduleName": "symbol.prototype.description",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Symbol.prototype.description",
+    "weeklyDownloads": 869069,
+    "dependentCount": 56,
+    "compositeScore": 0.2412,
+    "impactScore": 0.447,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.54,
+    "livenessPenalty": 1,
+    "tier": 3,
+    "status": "active",
+    "repoUrl": "https://github.com/es-shims/Symbol.prototype.description",
+    "topDependents": [
+      {
+        "name": "hc-oss/react-multi-select-component",
+        "downloads": 389
+      },
+      {
+        "name": "airbnb/js-shims",
+        "downloads": 124
+      },
+      {
+        "name": "stevensacks/storybook-i18n",
+        "downloads": 12
+      },
+      {
+        "name": "zillow/javascript",
+        "downloads": 23
+      },
+      {
+        "name": "ljharb/es-value-fixtures",
+        "downloads": 2
+      }
+    ]
+  },
+  {
+    "rank": 39,
+    "moduleName": "crypto-js",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: crypto-js",
+    "weeklyDownloads": 12791625,
+    "dependentCount": 18293,
+    "compositeScore": 0.2391,
+    "impactScore": 0.817,
+    "effortMultiplier": 0.6,
+    "mergeProbability": 0.488,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "stale",
+    "repoUrl": "https://github.com/brix/crypto-js",
+    "topDependents": [
+      {
+        "name": "vitejs/vite",
+        "downloads": 78100
+      },
+      {
+        "name": "n8n-io/n8n",
+        "downloads": 174377
+      }
+    ]
+  },
+  {
+    "rank": 40,
+    "moduleName": "xmldom",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: xmldom",
+    "weeklyDownloads": 1525200,
+    "dependentCount": 3350,
+    "compositeScore": 0.2375,
+    "impactScore": 0.696,
+    "effortMultiplier": 0.7,
+    "mergeProbability": 0.488,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/xmldom/xmldom",
+    "topDependents": [
+      {
+        "name": "expo/expo",
+        "downloads": 47191
+      },
+      {
+        "name": "nrwl/nx",
+        "downloads": 28135
+      },
+      {
+        "name": "lit/lit",
+        "downloads": 21146
+      }
+    ]
+  },
+  {
+    "rank": 41,
     "moduleName": "array-includes",
     "source": "module-replacements",
     "replacementType": "native",
     "replacement": "Array.prototype.includes",
     "weeklyDownloads": 44993829,
     "dependentCount": 1848,
-    "compositeScore": 0.254,
-    "impactScore": 0.815,
+    "compositeScore": 0.2354,
+    "impactScore": 0.755,
     "effortMultiplier": 1,
     "mergeProbability": 0.312,
     "livenessPenalty": 1,
-    "tier": 1,
+    "tier": 2,
     "status": "stale",
     "repoUrl": "https://github.com/es-shims/array-includes",
     "topDependents": [
@@ -155,15 +1122,1298 @@
     ]
   },
   {
-    "rank": 6,
+    "rank": 42,
+    "moduleName": "string.prototype.replaceall",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "String.prototype.replaceAll",
+    "weeklyDownloads": 184568,
+    "dependentCount": 103,
+    "compositeScore": 0.2257,
+    "impactScore": 0.503,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.449,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/es-shims/String.prototype.replaceAll",
+    "topDependents": [
+      {
+        "name": "pnpm/pnpm",
+        "downloads": 33944
+      }
+    ]
+  },
+  {
+    "rank": 43,
+    "moduleName": "execa",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: execa",
+    "weeklyDownloads": 127313614,
+    "dependentCount": 27190,
+    "compositeScore": 0.2202,
+    "impactScore": 0.69,
+    "effortMultiplier": 0.6,
+    "mergeProbability": 0.532,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/sindresorhus/execa",
+    "topDependents": []
+  },
+  {
+    "rank": 44,
+    "moduleName": "pkg-dir",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: pkg-dir",
+    "weeklyDownloads": 73014749,
+    "dependentCount": 4416,
+    "compositeScore": 0.2132,
+    "impactScore": 0.796,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.315,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/pkg-dir",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "facebook/react",
+        "downloads": 242985
+      }
+    ]
+  },
+  {
+    "rank": 45,
+    "moduleName": "formidable",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "busboy or @fastify/busboy",
+    "weeklyDownloads": 16285468,
+    "dependentCount": 2709,
+    "compositeScore": 0.2128,
+    "impactScore": 0.734,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.29,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": null,
+    "topDependents": [
+      {
+        "name": "axios/axios",
+        "downloads": 108584
+      }
+    ]
+  },
+  {
+    "rank": 46,
+    "moduleName": "json-stable-stringify",
+    "source": "polyfill-decay",
+    "replacementType": "native",
+    "replacement": "JSON.stringify() with sorted keys",
+    "weeklyDownloads": 10183863,
+    "dependentCount": 2402,
+    "compositeScore": 0.1992,
+    "impactScore": 0.732,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.272,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/ljharb/json-stable-stringify",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "prettier/prettier",
+        "downloads": 51457
+      },
+      {
+        "name": "eslint/eslint",
+        "downloads": 26863
+      }
+    ]
+  },
+  {
+    "rank": 47,
+    "moduleName": "osenv",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "node:os",
+    "weeklyDownloads": 4743596,
+    "dependentCount": 919,
+    "compositeScore": 0.1965,
+    "impactScore": 0.673,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.292,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/npm/osenv",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "pnpm/pnpm",
+        "downloads": 33944
+      },
+      {
+        "name": "browserify/browserify",
+        "downloads": 14691
+      }
+    ]
+  },
+  {
+    "rank": 48,
+    "moduleName": "object-assign",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.assign",
+    "weeklyDownloads": 80329223,
+    "dependentCount": 14893,
+    "compositeScore": 0.1949,
+    "impactScore": 0.851,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.229,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/object-assign",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "facebook/react",
+        "downloads": 242985
+      }
+    ]
+  },
+  {
+    "rank": 49,
+    "moduleName": "depcheck",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: depcheck",
+    "weeklyDownloads": 1710860,
+    "dependentCount": 2936,
+    "compositeScore": 0.1929,
+    "impactScore": 0.689,
+    "effortMultiplier": 0.65,
+    "mergeProbability": 0.431,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/depcheck/depcheck",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "webdriverio/webdriverio",
+        "downloads": 9718
+      },
+      {
+        "name": "electron-userland/electron-builder",
+        "downloads": 14447
+      }
+    ]
+  },
+  {
+    "rank": 50,
+    "moduleName": "shortid",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: shortid",
+    "weeklyDownloads": 892730,
+    "dependentCount": 4420,
+    "compositeScore": 0.1907,
+    "impactScore": 0.702,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.32,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/dylang/shortid",
+    "topDependents": [
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "vuejs/vue-cli",
+        "downloads": 29658
+      }
+    ]
+  },
+  {
+    "rank": 51,
+    "moduleName": "reflect.ownkeys",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Reflect.ownKeys",
+    "weeklyDownloads": 726170,
+    "dependentCount": 43,
+    "compositeScore": 0.187,
+    "impactScore": 0.338,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.553,
+    "livenessPenalty": 1,
+    "tier": 3,
+    "status": "active",
+    "repoUrl": "https://github.com/es-shims/Reflect.ownKeys",
+    "topDependents": []
+  },
+  {
+    "rank": 52,
+    "moduleName": "fs-extra",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: fs-extra",
+    "weeklyDownloads": 144171639,
+    "dependentCount": 114434,
+    "compositeScore": 0.1836,
+    "impactScore": 0.749,
+    "effortMultiplier": 0.45,
+    "mergeProbability": 0.544,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/jprichardson/node-fs-extra",
+    "topDependents": []
+  },
+  {
+    "rank": 53,
+    "moduleName": "object.entries",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.entries",
+    "weeklyDownloads": 36706596,
+    "dependentCount": 1738,
+    "compositeScore": 0.182,
+    "impactScore": 0.744,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.245,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/es-shims/Object.entries",
+    "topDependents": [
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "airbnb/javascript",
+        "downloads": 147197
+      }
+    ]
+  },
+  {
+    "rank": 54,
+    "moduleName": "find-cache-dir",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: find-cache-dir",
+    "weeklyDownloads": 40807880,
+    "dependentCount": 2520,
+    "compositeScore": 0.1685,
+    "impactScore": 0.746,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.266,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/find-cache-dir",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 55,
+    "moduleName": "read-installed",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "@npmcli/arborist",
+    "weeklyDownloads": 1173602,
+    "dependentCount": 160,
+    "compositeScore": 0.1565,
+    "impactScore": 0.536,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.292,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/isaacs/read-installed",
+    "topDependents": [
+      {
+        "name": "npm/cli",
+        "downloads": 9513
+      }
+    ]
+  },
+  {
+    "rank": 56,
+    "moduleName": "builtin-modules",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: builtin-modules",
+    "weeklyDownloads": 17324161,
+    "dependentCount": 1846,
+    "compositeScore": 0.1554,
+    "impactScore": 0.734,
+    "effortMultiplier": 0.9,
+    "mergeProbability": 0.235,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/builtin-modules",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "prettier/prettier",
+        "downloads": 51457
+      },
+      {
+        "name": "vitejs/vite",
+        "downloads": 78100
+      }
+    ]
+  },
+  {
+    "rank": 57,
+    "moduleName": "array.prototype.reduce",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.reduce",
+    "weeklyDownloads": 7245372,
+    "dependentCount": 299,
+    "compositeScore": 0.1495,
+    "impactScore": 0.611,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.245,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.reduce",
+    "topDependents": [
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "ant-design/ant-design-icons",
+        "downloads": 1055
+      },
+      {
+        "name": "Uniswap/v2-core",
+        "downloads": 3213
+      },
+      {
+        "name": "devfolioco/react-otp-input",
+        "downloads": 699
+      }
+    ]
+  },
+  {
+    "rank": 58,
+    "moduleName": "is-builtin-module",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: is-builtin-module",
+    "weeklyDownloads": 8943484,
+    "dependentCount": 670,
+    "compositeScore": 0.1423,
+    "impactScore": 0.672,
+    "effortMultiplier": 0.9,
+    "mergeProbability": 0.235,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/is-builtin-module",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      }
+    ]
+  },
+  {
+    "rank": 59,
+    "moduleName": "lodash-es",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 25553075,
+    "dependentCount": 21347,
+    "compositeScore": 0.1413,
+    "impactScore": 0.83,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.567,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "active",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": [
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      },
+      {
+        "name": "vitejs/vite",
+        "downloads": 78100
+      }
+    ]
+  },
+  {
+    "rank": 60,
+    "moduleName": "string.prototype.padstart",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "String.prototype.padStart",
+    "weeklyDownloads": 1146947,
+    "dependentCount": 234,
+    "compositeScore": 0.1386,
+    "impactScore": 0.568,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.244,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/es-shims/String.prototype.padStart",
+    "topDependents": [
+      {
+        "name": "vuejs/vue-cli",
+        "downloads": 29658
+      }
+    ]
+  },
+  {
+    "rank": 61,
+    "moduleName": "eslint-plugin-import",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: eslint-plugin-import",
+    "weeklyDownloads": 38741687,
+    "dependentCount": 233826,
+    "compositeScore": 0.1378,
+    "impactScore": 0.753,
+    "effortMultiplier": 0.55,
+    "mergeProbability": 0.333,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/import-js/eslint-plugin-import",
+    "topDependents": []
+  },
+  {
+    "rank": 62,
+    "moduleName": "@jsdevtools/ez-spawn",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: ez-spawn",
+    "weeklyDownloads": 136261,
+    "dependentCount": 49,
+    "compositeScore": 0.1316,
+    "impactScore": 0.312,
+    "effortMultiplier": 0.75,
+    "mergeProbability": 0.562,
+    "livenessPenalty": 1,
+    "tier": 3,
+    "status": "active",
+    "repoUrl": "https://github.com/JS-DevTools/ez-spawn",
+    "topDependents": []
+  },
+  {
+    "rank": 63,
+    "moduleName": "lodash",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 102884471,
+    "dependentCount": 128470,
+    "compositeScore": 0.126,
+    "impactScore": 0.748,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.562,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": []
+  },
+  {
+    "rank": 64,
+    "moduleName": "error-cause",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Use errors `.cause` property and second `Error` constructors argument to define it",
+    "weeklyDownloads": 29806,
+    "dependentCount": 35,
+    "compositeScore": 0.1214,
+    "impactScore": 0.271,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.449,
+    "livenessPenalty": 1,
+    "tier": 3,
+    "status": "stale",
+    "repoUrl": "https://github.com/es-shims/error-cause",
+    "topDependents": []
+  },
+  {
+    "rank": 65,
+    "moduleName": "es-aggregate-error",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "AggregateError",
+    "weeklyDownloads": 2785329,
+    "dependentCount": 47,
+    "compositeScore": 0.1144,
+    "impactScore": 0.367,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.312,
+    "livenessPenalty": 1,
+    "tier": 3,
+    "status": "stale",
+    "repoUrl": "https://github.com/es-shims/AggregateError",
+    "topDependents": []
+  },
+  {
+    "rank": 66,
+    "moduleName": "eslint-plugin-react",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: eslint-plugin-react",
+    "weeklyDownloads": 34447225,
+    "dependentCount": 147023,
+    "compositeScore": 0.1037,
+    "impactScore": 0.732,
+    "effortMultiplier": 0.55,
+    "mergeProbability": 0.258,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/jsx-eslint/eslint-plugin-react",
+    "topDependents": []
+  },
+  {
+    "rank": 67,
+    "moduleName": "lodash.startcase",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 7302879,
+    "dependentCount": 817,
+    "compositeScore": 0.1035,
+    "impactScore": 0.644,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.535,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": [
+      {
+        "name": "conventional-changelog/commitlint",
+        "downloads": 18279
+      }
+    ]
+  },
+  {
+    "rank": 68,
+    "moduleName": "q",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: bluebird-q",
+    "weeklyDownloads": 11842704,
+    "dependentCount": 13360,
+    "compositeScore": 0.0971,
+    "impactScore": 0.791,
+    "effortMultiplier": 0.25,
+    "mergeProbability": 0.491,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/kriskowal/q",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      }
+    ]
+  },
+  {
+    "rank": 69,
+    "moduleName": "jquery",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: jquery",
+    "weeklyDownloads": 18629090,
+    "dependentCount": 35762,
+    "compositeScore": 0.0949,
+    "impactScore": 0.848,
+    "effortMultiplier": 0.2,
+    "mergeProbability": 0.559,
+    "livenessPenalty": 1,
+    "tier": 1,
+    "status": "active",
+    "repoUrl": "https://github.com/jquery/jquery",
+    "topDependents": [
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      },
+      {
+        "name": "rails/rails",
+        "downloads": 58162
+      },
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      }
+    ]
+  },
+  {
+    "rank": 70,
+    "moduleName": "lodash.startswith",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 578972,
+    "dependentCount": 189,
+    "compositeScore": 0.0869,
+    "impactScore": 0.541,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.535,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "active",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": [
+      {
+        "name": "alibaba/ice",
+        "downloads": 18644
+      },
+      {
+        "name": "TypeStrong/fork-ts-checker-webpack-plugin",
+        "downloads": 1993
+      }
+    ]
+  },
+  {
+    "rank": 71,
+    "moduleName": "moment",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: moment",
+    "weeklyDownloads": 28491156,
+    "dependentCount": 87217,
+    "compositeScore": 0.0692,
+    "impactScore": 0.708,
+    "effortMultiplier": 0.2,
+    "mergeProbability": 0.489,
+    "livenessPenalty": 1,
+    "tier": 2,
+    "status": "stale",
+    "repoUrl": "https://github.com/moment/moment",
+    "topDependents": []
+  },
+  {
+    "rank": 72,
+    "moduleName": "find-cache-directory",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: find-cache-directory",
+    "weeklyDownloads": 553206,
+    "dependentCount": 8,
+    "compositeScore": 0.06,
+    "impactScore": 0.27,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.261,
+    "livenessPenalty": 1,
+    "tier": 3,
+    "status": "stale",
+    "repoUrl": "https://github.com/sindresorhus/find-cache-directory",
+    "topDependents": []
+  },
+  {
+    "rank": 73,
+    "moduleName": "for-each",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "for...of (using \"Object.entries\" if dealing with objects)",
+    "weeklyDownloads": 61834684,
+    "dependentCount": 1485,
+    "compositeScore": 0.0505,
+    "impactScore": 0.742,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.227,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/Raynos/for-each",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "tape-testing/tape",
+        "downloads": 5787
+      }
+    ]
+  },
+  {
+    "rank": 74,
+    "moduleName": "es-shim-unscopables",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype[Symbol.unscopables]",
+    "weeklyDownloads": 42861425,
+    "dependentCount": 1271,
+    "compositeScore": 0.0504,
+    "impactScore": 0.739,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.227,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/es-shim-unscopables",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "xyflow/xyflow",
+        "downloads": 34862
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "sweetalert2/sweetalert2",
+        "downloads": 18024
+      }
+    ]
+  },
+  {
+    "rank": 75,
+    "moduleName": "assert",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "node:assert",
+    "weeklyDownloads": 15104518,
+    "dependentCount": 11293,
+    "compositeScore": 0.048,
+    "impactScore": 0.798,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.2,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/browserify/commonjs-assert",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 76,
+    "moduleName": "is-boolean-object",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use Object.prototype.toString.call(v) === \"[object Boolean]\"",
+    "weeklyDownloads": 54197656,
+    "dependentCount": 1583,
+    "compositeScore": 0.0475,
+    "impactScore": 0.745,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.224,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/is-boolean-object",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "enzymejs/enzyme",
+        "downloads": 19900
+      }
+    ]
+  },
+  {
+    "rank": 77,
+    "moduleName": "regexp.prototype.flags",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "RegExp.prototype.flags (e.g. \"/foo/g.flags\")",
+    "weeklyDownloads": 57161787,
+    "dependentCount": 1651,
+    "compositeScore": 0.0472,
+    "impactScore": 0.755,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.208,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/RegExp.prototype.flags",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "xyflow/xyflow",
+        "downloads": 34862
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      }
+    ]
+  },
+  {
+    "rank": 78,
+    "moduleName": "object.assign",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.assign",
+    "weeklyDownloads": 61152510,
+    "dependentCount": 2965,
+    "compositeScore": 0.0467,
+    "impactScore": 0.769,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.202,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/object.assign",
+    "topDependents": [
+      {
+        "name": "mochajs/mocha",
+        "downloads": 22872
+      },
+      {
+        "name": "airbnb/javascript",
+        "downloads": 147197
+      }
+    ]
+  },
+  {
+    "rank": 79,
+    "moduleName": "has-symbols",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Always `true`",
+    "weeklyDownloads": 112641231,
+    "dependentCount": 2806,
+    "compositeScore": 0.0466,
+    "impactScore": 0.79,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.197,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/has-symbols",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      },
+      {
+        "name": "ionic-team/ionic-framework",
+        "downloads": 52352
+      }
+    ]
+  },
+  {
+    "rank": 80,
+    "moduleName": "object.values",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.values",
+    "weeklyDownloads": 44903967,
+    "dependentCount": 1888,
+    "compositeScore": 0.0459,
+    "impactScore": 0.754,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.203,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Object.values",
+    "topDependents": [
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "enzymejs/enzyme",
+        "downloads": 19900
+      }
+    ]
+  },
+  {
+    "rank": 81,
+    "moduleName": "get-symbol-description",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Symbol.prototype.description",
+    "weeklyDownloads": 51844286,
+    "dependentCount": 1419,
+    "compositeScore": 0.0455,
+    "impactScore": 0.751,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.202,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/get-symbol-description",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      },
+      {
+        "name": "ionic-team/ionic-framework",
+        "downloads": 52352
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      }
+    ]
+  },
+  {
+    "rank": 82,
+    "moduleName": "gopd",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.getOwnPropertyDescriptor",
+    "weeklyDownloads": 106106822,
+    "dependentCount": 1810,
+    "compositeScore": 0.0454,
+    "impactScore": 0.768,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.197,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/gopd",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "digitalbazaar/forge",
+        "downloads": 5244
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      }
+    ]
+  },
+  {
+    "rank": 83,
+    "moduleName": "is-symbol",
+    "source": "polyfill-decay",
+    "replacementType": "native",
+    "replacement": "typeof x === 'symbol'",
+    "weeklyDownloads": 56104617,
+    "dependentCount": 1451,
+    "compositeScore": 0.0454,
+    "impactScore": 0.755,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.2,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/is-symbol",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      },
+      {
+        "name": "ionic-team/ionic-framework",
+        "downloads": 52352
+      }
+    ]
+  },
+  {
+    "rank": 84,
+    "moduleName": "string.prototype.trimend",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "String.prototype.trimEnd",
+    "weeklyDownloads": 54108907,
+    "dependentCount": 1598,
+    "compositeScore": 0.0452,
+    "impactScore": 0.754,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.2,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/String.prototype.trimEnd",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "import-js/eslint-plugin-import",
+        "downloads": 5798
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      }
+    ]
+  },
+  {
+    "rank": 85,
+    "moduleName": "function.prototype.name",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Use functions `.name` property",
+    "weeklyDownloads": 51460151,
+    "dependentCount": 1401,
+    "compositeScore": 0.045,
+    "impactScore": 0.739,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.203,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Function.prototype.name",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "enzymejs/enzyme",
+        "downloads": 19900
+      }
+    ]
+  },
+  {
+    "rank": 86,
+    "moduleName": "has-proto",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Always `true`",
+    "weeklyDownloads": 53099624,
+    "dependentCount": 1782,
+    "compositeScore": 0.0448,
+    "impactScore": 0.754,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.198,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/has-proto",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ljharb/qs",
+        "downloads": 8901
+      },
+      {
+        "name": "digitalbazaar/forge",
+        "downloads": 5244
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "tailwindlabs/prettier-plugin-tailwindcss",
+        "downloads": 6993
+      }
+    ]
+  },
+  {
+    "rank": 87,
+    "moduleName": "array.prototype.flatmap",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.flatMap",
+    "weeklyDownloads": 41827181,
+    "dependentCount": 1520,
+    "compositeScore": 0.0448,
+    "impactScore": 0.741,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.201,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.flatMap",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "gatsbyjs/gatsby",
+        "downloads": 55965
+      },
+      {
+        "name": "jsx-eslint/eslint-plugin-react",
+        "downloads": 9228
+      }
+    ]
+  },
+  {
+    "rank": 88,
     "moduleName": "array-buffer-byte-length",
     "source": "module-replacements",
     "replacementType": "native",
     "replacement": "ArrayBuffer.prototype.byteLength",
     "weeklyDownloads": 50929500,
     "dependentCount": 1055,
-    "compositeScore": 0.0478,
-    "impactScore": 0.786,
+    "compositeScore": 0.0445,
+    "impactScore": 0.731,
     "effortMultiplier": 1,
     "mergeProbability": 0.203,
     "livenessPenalty": 0.3,
@@ -194,19 +2444,677 @@
     ]
   },
   {
-    "rank": 7,
+    "rank": 89,
+    "moduleName": "array.prototype.flat",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.flat",
+    "weeklyDownloads": 42929740,
+    "dependentCount": 1318,
+    "compositeScore": 0.0445,
+    "impactScore": 0.736,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.201,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.flat",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "iamkun/dayjs",
+        "downloads": 48413
+      },
+      {
+        "name": "enzymejs/enzyme",
+        "downloads": 19900
+      }
+    ]
+  },
+  {
+    "rank": 90,
+    "moduleName": "es-set-tostringtag",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use Object.defineProperty(target, Symbol.toStringTag, { value, configurable: true })",
+    "weeklyDownloads": 89206750,
+    "dependentCount": 1120,
+    "compositeScore": 0.0442,
+    "impactScore": 0.745,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.208,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/es-set-tostringtag",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "form-data/form-data",
+        "downloads": 2352
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      }
+    ]
+  },
+  {
+    "rank": 91,
+    "moduleName": "call-bind",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use Function.call.bind(v)",
+    "weeklyDownloads": 72696077,
+    "dependentCount": 2731,
+    "compositeScore": 0.044,
+    "impactScore": 0.78,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.198,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/call-bind",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "iamkun/dayjs",
+        "downloads": 48413
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      }
+    ]
+  },
+  {
+    "rank": 92,
+    "moduleName": "typed-array-byte-offset",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "%TypedArray%.prototype.byteOffset",
+    "weeklyDownloads": 47981443,
+    "dependentCount": 876,
+    "compositeScore": 0.0439,
+    "impactScore": 0.722,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.203,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/typed-array-byte-offset",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      }
+    ]
+  },
+  {
+    "rank": 93,
+    "moduleName": "typed-array-buffer",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "%TypedArray%.prototype.buffer",
+    "weeklyDownloads": 52054315,
+    "dependentCount": 872,
+    "compositeScore": 0.0439,
+    "impactScore": 0.724,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.202,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/typed-array-buffer",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      }
+    ]
+  },
+  {
+    "rank": 94,
+    "moduleName": "es-define-property",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.defineProperty",
+    "weeklyDownloads": 102991761,
+    "dependentCount": 1237,
+    "compositeScore": 0.0439,
+    "impactScore": 0.739,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.198,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/es-define-property",
+    "topDependents": [
+      {
+        "name": "digitalbazaar/forge",
+        "downloads": 5244
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "primefaces/primevue",
+        "downloads": 13971
+      }
+    ]
+  },
+  {
+    "rank": 95,
+    "moduleName": "typed-array-byte-length",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "%TypedArray%.prototype.byteLength",
+    "weeklyDownloads": 47918814,
+    "dependentCount": 871,
+    "compositeScore": 0.0438,
+    "impactScore": 0.722,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.202,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/typed-array-byte-length",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      }
+    ]
+  },
+  {
+    "rank": 96,
+    "moduleName": "string.prototype.trim",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "String.prototype.trim",
+    "weeklyDownloads": 49618563,
+    "dependentCount": 1081,
+    "compositeScore": 0.0437,
+    "impactScore": 0.729,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.2,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/String.prototype.trim",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "enzymejs/enzyme",
+        "downloads": 19900
+      },
+      {
+        "name": "pnpm/pnpm",
+        "downloads": 33944
+      },
+      {
+        "name": "tape-testing/tape",
+        "downloads": 5787
+      }
+    ]
+  },
+  {
+    "rank": 97,
+    "moduleName": "arraybuffer.prototype.slice",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "ArrayBuffer.prototype.slice",
+    "weeklyDownloads": 47959238,
+    "dependentCount": 873,
+    "compositeScore": 0.0436,
+    "impactScore": 0.722,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.201,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/ArrayBuffer.prototype.slice",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      }
+    ]
+  },
+  {
+    "rank": 98,
+    "moduleName": "is-date-object",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use v instanceof Date, or if cross-realm, use Object.prototype.toString.call(v) === \"[object Date]\"",
+    "weeklyDownloads": 56903029,
+    "dependentCount": 1904,
+    "compositeScore": 0.0436,
+    "impactScore": 0.764,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.2,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/is-date-object",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      },
+      {
+        "name": "pnpm/pnpm",
+        "downloads": 33944
+      }
+    ]
+  },
+  {
+    "rank": 99,
+    "moduleName": "reflect.getprototypeof",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Reflect.getPrototypeOf",
+    "weeklyDownloads": 43584404,
+    "dependentCount": 738,
+    "compositeScore": 0.0436,
+    "impactScore": 0.697,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.208,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Reflect.getPrototypeOf",
+    "topDependents": [
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      },
+      {
+        "name": "sindresorhus/ky",
+        "downloads": 16267
+      },
+      {
+        "name": "inspect-js/typed-array-length",
+        "downloads": 8
+      }
+    ]
+  },
+  {
+    "rank": 100,
+    "moduleName": "is-string",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use typeof str === \"string\"",
+    "weeklyDownloads": 54955843,
+    "dependentCount": 1908,
+    "compositeScore": 0.0434,
+    "impactScore": 0.755,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.202,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/is-string",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "gatsbyjs/gatsby",
+        "downloads": 55965
+      }
+    ]
+  },
+  {
+    "rank": 101,
+    "moduleName": "string.prototype.matchall",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "String.prototype.matchAll",
+    "weeklyDownloads": 34233330,
+    "dependentCount": 1407,
+    "compositeScore": 0.0434,
+    "impactScore": 0.712,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.203,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/String.prototype.matchAll",
+    "topDependents": [
+      {
+        "name": "eslint/eslint",
+        "downloads": 26863
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "jsx-eslint/eslint-plugin-react",
+        "downloads": 9228
+      }
+    ]
+  },
+  {
+    "rank": 102,
+    "moduleName": "is-number-object",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use Object.prototype.toString.call(v) === \"[object Number]\"",
+    "weeklyDownloads": 53913080,
+    "dependentCount": 1553,
+    "compositeScore": 0.0428,
+    "impactScore": 0.744,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.202,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/is-number-object",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "enzymejs/enzyme",
+        "downloads": 19900
+      }
+    ]
+  },
+  {
+    "rank": 103,
+    "moduleName": "typed-array-length",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "%TypedArray%.prototype.length",
+    "weeklyDownloads": 49271033,
+    "dependentCount": 1087,
+    "compositeScore": 0.0425,
+    "impactScore": 0.732,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.193,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/typed-array-length",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      }
+    ]
+  },
+  {
+    "rank": 104,
+    "moduleName": "is-array-buffer",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use v instanceof ArrayBuffer, or if cross-realm, use Object.prototype.toString.call(v) === \"[object ArrayBuffer]\"",
+    "weeklyDownloads": 51525071,
+    "dependentCount": 1171,
+    "compositeScore": 0.0423,
+    "impactScore": 0.736,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.202,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/is-array-buffer",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "node-fetch/node-fetch",
+        "downloads": 8843
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      }
+    ]
+  },
+  {
+    "rank": 105,
+    "moduleName": "is-ci",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use Boolean(process.env.CI)",
+    "weeklyDownloads": 18489865,
+    "dependentCount": 3519,
+    "compositeScore": 0.0422,
+    "impactScore": 0.745,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.199,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/watson/is-ci",
+    "topDependents": [
+      {
+        "name": "prettier/prettier",
+        "downloads": 51457
+      },
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      }
+    ]
+  },
+  {
+    "rank": 106,
+    "moduleName": "is-arguments",
+    "source": "polyfill-decay",
+    "replacementType": "native",
+    "replacement": "Array.isArray() or spread",
+    "weeklyDownloads": 31963731,
+    "dependentCount": 907,
+    "compositeScore": 0.0419,
+    "impactScore": 0.697,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.2,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/is-arguments",
+    "topDependents": [
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      },
+      {
+        "name": "Uniswap/v2-core",
+        "downloads": 3213
+      },
+      {
+        "name": "inspect-js/node-deep-equal",
+        "downloads": 788
+      }
+    ]
+  },
+  {
+    "rank": 107,
     "moduleName": "tape",
     "source": "node-builtin",
     "replacementType": "native",
     "replacement": "node:test",
     "weeklyDownloads": 694896,
     "dependentCount": 39595,
-    "compositeScore": 0.0439,
-    "impactScore": 0.84,
+    "compositeScore": 0.0414,
+    "impactScore": 0.793,
     "effortMultiplier": 1,
     "mergeProbability": 0.174,
     "livenessPenalty": 0.3,
-    "tier": 1,
+    "tier": 2,
     "status": "dormant",
     "repoUrl": "https://github.com/tape-testing/tape",
     "topDependents": [
@@ -221,15 +3129,307 @@
     ]
   },
   {
-    "rank": 8,
+    "rank": 108,
+    "moduleName": "lodash-amd",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 7370,
+    "dependentCount": 36,
+    "compositeScore": 0.0413,
+    "impactScore": 0.246,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.561,
+    "livenessPenalty": 1,
+    "tier": 3,
+    "status": "active",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": []
+  },
+  {
+    "rank": 109,
+    "moduleName": "data-view-byte-length",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "DataView.prototype.byteLength",
+    "weeklyDownloads": 44723827,
+    "dependentCount": 415,
+    "compositeScore": 0.0413,
+    "impactScore": 0.678,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.203,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/data-view-byte-length",
+    "topDependents": [
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      },
+      {
+        "name": "ant-design/ant-design-icons",
+        "downloads": 1055
+      },
+      {
+        "name": "sindresorhus/ky",
+        "downloads": 16267
+      }
+    ]
+  },
+  {
+    "rank": 110,
+    "moduleName": "data-view-buffer",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "DataView.prototype.buffer",
+    "weeklyDownloads": 44690376,
+    "dependentCount": 415,
+    "compositeScore": 0.0413,
+    "impactScore": 0.678,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.203,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/data-view-buffer",
+    "topDependents": [
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      },
+      {
+        "name": "ant-design/ant-design-icons",
+        "downloads": 1055
+      },
+      {
+        "name": "sindresorhus/ky",
+        "downloads": 16267
+      }
+    ]
+  },
+  {
+    "rank": 111,
+    "moduleName": "data-view-byte-offset",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "DataView.prototype.byteOffset",
+    "weeklyDownloads": 44692987,
+    "dependentCount": 415,
+    "compositeScore": 0.0412,
+    "impactScore": 0.678,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.203,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/data-view-byte-offset",
+    "topDependents": [
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      },
+      {
+        "name": "ant-design/ant-design-icons",
+        "downloads": 1055
+      },
+      {
+        "name": "sindresorhus/ky",
+        "downloads": 16267
+      }
+    ]
+  },
+  {
+    "rank": 112,
+    "moduleName": "path-exists",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: path-exists",
+    "weeklyDownloads": 131311421,
+    "dependentCount": 6845,
+    "compositeScore": 0.0406,
+    "impactScore": 0.819,
+    "effortMultiplier": 0.9,
+    "mergeProbability": 0.184,
+    "livenessPenalty": 0.3,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/path-exists",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 113,
+    "moduleName": "util.promisify",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "node:util promisify()",
+    "weeklyDownloads": 8767111,
+    "dependentCount": 937,
+    "compositeScore": 0.0405,
+    "impactScore": 0.667,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.202,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/util.promisify",
+    "topDependents": [
+      {
+        "name": "expo/expo",
+        "downloads": 47191
+      }
+    ]
+  },
+  {
+    "rank": 114,
+    "moduleName": "es6-promise",
+    "source": "polyfill-decay",
+    "replacementType": "native",
+    "replacement": "native Promise",
+    "weeklyDownloads": 14518063,
+    "dependentCount": 12390,
+    "compositeScore": 0.0391,
+    "impactScore": 0.805,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.162,
+    "livenessPenalty": 0.3,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/stefanpenner/es6-promise",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "axios/axios",
+        "downloads": 108584
+      }
+    ]
+  },
+  {
+    "rank": 115,
+    "moduleName": "get-value",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: dot-prop",
+    "weeklyDownloads": 13228746,
+    "dependentCount": 1361,
+    "compositeScore": 0.0389,
+    "impactScore": 0.683,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.224,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/jonschlinkert/get-value",
+    "topDependents": [
+      {
+        "name": "vuejs/vue-cli",
+        "downloads": 29658
+      }
+    ]
+  },
+  {
+    "rank": 116,
+    "moduleName": "array.prototype.push",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.push",
+    "weeklyDownloads": 2776,
+    "dependentCount": 5,
+    "compositeScore": 0.0379,
+    "impactScore": 0.155,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.244,
+    "livenessPenalty": 1,
+    "tier": 4,
+    "status": "stale",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.push",
+    "topDependents": []
+  },
+  {
+    "rank": 117,
+    "moduleName": "fast-glob",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: fast-glob",
+    "weeklyDownloads": 89817712,
+    "dependentCount": 11375,
+    "compositeScore": 0.037,
+    "impactScore": 0.842,
+    "effortMultiplier": 0.7,
+    "mergeProbability": 0.21,
+    "livenessPenalty": 0.3,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/mrmlnc/fast-glob",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "facebook/react",
+        "downloads": 242985
+      }
+    ]
+  },
+  {
+    "rank": 118,
     "moduleName": "request-promise",
     "source": "deprecated",
     "replacementType": "remove",
     "replacement": "undici or global fetch()",
     "weeklyDownloads": 1448816,
     "dependentCount": 9473,
-    "compositeScore": 0.0368,
-    "impactScore": 0.758,
+    "compositeScore": 0.0349,
+    "impactScore": 0.718,
     "effortMultiplier": 1,
     "mergeProbability": 0.162,
     "livenessPenalty": 0.3,
@@ -248,15 +3448,939 @@
     ]
   },
   {
-    "rank": 9,
+    "rank": 119,
+    "moduleName": "define-properties",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.defineProperties",
+    "weeklyDownloads": 61660841,
+    "dependentCount": 2189,
+    "compositeScore": 0.0345,
+    "impactScore": 0.771,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/define-properties",
+    "topDependents": [
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      }
+    ]
+  },
+  {
+    "rank": 120,
+    "moduleName": "globalthis",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "globalThis",
+    "weeklyDownloads": 50318362,
+    "dependentCount": 1203,
+    "compositeScore": 0.0337,
+    "impactScore": 0.737,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.152,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/System.global",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "TheWidlarzGroup/react-native-video",
+        "downloads": 7633
+      }
+    ]
+  },
+  {
+    "rank": 121,
+    "moduleName": "string.prototype.trimstart",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "String.prototype.trimStart",
+    "weeklyDownloads": 52876535,
+    "dependentCount": 1533,
+    "compositeScore": 0.0337,
+    "impactScore": 0.753,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/String.prototype.trimStart",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      },
+      {
+        "name": "ionic-team/ionic-framework",
+        "downloads": 52352
+      }
+    ]
+  },
+  {
+    "rank": 122,
+    "moduleName": "array.prototype.map",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.map",
+    "weeklyDownloads": 1836538,
+    "dependentCount": 455,
+    "compositeScore": 0.0334,
+    "impactScore": 0.548,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.203,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.map",
+    "topDependents": [
+      {
+        "name": "browserify/resolve",
+        "downloads": 791
+      }
+    ]
+  },
+  {
+    "rank": 123,
+    "moduleName": "rfdc",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "structuredClone()",
+    "weeklyDownloads": 35007762,
+    "dependentCount": 641,
+    "compositeScore": 0.0328,
+    "impactScore": 0.695,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.157,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/davidmarkclements/rfdc",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 124,
+    "moduleName": "object.fromentries",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.fromEntries",
+    "weeklyDownloads": 40946464,
+    "dependentCount": 1334,
+    "compositeScore": 0.0328,
+    "impactScore": 0.734,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Object.fromEntries",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "enzymejs/enzyme",
+        "downloads": 19900
+      },
+      {
+        "name": "jsx-eslint/eslint-plugin-react",
+        "downloads": 9228
+      }
+    ]
+  },
+  {
+    "rank": 125,
+    "moduleName": "hasown",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.prototype.hasOwnProperty.call(obj, prop) (or in later versions of node, \"Object.hasOwn(obj, prop)\")",
+    "weeklyDownloads": 103509122,
+    "dependentCount": 1632,
+    "compositeScore": 0.0325,
+    "impactScore": 0.731,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.148,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/hasOwn",
+    "topDependents": [
+      {
+        "name": "enzymejs/enzyme",
+        "downloads": 19900
+      },
+      {
+        "name": "jsx-eslint/eslint-plugin-react",
+        "downloads": 9228
+      },
+      {
+        "name": "import-js/eslint-plugin-import",
+        "downloads": 5798
+      }
+    ]
+  },
+  {
+    "rank": 126,
+    "moduleName": "readable-stream",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: readable-stream",
+    "weeklyDownloads": 233702137,
+    "dependentCount": 7660,
+    "compositeScore": 0.0321,
+    "impactScore": 0.847,
+    "effortMultiplier": 0.6,
+    "mergeProbability": 0.21,
+    "livenessPenalty": 0.3,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/nodejs/readable-stream",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "mochajs/mocha",
+        "downloads": 22872
+      },
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      }
+    ]
+  },
+  {
+    "rank": 127,
+    "moduleName": "is-negative-zero",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use Object.is(v, -0)",
+    "weeklyDownloads": 47572002,
+    "dependentCount": 1687,
+    "compositeScore": 0.0317,
+    "impactScore": 0.756,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.147,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/is-negative-zero",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      },
+      {
+        "name": "ElemeFE/element",
+        "downloads": 54217
+      }
+    ]
+  },
+  {
+    "rank": 128,
+    "moduleName": "array.prototype.splice",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.splice",
+    "weeklyDownloads": 703,
+    "dependentCount": 5,
+    "compositeScore": 0.0316,
+    "impactScore": 0.13,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.244,
+    "livenessPenalty": 1,
+    "tier": 4,
+    "status": "stale",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.splice",
+    "topDependents": []
+  },
+  {
+    "rank": 129,
+    "moduleName": "array.prototype.findindex",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.findIndex",
+    "weeklyDownloads": 169240,
+    "dependentCount": 64,
+    "compositeScore": 0.0303,
+    "impactScore": 0.501,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.202,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/paulmillr/Array.prototype.findIndex",
+    "topDependents": [
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "npm/cli",
+        "downloads": 9513
+      }
+    ]
+  },
+  {
+    "rank": 130,
+    "moduleName": "traverse",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: traverse",
+    "weeklyDownloads": 12453130,
+    "dependentCount": 1780,
+    "compositeScore": 0.03,
+    "impactScore": 0.72,
+    "effortMultiplier": 0.65,
+    "mergeProbability": 0.214,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/js-traverse",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "browserify/browserify",
+        "downloads": 14691
+      }
+    ]
+  },
+  {
+    "rank": 131,
+    "moduleName": "es-string-html-methods",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "String.prototype.{ anchor, big, blink, bold, fixed, fontcolor, fontsize, italics, link, small, strike, sub, sup }",
+    "weeklyDownloads": 723,
+    "dependentCount": 4,
+    "compositeScore": 0.03,
+    "impactScore": 0.123,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.244,
+    "livenessPenalty": 1,
+    "tier": 4,
+    "status": "stale",
+    "repoUrl": "https://github.com/es-shims/es-string-html-methods",
+    "topDependents": []
+  },
+  {
+    "rank": 132,
+    "moduleName": "cross-fetch",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: fetch",
+    "weeklyDownloads": 26830963,
+    "dependentCount": 6648,
+    "compositeScore": 0.0298,
+    "impactScore": 0.75,
+    "effortMultiplier": 0.65,
+    "mergeProbability": 0.204,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/lquixada/cross-fetch",
+    "topDependents": [
+      {
+        "name": "typescript-eslint/typescript-eslint",
+        "downloads": 16094
+      }
+    ]
+  },
+  {
+    "rank": 133,
+    "moduleName": "number.parseint",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Number.parseInt",
+    "weeklyDownloads": 27,
+    "dependentCount": 3,
+    "compositeScore": 0.0295,
+    "impactScore": 0.053,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.555,
+    "livenessPenalty": 1,
+    "tier": 4,
+    "status": "active",
+    "repoUrl": "https://github.com/es-shims/Number.parseInt",
+    "topDependents": []
+  },
+  {
+    "rank": 134,
+    "moduleName": "object.hasown",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.hasOwn",
+    "weeklyDownloads": 5733637,
+    "dependentCount": 1031,
+    "compositeScore": 0.0294,
+    "impactScore": 0.656,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Object.hasOwn",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "jsx-eslint/eslint-plugin-react",
+        "downloads": 9228
+      }
+    ]
+  },
+  {
+    "rank": 135,
+    "moduleName": "left-pad",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "String.prototype.padStart",
+    "weeklyDownloads": 1306811,
+    "dependentCount": 701,
+    "compositeScore": 0.0292,
+    "impactScore": 0.643,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.151,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/stevemao/left-pad",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      },
+      {
+        "name": "facebook/react-native",
+        "downloads": 125342
+      }
+    ]
+  },
+  {
+    "rank": 136,
+    "moduleName": "object-is",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.is",
+    "weeklyDownloads": 21776384,
+    "dependentCount": 574,
+    "compositeScore": 0.0289,
+    "impactScore": 0.652,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.148,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/object-is",
+    "topDependents": [
+      {
+        "name": "enzymejs/enzyme",
+        "downloads": 19900
+      }
+    ]
+  },
+  {
+    "rank": 137,
+    "moduleName": "es6-symbol",
+    "source": "polyfill-decay",
+    "replacementType": "native",
+    "replacement": "native Symbol",
+    "weeklyDownloads": 10691093,
+    "dependentCount": 560,
+    "compositeScore": 0.0288,
+    "impactScore": 0.65,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.148,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/medikoo/es6-symbol",
+    "topDependents": [
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 138,
+    "moduleName": "filter-obj",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use Object.fromEntries(Object.entries(obj).filter(fn))",
+    "weeklyDownloads": 12703361,
+    "dependentCount": 208,
+    "compositeScore": 0.0273,
+    "impactScore": 0.617,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.155,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/filter-obj",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "web-infra-dev/modern.js",
+        "downloads": 4951
+      }
+    ]
+  },
+  {
+    "rank": 139,
+    "moduleName": "string.prototype.startswith",
+    "source": "polyfill-decay",
+    "replacementType": "native",
+    "replacement": "String.prototype.startsWith()",
+    "weeklyDownloads": 65873,
+    "dependentCount": 95,
+    "compositeScore": 0.0265,
+    "impactScore": 0.5,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.177,
+    "livenessPenalty": 0.3,
+    "tier": 3,
+    "status": "dormant",
+    "repoUrl": "https://github.com/mathiasbynens/String.prototype.startsWith",
+    "topDependents": [
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "cyclejs/cyclejs",
+        "downloads": 10240
+      },
+      {
+        "name": "twilio/twilio-node",
+        "downloads": 1519
+      },
+      {
+        "name": "curlconverter/curlconverter",
+        "downloads": 7705
+      }
+    ]
+  },
+  {
+    "rank": 140,
+    "moduleName": "object-path",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: dot-prop",
+    "weeklyDownloads": 2270507,
+    "dependentCount": 1776,
+    "compositeScore": 0.0264,
+    "impactScore": 0.666,
+    "effortMultiplier": 0.85,
+    "mergeProbability": 0.156,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/mariocasciaro/object-path",
+    "topDependents": [
+      {
+        "name": "yarnpkg/yarn",
+        "downloads": 41547
+      }
+    ]
+  },
+  {
+    "rank": 141,
+    "moduleName": "string.prototype.padend",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "String.prototype.padEnd",
+    "weeklyDownloads": 4795654,
+    "dependentCount": 194,
+    "compositeScore": 0.0262,
+    "impactScore": 0.587,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/String.prototype.padEnd",
+    "topDependents": [
+      {
+        "name": "vuejs/vue-cli",
+        "downloads": 29658
+      }
+    ]
+  },
+  {
+    "rank": 142,
+    "moduleName": "deep-equal",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: deep-equal",
+    "weeklyDownloads": 23802602,
+    "dependentCount": 4354,
+    "compositeScore": 0.026,
+    "impactScore": 0.757,
+    "effortMultiplier": 0.75,
+    "mergeProbability": 0.153,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/node-deep-equal",
+    "topDependents": [
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 143,
+    "moduleName": "array.prototype.filter",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.filter",
+    "weeklyDownloads": 1770767,
+    "dependentCount": 233,
+    "compositeScore": 0.0253,
+    "impactScore": 0.567,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.filter",
+    "topDependents": [
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "ljharb/es-abstract",
+        "downloads": 122
+      }
+    ]
+  },
+  {
+    "rank": 144,
+    "moduleName": "array.prototype.find",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.find",
+    "weeklyDownloads": 1457944,
+    "dependentCount": 190,
+    "compositeScore": 0.0247,
+    "impactScore": 0.554,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/paulmillr/Array.prototype.find",
+    "topDependents": [
+      {
+        "name": "jsx-eslint/eslint-plugin-react",
+        "downloads": 9228
+      },
+      {
+        "name": "import-js/eslint-plugin-import",
+        "downloads": 5798
+      }
+    ]
+  },
+  {
+    "rank": 145,
+    "moduleName": "number.isfinite",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Number.isFinite",
+    "weeklyDownloads": 30,
+    "dependentCount": 2,
+    "compositeScore": 0.0242,
+    "impactScore": 0.044,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.555,
+    "livenessPenalty": 1,
+    "tier": 4,
+    "status": "active",
+    "repoUrl": "https://github.com/es-shims/Number.isFinite",
+    "topDependents": []
+  },
+  {
+    "rank": 146,
+    "moduleName": "faker",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: faker",
+    "weeklyDownloads": 2135356,
+    "dependentCount": 6280,
+    "compositeScore": 0.0224,
+    "impactScore": 0.741,
+    "effortMultiplier": 0.55,
+    "mergeProbability": 0.184,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/Marak/Faker.js",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      },
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      }
+    ]
+  },
+  {
+    "rank": 147,
+    "moduleName": "cli-color",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: chalk",
+    "weeklyDownloads": 3086378,
+    "dependentCount": 2952,
+    "compositeScore": 0.0217,
+    "impactScore": 0.7,
+    "effortMultiplier": 0.7,
+    "mergeProbability": 0.148,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/medikoo/cli-color",
+    "topDependents": [
+      {
+        "name": "nestjs/nest",
+        "downloads": 74543
+      }
+    ]
+  },
+  {
+    "rank": 148,
+    "moduleName": "typedarray.prototype.slice",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "%TypedArray%.prototype.slice",
+    "weeklyDownloads": 2398326,
+    "dependentCount": 24,
+    "compositeScore": 0.0212,
+    "impactScore": 0.338,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.209,
+    "livenessPenalty": 0.3,
+    "tier": 3,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/TypedArray.prototype.slice",
+    "topDependents": []
+  },
+  {
+    "rank": 149,
+    "moduleName": "number.isinteger",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Number.isInteger",
+    "weeklyDownloads": 22,
+    "dependentCount": 2,
+    "compositeScore": 0.0211,
+    "impactScore": 0.038,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.553,
+    "livenessPenalty": 1,
+    "tier": 4,
+    "status": "active",
+    "repoUrl": "https://github.com/es-shims/Number.isInteger",
+    "topDependents": []
+  },
+  {
+    "rank": 150,
+    "moduleName": "string.prototype.endswith",
+    "source": "polyfill-decay",
+    "replacementType": "native",
+    "replacement": "String.prototype.endsWith()",
+    "weeklyDownloads": 29272,
+    "dependentCount": 64,
+    "compositeScore": 0.0209,
+    "impactScore": 0.469,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 3,
+    "status": "dormant",
+    "repoUrl": "https://github.com/mathiasbynens/String.prototype.endsWith",
+    "topDependents": [
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "video-dev/hls.js",
+        "downloads": 16473
+      }
+    ]
+  },
+  {
+    "rank": 151,
+    "moduleName": "date",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Date",
+    "weeklyDownloads": 3980,
+    "dependentCount": 53,
+    "compositeScore": 0.0204,
+    "impactScore": 0.334,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.204,
+    "livenessPenalty": 0.3,
+    "tier": 3,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Date",
+    "topDependents": [
+      {
+        "name": "Zalastax/no-one-left-behind",
+        "downloads": 107
+      },
+      {
+        "name": "everything-registry/everything",
+        "downloads": 182
+      },
+      {
+        "name": "10xly/lolite",
+        "downloads": 2
+      }
+    ]
+  },
+  {
+    "rank": 152,
+    "moduleName": "eslint-plugin-vitest",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: eslint-plugin-vitest",
+    "weeklyDownloads": 723705,
+    "dependentCount": 903,
+    "compositeScore": 0.0201,
+    "impactScore": 0.63,
+    "effortMultiplier": 0.7,
+    "mergeProbability": 0.152,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/veritem/eslint-plugin-vitest",
+    "topDependents": [
+      {
+        "name": "pmndrs/zustand",
+        "downloads": 56826
+      },
+      {
+        "name": "vuetifyjs/vuetify",
+        "downloads": 40948
+      }
+    ]
+  },
+  {
+    "rank": 153,
     "moduleName": "array.from",
     "source": "module-replacements",
     "replacementType": "native",
     "replacement": "Array.from",
     "weeklyDownloads": 8521,
     "dependentCount": 73,
-    "compositeScore": 0.0165,
-    "impactScore": 0.368,
+    "compositeScore": 0.019,
+    "impactScore": 0.424,
     "effortMultiplier": 1,
     "mergeProbability": 0.149,
     "livenessPenalty": 0.3,
@@ -275,19 +4399,549 @@
     ]
   },
   {
-    "rank": 10,
+    "rank": 154,
+    "moduleName": "is-travis",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use (\"TRAVIS\" in process.env)",
+    "weeklyDownloads": 308,
+    "dependentCount": 95,
+    "compositeScore": 0.0171,
+    "impactScore": 0.405,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.148,
+    "livenessPenalty": 0.3,
+    "tier": 3,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/is-travis",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      }
+    ]
+  },
+  {
+    "rank": 155,
+    "moduleName": "array.prototype.every",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.every",
+    "weeklyDownloads": 201342,
+    "dependentCount": 10,
+    "compositeScore": 0.0155,
+    "impactScore": 0.259,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.2,
+    "livenessPenalty": 0.3,
+    "tier": 3,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.every",
+    "topDependents": []
+  },
+  {
+    "rank": 156,
+    "moduleName": "object.getprototypeof",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.getPrototypeOf",
+    "weeklyDownloads": 78047,
+    "dependentCount": 10,
+    "compositeScore": 0.0151,
+    "impactScore": 0.242,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.208,
+    "livenessPenalty": 0.3,
+    "tier": 3,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Object.getPrototypeOf",
+    "topDependents": []
+  },
+  {
+    "rank": 157,
+    "moduleName": "lodash.isequal",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 16093869,
+    "dependentCount": 4744,
+    "compositeScore": 0.015,
+    "impactScore": 0.764,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.217,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 158,
+    "moduleName": "lodash.get",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 15887801,
+    "dependentCount": 5779,
+    "compositeScore": 0.0149,
+    "impactScore": 0.764,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.217,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "lodash/lodash",
+        "downloads": 61607
+      }
+    ]
+  },
+  {
+    "rank": 159,
+    "moduleName": "bluebird",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: bluebird-q",
+    "weeklyDownloads": 37560655,
+    "dependentCount": 33208,
+    "compositeScore": 0.0143,
+    "impactScore": 0.858,
+    "effortMultiplier": 0.25,
+    "mergeProbability": 0.222,
+    "livenessPenalty": 0.3,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/petkaantonov/bluebird",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 160,
+    "moduleName": "underscore",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 18339314,
+    "dependentCount": 27160,
+    "compositeScore": 0.0141,
+    "impactScore": 0.837,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.187,
+    "livenessPenalty": 0.3,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/jashkenas/underscore",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      }
+    ]
+  },
+  {
+    "rank": 161,
+    "moduleName": "lodash.template",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 3787928,
+    "dependentCount": 1884,
+    "compositeScore": 0.0136,
+    "impactScore": 0.697,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.217,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      }
+    ]
+  },
+  {
+    "rank": 162,
+    "moduleName": "lodash.pick",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 1973304,
+    "dependentCount": 1842,
+    "compositeScore": 0.0135,
+    "impactScore": 0.688,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.217,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 163,
+    "moduleName": "lodash.omit",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 2635033,
+    "dependentCount": 1913,
+    "compositeScore": 0.013,
+    "impactScore": 0.665,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.217,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": [
+      {
+        "name": "eslint/eslint",
+        "downloads": 26863
+      }
+    ]
+  },
+  {
+    "rank": 164,
+    "moduleName": "lodash.clone",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: lodash-underscore",
+    "weeklyDownloads": 992982,
+    "dependentCount": 611,
+    "compositeScore": 0.0123,
+    "impactScore": 0.629,
+    "effortMultiplier": 0.3,
+    "mergeProbability": 0.217,
+    "livenessPenalty": 0.3,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/lodash/lodash",
+    "topDependents": [
+      {
+        "name": "n8n-io/n8n",
+        "downloads": 174377
+      }
+    ]
+  },
+  {
+    "rank": 165,
+    "moduleName": "inherits",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Use native class syntax",
+    "weeklyDownloads": 122489129,
+    "dependentCount": 9068,
+    "compositeScore": 0.0119,
+    "impactScore": 0.846,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/isaacs/inherits",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "mochajs/mocha",
+        "downloads": 22872
+      },
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "tailwindlabs/tailwindcss",
+        "downloads": 93436
+      }
+    ]
+  },
+  {
+    "rank": 166,
+    "moduleName": "function-bind",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Function.prototype.bind",
+    "weeklyDownloads": 111542967,
+    "dependentCount": 5570,
+    "compositeScore": 0.0116,
+    "impactScore": 0.817,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.142,
+    "livenessPenalty": 0.1,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/Raynos/function-bind",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "request/request",
+        "downloads": 25607
+      }
+    ]
+  },
+  {
+    "rank": 167,
+    "moduleName": "array.prototype.at",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.at",
+    "weeklyDownloads": 81773,
+    "dependentCount": 16,
+    "compositeScore": 0.0116,
+    "impactScore": 0.26,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 3,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.at",
+    "topDependents": []
+  },
+  {
+    "rank": 168,
+    "moduleName": "concat-map",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.flatMap",
+    "weeklyDownloads": 101831107,
+    "dependentCount": 4098,
+    "compositeScore": 0.0114,
+    "impactScore": 0.81,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/concat-map",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "tailwindlabs/tailwindcss",
+        "downloads": 93436
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      }
+    ]
+  },
+  {
+    "rank": 169,
+    "moduleName": "isarray",
+    "source": "polyfill-decay",
+    "replacementType": "native",
+    "replacement": "Array.isArray()",
+    "weeklyDownloads": 165505837,
+    "dependentCount": 3305,
+    "compositeScore": 0.0114,
+    "impactScore": 0.805,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/juliangruber/isarray",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "socketio/socket.io",
+        "downloads": 62736
+      }
+    ]
+  },
+  {
+    "rank": 170,
+    "moduleName": "mkdirp",
+    "source": "module-replacements",
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: mkdirp",
+    "weeklyDownloads": 104622349,
+    "dependentCount": 39950,
+    "compositeScore": 0.0113,
+    "impactScore": 0.881,
+    "effortMultiplier": 0.9,
+    "mergeProbability": 0.143,
+    "livenessPenalty": 0.1,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/isaacs/node-mkdirp",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      }
+    ]
+  },
+  {
+    "rank": 171,
+    "moduleName": "safe-buffer",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "Buffer.alloc() / Buffer.from()",
+    "weeklyDownloads": 210367801,
+    "dependentCount": 5843,
+    "compositeScore": 0.0113,
+    "impactScore": 0.801,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/feross/safe-buffer",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      }
+    ]
+  },
+  {
+    "rank": 172,
+    "moduleName": "pify",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "node:util promisify()",
+    "weeklyDownloads": 92756736,
+    "dependentCount": 5079,
+    "compositeScore": 0.0113,
+    "impactScore": 0.8,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/pify",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      }
+    ]
+  },
+  {
+    "rank": 173,
     "moduleName": "isomorphic-fetch",
     "source": "node-builtin",
     "replacementType": "native",
     "replacement": "global fetch()",
     "weeklyDownloads": 6875035,
     "dependentCount": 9306,
-    "compositeScore": 0.0121,
-    "impactScore": 0.845,
+    "compositeScore": 0.0113,
+    "impactScore": 0.789,
     "effortMultiplier": 1,
     "mergeProbability": 0.143,
     "livenessPenalty": 0.1,
-    "tier": 1,
+    "tier": 2,
     "status": "dormant",
     "repoUrl": "https://github.com/matthew-andrews/isomorphic-fetch",
     "topDependents": [
@@ -310,15 +4964,877 @@
     ]
   },
   {
-    "rank": 11,
+    "rank": 174,
+    "moduleName": "xtend",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.assign, or if deep clones are needed, use structuredClone",
+    "weeklyDownloads": 49957533,
+    "dependentCount": 4887,
+    "compositeScore": 0.0112,
+    "impactScore": 0.792,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/Raynos/xtend",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "facebook/react-native",
+        "downloads": 125342
+      }
+    ]
+  },
+  {
+    "rank": 175,
+    "moduleName": "has-tostringtag",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Always `true`",
+    "weeklyDownloads": 95250841,
+    "dependentCount": 1518,
+    "compositeScore": 0.0112,
+    "impactScore": 0.763,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.146,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/has-tostringtag",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "mrdoob/three.js",
+        "downloads": 110879
+      },
+      {
+        "name": "ionic-team/ionic-framework",
+        "downloads": 52352
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      }
+    ]
+  },
+  {
+    "rank": 176,
+    "moduleName": "path-is-absolute",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "path.isAbsolute()",
+    "weeklyDownloads": 66055028,
+    "dependentCount": 4415,
+    "compositeScore": 0.0111,
+    "impactScore": 0.788,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/path-is-absolute",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 177,
+    "moduleName": "has-flag",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use process.argv.includes('--flag')",
+    "weeklyDownloads": 241051830,
+    "dependentCount": 4967,
+    "compositeScore": 0.011,
+    "impactScore": 0.827,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 1,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/has-flag",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "SeleniumHQ/selenium",
+        "downloads": 33997
+      }
+    ]
+  },
+  {
+    "rank": 178,
+    "moduleName": "object-keys",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.keys(obj)",
+    "weeklyDownloads": 60044195,
+    "dependentCount": 2199,
+    "compositeScore": 0.0109,
+    "impactScore": 0.776,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/object-keys",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      },
+      {
+        "name": "facebook/create-react-app",
+        "downloads": 103969
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      }
+    ]
+  },
+  {
+    "rank": 179,
+    "moduleName": "define-data-property",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.defineProperty",
+    "weeklyDownloads": 62646019,
+    "dependentCount": 1332,
+    "compositeScore": 0.0109,
+    "impactScore": 0.744,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.147,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/define-data-property",
+    "topDependents": [
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "digitalbazaar/forge",
+        "downloads": 5244
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      }
+    ]
+  },
+  {
+    "rank": 180,
+    "moduleName": "is-plain-obj",
+    "source": "polyfill-decay",
+    "replacementType": "native",
+    "replacement": "manual check",
+    "weeklyDownloads": 73477466,
+    "dependentCount": 1974,
+    "compositeScore": 0.0108,
+    "impactScore": 0.767,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/is-plain-obj",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "conventional-changelog/commitlint",
+        "downloads": 18279
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "Leaflet/Leaflet",
+        "downloads": 44446
+      }
+    ]
+  },
+  {
+    "rank": 181,
+    "moduleName": "buffer-from",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "Buffer.from()",
+    "weeklyDownloads": 64766237,
+    "dependentCount": 2386,
+    "compositeScore": 0.0108,
+    "impactScore": 0.771,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.14,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/LinusU/buffer-from",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "iamkun/dayjs",
+        "downloads": 48413
+      },
+      {
+        "name": "TypeStrong/ts-node",
+        "downloads": 13118
+      }
+    ]
+  },
+  {
+    "rank": 182,
+    "moduleName": "es-errors",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Error / EvalError / RangeError / ReferenceError / SyntaxError / TypeError / URIError",
+    "weeklyDownloads": 98800273,
+    "dependentCount": 1201,
+    "compositeScore": 0.0108,
+    "impactScore": 0.736,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.146,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/ljharb/es-errors",
+    "topDependents": [
+      {
+        "name": "digitalbazaar/forge",
+        "downloads": 5244
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      },
+      {
+        "name": "diegomura/react-pdf",
+        "downloads": 16300
+      },
+      {
+        "name": "primefaces/primevue",
+        "downloads": 13971
+      }
+    ]
+  },
+  {
+    "rank": 183,
+    "moduleName": "abort-controller",
+    "source": "node-builtin",
+    "replacementType": "native",
+    "replacement": "global AbortController",
+    "weeklyDownloads": 36639907,
+    "dependentCount": 2310,
+    "compositeScore": 0.0108,
+    "impactScore": 0.763,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/mysticatea/abort-controller",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "facebook/react",
+        "downloads": 242985
+      },
+      {
+        "name": "facebook/react-native",
+        "downloads": 125342
+      }
+    ]
+  },
+  {
+    "rank": 184,
+    "moduleName": "is-number",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use typeof v === \"number\" || (typeof v === \"string\" && Number.isFinite(+v))",
+    "weeklyDownloads": 110134549,
+    "dependentCount": 3395,
+    "compositeScore": 0.0107,
+    "impactScore": 0.8,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/jonschlinkert/is-number",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "tailwindlabs/tailwindcss",
+        "downloads": 93436
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      }
+    ]
+  },
+  {
+    "rank": 185,
+    "moduleName": "slash",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use path.startsWith('\\\\?\\') ? path : path.replace(/\\/g, '/')",
+    "weeklyDownloads": 107680954,
+    "dependentCount": 5969,
+    "compositeScore": 0.0107,
+    "impactScore": 0.798,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/slash",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "babel/babel",
+        "downloads": 43880
+      }
+    ]
+  },
+  {
+    "rank": 186,
+    "moduleName": "has",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.prototype.hasOwnProperty.call(obj, prop) (or in later versions of node, \"Object.hasOwn(obj, prop)\")",
+    "weeklyDownloads": 17012104,
+    "dependentCount": 2347,
+    "compositeScore": 0.0107,
+    "impactScore": 0.749,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.142,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/tarruda/has",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "jestjs/jest",
+        "downloads": 45288
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      }
+    ]
+  },
+  {
+    "rank": 187,
+    "moduleName": "extend-shallow",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.assign, or if deep clones are needed, use structuredClone",
+    "weeklyDownloads": 59891676,
+    "dependentCount": 1512,
+    "compositeScore": 0.0106,
+    "impactScore": 0.751,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/jonschlinkert/extend-shallow",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "pnpm/pnpm",
+        "downloads": 33944
+      },
+      {
+        "name": "ionic-team/ionic-framework",
+        "downloads": 52352
+      }
+    ]
+  },
+  {
+    "rank": 188,
+    "moduleName": "defaults",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Object.assign, or if deep clones are needed, use structuredClone",
+    "weeklyDownloads": 36954060,
+    "dependentCount": 1881,
+    "compositeScore": 0.0106,
+    "impactScore": 0.741,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.143,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/node-defaults",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "yarnpkg/yarn",
+        "downloads": 41547
+      }
+    ]
+  },
+  {
+    "rank": 189,
+    "moduleName": "functions-have-names",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Always `true`",
+    "weeklyDownloads": 50707903,
+    "dependentCount": 1512,
+    "compositeScore": 0.0105,
+    "impactScore": 0.747,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/inspect-js/functions-have-names",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "open-telemetry/opentelemetry-js-contrib",
+        "downloads": 879
+      },
+      {
+        "name": "xyflow/xyflow",
+        "downloads": 34862
+      },
+      {
+        "name": "slab/quill",
+        "downloads": 46739
+      }
+    ]
+  },
+  {
+    "rank": 190,
+    "moduleName": "kind-of",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use typeof v, or Object.prototype.toString.call(v) to get the internal [[Class]]",
+    "weeklyDownloads": 107522825,
+    "dependentCount": 2254,
+    "compositeScore": 0.0105,
+    "impactScore": 0.782,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/jonschlinkert/kind-of",
+    "topDependents": [
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "ionic-team/ionic-framework",
+        "downloads": 52352
+      },
+      {
+        "name": "digitalbazaar/forge",
+        "downloads": 5244
+      }
+    ]
+  },
+  {
+    "rank": 191,
+    "moduleName": "querystring",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "URLSearchParams",
+    "weeklyDownloads": 15198080,
+    "dependentCount": 2904,
+    "compositeScore": 0.0105,
+    "impactScore": 0.748,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.14,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/Gozala/querystring",
+    "topDependents": [
+      {
+        "name": "vercel/next.js",
+        "downloads": 137675
+      },
+      {
+        "name": "facebook/react-native",
+        "downloads": 125342
+      }
+    ]
+  },
+  {
+    "rank": 192,
+    "moduleName": "tinycolor2",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "@ctrl/tinycolor",
+    "weeklyDownloads": 9269958,
+    "dependentCount": 3022,
+    "compositeScore": 0.0104,
+    "impactScore": 0.735,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/bgrins/TinyColor",
+    "topDependents": [
+      {
+        "name": "facebook/react-native",
+        "downloads": 125342
+      },
+      {
+        "name": "ElemeFE/element",
+        "downloads": 54217
+      }
+    ]
+  },
+  {
+    "rank": 193,
+    "moduleName": "array-union",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use [...new Set([...a, ...b])]",
+    "weeklyDownloads": 52376741,
+    "dependentCount": 2035,
+    "compositeScore": 0.0102,
+    "impactScore": 0.764,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.14,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/array-union",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "iamkun/dayjs",
+        "downloads": 48413
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      }
+    ]
+  },
+  {
+    "rank": 194,
+    "moduleName": "array.prototype.foreach",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "Array.prototype.forEach",
+    "weeklyDownloads": 66739,
+    "dependentCount": 7,
+    "compositeScore": 0.0101,
+    "impactScore": 0.226,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.149,
+    "livenessPenalty": 0.3,
+    "tier": 3,
+    "status": "dormant",
+    "repoUrl": "https://github.com/es-shims/Array.prototype.forEach",
+    "topDependents": []
+  },
+  {
+    "rank": 195,
+    "moduleName": "arrify",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use (v == null ? [] : Array.isArray(v) ? v : [v])",
+    "weeklyDownloads": 35205412,
+    "dependentCount": 1705,
+    "compositeScore": 0.0101,
+    "impactScore": 0.753,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/sindresorhus/arrify",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "tailwindlabs/tailwindcss",
+        "downloads": 93436
+      },
+      {
+        "name": "motdotla/dotenv",
+        "downloads": 20262
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      }
+    ]
+  },
+  {
+    "rank": 196,
+    "moduleName": "global",
+    "source": "module-replacements",
+    "replacementType": "native",
+    "replacement": "globalThis",
+    "weeklyDownloads": 5989191,
+    "dependentCount": 3217,
+    "compositeScore": 0.0101,
+    "impactScore": 0.719,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.14,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/Raynos/global",
+    "topDependents": [
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      }
+    ]
+  },
+  {
+    "rank": 197,
+    "moduleName": "is-plain-object",
+    "source": "module-replacements",
+    "replacementType": "simple",
+    "replacement": "Use v && typeof v === \"object\" && (Object.getPrototypeOf(v) === null || Object.getPrototypeOf(v) === Object.prototype)",
+    "weeklyDownloads": 57062974,
+    "dependentCount": 1604,
+    "compositeScore": 0.01,
+    "impactScore": 0.748,
+    "effortMultiplier": 0.95,
+    "mergeProbability": 0.141,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/jonschlinkert/is-plain-object",
+    "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
+      {
+        "name": "storybookjs/storybook",
+        "downloads": 89233
+      },
+      {
+        "name": "mui/material-ui",
+        "downloads": 97797
+      }
+    ]
+  },
+  {
+    "rank": 198,
+    "moduleName": "source-map-resolve",
+    "source": "deprecated",
+    "replacementType": "remove",
+    "replacement": "remove — no longer needed",
+    "weeklyDownloads": 12832674,
+    "dependentCount": 973,
+    "compositeScore": 0.0099,
+    "impactScore": 0.708,
+    "effortMultiplier": 1,
+    "mergeProbability": 0.14,
+    "livenessPenalty": 0.1,
+    "tier": 2,
+    "status": "dormant",
+    "repoUrl": "https://github.com/lydell/source-map-resolve",
+    "topDependents": [
+      {
+        "name": "microsoft/TypeScript",
+        "downloads": 107805
+      },
+      {
+        "name": "twbs/bootstrap",
+        "downloads": 173969
+      },
+      {
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
+      },
+      {
+        "name": "ionic-team/ionic-framework",
+        "downloads": 52352
+      },
+      {
+        "name": "digitalbazaar/forge",
+        "downloads": 5244
+      }
+    ]
+  },
+  {
+    "rank": 199,
     "moduleName": "request-promise-native",
     "source": "deprecated",
     "replacementType": "remove",
     "replacement": "undici or global fetch()",
     "weeklyDownloads": 3687957,
     "dependentCount": 4528,
-    "compositeScore": 0.0105,
-    "impactScore": 0.749,
+    "compositeScore": 0.0099,
+    "impactScore": 0.707,
     "effortMultiplier": 1,
     "mergeProbability": 0.14,
     "livenessPenalty": 0.1,
@@ -333,239 +5849,42 @@
     ]
   },
   {
-    "rank": 12,
-    "moduleName": "unfetch",
-    "source": "node-builtin",
-    "replacementType": "native",
-    "replacement": "global fetch()",
-    "weeklyDownloads": 6221866,
-    "dependentCount": 798,
-    "compositeScore": 0.0098,
-    "impactScore": 0.696,
-    "effortMultiplier": 1,
-    "mergeProbability": 0.14,
-    "livenessPenalty": 0.1,
-    "tier": 2,
-    "status": "dormant",
-    "repoUrl": "https://github.com/developit/unfetch",
-    "topDependents": [
-      {
-        "name": "storybookjs/storybook",
-        "downloads": 89233
-      }
-    ]
-  },
-  {
-    "rank": 13,
-    "moduleName": "array-map",
+    "rank": 200,
+    "moduleName": "core-util-is",
     "source": "module-replacements",
-    "replacementType": "native",
-    "replacement": "Array.prototype.map",
-    "weeklyDownloads": 613544,
-    "dependentCount": 318,
-    "compositeScore": 0.0087,
-    "impactScore": 0.595,
-    "effortMultiplier": 1,
-    "mergeProbability": 0.145,
+    "replacementType": "documented",
+    "replacement": "See module-replacements docs: core-util-is",
+    "weeklyDownloads": 72977097,
+    "dependentCount": 2689,
+    "compositeScore": 0.0099,
+    "impactScore": 0.785,
+    "effortMultiplier": 0.9,
+    "mergeProbability": 0.14,
     "livenessPenalty": 0.1,
     "tier": 2,
     "status": "dormant",
-    "repoUrl": "https://github.com/ljharb/array-map",
+    "repoUrl": "https://github.com/isaacs/core-util-is",
     "topDependents": [
+      {
+        "name": "DefinitelyTyped/DefinitelyTyped",
+        "downloads": 50940
+      },
       {
         "name": "microsoft/TypeScript",
         "downloads": 107805
       },
       {
-        "name": "pnpm/pnpm",
-        "downloads": 33944
+        "name": "motdotla/dotenv",
+        "downloads": 20262
       },
       {
-        "name": "invertase/react-native-firebase",
-        "downloads": 12246
+        "name": "twbs/bootstrap",
+        "downloads": 173969
       },
       {
-        "name": "airyland/vux",
-        "downloads": 17535
+        "name": "ckeditor/ckeditor5",
+        "downloads": 10376
       }
     ]
-  },
-  {
-    "rank": 14,
-    "moduleName": "array-filter",
-    "source": "polyfill-decay",
-    "replacementType": "native",
-    "replacement": "Array.prototype.filter()",
-    "weeklyDownloads": 1035359,
-    "dependentCount": 337,
-    "compositeScore": 0.0086,
-    "impactScore": 0.613,
-    "effortMultiplier": 1,
-    "mergeProbability": 0.14,
-    "livenessPenalty": 0.1,
-    "tier": 2,
-    "status": "dormant",
-    "repoUrl": "https://github.com/juliangruber/array-filter",
-    "topDependents": [
-      {
-        "name": "microsoft/TypeScript",
-        "downloads": 107805
-      },
-      {
-        "name": "pnpm/pnpm",
-        "downloads": 33944
-      },
-      {
-        "name": "invertase/react-native-firebase",
-        "downloads": 12246
-      },
-      {
-        "name": "airyland/vux",
-        "downloads": 17535
-      }
-    ]
-  },
-  {
-    "rank": 15,
-    "moduleName": "nomnom",
-    "source": "deprecated",
-    "replacementType": "remove",
-    "replacement": "commander or node:util parseArgs()",
-    "weeklyDownloads": 581357,
-    "dependentCount": 800,
-    "compositeScore": 0.0084,
-    "impactScore": 0.598,
-    "effortMultiplier": 1,
-    "mergeProbability": 0.14,
-    "livenessPenalty": 0.1,
-    "tier": 2,
-    "status": "dormant",
-    "repoUrl": "http://github.com/harthur/nomnom",
-    "topDependents": [
-      {
-        "name": "openlayers/openlayers",
-        "downloads": 12325
-      }
-    ]
-  },
-  {
-    "rank": 16,
-    "moduleName": "array-find",
-    "source": "polyfill-decay",
-    "replacementType": "native",
-    "replacement": "Array.prototype.find()",
-    "weeklyDownloads": 695250,
-    "dependentCount": 288,
-    "compositeScore": 0.0082,
-    "impactScore": 0.587,
-    "effortMultiplier": 1,
-    "mergeProbability": 0.14,
-    "livenessPenalty": 0.1,
-    "tier": 2,
-    "status": "dormant",
-    "repoUrl": "https://github.com/stefanduberg/array-find",
-    "topDependents": [
-      {
-        "name": "facebook/create-react-app",
-        "downloads": 103969
-      },
-      {
-        "name": "import-js/eslint-plugin-import",
-        "downloads": 5798
-      }
-    ]
-  },
-  {
-    "rank": 17,
-    "moduleName": "array-reduce",
-    "source": "polyfill-decay",
-    "replacementType": "native",
-    "replacement": "Array.prototype.reduce()",
-    "weeklyDownloads": 582967,
-    "dependentCount": 173,
-    "compositeScore": 0.0079,
-    "impactScore": 0.564,
-    "effortMultiplier": 1,
-    "mergeProbability": 0.14,
-    "livenessPenalty": 0.1,
-    "tier": 2,
-    "status": "dormant",
-    "repoUrl": null,
-    "topDependents": [
-      {
-        "name": "microsoft/TypeScript",
-        "downloads": 107805
-      },
-      {
-        "name": "pnpm/pnpm",
-        "downloads": 33944
-      },
-      {
-        "name": "invertase/react-native-firebase",
-        "downloads": 12246
-      },
-      {
-        "name": "dropbox/zxcvbn",
-        "downloads": 15582
-      },
-      {
-        "name": "magiclabs/magic-js",
-        "downloads": 477
-      }
-    ]
-  },
-  {
-    "rank": 18,
-    "moduleName": "array-foreach",
-    "source": "polyfill-decay",
-    "replacementType": "native",
-    "replacement": "Array.prototype.forEach()",
-    "weeklyDownloads": 13099,
-    "dependentCount": 31,
-    "compositeScore": 0.0026,
-    "impactScore": 0.189,
-    "effortMultiplier": 1,
-    "mergeProbability": 0.14,
-    "livenessPenalty": 0.1,
-    "tier": 4,
-    "status": "dormant",
-    "repoUrl": "https://github.com/twada/array-foreach",
-    "topDependents": []
-  },
-  {
-    "rank": 19,
-    "moduleName": "array-every",
-    "source": "module-replacements",
-    "replacementType": "native",
-    "replacement": "Array.prototype.every",
-    "weeklyDownloads": 19755,
-    "dependentCount": 6,
-    "compositeScore": 0.0018,
-    "impactScore": 0.126,
-    "effortMultiplier": 1,
-    "mergeProbability": 0.14,
-    "livenessPenalty": 0.1,
-    "tier": 4,
-    "status": "dormant",
-    "repoUrl": "https://github.com/jonschlinkert/array-every",
-    "topDependents": []
-  },
-  {
-    "rank": 20,
-    "moduleName": "array.prototype.includes",
-    "source": "polyfill-decay",
-    "replacementType": "native",
-    "replacement": "Array.prototype.includes()",
-    "weeklyDownloads": 235,
-    "dependentCount": 6,
-    "compositeScore": 0,
-    "impactScore": 0,
-    "effortMultiplier": 1,
-    "mergeProbability": 0.14,
-    "livenessPenalty": 0.1,
-    "tier": 4,
-    "status": "dormant",
-    "repoUrl": "https://github.com/domenic/Array.prototype.includes",
-    "topDependents": []
   }
 ]
