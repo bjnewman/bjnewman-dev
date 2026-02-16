@@ -37,3 +37,10 @@ vite.config.d.ts
 # Environment files
 .env
 .env.local
+
+# Non-bun lockfiles
+package-lock.json
+yarn.lock
+
+# Wrangler
+wrangler.toml
