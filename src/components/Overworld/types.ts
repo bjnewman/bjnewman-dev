@@ -10,12 +10,20 @@ export type Building = {
   name: string;
   description: string;
   page: string;
+  // Position on tile grid (top-left corner of collision footprint)
   tileX: number;
   tileY: number;
-  width: number;   // in tiles
-  height: number;  // in tiles
+  // Collision footprint in tiles
+  footprintW: number;
+  footprintH: number;
+  // Entrance tile (absolute, must be walkable)
   entranceX: number;
   entranceY: number;
+  // Sprite rendering
+  spriteAsset: string;      // path relative to /assets/overworld/
+  spriteWidth: number;      // px
+  spriteHeight: number;     // px
+  spriteOffsetY: number;    // px — buildings render taller than footprint
 };
 
 export type PlayerState = {
@@ -51,16 +59,14 @@ export type GameAction =
   | { type: 'TOGGLE_AUDIO' }
   | { type: 'TOGGLE_HIGH_CONTRAST' };
 
-// Tile type constants for the map array
+// Tile type constants for the terrain grid
+// Buildings are NOT terrain — they're sprite overlays with a separate collision map
 export const TileType = {
   GRASS: 0,
   PATH: 1,
-  BUILDING: 2,
-  TREE: 3,
-  FENCE: 4,
-  WATER: 5,
-  FLOWER: 6,
-  DOOR: 7,
+  TREE: 2,
+  WATER: 3,
+  FLOWER: 4,
 } as const;
 
 export type TileTypeValue = (typeof TileType)[keyof typeof TileType];
