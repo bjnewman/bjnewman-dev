@@ -284,3 +284,44 @@
     transition: none;
   }
 }
+
+/* ---------- Mobile Responsive ---------- */
+@media (max-width: 768px) {
+  .interior-scene__content {
+    padding: 1.5rem 1rem 5rem;
+  }
+
+  .rpg-panel {
+    padding: 1.25rem 1rem;
+  }
+
+  .rpg-banner {
+    font-size: 1rem;
+    padding: 0.375rem 1.25rem;
+  }
+
+  .door-button {
+    bottom: 1rem;
+    left: 1rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.75rem;
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .interior-scene__character {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .interior-scene__content {
+    padding: 1rem 0.75rem 5rem;
+  }
+
+  .rpg-panel {
+    padding: 1rem 0.75rem;
+    font-size: 0.9rem;
+  }
+}
