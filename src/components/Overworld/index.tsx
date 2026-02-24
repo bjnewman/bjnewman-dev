@@ -196,8 +196,8 @@ export function Overworld() {
 
   if (textMode) {
     return (
-      <div className="overworld">
-        <button onClick={handleToggleTextMode} type="button">
+      <div className="overworld overworld--text-mode">
+        <button className="overworld__text-toggle" onClick={handleToggleTextMode} type="button">
           Switch to Village View
         </button>
         <TextOnlyFallback />

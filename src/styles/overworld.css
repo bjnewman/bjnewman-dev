@@ -252,6 +252,17 @@
 /* Text-only fallback */
 .overworld__text-fallback {
   padding: 2rem;
+  max-width: 640px;
+  margin: 0 auto;
+  color: #f0f0f0;
+}
+
+.overworld__text-fallback h1 {
+  color: #e0c97f;
+}
+
+.overworld__text-fallback p {
+  color: #d0d0d0;
 }
 
 .overworld__text-fallback__list {
@@ -264,14 +275,19 @@
 .overworld__text-fallback__link {
   display: block;
   padding: 1rem;
-  border: 1px solid var(--primary, #6366f1);
-  border-radius: 0.25rem;
+  border: 2px solid #e0c97f;
+  border-radius: 4px;
   text-decoration: none;
-  color: var(--text-primary, #1e293b);
+  color: #f0f0f0;
+  background: rgba(26, 26, 46, 0.85);
+}
+
+.overworld__text-fallback__link strong {
+  color: #e0c97f;
 }
 
 .overworld__text-fallback__link:hover {
-  background: var(--bg-secondary, #f8fafc);
+  background: rgba(224, 201, 127, 0.15);
 }
 
 /* Virtual d-pad — touch devices only */
