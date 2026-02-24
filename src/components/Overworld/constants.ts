@@ -1,0 +1,10 @@
+export const TILE_SIZE = 32;
+export const MAP_COLS = 20;
+export const MAP_ROWS = 15;
+export const CANVAS_WIDTH = MAP_COLS * TILE_SIZE;  // 640
+export const CANVAS_HEIGHT = MAP_ROWS * TILE_SIZE; // 480
+export const MOVE_SPEED = 2; // pixels per frame
+export const ANIMATION_FRAME_DURATION = 150; // ms per walk frame
+export const INTERACTION_RANGE = 1; // tiles
+export const SPAWN_X = 10; // tile column
+export const SPAWN_Y = 10; // tile row
