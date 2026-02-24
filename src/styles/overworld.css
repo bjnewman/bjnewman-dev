@@ -19,6 +19,22 @@
   display: block;
 }
 
+/* View as text toggle */
+.overworld__text-toggle {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 10;
+  padding: 0.25rem 0.5rem;
+  background: rgba(26, 26, 46, 0.85);
+  border: 2px solid #e0c97f;
+  border-radius: 2px;
+  color: #e0c97f;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
 /* Building dialog — RPG text box style */
 .building-dialog {
   position: absolute;
