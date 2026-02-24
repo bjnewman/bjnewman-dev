@@ -52,10 +52,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       };
     case 'SET_PATH':
       return { ...state, path: action.path };
-    case 'TOGGLE_AUDIO':
+    case 'SET_AUDIO_MUTED':
       return {
         ...state,
-        audio: { muted: !state.audio.muted },
+        audio: { muted: action.muted },
       };
     case 'TOGGLE_HIGH_CONTRAST':
       return { ...state, highContrast: !state.highContrast };

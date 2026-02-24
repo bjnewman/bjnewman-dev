@@ -11,14 +11,16 @@ import type {
   AnimatedSprite,
 } from 'pixi.js';
 import type { CompositeTilemap } from '@pixi/tilemap';
-import type { PixiReactElementProps } from '@pixi/react/types/typedefs/PixiReactNode';
+import type { PixiReactElementProps } from '@pixi/react';
 
-declare module '@pixi/react/types/typedefs/PixiElements' {
-  interface PixiElements {
-    container: PixiReactElementProps<typeof Container>;
-    sprite: PixiReactElementProps<typeof Sprite>;
-    graphics: PixiReactElementProps<typeof Graphics>;
-    animatedSprite: PixiReactElementProps<typeof AnimatedSprite>;
-    compositeTilemap: PixiReactElementProps<typeof CompositeTilemap>;
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      container: PixiReactElementProps<typeof Container>;
+      sprite: PixiReactElementProps<typeof Sprite>;
+      graphics: PixiReactElementProps<typeof Graphics>;
+      animatedSprite: PixiReactElementProps<typeof AnimatedSprite>;
+      compositeTilemap: PixiReactElementProps<typeof CompositeTilemap>;
+    }
   }
 }

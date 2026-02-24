@@ -56,7 +56,7 @@ export type GameAction =
   | { type: 'OPEN_DIALOG'; building: Building }
   | { type: 'CLOSE_DIALOG' }
   | { type: 'SET_PATH'; path: Point[] | null }
-  | { type: 'TOGGLE_AUDIO' }
+  | { type: 'SET_AUDIO_MUTED'; muted: boolean }
   | { type: 'TOGGLE_HIGH_CONTRAST' };
 
 // Tile type constants for the terrain grid

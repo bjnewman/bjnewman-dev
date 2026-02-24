@@ -18,21 +18,19 @@ export function Overworld() {
   const [textMode, setTextMode] = useState(false);
   const frameRef = useRef<number>(0);
   const lastFrameTime = useRef(0);
-  const reducedMotion = useRef(false);
 
-  // Check reduced motion preference
+  // Refs for game loop — avoids re-creating rAF on every state change
+  const stateRef = useRef(state);
+  stateRef.current = state;
+  const keysRef = useRef(keys);
+  keysRef.current = keys;
+
+  // Sync audio state from useSoundEffects → reducer (single source of truth)
   useEffect(() => {
-    reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }, []);
+    dispatch({ type: 'SET_AUDIO_MUTED', muted });
+  }, [muted]);
 
-  // Sync audio state
-  useEffect(() => {
-    if (state.audio.muted !== muted) {
-      dispatch({ type: 'TOGGLE_AUDIO' });
-    }
-  }, [muted, state.audio.muted]);
-
-  // Game loop
+  // Game loop — stable rAF with refs, empty dep array
   useEffect(() => {
     const gameLoop = () => {
       frameRef.current = requestAnimationFrame(gameLoop);
@@ -40,30 +38,32 @@ export function Overworld() {
       if (now - lastFrameTime.current < 16) return; // ~60fps
       lastFrameTime.current = now;
 
+      const s = stateRef.current;
+      const k = keysRef.current;
+
       // Don't process movement when dialog is open
-      if (state.dialog.open) return;
+      if (s.dialog.open) return;
 
       let dx = 0;
       let dy = 0;
-      let direction: Direction = state.player.direction;
+      let direction: Direction = s.player.direction;
 
       // Keyboard input
-      if (keys.up) { dy = -MOVE_SPEED; direction = 'up'; }
-      else if (keys.down) { dy = MOVE_SPEED; direction = 'down'; }
-      if (keys.left) { dx = -MOVE_SPEED; direction = 'left'; }
-      else if (keys.right) { dx = MOVE_SPEED; direction = 'right'; }
+      if (k.up) { dy = -MOVE_SPEED; direction = 'up'; }
+      else if (k.down) { dy = MOVE_SPEED; direction = 'down'; }
+      if (k.left) { dx = -MOVE_SPEED; direction = 'left'; }
+      else if (k.right) { dx = MOVE_SPEED; direction = 'right'; }
 
       // Click-to-move path following
-      if (!dx && !dy && state.path && state.path.length > 0) {
-        const target = state.path[0];
-        const tdx = target.x - state.player.x;
-        const tdy = target.y - state.player.y;
+      if (!dx && !dy && s.path && s.path.length > 0) {
+        const target = s.path[0];
+        const tdx = target.x - s.player.x;
+        const tdy = target.y - s.player.y;
         const dist = Math.hypot(tdx, tdy);
 
         if (dist < MOVE_SPEED) {
-          // Reached waypoint, advance to next
           dispatch({ type: 'MOVE_PLAYER', x: target.x, y: target.y, direction });
-          const newPath = state.path.slice(1);
+          const newPath = s.path.slice(1);
           dispatch({ type: 'SET_PATH', path: newPath.length > 0 ? newPath : null });
           return;
         }
@@ -81,26 +81,26 @@ export function Overworld() {
       dispatch({ type: 'SET_MOVING', isMoving });
 
       if (isMoving) {
-        const newX = state.player.x + dx;
-        const newY = state.player.y + dy;
+        const newX = s.player.x + dx;
+        const newY = s.player.y + dy;
 
         if (canMoveTo(newX, newY)) {
           dispatch({ type: 'MOVE_PLAYER', x: newX, y: newY, direction });
         } else {
-          dispatch({ type: 'MOVE_PLAYER', x: state.player.x, y: state.player.y, direction });
+          dispatch({ type: 'MOVE_PLAYER', x: s.player.x, y: s.player.y, direction });
         }
       }
 
       // Check building proximity
-      const nearby = isNearBuilding(state.player.x, state.player.y);
-      if (nearby?.id !== state.nearbyBuilding?.id) {
+      const nearby = isNearBuilding(s.player.x, s.player.y);
+      if (nearby?.id !== s.nearbyBuilding?.id) {
         dispatch({ type: 'SET_NEARBY_BUILDING', building: nearby });
       }
     };
 
     frameRef.current = requestAnimationFrame(gameLoop);
     return () => cancelAnimationFrame(frameRef.current);
-  }, [keys, state.player, state.path, state.dialog.open, state.nearbyBuilding]);
+  }, []); // stable — reads from refs
 
   // Handle interact key
   useEffect(() => {
@@ -188,7 +188,9 @@ export function Overworld() {
       </button>
 
       {/* Canvas */}
-      <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} />
+      <div role="img" aria-label="Interactive pixel art village — use arrow keys or WASD to move, press E near buildings to interact">
+        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} />
+      </div>
 
       {/* React UI overlay */}
       <OverworldUI

@@ -61,9 +61,12 @@ describe('gameReducer', () => {
     expect(state.path).toEqual(path);
   });
 
-  it('should handle TOGGLE_AUDIO', () => {
-    const state = gameReducer(initialGameState, { type: 'TOGGLE_AUDIO' });
+  it('should handle SET_AUDIO_MUTED', () => {
+    const state = gameReducer(initialGameState, { type: 'SET_AUDIO_MUTED', muted: false });
     expect(state.audio.muted).toBe(false);
+
+    const state2 = gameReducer(state, { type: 'SET_AUDIO_MUTED', muted: true });
+    expect(state2.audio.muted).toBe(true);
   });
 
   it('should handle TOGGLE_HIGH_CONTRAST', () => {
