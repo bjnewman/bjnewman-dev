@@ -394,6 +394,15 @@
   }
 }
 
+/* Confetti (Konami code easter egg) */
+.confetti-piece {
+  position: fixed;
+  width: 1.25rem;
+  height: 1.25rem;
+  pointer-events: none;
+  z-index: 999;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .overworld__fade {

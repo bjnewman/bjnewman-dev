@@ -77,21 +77,35 @@ const KONAMI_SEQUENCE = [
 
 export function useKonamiCode(onActivate: () => void) {
   const indexRef = useRef(0);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === KONAMI_SEQUENCE[indexRef.current]) {
+      const expected = KONAMI_SEQUENCE[indexRef.current];
+      if (e.key === expected) {
         indexRef.current++;
+
+        // Reset timeout — must complete sequence within 5 seconds
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => { indexRef.current = 0; }, 5000);
+
         if (indexRef.current === KONAMI_SEQUENCE.length) {
           indexRef.current = 0;
+          if (timeoutRef.current) clearTimeout(timeoutRef.current);
           onActivate();
         }
-      } else {
-        indexRef.current = 0;
+      } else if (KONAMI_SEQUENCE.includes(e.key)) {
+        // Only reset if the key is part of the sequence but wrong —
+        // ignore unrelated keys (WASD, letters other than b/a) so
+        // the game's movement input doesn't break the sequence
+        indexRef.current = e.key === KONAMI_SEQUENCE[0] ? 1 : 0;
       }
     };
     window.addEventListener('keydown', handleKey);
-    return () => window.removeEventListener('keydown', handleKey);
+    return () => {
+      window.removeEventListener('keydown', handleKey);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
   }, [onActivate]);
 }
 
