@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 type Props = {
   onPlay: () => void;
@@ -7,6 +7,7 @@ type Props = {
 
 export function WelcomeModal({ onPlay, onSkip }: Props) {
   const [isVisible, setIsVisible] = useState(false);
+  const playBtnRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const seen = sessionStorage.getItem('welcome-seen');
@@ -14,6 +15,12 @@ export function WelcomeModal({ onPlay, onSkip }: Props) {
       setIsVisible(true);
     }
   }, []);
+
+  useEffect(() => {
+    if (isVisible) {
+      playBtnRef.current?.focus();
+    }
+  }, [isVisible]);
 
   const handlePlay = () => {
     sessionStorage.setItem('welcome-seen', 'true');
@@ -62,6 +69,7 @@ export function WelcomeModal({ onPlay, onSkip }: Props) {
             View as text (Skip)
           </button>
           <button
+            ref={playBtnRef}
             className="welcome-modal__btn welcome-modal__btn--play"
             onClick={handlePlay}
             type="button"

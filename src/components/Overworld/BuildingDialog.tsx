@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import type { Building } from './types';
 
 type Props = {
@@ -7,6 +8,13 @@ type Props = {
 };
 
 export function BuildingDialog({ building, onConfirm, onCancel }: Props) {
+  const enterBtnRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    // Focus the enter button on mount so 'Enter' key works immediately
+    enterBtnRef.current?.focus();
+  }, []);
+
   return (
     <div
       className="building-dialog"
@@ -25,6 +33,7 @@ export function BuildingDialog({ building, onConfirm, onCancel }: Props) {
           Cancel
         </button>
         <button
+          ref={enterBtnRef}
           className="building-dialog__btn building-dialog__btn--enter"
           onClick={onConfirm}
           type="button"
