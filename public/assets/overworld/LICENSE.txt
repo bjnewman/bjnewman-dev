@@ -12,3 +12,9 @@ Mana Seed Character Base (Free Demo)
   Source: https://seliel-the-shaper.itch.io/character-base
   License: Free for personal and commercial use
   Used for: Player character sprite (composited from base + forester outfit + dapper hair)
+
+Pixel Character - Top Down - Dog (Root)
+  Author: Admurin
+  Source: https://admurin.itch.io/pixel-character-top-down-dog
+  License: Free for personal and commercial use (no resale as asset, no NFT)
+  Used for: Carlos the dog companion sprite (idle + walk, 4 directions)
