@@ -1,12 +1,16 @@
 ---
-import Base from '../layouts/Base.astro';
+import InteriorBase from '../layouts/InteriorBase.astro';
+import { RPGPanel } from '../components/Interior/RPGPanel';
 import { Dashboard } from '../components/Dashboard';
 import '../styles/dashboard.css';
 ---
 
-<Base
-  title="Dashboard"
+<InteriorBase
+  title="Observatory"
+  buildingId="observatory"
   description="A data visualization playground featuring personal metrics, family fun, and Chicago sports fandom."
 >
-  <Dashboard client:load />
-</Base>
+  <RPGPanel variant="wood">
+    <Dashboard client:load />
+  </RPGPanel>
+</InteriorBase>

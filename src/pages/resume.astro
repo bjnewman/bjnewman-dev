@@ -1,5 +1,6 @@
 ---
-import Base from '../layouts/Base.astro';
+import InteriorBase from '../layouts/InteriorBase.astro';
+import { RPGPanel } from '../components/Interior/RPGPanel';
 import { ResumeTimeline } from '../components/ResumeTimeline';
 import { SkillsGrid } from '../components/SkillsGrid';
 import { EducationCards } from '../components/EducationCards';
@@ -7,21 +8,29 @@ import { PageCollectible } from '../components/ScavengerHunt';
 import '../styles/resume-timeline.css';
 ---
 
-<Base title="Resume">
-  <div class="resume-header">
-    <h1>Resume</h1>
-    <a href="/resume.md" download class="resume-download" aria-label="Download full resume as markdown">
-      <span class="resume-download__icon">↓</span>
-      <span class="resume-download__text">Full Resume</span>
-    </a>
-  </div>
+<InteriorBase title="Courthouse" buildingId="courthouse">
+  <RPGPanel>
+    <div class="resume-header">
+      <h2>Resume</h2>
+      <a href="/resume.md" download class="resume-download" aria-label="Download full resume as markdown">
+        <span class="resume-download__icon">↓</span>
+        <span class="resume-download__text">Full Resume</span>
+      </a>
+    </div>
+  </RPGPanel>
 
-  <h2>Experience</h2>
-  <ResumeTimeline client:visible />
+  <RPGPanel>
+    <h2>Experience</h2>
+    <ResumeTimeline client:visible />
+  </RPGPanel>
 
-  <h2>Skills <PageCollectible id="rare_gem" client:visible /></h2>
-  <SkillsGrid client:visible />
+  <RPGPanel>
+    <h2>Skills <PageCollectible id="rare_gem" client:visible /></h2>
+    <SkillsGrid client:visible />
+  </RPGPanel>
 
-  <h2>Education</h2>
-  <EducationCards client:visible />
-</Base>
+  <RPGPanel>
+    <h2>Education</h2>
+    <EducationCards client:visible />
+  </RPGPanel>
+</InteriorBase>

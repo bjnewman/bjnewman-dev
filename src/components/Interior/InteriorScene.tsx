@@ -81,7 +81,7 @@ export function InteriorScene({
       {/* Content */}
       <div className="interior-scene__content">
         <div className="interior-scene__title">
-          <span className="rpg-banner" role="heading" aria-level={1}>{title}</span>
+          <h1 className="rpg-banner">{title}</h1>
         </div>
         {children}
       </div>

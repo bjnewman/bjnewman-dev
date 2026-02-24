@@ -19,16 +19,18 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 
 <InteriorBase title={title} buildingId="library" description={description}>
   <RPGPanel>
-    <a href="/blog" class="back-link">&larr; Back to Library</a>
+    <article>
+      <a href="/blog" class="back-link">&larr; Back to Library</a>
 
-    <header class="blog-post-header">
-      <h2>{title}</h2>
-      <time datetime={date}>{formattedDate}</time>
-    </header>
+      <header class="blog-post-header">
+        <h2>{title}</h2>
+        <time datetime={date}>{formattedDate}</time>
+      </header>
 
-    <div class="blog-post-content">
-      <slot />
-    </div>
+      <div class="blog-post-content">
+        <slot />
+      </div>
+    </article>
   </RPGPanel>
 </InteriorBase>
 
