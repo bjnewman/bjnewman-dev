@@ -251,4 +251,8 @@
   .interactive-object__tooltip {
     transition: none;
   }
+
+  .door-button {
+    transition: none;
+  }
 }

@@ -17,8 +17,8 @@ declare module '@pixi/react' {
   interface PixiElements {
     container: PixiReactElementProps<typeof Container>;
     sprite: PixiReactElementProps<typeof Sprite>;
-    graphics: PixiReactElementProps<typeof Graphics>;
+    graphics: Partial<PixiReactElementProps<typeof Graphics>>;
     animatedSprite: PixiReactElementProps<typeof AnimatedSprite>;
-    compositeTilemap: PixiReactElementProps<typeof CompositeTilemap>;
+    compositeTilemap: Partial<PixiReactElementProps<typeof CompositeTilemap>>;
   }
 }
