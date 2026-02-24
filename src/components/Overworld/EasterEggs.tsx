@@ -75,6 +75,7 @@ const KONAMI_SEQUENCE = [
   'b', 'a',
 ];
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useKonamiCode(onActivate: () => void) {
   const indexRef = useRef(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);

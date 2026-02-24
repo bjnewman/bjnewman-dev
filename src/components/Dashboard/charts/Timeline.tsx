@@ -66,7 +66,6 @@ export function Timeline({ activities, currentDayIndex, title }: TimelineProps) 
 
       <div
         className="timeline__track"
-        role="list"
         aria-label={`${title} - use arrow keys to navigate`}
       >
         {orderedActivities.map((activity, index) => {
@@ -77,7 +76,6 @@ export function Timeline({ activities, currentDayIndex, title }: TimelineProps) 
             <button
               key={activity.id}
               ref={el => { itemRefs.current[index] = el; }}
-              role="listitem"
               className={`timeline__item ${isToday ? 'timeline__item--today' : ''} ${isFocused ? 'timeline__item--focused' : ''}`}
               tabIndex={isFocused || (focusedIndex === null && isToday) ? 0 : -1}
               onKeyDown={e => handleKeyDown(e, index)}

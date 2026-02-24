@@ -27,7 +27,6 @@ export function BuildingDialog({ building, onConfirm, onCancel }: Props) {
         <button
           className="building-dialog__btn building-dialog__btn--enter"
           onClick={onConfirm}
-          autoFocus
           type="button"
         >
           Enter

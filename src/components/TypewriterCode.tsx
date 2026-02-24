@@ -118,7 +118,7 @@ export function TypewriterCode({ restartKey = 0 }: TypewriterCodeProps) {
   return (
     <div
       className="typewriter-container typewriter-clickable"
-      role="img"
+      role="button"
       aria-label="Code snippet showing: building reliable systems with React, Java, and AWS stack, handling 10M+ transactions per day"
       tabIndex={0}
       onClick={restartAnimation}

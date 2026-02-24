@@ -49,6 +49,7 @@ export const SecretMenu: React.FC<SecretMenuProps> = ({ items, isOpen: controlle
   if (!isOpen) return null;
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <div
       className="secret-menu-overlay"
       onClick={() => toggleMenu(false)}

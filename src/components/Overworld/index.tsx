@@ -9,6 +9,7 @@ import { OverworldCanvas } from './OverworldCanvas';
 import { OverworldUI } from './OverworldUI';
 import { VirtualDpad } from './VirtualDpad';
 import { AccessibleNav, TextOnlyFallback } from './AccessibleNav';
+import { WelcomeModal } from './WelcomeModal';
 // import { useKonamiCode } from './EasterEggs';
 // import { useConfetti } from '../ConfettiCannon';
 import { MOVE_SPEED, TILE_SIZE } from './constants';
@@ -21,6 +22,21 @@ export function Overworld() {
   const { muted, toggleMute, playDialogOpen, playConfirm, playCancel, playTransition } = useSoundEffects();
   const [transitioning, setTransitioning] = useState(false);
   const [textMode, setTextMode] = useState(false);
+  
+  // Welcome modal state
+  const [isWelcomeOpen, setIsWelcomeOpen] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return !sessionStorage.getItem('welcome-seen');
+    }
+    return false;
+  });
+  const isWelcomeOpenRef = useRef(isWelcomeOpen);
+  
+  // Keep ref synced
+  useEffect(() => {
+    isWelcomeOpenRef.current = isWelcomeOpen;
+  }, [isWelcomeOpen]);
+
   // When a building is double-clicked, pathfind there and auto-interact on arrival
   const pendingInteractRef = useRef<Building | null>(null);
 
@@ -80,8 +96,8 @@ export function Overworld() {
       const s = stateRef.current;
       const k = keysRef.current;
 
-      // Don't process movement when dialog is open
-      if (s.dialog.open) return;
+      // Don't process movement when dialog or welcome modal is open
+      if (s.dialog.open || isWelcomeOpenRef.current) return;
 
       let dx = 0;
       let dy = 0;
@@ -291,6 +307,14 @@ export function Overworld() {
       <div id="overworld-nav">
         <AccessibleNav />
       </div>
+
+      <WelcomeModal
+        onPlay={() => setIsWelcomeOpen(false)}
+        onSkip={() => {
+          setIsWelcomeOpen(false);
+          setTextMode(true);
+        }}
+      />
 
       {/* Konami code confetti — disabled pending debugging
       <ConfettiRender />

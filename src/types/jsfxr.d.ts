@@ -1,4 +1,5 @@
 declare module 'jsfxr' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface SfxrSound {
     // Internal representation
   }

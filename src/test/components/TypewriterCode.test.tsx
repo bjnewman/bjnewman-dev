@@ -20,7 +20,7 @@ describe('TypewriterCode', () => {
   it('should render the typewriter container', () => {
     render(<TypewriterCode />);
 
-    const container = screen.getByRole('img');
+    const container = screen.getByRole('button');
     expect(container).toBeInTheDocument();
     expect(container).toHaveClass('typewriter-container');
   });
@@ -28,7 +28,7 @@ describe('TypewriterCode', () => {
   it('should have accessible aria-label describing the content', () => {
     render(<TypewriterCode />);
 
-    const container = screen.getByRole('img');
+    const container = screen.getByRole('button');
     expect(container).toHaveAttribute('aria-label');
     expect(container.getAttribute('aria-label')).toContain('React');
   });

@@ -19,13 +19,13 @@ describe('StatCards', () => {
     expect(screen.getByText('years experience')).toBeInTheDocument();
   });
 
-  it('should have accessible list structure', () => {
+  it('should have accessible interactive structure', () => {
     render(<StatCards />);
 
-    const list = screen.getByRole('list', { name: 'Key statistics' });
-    expect(list).toBeInTheDocument();
+    const container = screen.getByLabelText('Key statistics');
+    expect(container).toBeInTheDocument();
 
-    const items = screen.getAllByRole('listitem');
+    const items = screen.getAllByRole('button');
     expect(items).toHaveLength(3);
   });
 

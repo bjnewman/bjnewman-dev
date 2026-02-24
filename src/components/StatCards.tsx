@@ -22,11 +22,11 @@ export function StatCards() {
   };
 
   return (
-    <div className="stat-cards" role="list" aria-label="Key statistics">
+    <div className="stat-cards" aria-label="Key statistics">
       {/* Transactions - Sparkline */}
       <div
         className="stat-card stat-card-clickable"
-        role="listitem"
+        role="button"
         tabIndex={0}
         onClick={() => restartAnimation('transactions')}
         onKeyDown={handleKeyDown('transactions')}
@@ -46,7 +46,7 @@ export function StatCards() {
       {/* Users - Crowd */}
       <div
         className="stat-card stat-card-clickable"
-        role="listitem"
+        role="button"
         tabIndex={0}
         onClick={() => restartAnimation('users')}
         onKeyDown={handleKeyDown('users')}
@@ -62,7 +62,7 @@ export function StatCards() {
       {/* Years - Clock */}
       <div
         className="stat-card stat-card-clickable"
-        role="listitem"
+        role="button"
         tabIndex={0}
         onClick={() => restartAnimation('years')}
         onKeyDown={handleKeyDown('years')}

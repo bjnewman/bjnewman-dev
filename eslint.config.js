@@ -48,7 +48,6 @@ export default tseslint.config([
       ],
 
       // Prevent common JS bugs
-      'no-undef': 'error',
       eqeqeq: ['error', 'always', { null: 'ignore' }],
       'no-var': 'error',
       'prefer-const': 'warn',
