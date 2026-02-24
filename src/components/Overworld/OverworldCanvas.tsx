@@ -4,6 +4,7 @@ import { OverworldMap } from './OverworldMap';
 import { BuildingSprites } from './BuildingSprites';
 import { PlayerSprite } from './PlayerSprite';
 import { BuildingZones } from './BuildingZones';
+import { AmbientEffects } from './AmbientEffects';
 import type { GameState } from './types';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants';
 
@@ -41,6 +42,7 @@ export function OverworldCanvas({ state, onCanvasClick, playerScale }: Props) {
       >
         <container>
           <OverworldMap />
+          <AmbientEffects />
           <BuildingSprites />
           <BuildingZones nearbyBuilding={state.nearbyBuilding} />
           <PlayerSprite
