@@ -61,7 +61,7 @@
   padding: 1.5rem 2rem;
   margin-bottom: 1.5rem;
   border-radius: 4px;
-  color: #2a1a0a;
+  color: #1a0f05;
   line-height: 1.7;
 }
 
@@ -86,7 +86,7 @@
 .rpg-panel h2,
 .rpg-panel h3 {
   font-family: 'JetBrains Mono', monospace;
-  color: #4a2c0a;
+  color: #1a0f05;
 }
 
 .rpg-panel--wood h1,
@@ -95,9 +95,17 @@
   color: #f5e6c8;
 }
 
+.rpg-panel p,
+.rpg-panel li,
+.rpg-panel span,
+.rpg-panel time {
+  color: #1a0f05;
+}
+
 .rpg-panel a {
-  color: #6a3d0a;
+  color: #3a1e05;
   text-decoration: underline;
+  font-weight: 500;
 }
 
 .rpg-panel--wood a {
