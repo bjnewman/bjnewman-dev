@@ -78,21 +78,30 @@ export function Overworld() {
       }
 
       const isMoving = dx !== 0 || dy !== 0;
-      dispatch({ type: 'SET_MOVING', isMoving });
+
+      // Only dispatch SET_MOVING when it actually changes
+      if (isMoving !== s.player.isMoving) {
+        dispatch({ type: 'SET_MOVING', isMoving });
+      }
+
+      let playerX = s.player.x;
+      let playerY = s.player.y;
 
       if (isMoving) {
         const newX = s.player.x + dx;
         const newY = s.player.y + dy;
 
         if (canMoveTo(newX, newY)) {
+          playerX = newX;
+          playerY = newY;
           dispatch({ type: 'MOVE_PLAYER', x: newX, y: newY, direction });
         } else {
           dispatch({ type: 'MOVE_PLAYER', x: s.player.x, y: s.player.y, direction });
         }
       }
 
-      // Check building proximity
-      const nearby = isNearBuilding(s.player.x, s.player.y);
+      // Check building proximity using the latest position
+      const nearby = isNearBuilding(playerX, playerY);
       if (nearby?.id !== s.nearbyBuilding?.id) {
         dispatch({ type: 'SET_NEARBY_BUILDING', building: nearby });
       }
@@ -187,20 +196,18 @@ export function Overworld() {
         View as text
       </button>
 
-      {/* Canvas */}
-      <div role="img" aria-label="Interactive pixel art village — use arrow keys or WASD to move, press E near buildings to interact">
+      {/* Canvas + UI overlay (overlays positioned relative to canvas) */}
+      <div className="overworld__game-area" role="img" aria-label="Interactive pixel art village — use arrow keys or WASD to move, press E near buildings to interact">
         <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} />
+        <OverworldUI
+          state={state}
+          onDialogConfirm={handleDialogConfirm}
+          onDialogCancel={handleDialogCancel}
+          onToggleAudio={handleToggleAudio}
+          onToggleContrast={handleToggleContrast}
+          transitioning={transitioning}
+        />
       </div>
-
-      {/* React UI overlay */}
-      <OverworldUI
-        state={state}
-        onDialogConfirm={handleDialogConfirm}
-        onDialogCancel={handleDialogCancel}
-        onToggleAudio={handleToggleAudio}
-        onToggleContrast={handleToggleContrast}
-        transitioning={transitioning}
-      />
 
       {/* Accessible tab-based nav (hidden visually, available to screen readers) */}
       <div id="overworld-nav">

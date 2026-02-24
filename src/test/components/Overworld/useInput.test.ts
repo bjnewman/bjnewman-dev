@@ -52,6 +52,27 @@ describe('useInput', () => {
     expect(result.current.keys.interact).toBe(true);
   });
 
+  it('should detect Space key as interact', () => {
+    const { result } = renderHook(() => useInput());
+
+    act(() => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: ' ' }));
+    });
+
+    expect(result.current.keys.interact).toBe(true);
+  });
+
+  it('should not map Enter key to interact', () => {
+    const { result } = renderHook(() => useInput());
+
+    act(() => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }));
+    });
+
+    // Enter is intentionally not mapped — it should reach focused dialog buttons
+    expect(result.current.keys.interact).toBe(false);
+  });
+
   it('should detect Escape key', () => {
     const { result } = renderHook(() => useInput());
 

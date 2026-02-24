@@ -10,6 +10,8 @@ export type InputKeys = {
   escape: boolean;
 };
 
+// Movement and game-specific keys only — Enter is NOT mapped here
+// so it can reach focused UI buttons (dialog confirm) naturally
 const KEY_MAP: Record<string, keyof InputKeys> = {
   ArrowUp: 'up',
   ArrowDown: 'down',
@@ -25,7 +27,7 @@ const KEY_MAP: Record<string, keyof InputKeys> = {
   D: 'right',
   e: 'interact',
   E: 'interact',
-  Enter: 'interact',
+  ' ': 'interact',
   Escape: 'escape',
 };
 
@@ -45,7 +47,11 @@ export function useInput() {
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     const mapped = KEY_MAP[e.key];
     if (mapped) {
-      e.preventDefault();
+      // Only preventDefault for movement keys — let interact/escape propagate
+      // so Enter/Escape can reach focused dialog buttons
+      if (mapped === 'up' || mapped === 'down' || mapped === 'left' || mapped === 'right') {
+        e.preventDefault();
+      }
       setKeys((prev) => ({ ...prev, [mapped]: true }));
     }
   }, []);

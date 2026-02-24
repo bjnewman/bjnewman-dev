@@ -1,6 +1,8 @@
 import type { GameState } from './types';
 import { BuildingDialog } from './BuildingDialog';
 import { useAudioDescription } from './useAudioDescription';
+import { buildings } from './mapData';
+import { TILE_SIZE, CANVAS_WIDTH, CANVAS_HEIGHT } from './constants';
 
 type Props = {
   state: GameState;
@@ -23,12 +25,38 @@ export function OverworldUI({
 
   return (
     <>
-      {/* Interaction prompt */}
-      {state.nearbyBuilding && !state.dialog.open && (
-        <div className="overworld__prompt" role="status" aria-live="polite">
-          Press E to enter {state.nearbyBuilding.name}
-        </div>
-      )}
+      {/* Building name signs — hide when interaction prompt is showing for that building */}
+      {buildings.filter((b) => !(state.nearbyBuilding?.id === b.id && !state.dialog.open)).map((b) => {
+        const centerX = (b.tileX + b.footprintW / 2) * TILE_SIZE;
+        const leftPct = (centerX / CANVAS_WIDTH) * 100;
+        const topPct = ((b.tileY * TILE_SIZE - TILE_SIZE * 0.25) / CANVAS_HEIGHT) * 100;
+        return (
+          <div
+            key={b.id}
+            className="overworld__building-sign"
+            style={{ left: `${leftPct}%`, top: `${Math.max(0, topPct)}%` }}
+          >
+            {b.name}
+          </div>
+        );
+      })}
+
+      {/* Interaction prompt — positioned above the building entrance */}
+      {state.nearbyBuilding && !state.dialog.open && (() => {
+        const b = state.nearbyBuilding;
+        const leftPct = ((b.entranceX * TILE_SIZE + TILE_SIZE / 2) / CANVAS_WIDTH) * 100;
+        const topPct = ((b.tileY * TILE_SIZE - TILE_SIZE * 0.5) / CANVAS_HEIGHT) * 100;
+        return (
+          <div
+            className="overworld__prompt"
+            role="status"
+            aria-live="polite"
+            style={{ left: `${leftPct}%`, top: `${Math.max(0, topPct)}%` }}
+          >
+            Press E to enter {b.name}
+          </div>
+        );
+      })()}
 
       {/* ARIA live region for screen readers */}
       <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
