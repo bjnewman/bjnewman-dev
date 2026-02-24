@@ -15,19 +15,31 @@ const FLOOR = {
   stoneDetail: 'url(/assets/overworld/interior/floor-stone-detail.png)',
 };
 
+// Warm tint overlays for interior atmosphere
+const TINT = {
+  warm: 'linear-gradient(rgba(40, 30, 20, 0.25), rgba(40, 30, 20, 0.4))',
+  cool: 'linear-gradient(rgba(20, 25, 40, 0.2), rgba(20, 25, 40, 0.35))',
+  magic: 'linear-gradient(rgba(60, 20, 80, 0.2), rgba(30, 10, 50, 0.35))',
+};
+
+// Composite tint + tile into a single background-image value
+function tinted(tint: string, tile: string): string {
+  return `${tint}, ${tile}`;
+}
+
 export const sceneConfigs: Record<string, SceneConfig> = {
   'town-hall': {
-    wallTilePattern: WALL.stoneWarm,
+    wallTilePattern: tinted(TINT.warm, WALL.stoneWarm),
     floorTilePattern: FLOOR.wood,
     props: [
       { src: '/assets/overworld/ui/banner.png', x: '40%', y: '5%', width: '20%', height: 'auto' },
     ],
     characterX: '15%',
     characterY: '75%',
-    characterDirection: 'right',
+    characterDirection: 'down',
   },
   'workshop': {
-    wallTilePattern: WALL.brick,
+    wallTilePattern: tinted(TINT.warm, WALL.brick),
     floorTilePattern: FLOOR.stone,
     props: [],
     characterX: '20%',
@@ -35,7 +47,7 @@ export const sceneConfigs: Record<string, SceneConfig> = {
     characterDirection: 'right',
   },
   'library': {
-    wallTilePattern: WALL.stoneWarm,
+    wallTilePattern: tinted(TINT.warm, WALL.stoneWarm),
     floorTilePattern: FLOOR.wood,
     props: [],
     characterX: '10%',
@@ -43,25 +55,25 @@ export const sceneConfigs: Record<string, SceneConfig> = {
     characterDirection: 'right',
   },
   'courthouse': {
-    wallTilePattern: WALL.stone,
+    wallTilePattern: tinted(TINT.cool, WALL.stone),
     floorTilePattern: FLOOR.stone,
     props: [
       { src: '/assets/overworld/ui/banner.png', x: '35%', y: '3%', width: '30%', height: 'auto' },
     ],
     characterX: '15%',
     characterY: '80%',
-    characterDirection: 'right',
+    characterDirection: 'up',
   },
   'observatory': {
-    wallTilePattern: WALL.stone,
+    wallTilePattern: tinted(TINT.cool, WALL.stone),
     floorTilePattern: FLOOR.stoneDetail,
     props: [],
     characterX: '25%',
     characterY: '70%',
-    characterDirection: 'right',
+    characterDirection: 'left',
   },
   'dog-house': {
-    wallTilePattern: WALL.stoneWarm,
+    wallTilePattern: tinted(TINT.warm, WALL.stoneWarm),
     floorTilePattern: FLOOR.wood,
     props: [],
     characterX: '20%',
@@ -69,7 +81,7 @@ export const sceneConfigs: Record<string, SceneConfig> = {
     characterDirection: 'down',
   },
   'fairy-treehouse': {
-    wallTilePattern: WALL.magicWood,
+    wallTilePattern: tinted(TINT.magic, WALL.magicWood),
     floorTilePattern: FLOOR.woodDark,
     props: [],
     characterX: '15%',
