@@ -1,0 +1,14 @@
+Overworld Asset Attribution
+===========================
+
+Tiny Swords (Free Pack)
+  Author: Pixel Frog
+  Source: https://pixelfrog-assets.itch.io/tiny-swords
+  License: Free for personal and commercial use
+  Used for: Buildings, terrain, decorations, UI elements, particles
+
+Mana Seed Character Base (Free Demo)
+  Author: Seliel the Shaper
+  Source: https://seliel-the-shaper.itch.io/character-base
+  License: Free for personal and commercial use
+  Used for: Player character sprite (composited from base + forester outfit + dapper hair)
