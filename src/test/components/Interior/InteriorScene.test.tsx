@@ -44,4 +44,14 @@ describe('InteriorScene', () => {
     );
     expect(container.firstChild).toHaveClass('interior-scene');
   });
+
+  it('should render fallback for unknown buildingId', () => {
+    render(
+      <InteriorScene buildingId="unknown-place" title="Mystery">
+        <p>Fallback content</p>
+      </InteriorScene>
+    );
+    expect(screen.getByText('Fallback content')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /return to village/i })).not.toBeInTheDocument();
+  });
 });

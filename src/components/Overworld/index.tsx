@@ -8,7 +8,8 @@ import { OverworldCanvas } from './OverworldCanvas';
 import { OverworldUI } from './OverworldUI';
 import { VirtualDpad } from './VirtualDpad';
 import { AccessibleNav, TextOnlyFallback } from './AccessibleNav';
-import { MOVE_SPEED } from './constants';
+import { MOVE_SPEED, TILE_SIZE } from './constants';
+import { buildings } from './mapData';
 import type { Direction } from './types';
 
 export function Overworld() {
@@ -31,6 +32,21 @@ export function Overworld() {
     };
     window.addEventListener('resize', updateScale);
     return () => window.removeEventListener('resize', updateScale);
+  }, []);
+
+  // Spawn at building entrance when returning from an interior page
+  useEffect(() => {
+    const spawnId = localStorage.getItem('overworld-spawn');
+    if (!spawnId) return;
+    localStorage.removeItem('overworld-spawn');
+    const building = buildings.find((b) => b.id === spawnId);
+    if (!building) return;
+    dispatch({
+      type: 'MOVE_PLAYER',
+      x: building.entranceX * TILE_SIZE,
+      y: building.entranceY * TILE_SIZE,
+      direction: 'down',
+    });
   }, []);
 
   // Refs for game loop — avoids re-creating rAF on every state change

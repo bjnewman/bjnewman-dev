@@ -1,5 +1,6 @@
 ---
-import Base from '../layouts/Base.astro';
+import InteriorBase from '../layouts/InteriorBase.astro';
+import { RPGPanel } from '../components/Interior/RPGPanel';
 import { ContactForm } from '../components/ContactForm';
 import { PlacesMap } from '../components/PlacesMap';
 import { PageCollectible } from '../components/ScavengerHunt';
@@ -8,49 +9,45 @@ import '../styles/fun-form-fields.css';
 import '../styles/places-map.css';
 ---
 
-<Base title="About">
-  <h1>About Me</h1>
+<InteriorBase title="Town Hall" buildingId="town-hall">
+  <RPGPanel>
+    <h2>The Short Version</h2>
+    <p>I'm a full-stack developer specializing in React and Java. Former lawyer who discovered that writing code is way more satisfying than writing briefs. Based in Happy Valley, OR, currently working as a Tech Lead at Availity building healthcare technology.</p>
 
-  <h2>The Short Version</h2>
+    <h2>The Career Path</h2>
+    <p>Started as a lawyer, realized I enjoyed solving logical puzzles more than arguing about them. Made the jump to software development and joined the legions of satisfied ex-lawyers.</p>
+    <p>Joined Availity as a developer and spent seven years building the infrastructure that helps healthcare providers and insurance companies talk to each other. Turns out American healthcare runs on some arcane data formats (looking at you, ANSI X12), and someone has to make sense of them. Worked across multiple teams handling different transaction types — 837 and 277CAs for claim submissions, 276/277 for claim status, 275 and 277RFAIs for attachments.</p>
+    <p>Got promoted multiple times as I took on bigger challenges — from individual contributor to Tech Lead. Built configuration-driven systems that replaced dozens of one-off custom solutions, architected workflows that handle millions of transactions daily, and led teams through AWS cloud migrations.</p>
+  </RPGPanel>
 
-  <p>I'm a full-stack developer specializing in React and Java. Former lawyer who discovered that writing code is way more satisfying than writing briefs. Based in Happy Valley, OR, currently working as a Tech Lead at Availity building healthcare technology.</p>
+  <RPGPanel>
+    <h2>What I Value in the Work</h2>
+    <p>Complex problems that take three whiteboard sessions to crack. Scalable architecture that doesn't fall over when real users show up. Interfaces that don't make people miserable. Solutions that actually move the business, not just technically interesting dead ends.</p>
 
-  <h2>The Career Path</h2>
+    <h2>The Law</h2>
+    <p>I went to law school and I practiced for a little bit. It turns out legal reasoning and software architecture have a lot in common — breaking down complex problems, thinking through edge cases, and building systems that hold up under scrutiny. Trained to read statutes; now I read ECMA-262 and the DOM Living Standard with the same intensity.</p>
+    <p>The main difference? Code either works or it doesn't. Much less ambiguity. Much more satisfying. Someday I'd like to contribute to an international standards body — W3C, TC39, IETF. Probably need to ship a few more things first.</p>
+  </RPGPanel>
 
-  <p>Started as a lawyer, realized I enjoyed solving logical puzzles more than arguing about them. Made the jump to software development and joined the legions of satisfied ex-lawyers.</p>
+  <RPGPanel>
+    <h2>Beyond Code</h2>
+    <p>When I'm not debugging production issues or refactoring CI pipelines, I'm in the Pacific Northwest with my family and my dog <a href="/carlos">Carlos</a>. <PageCollectible id="golden_paw" client:visible /></p>
 
-  <p>Joined Availity as a developer and spent seven years building the infrastructure that helps healthcare providers and insurance companies talk to each other. Turns out American healthcare runs on some arcane data formats (looking at you, ANSI X12), and someone has to make sense of them. Worked across multiple teams handling different transaction types — 837 and 277CAs for claim submissions, 276/277 for claim status, 275 and 277RFAIs for attachments.</p>
+    <h2>Books I Read in 2026</h2>
+    <ul>
+      <li><em>Barkskins</em> by Annie Proulx</li>
+    </ul>
+  </RPGPanel>
 
-  <p>Got promoted multiple times as I took on bigger challenges — from individual contributor to Tech Lead. Built configuration-driven systems that replaced dozens of one-off custom solutions, architected workflows that handle millions of transactions daily, and led teams through AWS cloud migrations.</p>
+  <RPGPanel>
+    <h2>The Journey</h2>
+    <p>I've lived in a few places that shaped who I am:</p>
+    <PlacesMap client:visible />
+  </RPGPanel>
 
-  <h2>What I Value in the Work</h2>
-
-  <p>Complex problems that take three whiteboard sessions to crack. Scalable architecture that doesn't fall over when real users show up. Interfaces that don't make people miserable. Solutions that actually move the business, not just technically interesting dead ends.</p>
-
-  <h2>The Law</h2>
-
-  <p>I went to law school and I practiced for a little bit. It turns out legal reasoning and software architecture have a lot in common — breaking down complex problems, thinking through edge cases, and building systems that hold up under scrutiny. Trained to read statutes; now I read ECMA-262 and the DOM Living Standard with the same intensity.</p>
-
-  <p>The main difference? Code either works or it doesn't. Much less ambiguity. Much more satisfying. Someday I'd like to contribute to an international standards body — W3C, TC39, IETF. Probably need to ship a few more things first.</p>
-
-  <h2>Beyond Code</h2>
-
-  <p>When I'm not debugging production issues or refactoring CI pipelines, I'm in the Pacific Northwest with my family and my dog <a href="/carlos">Carlos</a>. <PageCollectible id="golden_paw" client:visible /></p>
-
-  <h2>The Journey</h2>
-
-  <p>I've lived in a few places that shaped who I am:</p>
-
-  <PlacesMap client:visible />
-
-  <h2>Books I Read in 2026</h2>
-
-  <ul>
-    <li><em>Barkskins</em> by Annie Proulx</li>
-  </ul>
-  <h2>Let's Connect</h2>
-
-  <p>Want to talk shop? Drop me a line below or find me on <a href="https://github.com/bjnewman" target="_blank" rel="noopener">GitHub</a> or <a href="https://linkedin.com/in/bjnewman" target="_blank" rel="noopener">LinkedIn</a>.</p>
-
-  <ContactForm client:visible />
-</Base>
+  <RPGPanel>
+    <h2>Let's Connect</h2>
+    <p>Want to talk shop? Drop me a line below or find me on <a href="https://github.com/bjnewman" target="_blank" rel="noopener">GitHub</a> or <a href="https://linkedin.com/in/bjnewman" target="_blank" rel="noopener">LinkedIn</a>.</p>
+    <ContactForm client:visible />
+  </RPGPanel>
+</InteriorBase>

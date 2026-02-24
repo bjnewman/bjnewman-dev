@@ -1,5 +1,6 @@
 ---
-import Base from './Base.astro';
+import InteriorBase from './InteriorBase.astro';
+import { RPGPanel } from '../components/Interior/RPGPanel';
 
 interface Props {
   title: string;
@@ -16,26 +17,26 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 });
 ---
 
-<Base title={title} description={description}>
-  <article class="blog-post">
-    <a href="/blog" class="back-link">&larr; Back to Blog</a>
+<InteriorBase title={title} buildingId="library" description={description}>
+  <RPGPanel>
+    <a href="/blog" class="back-link">&larr; Back to Library</a>
 
     <header class="blog-post-header">
-      <h1>{title}</h1>
+      <h2>{title}</h2>
       <time datetime={date}>{formattedDate}</time>
     </header>
 
     <div class="blog-post-content">
       <slot />
     </div>
-  </article>
-</Base>
+  </RPGPanel>
+</InteriorBase>
 
 <style>
   .back-link {
     display: inline-block;
-    margin-bottom: 2rem;
-    color: var(--primary);
+    margin-bottom: 1.5rem;
+    color: #6a3d0a;
     text-decoration: none;
     font-weight: 500;
   }
@@ -45,18 +46,18 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   }
 
   .blog-post-header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 
-  .blog-post-header h1 {
+  .blog-post-header h2 {
     margin: 0 0 0.5rem 0;
-    font-size: 2.5rem;
+    font-size: 2rem;
     line-height: 1.2;
   }
 
   .blog-post-header time {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
+    color: #8b6d4c;
+    font-size: 0.9rem;
   }
 
   .blog-post-content {
@@ -76,8 +77,10 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   .blog-post-content :global(pre) {
     margin: 1.5rem 0;
     padding: 1rem;
-    border-radius: 8px;
+    border-radius: 4px;
     overflow-x: auto;
+    background: #2a1a0a;
+    color: #f5e6c8;
   }
 
   .blog-post-content :global(code) {
@@ -98,12 +101,12 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
   .blog-post-content :global(blockquote) {
     margin: 1.5rem 0;
     padding: 1rem 1.5rem;
-    border-left: 4px solid var(--primary);
-    background: var(--bg-secondary);
-    border-radius: 0 8px 8px 0;
+    border-left: 4px solid #c4a46a;
+    background: rgba(196, 164, 106, 0.1);
+    border-radius: 0 4px 4px 0;
   }
 
   .blog-post-content :global(a) {
-    color: var(--primary);
+    color: #6a3d0a;
   }
 </style>

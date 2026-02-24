@@ -1,0 +1,50 @@
+---
+import Base from './Base.astro';
+import { DoorButton } from '../components/Interior/DoorButton';
+import { sceneConfigs } from '../components/Interior/sceneConfigs';
+import '../styles/interior.css';
+
+interface Props {
+  title: string;
+  buildingId: string;
+  description?: string;
+}
+
+const { title, buildingId, description } = Astro.props;
+const config = sceneConfigs[buildingId];
+
+// Character idle frame: row 0=down, 1=up, 2=left, 3=right (64x64 in 512x512 sheet)
+const dirRow: Record<string, number> = { down: 0, up: 1, left: 2, right: 3 };
+const charRow = dirRow[config?.characterDirection ?? 'down'] ?? 0;
+---
+
+<Base title={title} description={description}>
+  <div class="interior-scene">
+    {config && (
+      <>
+        <div
+          class="interior-scene__background"
+          style={`background-image: ${config.wallTilePattern};`}
+        />
+        <div
+          class="interior-scene__floor"
+          style={`background-image: ${config.floorTilePattern};`}
+        />
+        <div
+          class="interior-scene__character"
+          style={`left: ${config.characterX}; top: ${config.characterY}; background-image: url(/assets/overworld/units/character.png); background-position: 0px -${charRow * 64}px; background-size: 512px 512px; image-rendering: pixelated;`}
+          aria-hidden="true"
+        />
+      </>
+    )}
+
+    <div class="interior-scene__content">
+      <div class="interior-scene__title">
+        <span class="rpg-banner" role="heading" aria-level="1">{title}</span>
+      </div>
+      <slot />
+    </div>
+
+    <DoorButton buildingId={buildingId} client:load />
+  </div>
+</Base>
