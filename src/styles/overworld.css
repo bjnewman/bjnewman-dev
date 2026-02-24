@@ -1,22 +1,36 @@
-/* Overworld container */
+/* Full-viewport page reset */
+.overworld-page {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #2a5a1e;
+}
+
+/* Overworld container — fills viewport */
 .overworld {
   position: relative;
-  width: 100%;
-  max-width: 960px;
-  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2a5a1e;
 }
 
 .overworld__canvas-wrapper {
   position: relative;
   width: 100%;
-  aspect-ratio: 1024 / 768;
+  height: 100%;
+  max-width: calc(100vh * 1024 / 768);
+  max-height: calc(100vw * 768 / 1024);
 }
 
 .overworld__canvas {
   width: 100%;
-  height: auto;
+  height: 100%;
   image-rendering: pixelated;
   display: block;
+  object-fit: contain;
 }
 
 /* View as text toggle */

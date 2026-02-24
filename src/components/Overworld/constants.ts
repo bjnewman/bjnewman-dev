@@ -8,3 +8,4 @@ export const ANIMATION_FRAME_DURATION = 135; // ms per walk frame (Mana Seed gui
 export const INTERACTION_RANGE = 1; // tiles
 export const SPAWN_X = 8; // tile column (center of 16-col map)
 export const SPAWN_Y = 8; // tile row (lower-center)
+export const PLAYER_SCALE = 2; // character sprite scale multiplier
