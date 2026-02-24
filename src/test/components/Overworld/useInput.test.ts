@@ -98,4 +98,20 @@ describe('useInput', () => {
     expect(removeEventSpy).toHaveBeenCalledWith('keydown', expect.any(Function));
     expect(removeEventSpy).toHaveBeenCalledWith('keyup', expect.any(Function));
   });
+
+  it('should set direction key via setDirectionKey', () => {
+    const { result } = renderHook(() => useInput());
+
+    act(() => {
+      result.current.setDirectionKey('up', true);
+    });
+
+    expect(result.current.keys.up).toBe(true);
+
+    act(() => {
+      result.current.setDirectionKey('up', false);
+    });
+
+    expect(result.current.keys.up).toBe(false);
+  });
 });

@@ -21,12 +21,14 @@ export function Overworld() {
   const lastFrameTime = useRef(0);
 
   // Responsive player scale — smaller on mobile
-  const [playerScale, setPlayerScale] = useState(2);
+  const [playerScale, setPlayerScale] = useState(() =>
+    typeof window !== 'undefined' && window.innerWidth < 768 ? 1.25 : 2
+  );
   useEffect(() => {
     const updateScale = () => {
-      setPlayerScale(window.innerWidth < 768 ? 1.25 : 2);
+      const next = window.innerWidth < 768 ? 1.25 : 2;
+      setPlayerScale((prev) => prev === next ? prev : next);
     };
-    updateScale();
     window.addEventListener('resize', updateScale);
     return () => window.removeEventListener('resize', updateScale);
   }, []);
