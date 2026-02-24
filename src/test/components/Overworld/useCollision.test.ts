@@ -50,4 +50,11 @@ describe('collision detection', () => {
     expect(getTileAt(-1, 0)).toBeNull();
     expect(getTileAt(0, MAP_ROWS * TILE_SIZE + 1)).toBeNull();
   });
+
+  it('should allow movement to every building entrance via canMoveTo', () => {
+    buildings.forEach((building) => {
+      const walkable = canMoveTo(building.entranceX * TILE_SIZE, building.entranceY * TILE_SIZE);
+      expect(walkable, `${building.id} entrance at (${building.entranceX}, ${building.entranceY}) should be walkable`).toBe(true);
+    });
+  });
 });

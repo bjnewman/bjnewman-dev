@@ -51,6 +51,14 @@ export function useSoundEffects() {
     }
   }, []);
 
+  // Clean up AudioContext on unmount
+  useEffect(() => {
+    return () => {
+      audioCtxRef.current?.close();
+      audioCtxRef.current = null;
+    };
+  }, []);
+
   // Persist mute state
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, muted.toString());
