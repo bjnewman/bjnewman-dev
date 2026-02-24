@@ -25,6 +25,12 @@ export function OverworldUI({
 
   return (
     <>
+      {/* Title card banner */}
+      <h1 className="overworld__title-card" aria-label="Ben Newman — Welcome to Ben's Village">
+        <span className="overworld__title-text">Ben Newman</span>
+        <span className="overworld__title-subtitle">Welcome to Ben's Village</span>
+      </h1>
+
       {/* Building name signs — hide when interaction prompt is showing for that building */}
       {buildings.filter((b) => !(state.nearbyBuilding?.id === b.id && !state.dialog.open)).map((b) => {
         const centerX = (b.tileX + b.footprintW / 2) * TILE_SIZE;
