@@ -20,8 +20,9 @@ export function useSoundEffects() {
   });
   const audioCtxRef = useRef<AudioContext | null>(null);
   const bufferCache = useRef<Map<string, AudioBuffer>>(new Map());
+  const preloaded = useRef(false);
 
-  // Lazily create AudioContext (must be triggered by user gesture)
+  // Lazily create AudioContext (only on user gesture)
   const getAudioContext = useCallback(() => {
     if (!audioCtxRef.current) {
       audioCtxRef.current = new AudioContext();
@@ -32,33 +33,23 @@ export function useSoundEffects() {
     return audioCtxRef.current;
   }, []);
 
-  // Preload sounds after first user interaction
-  useEffect(() => {
-    let cancelled = false;
+  // Preload all sounds in background (low priority, non-blocking)
+  const preloadSounds = useCallback(async (ctx: AudioContext) => {
+    if (preloaded.current) return;
+    preloaded.current = true;
 
-    const preload = async () => {
+    for (const path of Object.values(SOUND_PATHS)) {
+      if (bufferCache.current.has(path)) continue;
       try {
-        const ctx = getAudioContext();
-        for (const path of Object.values(SOUND_PATHS)) {
-          if (bufferCache.current.has(path)) continue;
-          const response = await fetch(path);
-          const arrayBuffer = await response.arrayBuffer();
-          if (cancelled) return;
-          const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
-          bufferCache.current.set(path, audioBuffer);
-        }
+        const response = await fetch(path, { priority: 'low' } as RequestInit);
+        const arrayBuffer = await response.arrayBuffer();
+        const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+        bufferCache.current.set(path, audioBuffer);
       } catch {
-        // Audio not available — silent fallback
+        // Individual sound fetch failure is fine — will retry on play
       }
-    };
-
-    // Defer preload slightly to avoid blocking initial render
-    const timer = setTimeout(preload, 1000);
-    return () => {
-      cancelled = true;
-      clearTimeout(timer);
-    };
-  }, [getAudioContext]);
+    }
+  }, []);
 
   // Persist mute state
   useEffect(() => {
@@ -70,6 +61,10 @@ export function useSoundEffects() {
       if (muted) return;
       try {
         const ctx = getAudioContext();
+
+        // Kick off background preload on first play attempt
+        preloadSounds(ctx);
+
         const path = SOUND_PATHS[name];
         let buffer = bufferCache.current.get(path);
 
@@ -85,10 +80,10 @@ export function useSoundEffects() {
         source.connect(ctx.destination);
         source.start(0);
       } catch {
-        // Silently fail
+        // Silently fail — audio is non-essential
       }
     },
-    [muted, getAudioContext]
+    [muted, getAudioContext, preloadSounds]
   );
 
   const toggleMute = useCallback(() => {
