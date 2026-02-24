@@ -13,12 +13,23 @@ import type { Direction } from './types';
 
 export function Overworld() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
-  const { keys, clickTarget, handleCanvasClick, clearClickTarget, clearInteract, clearEscape } = useInput();
+  const { keys, clickTarget, handleCanvasClick, clearClickTarget, clearInteract, clearEscape, setDirectionKey } = useInput();
   const { muted, toggleMute, playDialogOpen, playConfirm, playCancel, playTransition } = useSoundEffects();
   const [transitioning, setTransitioning] = useState(false);
   const [textMode, setTextMode] = useState(false);
   const frameRef = useRef<number>(0);
   const lastFrameTime = useRef(0);
+
+  // Responsive player scale — smaller on mobile
+  const [playerScale, setPlayerScale] = useState(2);
+  useEffect(() => {
+    const updateScale = () => {
+      setPlayerScale(window.innerWidth < 768 ? 1.25 : 2);
+    };
+    updateScale();
+    window.addEventListener('resize', updateScale);
+    return () => window.removeEventListener('resize', updateScale);
+  }, []);
 
   // Refs for game loop — avoids re-creating rAF on every state change
   const stateRef = useRef(state);
@@ -172,6 +183,17 @@ export function Overworld() {
     setTextMode((prev) => !prev);
   }, []);
 
+  // Virtual d-pad handlers
+  const handleDpadDirection = useCallback((dir: 'up' | 'down' | 'left' | 'right', pressed: boolean) => {
+    setDirectionKey(dir, pressed);
+  }, [setDirectionKey]);
+
+  const handleDpadInteract = useCallback(() => {
+    setDirectionKey('interact', true);
+    // Auto-release after a short delay (tap behavior)
+    setTimeout(() => setDirectionKey('interact', false), 100);
+  }, [setDirectionKey]);
+
   if (textMode) {
     return (
       <div className="overworld">
@@ -199,7 +221,7 @@ export function Overworld() {
 
       {/* Canvas + UI overlay (overlays positioned relative to canvas) */}
       <div className="overworld__game-area" role="img" aria-label="Interactive pixel art village — use arrow keys or WASD to move, press E near buildings to interact">
-        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} />
+        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} playerScale={playerScale} />
         <OverworldUI
           state={state}
           onDialogConfirm={handleDialogConfirm}
@@ -209,6 +231,9 @@ export function Overworld() {
           transitioning={transitioning}
         />
       </div>
+
+      {/* Virtual d-pad for touch devices */}
+      <VirtualDpad onDirection={handleDpadDirection} onInteract={handleDpadInteract} />
 
       {/* Accessible tab-based nav (hidden visually, available to screen readers) */}
       <div id="overworld-nav">

@@ -3,7 +3,7 @@ import { extend, useTick } from '@pixi/react';
 import { AnimatedSprite as PixiAnimatedSprite, Assets, Texture, Rectangle } from 'pixi.js';
 import type { Direction } from './types';
 import { characterIdle, characterWalk, CHARACTER_PATH } from './spriteSheet';
-import { TILE_SIZE, ANIMATION_FRAME_DURATION, PLAYER_SCALE } from './constants';
+import { TILE_SIZE, ANIMATION_FRAME_DURATION } from './constants';
 
 extend({ AnimatedSprite: PixiAnimatedSprite });
 
@@ -12,6 +12,7 @@ type Props = {
   y: number;
   direction: Direction;
   isMoving: boolean;
+  scale?: number;
 };
 
 type FrameSet = {
@@ -19,7 +20,7 @@ type FrameSet = {
   walk: Record<Direction, Texture[]>;
 };
 
-export function PlayerSprite({ x, y, direction, isMoving }: Props) {
+export function PlayerSprite({ x, y, direction, isMoving, scale: playerScale = 2 }: Props) {
   const spriteRef = useRef<PixiAnimatedSprite>(null);
   const [frames, setFrames] = useState<FrameSet | null>(null);
 
@@ -76,7 +77,7 @@ export function PlayerSprite({ x, y, direction, isMoving }: Props) {
   if (!frames) return null;
 
   // Offset so the sprite's feet align with the tile position
-  const scaledSize = TILE_SIZE * PLAYER_SCALE;
+  const scaledSize = TILE_SIZE * playerScale;
   const offsetX = x - (scaledSize - TILE_SIZE) / 2;
   const offsetY = y - (scaledSize - TILE_SIZE);
 

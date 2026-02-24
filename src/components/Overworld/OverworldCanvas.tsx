@@ -12,9 +12,10 @@ extend({ Container });
 type Props = {
   state: GameState;
   onCanvasClick: (worldX: number, worldY: number) => void;
+  playerScale?: number;
 };
 
-export function OverworldCanvas({ state, onCanvasClick }: Props) {
+export function OverworldCanvas({ state, onCanvasClick, playerScale }: Props) {
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const target = e.currentTarget;
     const rect = target.getBoundingClientRect();
@@ -47,6 +48,7 @@ export function OverworldCanvas({ state, onCanvasClick }: Props) {
             y={state.player.y}
             direction={state.player.direction}
             isMoving={state.player.isMoving}
+            scale={playerScale}
           />
         </container>
       </Application>
