@@ -125,7 +125,7 @@ const currentPath = Astro.url.pathname;
 
     <header role="banner" class="site-header">
       <nav role="navigation" aria-label="Main navigation" class="site-nav nav-filing-tabs">
-        <a href="/" class={`nav-link ${currentPath === '/' ? 'active' : ''}`}>Home</a>
+        <a href="/" class={`nav-link ${currentPath === '/' ? 'active' : ''}`}>{currentPath === '/' ? 'Village' : '\u2190 Village'}</a>
         <a href="/about" class={`nav-link ${currentPath.startsWith('/about') ? 'active' : ''}`}>About</a>
         <a href="/projects" class={`nav-link ${currentPath.startsWith('/projects') ? 'active' : ''}`}>Projects</a>
         <a href="/resume" class={`nav-link ${currentPath.startsWith('/resume') ? 'active' : ''}`}>Resume</a>

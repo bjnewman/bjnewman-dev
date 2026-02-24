@@ -7,7 +7,7 @@ import { findPath } from './usePathfinding';
 import { OverworldCanvas } from './OverworldCanvas';
 import { OverworldUI } from './OverworldUI';
 import { AccessibleNav, TextOnlyFallback } from './AccessibleNav';
-import { MOVE_SPEED, TILE_SIZE } from './constants';
+import { MOVE_SPEED } from './constants';
 import type { Direction } from './types';
 
 export function Overworld() {
