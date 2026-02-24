@@ -36,12 +36,7 @@ export function OverworldCanvas({ state, onCanvasClick }: Props) {
         backgroundAlpha={1}
         backgroundColor={0x4a8c3f}
         resizeTo={undefined}
-        style={{
-          width: '100%',
-          height: 'auto',
-          imageRendering: 'pixelated',
-          display: 'block',
-        }}
+        className="overworld__canvas"
       >
         <container>
           <OverworldMap />

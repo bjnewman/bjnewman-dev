@@ -12,6 +12,13 @@
   aspect-ratio: 1024 / 768;
 }
 
+.overworld__canvas {
+  width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  display: block;
+}
+
 /* Building dialog — RPG text box style */
 .building-dialog {
   position: absolute;

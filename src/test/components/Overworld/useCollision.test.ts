@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { canMoveTo, getTileAt, isNearBuilding } from '../../../components/Overworld/useCollision';
-import { TileType } from '../../../components/Overworld/types';
 import { buildings } from '../../../components/Overworld/mapData';
 import { TILE_SIZE, MAP_COLS, MAP_ROWS } from '../../../components/Overworld/constants';
 

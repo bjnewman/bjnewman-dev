@@ -12,14 +12,18 @@ export function BuildingSprites() {
 
   useEffect(() => {
     const load = async () => {
-      const loaded = new Map<string, Texture>();
-      for (const building of buildings) {
-        const url = buildingAssetUrl(building.spriteAsset);
-        try {
+      const results = await Promise.allSettled(
+        buildings.map(async (building) => {
+          const url = buildingAssetUrl(building.spriteAsset);
           const texture = await Assets.load(url);
-          loaded.set(building.id, texture);
-        } catch {
-          // Skip buildings whose assets fail to load
+          return { id: building.id, texture } as { id: string; texture: Texture };
+        })
+      );
+
+      const loaded = new Map<string, Texture>();
+      for (const result of results) {
+        if (result.status === 'fulfilled') {
+          loaded.set(result.value.id, result.value.texture);
         }
       }
       setTextures(loaded);

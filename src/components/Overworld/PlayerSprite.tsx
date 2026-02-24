@@ -60,6 +60,8 @@ export function PlayerSprite({ x, y, direction, isMoving }: Props) {
       if (sprite.textures !== walkTextures) {
         sprite.textures = walkTextures;
       }
+      // PixiJS animationSpeed is in frames-per-tick at 60fps.
+      // Convert ms-per-frame → frames-per-tick: 1000 / (ms * 60)
       sprite.animationSpeed = 1000 / (ANIMATION_FRAME_DURATION * 60);
       if (!sprite.playing) sprite.play();
     } else {
