@@ -6,6 +6,7 @@ import { canMoveTo, isNearBuilding } from './useCollision';
 import { findPath } from './usePathfinding';
 import { OverworldCanvas } from './OverworldCanvas';
 import { OverworldUI } from './OverworldUI';
+import { VirtualDpad } from './VirtualDpad';
 import { AccessibleNav, TextOnlyFallback } from './AccessibleNav';
 import { MOVE_SPEED } from './constants';
 import type { Direction } from './types';

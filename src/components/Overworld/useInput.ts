@@ -88,5 +88,10 @@ export function useInput() {
     setKeys((prev) => ({ ...prev, escape: false }));
   }, []);
 
-  return { keys, clickTarget, handleCanvasClick, clearClickTarget, clearInteract, clearEscape };
+  // For virtual d-pad: set a direction key directly
+  const setDirectionKey = useCallback((key: keyof InputKeys, pressed: boolean) => {
+    setKeys((prev) => ({ ...prev, [key]: pressed }));
+  }, []);
+
+  return { keys, clickTarget, handleCanvasClick, clearClickTarget, clearInteract, clearEscape, setDirectionKey };
 }
