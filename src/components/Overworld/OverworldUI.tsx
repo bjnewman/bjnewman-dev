@@ -1,5 +1,6 @@
 import type { GameState } from './types';
 import { BuildingDialog } from './BuildingDialog';
+import { useAudioDescription } from './useAudioDescription';
 
 type Props = {
   state: GameState;
@@ -18,6 +19,8 @@ export function OverworldUI({
   onToggleContrast,
   transitioning,
 }: Props) {
+  const { describeScene } = useAudioDescription();
+
   return (
     <>
       {/* Interaction prompt */}
@@ -51,6 +54,16 @@ export function OverworldUI({
         type="button"
       >
         {state.audio.muted ? '\u{1F507}' : '\u{1F50A}'}
+      </button>
+
+      {/* Describe scene (accessibility) */}
+      <button
+        className="overworld__describe-btn"
+        onClick={describeScene}
+        aria-label="Describe the village scene"
+        type="button"
+      >
+        AD
       </button>
 
       {/* High contrast toggle */}

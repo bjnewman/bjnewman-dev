@@ -140,6 +140,26 @@
   justify-content: center;
 }
 
+/* Describe scene button (audio description) */
+.overworld__describe-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 5.5rem;
+  z-index: 10;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: rgba(26, 26, 46, 0.85);
+  border: 2px solid #e0c97f;
+  border-radius: 2px;
+  color: #e0c97f;
+  cursor: pointer;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* High contrast toggle */
 .overworld__contrast-toggle {
   position: absolute;
