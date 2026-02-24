@@ -1,12 +1,16 @@
-# Overworld Fun Details — Enhancement Plan
+# Overworld & Interior Polish — Enhancement Plan
 
-> **For Claude:** These are incremental enhancements to the existing overworld. Each can be implemented independently. No architectural changes needed.
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement these enhancements.
 
-**Goal:** Bring the overworld village to life with ambient animations, wandering NPCs/animals, and hidden easter eggs.
+**Goal:** Bring the overworld village to life with ambient animations, NPCs, easter eggs. Polish interior scenes with atmospheric tints and props. Verify mobile experience.
 
 **Project root:** `/Users/benjaminnewman/Projects/bjnewman-dev`
 
-**Assets available:** Check `public/assets/overworld/decorations/` for trees, bushes, rocks, sheep, rubber duck. Check `public/assets/overworld/particles/` for dust effects.
+**Assets available:**
+- Decorations: `public/assets/overworld/decorations/` — trees, bushes, rocks, sheep (idle + move), rubber duck, clouds (cloud1-3.png)
+- Particles: `public/assets/overworld/particles/` — dust, fire (fire1-3.png)
+- Interior tiles: `public/assets/overworld/interior/` — wall and floor textures for 7 buildings
+- UI: `public/assets/overworld/ui/` — banners, buttons, paper, ribbons, wood table
 
 ---
 
@@ -111,12 +115,112 @@ These are PixiJS animations added to the existing overworld canvas.
 - Each is independently implementable and commitable
 - Test: Visual QA via dev server is primary; unit tests for easter egg triggers
 
+---
+
+## Category 4: Interior Visual Polish
+
+These enhance the interior scene pages (which use `InteriorBase.astro`).
+
+### 4a. Warm Tint Overlays
+- Add a semi-transparent CSS gradient overlay on top of the tiled background for interior warmth
+- In `sceneConfigs.ts`, change wallTilePattern to composite: `linear-gradient(rgba(40, 30, 20, 0.3), rgba(40, 30, 20, 0.5)), url(/assets/overworld/interior/wall-stone-warm.png)`
+- Fairy Treehouse gets a magic tint: `linear-gradient(rgba(60, 20, 80, 0.2), rgba(30, 10, 50, 0.4))`
+- Note: InteriorBase.astro uses `style={`background-image: ...`}` — the composite gradient+url works with backgroundImage
+
+### 4b. Interior Props
+- Add positioned prop images inside each interior scene via `sceneConfigs.ts` props array
+- Town Hall: banner on wall, table in center
+- Workshop: anvil, tool rack
+- Library: bookshelf sprites on walls
+- Courthouse: banner, columns
+- Observatory: telescope prop
+- Dog House: dog bowl, toy
+- Fairy Treehouse: sparkle/glow effects
+- Props use the Tiny Swords TX Props.png sprites — extract individual prop images if needed
+
+### 4c. Character Pose Variety
+- Currently all interiors show the character in idle frame facing right
+- Adjust `characterDirection` per scene for variety (some facing down, some facing right)
+- Consider using a different frame (e.g., wave pose for Holland page if available)
+
+### 4d. Interior Ambient Effects (CSS)
+- Subtle CSS animations on interior pages:
+  - Fairy Treehouse: floating sparkle particles (CSS keyframe animation)
+  - Observatory: slowly rotating star chart (CSS transform rotate)
+  - Workshop: warm glow near forge area (CSS radial gradient)
+- All respect `prefers-reduced-motion`
+
+---
+
+## Category 5: Mobile Testing & Fixes
+
+Verify the complete experience on mobile devices and fix any issues found.
+
+### 5a. Overworld Mobile Check
+- Virtual d-pad renders on touch devices (`@media (pointer: coarse)`)
+- Character moves smoothly with d-pad buttons
+- Interact button (E) works to open building dialogs
+- Building dialog buttons are tap-friendly (min 44px touch targets)
+- Title card banner readable on small screens
+- Canvas scales properly on various screen sizes
+
+### 5b. Interior Pages Mobile Check
+- Tiled backgrounds render correctly on mobile viewports
+- RPGPanels don't overflow horizontally
+- Door button is reachable and tap-friendly
+- Content scrolls smoothly over fixed background
+- Character sprite doesn't overlap content on small screens
+- All interactive components (ContactForm, PlacesMap, Dashboard charts) work on touch
+
+### 5c. Responsive Fixes
+- If RPGPanels are too wide on mobile, add `max-width: 100%` and responsive padding
+- If the door button overlaps content, adjust position for mobile
+- If text in RPGPanels is too small, increase font-size at mobile breakpoint
+- Blog post code blocks should not overflow panels on mobile
+- Add mobile-specific breakpoints to `interior.css` if needed
+
+### 5d. Touch Interaction Polish
+- Ensure all interactive objects have adequate touch targets (min 44x44px per WCAG)
+- Verify hover tooltips on interactive objects work on touch (first tap shows tooltip, second tap activates)
+- DoorButton should not accidentally trigger from scroll gestures
+
+---
+
+## Implementation Notes
+
+- All overworld enhancements are additions to existing PixiJS canvas rendering
+- Animated sprites use PixiJS `AnimatedSprite` (same pattern as PlayerSprite)
+- Cloud/NPC movement uses `useTick()` for per-frame updates
+- Easter eggs wire through `useInput` hook or pointer events
+- Interior polish is CSS-only changes to `sceneConfigs.ts` and `interior.css`
+- Mobile fixes are CSS responsive adjustments
+- Each item is independently implementable and commitable
+- Test: Visual QA via dev server is primary; unit tests for easter egg triggers
+
 ## Priority Order (Recommended)
 
-1. **Swaying trees** — easiest, biggest visual impact
-2. **Carlos near the dog house** — personality
-3. **Drifting clouds** — atmosphere
-4. **Rubber duck easter egg** — fun
-5. **Konami code** — delight
-6. **Day/night cycle** — atmosphere
-7. **Everything else** — as time allows
+**Phase A: Overworld Life (highest impact)**
+1. Swaying trees — easiest, biggest visual impact
+2. Drifting clouds — atmosphere
+3. Carlos near the dog house — personality
+4. Flickering torches — ambiance
+
+**Phase B: Interior Polish**
+5. Warm tint overlays — quick win, big atmosphere improvement
+6. Interior props — scene detail
+7. Character pose variety — minor touch
+
+**Phase C: Easter Eggs**
+8. Rubber duck easter egg — fun
+9. Konami code — delight
+10. Clickable well/fountain — charm
+
+**Phase D: Mobile**
+11. Mobile testing pass — verify everything works
+12. Responsive fixes — fix what's broken
+13. Touch interaction polish — refinement
+
+**Phase E: Ambitious (if time)**
+14. Day/night cycle
+15. Wandering sheep
+16. Seasonal decorations
