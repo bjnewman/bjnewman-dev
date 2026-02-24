@@ -4,6 +4,7 @@ import { useInput } from './useInput';
 import { useSoundEffects } from './useSoundEffects';
 import { canMoveTo, isNearBuilding } from './useCollision';
 import { findPath } from './usePathfinding';
+import type { Building } from './types';
 import { OverworldCanvas } from './OverworldCanvas';
 import { OverworldUI } from './OverworldUI';
 import { VirtualDpad } from './VirtualDpad';
@@ -20,6 +21,9 @@ export function Overworld() {
   const { muted, toggleMute, playDialogOpen, playConfirm, playCancel, playTransition } = useSoundEffects();
   const [transitioning, setTransitioning] = useState(false);
   const [textMode, setTextMode] = useState(false);
+  // When a building is double-clicked, pathfind there and auto-interact on arrival
+  const pendingInteractRef = useRef<Building | null>(null);
+
   // Konami code easter egg — disabled pending debugging
   // const { fireConfetti, ConfettiRender } = useConfetti();
   // useKonamiCode(fireConfetti);
@@ -140,6 +144,13 @@ export function Overworld() {
       if (nearby?.id !== s.nearbyBuilding?.id) {
         dispatch({ type: 'SET_NEARBY_BUILDING', building: nearby });
       }
+
+      // Auto-interact when arriving at a double-clicked building
+      if (pendingInteractRef.current && nearby?.id === pendingInteractRef.current.id && !s.dialog.open) {
+        dispatch({ type: 'OPEN_DIALOG', building: nearby });
+        dispatch({ type: 'SET_PATH', path: null });
+        pendingInteractRef.current = null;
+      }
     };
 
     frameRef.current = requestAnimationFrame(gameLoop);
@@ -188,6 +199,23 @@ export function Overworld() {
       window.location.href = url;
     }, 300);
   }, [state.dialog.building, playConfirm, playTransition]);
+
+  const handleBuildingDoubleClick = useCallback((building: Building) => {
+    if (state.dialog.open) return;
+    // If already near the building, open dialog immediately
+    if (state.nearbyBuilding?.id === building.id) {
+      playDialogOpen();
+      dispatch({ type: 'OPEN_DIALOG', building });
+      return;
+    }
+    // Otherwise pathfind to entrance and auto-interact on arrival
+    const path = findPath(
+      { x: state.player.x, y: state.player.y },
+      { x: building.entranceX * TILE_SIZE, y: building.entranceY * TILE_SIZE }
+    );
+    dispatch({ type: 'SET_PATH', path });
+    pendingInteractRef.current = building;
+  }, [state.dialog.open, state.nearbyBuilding, state.player.x, state.player.y, playDialogOpen]);
 
   const handleDialogCancel = useCallback(() => {
     playCancel();
@@ -244,7 +272,7 @@ export function Overworld() {
 
       {/* Canvas + UI overlay (overlays positioned relative to canvas) */}
       <div className="overworld__game-area" role="img" aria-label="Interactive pixel art village — use arrow keys or WASD to move, press E near buildings to interact">
-        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} playerScale={playerScale} />
+        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} onBuildingDoubleClick={handleBuildingDoubleClick} playerScale={playerScale} />
         <OverworldUI
           state={state}
           onDialogConfirm={handleDialogConfirm}

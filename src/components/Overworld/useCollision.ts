@@ -25,6 +25,23 @@ export function canMoveTo(pixelX: number, pixelY: number): boolean {
   return true;
 }
 
+export function getBuildingAtPixel(pixelX: number, pixelY: number): Building | null {
+  const tileX = Math.floor(pixelX / TILE_SIZE);
+  const tileY = Math.floor(pixelY / TILE_SIZE);
+
+  for (const building of buildings) {
+    if (
+      tileX >= building.tileX &&
+      tileX < building.tileX + building.footprintW &&
+      tileY >= building.tileY &&
+      tileY < building.tileY + building.footprintH
+    ) {
+      return building;
+    }
+  }
+  return null;
+}
+
 export function isNearBuilding(pixelX: number, pixelY: number): Building | null {
   const playerTileX = Math.floor(pixelX / TILE_SIZE);
   const playerTileY = Math.floor(pixelY / TILE_SIZE);
