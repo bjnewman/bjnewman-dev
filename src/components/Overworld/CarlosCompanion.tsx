@@ -6,10 +6,12 @@ import { TILE_SIZE, SPAWN_X, SPAWN_Y } from './constants';
 
 extend({ AnimatedSprite: PixiAnimatedSprite });
 
+const CARLOS_SCALE = 1.5;
+const CARLOS_SIZE = TILE_SIZE * CARLOS_SCALE; // 96px
 const CARLOS_SPEED = 2; // slightly slower than player (3)
-const FOLLOW_DISTANCE = TILE_SIZE * 1.5; // start following when player is this far
-const STOP_DISTANCE = TILE_SIZE * 0.7; // stop when this close
-const HISTORY_LENGTH = 30; // frames of delay (~0.5s at 60fps)
+const FOLLOW_DISTANCE = TILE_SIZE * 0.8; // start following when player is this far
+const STOP_DISTANCE = TILE_SIZE * 0.4; // stop when this close
+const HISTORY_LENGTH = 15; // frames of delay (~0.25s at 60fps)
 
 // Carlos sprite layout: 256x256, 4x4 grid of 64x64 frames
 // Row 0=down, Row 1=right, Row 2=left, Row 3=up, 4 frames each
@@ -113,9 +115,11 @@ export function CarlosCompanion({ playerX, playerY, playerDirection }: Props) {
       movingRef.current = false;
     }
 
-    // Update sprite
-    sprite.x = pos.x;
-    sprite.y = pos.y;
+    // Update sprite — offset so feet align with tile position
+    sprite.x = pos.x - (CARLOS_SIZE - TILE_SIZE) / 2;
+    sprite.y = pos.y - (CARLOS_SIZE - TILE_SIZE);
+    sprite.width = CARLOS_SIZE;
+    sprite.height = CARLOS_SIZE;
 
     const dir = dirRef.current;
     const targetTextures = movingRef.current ? frames.walk[dir] : frames.idle[dir];
