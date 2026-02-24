@@ -6,6 +6,7 @@ import { PlayerSprite } from './PlayerSprite';
 import { BuildingZones } from './BuildingZones';
 import { AmbientEffects } from './AmbientEffects';
 import { CarlosCompanion } from './CarlosCompanion';
+import { EasterEggs } from './EasterEggs';
 import type { GameState } from './types';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants';
 
@@ -46,6 +47,7 @@ export function OverworldCanvas({ state, onCanvasClick, playerScale }: Props) {
           <AmbientEffects />
           <BuildingSprites />
           <BuildingZones nearbyBuilding={state.nearbyBuilding} />
+          <EasterEggs />
           <CarlosCompanion
             playerX={state.player.x}
             playerY={state.player.y}

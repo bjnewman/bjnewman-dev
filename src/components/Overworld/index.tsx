@@ -8,6 +8,8 @@ import { OverworldCanvas } from './OverworldCanvas';
 import { OverworldUI } from './OverworldUI';
 import { VirtualDpad } from './VirtualDpad';
 import { AccessibleNav, TextOnlyFallback } from './AccessibleNav';
+import { useKonamiCode } from './EasterEggs';
+import { useConfetti } from '../ConfettiCannon';
 import { MOVE_SPEED, TILE_SIZE } from './constants';
 import { buildings } from './mapData';
 import type { Direction } from './types';
@@ -18,6 +20,8 @@ export function Overworld() {
   const { muted, toggleMute, playDialogOpen, playConfirm, playCancel, playTransition } = useSoundEffects();
   const [transitioning, setTransitioning] = useState(false);
   const [textMode, setTextMode] = useState(false);
+  const { fireConfetti, ConfettiRender } = useConfetti();
+  useKonamiCode(fireConfetti);
   const frameRef = useRef<number>(0);
   const lastFrameTime = useRef(0);
 
@@ -257,6 +261,9 @@ export function Overworld() {
       <div id="overworld-nav">
         <AccessibleNav />
       </div>
+
+      {/* Konami code confetti */}
+      <ConfettiRender />
 
       {/* noscript fallback */}
       <noscript>
