@@ -4,6 +4,11 @@ import { RPGPanel } from '../components/Interior/RPGPanel';
 ---
 
 <InteriorBase title="Treehouse" buildingId="fairy-treehouse">
+  <RPGPanel variant="wood">
+    <p class="holland-guard"><strong>HALT, TRAVELER!</strong> This page is for Holland and Holland ONLY. All unauthorized visitors must immediately close their eyes, spin around three times, and forget everything they saw. Violators will be turned into frogs.</p>
+    <p class="holland-guard holland-guard--warning"><em>(You have been warned.)</em></p>
+  </RPGPanel>
+
   <RPGPanel>
     <h2>Welcome Holland!</h2>
     <p>You found the secret page! This is your very own special corner of Uncle Ben's website.</p>
@@ -46,6 +51,18 @@ import { RPGPanel } from '../components/Interior/RPGPanel';
   color: #2a1a0a;
   font-size: 1.1rem;
   margin: 0.5rem 0;
+}
+
+.holland-guard {
+  text-align: center;
+  font-size: 1rem;
+  color: #3a2a1a;
+  margin: 0.5rem 0;
+}
+
+.holland-guard--warning {
+  font-size: 0.9rem;
+  color: #6a4a2a;
 }
 
 .holland-footer {
