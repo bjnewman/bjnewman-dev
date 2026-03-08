@@ -57,8 +57,8 @@ function SwayingTree({ x, y, variant }: { x: number; y: number; variant: 1 | 2 }
 
 // --- Drifting Clouds ---
 
-function DriftingCloud({ src, startX, y, speed, scale }: {
-  src: string; startX: number; y: number; speed: number; scale: number;
+function DriftingCloud({ src, startX, y, speed, scale, alpha = 0.6 }: {
+  src: string; startX: number; y: number; speed: number; scale: number; alpha?: number;
 }) {
   const spriteRef = useRef<PixiSprite>(null);
   const [texture, setTexture] = useState<Texture | null>(null);
@@ -86,7 +86,7 @@ function DriftingCloud({ src, startX, y, speed, scale }: {
       y={y}
       width={576 * scale}
       height={256 * scale}
-      alpha={0.6}
+      alpha={alpha}
     />
   );
 }
@@ -107,15 +107,28 @@ export function AmbientEffects() {
     }
   }
 
+  const clouds = [
+    { src: '/assets/overworld/decorations/cloud1.png', startX: -200, y: -10, speed: 0.12, scale: 0.35, alpha: 0.5 },
+    { src: '/assets/overworld/decorations/cloud2.png', startX: 100,  y: 5,   speed: 0.08, scale: 0.4,  alpha: 0.55 },
+    { src: '/assets/overworld/decorations/cloud3.png', startX: 400,  y: -25, speed: 0.15, scale: 0.2,  alpha: 0.45 },
+    { src: '/assets/overworld/decorations/cloud1.png', startX: 700,  y: 15,  speed: 0.1,  scale: 0.25, alpha: 0.4 },
+    { src: '/assets/overworld/decorations/cloud2.png', startX: -400, y: 35,  speed: 0.18, scale: 0.15, alpha: 0.35 },
+    { src: '/assets/overworld/decorations/cloud3.png', startX: 250,  y: -5,  speed: 0.06, scale: 0.5,  alpha: 0.6 },
+    { src: '/assets/overworld/decorations/cloud1.png', startX: 550,  y: 25,  speed: 0.14, scale: 0.22, alpha: 0.5 },
+    { src: '/assets/overworld/decorations/cloud2.png', startX: -100, y: 40,  speed: 0.09, scale: 0.3,  alpha: 0.4 },
+    { src: '/assets/overworld/decorations/cloud3.png', startX: 850,  y: 0,   speed: 0.11, scale: 0.28, alpha: 0.45 },
+    { src: '/assets/overworld/decorations/cloud1.png', startX: 300,  y: 50,  speed: 0.07, scale: 0.18, alpha: 0.3 },
+  ];
+
   return (
     <>
       {treePositions.map((t, i) => (
         <SwayingTree key={`tree-${i}`} x={t.x} y={t.y} variant={t.variant} />
       ))}
 
-      <DriftingCloud src="/assets/overworld/decorations/cloud1.png" startX={-200} y={10} speed={0.15} scale={0.3} />
-      <DriftingCloud src="/assets/overworld/decorations/cloud2.png" startX={400} y={-20} speed={0.1} scale={0.25} />
-      <DriftingCloud src="/assets/overworld/decorations/cloud3.png" startX={100} y={30} speed={0.2} scale={0.2} />
+      {clouds.map((c, i) => (
+        <DriftingCloud key={`cloud-${i}`} {...c} />
+      ))}
 
       {/* Torches commented out — fire sprites are explosion bursts, need proper torch assets
       {torchPositions.map((t, i) => (
