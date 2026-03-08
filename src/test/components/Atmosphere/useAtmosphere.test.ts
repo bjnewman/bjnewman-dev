@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useAtmosphere } from '../../../components/Atmosphere/useAtmosphere';
+import { applySeasonPalette } from '../../../components/Atmosphere/applySeasonPalette';
 
 describe('useAtmosphere', () => {
   beforeEach(() => {
@@ -88,5 +89,24 @@ describe('useAtmosphere', () => {
     const { result } = renderHook(() => useAtmosphere());
     expect(result.current.dayProgress).toBeGreaterThanOrEqual(0);
     expect(result.current.dayProgress).toBeLessThanOrEqual(1);
+  });
+});
+
+describe('applySeasonPalette', () => {
+  beforeEach(() => {
+    document.documentElement.style.cssText = '';
+    document.body.style.cssText = '';
+  });
+
+  it('should set CSS custom properties for a season', () => {
+    applySeasonPalette('spring');
+    expect(document.documentElement.style.getPropertyValue('--primary')).toBe('#10b981');
+    expect(document.documentElement.style.getPropertyValue('--accent')).toBe('#ec4899');
+  });
+
+  it('should override text colors in dark mode', () => {
+    applySeasonPalette('spring', true);
+    expect(document.documentElement.style.getPropertyValue('--text-primary')).toBe('#f1f5f9');
+    expect(document.documentElement.style.getPropertyValue('--bg-primary')).toBe('#1e293b');
   });
 });
