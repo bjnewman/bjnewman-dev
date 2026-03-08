@@ -7,6 +7,7 @@ import { BuildingZones } from './BuildingZones';
 import { AmbientEffects } from './AmbientEffects';
 import { CarlosCompanion } from './CarlosCompanion';
 import { EasterEggs } from './EasterEggs';
+import { DayNightOverlay } from './DayNightOverlay';
 import { getBuildingAtPixel } from './useCollision';
 import type { Building, GameState } from './types';
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants';
@@ -19,9 +20,10 @@ type Props = {
   onBuildingDoubleClick: (building: Building) => void;
   playSound: (name: string) => void;
   playerScale?: number;
+  dayProgress: number;
 };
 
-export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, playSound, playerScale }: Props) {
+export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, playSound, playerScale, dayProgress }: Props) {
   const toWorld = (e: React.PointerEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const scaleX = CANVAS_WIDTH / rect.width;
@@ -77,6 +79,7 @@ export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, p
             isMoving={state.player.isMoving}
             scale={playerScale}
           />
+          <DayNightOverlay dayProgress={dayProgress} />
         </container>
       </Application>
     </div>

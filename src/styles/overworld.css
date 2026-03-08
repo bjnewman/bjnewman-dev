@@ -427,34 +427,6 @@
   }
 }
 
-/* Day/night cycle overlay */
-.overworld__daynight {
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  animation: daynight-cycle 600s ease-in-out infinite;
-}
-
-@keyframes daynight-cycle {
-  0%   { background: transparent; }                              /* day */
-  20%  { background: transparent; }                              /* day */
-  35%  { background: rgba(255, 140, 50, 0.12); }                /* golden hour */
-  45%  { background: rgba(180, 80, 40, 0.2); }                  /* sunset */
-  55%  { background: rgba(15, 15, 60, 0.35); }                  /* dusk */
-  65%  { background: rgba(5, 5, 30, 0.4); }                     /* night */
-  75%  { background: rgba(5, 5, 30, 0.4); }                     /* night */
-  85%  { background: rgba(80, 50, 100, 0.2); }                  /* dawn */
-  95%  { background: rgba(255, 200, 100, 0.1); }                /* sunrise */
-  100% { background: transparent; }                              /* day */
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .overworld__daynight {
-    animation: none;
-  }
-}
-
 /* Confetti (Konami code easter egg) */
 .confetti-piece {
   position: fixed;

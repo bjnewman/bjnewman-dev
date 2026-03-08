@@ -6,6 +6,7 @@ import { canMoveTo, isNearBuilding } from './useCollision';
 import { findPath } from './usePathfinding';
 import type { Building } from './types';
 import { OverworldCanvas } from './OverworldCanvas';
+import { useAtmosphere } from '../Atmosphere/useAtmosphere';
 import { OverworldUI } from './OverworldUI';
 import { VirtualDpad } from './VirtualDpad';
 import { AccessibleNav, TextOnlyFallback } from './AccessibleNav';
@@ -20,6 +21,7 @@ export function Overworld() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
   const { keys, clickTarget, handleCanvasClick, clearClickTarget, clearInteract, clearEscape, setDirectionKey } = useInput();
   const { muted, toggleMute, playDialogOpen, playConfirm, playCancel, playTransition, playSound } = useSoundEffects();
+  const { dayProgress } = useAtmosphere();
   const [transitioning, setTransitioning] = useState(false);
   const [textMode, setTextMode] = useState(false);
   
@@ -288,8 +290,7 @@ export function Overworld() {
 
       {/* Canvas + UI overlay (overlays positioned relative to canvas) */}
       <div className="overworld__game-area" role="img" aria-label="Interactive pixel art village — use arrow keys or WASD to move, press E near buildings to interact">
-        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} onBuildingDoubleClick={handleBuildingDoubleClick} playSound={playSound} playerScale={playerScale} />
-        <div className="overworld__daynight" />
+        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} onBuildingDoubleClick={handleBuildingDoubleClick} playSound={playSound} playerScale={playerScale} dayProgress={dayProgress} />
         <OverworldUI
           state={state}
           onDialogConfirm={handleDialogConfirm}
