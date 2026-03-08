@@ -269,6 +269,13 @@ footer {
   animation: none;
 }
 
+/* Iris transition: JS controls animation via clip-path */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
 footer .social-links {
   display: flex;
   justify-content: center;

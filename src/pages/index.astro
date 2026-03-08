@@ -21,6 +21,10 @@ import '../styles/overworld.css';
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="alternate" type="application/rss+xml" title="Ben Newman's Blog" href="/rss.xml">
     <ViewTransitions />
+    <script>
+      import { initIrisTransition } from '../components/transitions';
+      initIrisTransition();
+    </script>
   </head>
   <body class="overworld-page">
     <Overworld client:only="react" />

@@ -1,8 +1,14 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react-swc';
+import path from 'node:path';
 
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      'astro:transitions/client': path.resolve(__dirname, 'src/test/mocks/astro-transitions.ts'),
+    },
+  },
   test: {
     browser: {
       enabled: true,

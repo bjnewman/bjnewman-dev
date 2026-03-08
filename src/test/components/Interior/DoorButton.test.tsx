@@ -24,4 +24,9 @@ describe('DoorButton', () => {
     render(<DoorButton buildingId="library" />);
     expect(screen.getByText('\u{1F6AA}')).toBeInTheDocument();
   });
+
+  it('should not render a fade overlay', () => {
+    const { container } = render(<DoorButton buildingId="library" />);
+    expect(container.querySelector('.interior-scene__fade')).toBeNull();
+  });
 });

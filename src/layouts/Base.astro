@@ -55,6 +55,10 @@ const currentPath = Astro.url.pathname;
 
     <!-- View Transitions -->
     <ViewTransitions />
+    <script>
+      import { initIrisTransition } from '../components/transitions';
+      initIrisTransition();
+    </script>
 
     <!-- Prevent FOUC by applying saved season palette and dark mode before render -->
     <script is:inline>
