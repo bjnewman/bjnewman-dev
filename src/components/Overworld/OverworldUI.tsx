@@ -21,7 +21,7 @@ export function OverworldUI({
   onToggleContrast,
   transitioning,
 }: Props) {
-  const { describeScene } = useAudioDescription();
+  const { describeScene, speaking } = useAudioDescription();
 
   return (
     <>
@@ -94,10 +94,10 @@ export function OverworldUI({
       <button
         className="overworld__describe-btn"
         onClick={describeScene}
-        aria-label="Describe the village scene"
+        aria-label={speaking ? 'Stop audio description' : 'Describe the village scene'}
         type="button"
       >
-        AD
+        {speaking ? '\u{23F9}' : 'AD'}
       </button>
 
       {/* High contrast toggle */}
