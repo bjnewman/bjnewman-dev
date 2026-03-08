@@ -8,21 +8,24 @@ import type { Building } from './types';
 import { OverworldCanvas } from './OverworldCanvas';
 import { useAtmosphere } from '../Atmosphere/useAtmosphere';
 import { OverworldUI } from './OverworldUI';
+import { OverworldSettingsPanel } from './OverworldSettingsPanel';
 import { VirtualDpad } from './VirtualDpad';
 import { AccessibleNav, TextOnlyFallback } from './AccessibleNav';
 import { WelcomeModal } from './WelcomeModal';
 // import { useKonamiCode } from './EasterEggs';
 // import { useConfetti } from '../ConfettiCannon';
-import { MOVE_SPEED, TILE_SIZE } from './constants';
+import { MOVE_SPEED, TILE_SIZE, CANVAS_WIDTH, CANVAS_HEIGHT } from './constants';
 import { buildings } from './mapData';
 import type { Direction } from './types';
+import { setIrisCenter } from '../transitions';
 
 export function Overworld() {
   const [state, dispatch] = useReducer(gameReducer, initialGameState);
   const { keys, clickTarget, handleCanvasClick, clearClickTarget, clearInteract, clearEscape, setDirectionKey } = useInput();
   const { muted, toggleMute, playDialogOpen, playConfirm, playCancel, playTransition, playSound } = useSoundEffects();
-  const { dayProgress, season } = useAtmosphere();
-  const [doorTransition, setDoorTransition] = useState<{ active: boolean; x: number; y: number; url: string } | null>(null);
+  const atmosphere = useAtmosphere();
+  const { dayProgress, season, weatherEnabled, weatherOverrides } = atmosphere;
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [textMode, setTextMode] = useState(false);
   
   // Welcome modal state
@@ -33,11 +36,15 @@ export function Overworld() {
     return false;
   });
   const isWelcomeOpenRef = useRef(isWelcomeOpen);
-  
-  // Keep ref synced
+  const settingsOpenRef = useRef(settingsOpen);
+
+  // Keep refs synced
   useEffect(() => {
     isWelcomeOpenRef.current = isWelcomeOpen;
   }, [isWelcomeOpen]);
+  useEffect(() => {
+    settingsOpenRef.current = settingsOpen;
+  }, [settingsOpen]);
 
   // When a building is double-clicked, pathfind there and auto-interact on arrival
   const pendingInteractRef = useRef<Building | null>(null);
@@ -98,8 +105,8 @@ export function Overworld() {
       const s = stateRef.current;
       const k = keysRef.current;
 
-      // Don't process movement when dialog or welcome modal is open
-      if (s.dialog.open || isWelcomeOpenRef.current) return;
+      // Don't process movement when dialog, welcome modal, or settings panel is open
+      if (s.dialog.open || isWelcomeOpenRef.current || settingsOpenRef.current) return;
 
       let dx = 0;
       let dy = 0;
@@ -205,6 +212,8 @@ export function Overworld() {
     }
   }, [clickTarget, state.player.x, state.player.y, clearClickTarget]);
 
+  const canvasWrapperRef = useRef<HTMLDivElement | null>(null);
+
   const handleDialogConfirm = useCallback(() => {
     if (!state.dialog.building) return;
     playConfirm();
@@ -212,20 +221,25 @@ export function Overworld() {
     const building = state.dialog.building;
     localStorage.setItem('overworld-spawn', building.id);
 
-    // Start iris-out centered on building entrance
+    // Convert canvas coordinates to viewport coordinates
     const cx = building.entranceX * TILE_SIZE + TILE_SIZE / 2;
     const cy = building.entranceY * TILE_SIZE;
-    setDoorTransition({ active: true, x: cx, y: cy, url: building.page });
+    const wrapper = canvasWrapperRef.current ?? document.querySelector('.overworld__canvas-wrapper');
+    if (wrapper) {
+      const rect = wrapper.getBoundingClientRect();
+      const viewportX = rect.left + cx * (rect.width / CANVAS_WIDTH);
+      const viewportY = rect.top + cy * (rect.height / CANVAS_HEIGHT);
+      setIrisCenter(viewportX, viewportY, 'enter');
+    }
 
     dispatch({ type: 'CLOSE_DIALOG' });
     playTransition();
-  }, [state.dialog.building, playConfirm, playTransition]);
 
-  const handleDoorTransitionComplete = useCallback(() => {
-    if (doorTransition) {
-      window.location.href = doorTransition.url;
-    }
-  }, [doorTransition]);
+    // Navigate using Astro's client-side router
+    import('astro:transitions/client')
+      .then(({ navigate }) => navigate(building.page))
+      .catch(() => { window.location.href = building.page; });
+  }, [state.dialog.building, playConfirm, playTransition]);
 
   const handleBuildingDoubleClick = useCallback((building: Building) => {
     if (state.dialog.open) return;
@@ -299,16 +313,24 @@ export function Overworld() {
 
       {/* Canvas + UI overlay (overlays positioned relative to canvas) */}
       <div className="overworld__game-area" role="img" aria-label="Interactive pixel art village — use arrow keys or WASD to move, press E near buildings to interact">
-        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} onBuildingDoubleClick={handleBuildingDoubleClick} playSound={playSound} playerScale={playerScale} dayProgress={dayProgress} season={season} doorTransition={doorTransition} onDoorTransitionComplete={handleDoorTransitionComplete} />
+        <OverworldCanvas ref={canvasWrapperRef} state={state} onCanvasClick={handleCanvasClick} onBuildingDoubleClick={handleBuildingDoubleClick} playSound={playSound} playerScale={playerScale} dayProgress={dayProgress} season={season} weatherEnabled={weatherEnabled} weatherOverrides={weatherOverrides} />
         <OverworldUI
           state={state}
           onDialogConfirm={handleDialogConfirm}
           onDialogCancel={handleDialogCancel}
           onToggleAudio={handleToggleAudio}
           onToggleContrast={handleToggleContrast}
+          onToggleSettings={() => setSettingsOpen((prev) => !prev)}
           transitioning={false}
         />
       </div>
+
+      {/* Settings panel (Cmd+K) */}
+      <OverworldSettingsPanel
+        atmosphere={atmosphere}
+        isOpen={settingsOpen}
+        onToggle={setSettingsOpen}
+      />
 
       {/* Virtual d-pad for touch devices */}
       <VirtualDpad onDirection={handleDpadDirection} onInteract={handleDpadInteract} />

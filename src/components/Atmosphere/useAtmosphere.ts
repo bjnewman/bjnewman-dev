@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import type { Season, TimeOfDay, AtmosphereState } from './types';
+import type { Season, TimeOfDay, AtmosphereState, WeatherOverrides } from './types';
 
-const SEASONS: Season[] = ['spring', 'summer', 'fall', 'winter'];
-const SEASON_DURATION = 150_000; // 2.5 min per season
-const DAY_DURATION = 600_000; // 10 min full day cycle
+export const SEASONS: Season[] = ['spring', 'summer', 'fall', 'winter'];
+const DEFAULT_SEASON_DURATION = 150_000; // 2.5 min per season
+const DEFAULT_DAY_DURATION = 600_000; // 10 min full day cycle
 const TICK_INTERVAL = 1_000; // 1-second ticks
 const STORAGE_KEY = 'atmosphere-override';
+const SEASON_DURATION_KEY = 'atmosphere-season-duration';
+const DAY_DURATION_KEY = 'atmosphere-day-duration';
+const WEATHER_KEY = 'atmosphere-weather';
+const WEATHER_OVERRIDES_KEY = 'atmosphere-weather-overrides';
 
 type TimePhase = { threshold: number; name: TimeOfDay };
 
@@ -39,14 +43,70 @@ function loadOverride(): Season | null {
   return null;
 }
 
-type UseAtmosphereReturn = AtmosphereState & {
+function loadNumber(key: string, fallback: number): number {
+  if (typeof window === 'undefined') return fallback;
+  const stored = localStorage.getItem(key);
+  if (stored) {
+    const n = Number(stored);
+    if (Number.isFinite(n) && n > 0) return n;
+  }
+  return fallback;
+}
+
+function loadBoolean(key: string, fallback: boolean): boolean {
+  if (typeof window === 'undefined') return fallback;
+  const stored = localStorage.getItem(key);
+  if (stored === 'true') return true;
+  if (stored === 'false') return false;
+  return fallback;
+}
+
+function loadWeatherOverrides(): WeatherOverrides {
+  if (typeof window === 'undefined') return {};
+  const stored = localStorage.getItem(WEATHER_OVERRIDES_KEY);
+  if (stored) {
+    try {
+      return JSON.parse(stored) as WeatherOverrides;
+    } catch {
+      return {};
+    }
+  }
+  return {};
+}
+
+export type UseAtmosphereReturn = AtmosphereState & {
   setOverride: (season: Season | null) => void;
+  seasonDuration: number;
+  dayDuration: number;
+  setSeasonDuration: (ms: number) => void;
+  setDayDuration: (ms: number) => void;
+  setDayProgress: (progress: number) => void;
+  weatherEnabled: boolean;
+  setWeatherEnabled: (enabled: boolean) => void;
+  weatherOverrides: WeatherOverrides;
+  setWeatherOverrides: (overrides: WeatherOverrides) => void;
+  resetWeatherOverrides: () => void;
+  resetToDefaults: () => void;
 };
 
 export function useAtmosphere(): UseAtmosphereReturn {
   const startTimeRef = useRef(Date.now());
   const [override, setOverrideState] = useState<Season | null>(loadOverride);
   const [tick, setTick] = useState(0);
+  const [seasonDuration, setSeasonDurationState] = useState(() =>
+    loadNumber(SEASON_DURATION_KEY, DEFAULT_SEASON_DURATION)
+  );
+  const [dayDuration, setDayDurationState] = useState(() =>
+    loadNumber(DAY_DURATION_KEY, DEFAULT_DAY_DURATION)
+  );
+  const [weatherEnabled, setWeatherEnabledState] = useState(() =>
+    loadBoolean(WEATHER_KEY, true)
+  );
+  const [weatherOverrides, setWeatherOverridesState] = useState<WeatherOverrides>(
+    loadWeatherOverrides
+  );
+  // Offset added when user jumps to a specific day progress
+  const dayOffsetRef = useRef(0);
 
   // Tick interval to drive re-computation
   useEffect(() => {
@@ -60,12 +120,13 @@ export function useAtmosphere(): UseAtmosphereReturn {
   const elapsed = Date.now() - startTimeRef.current;
 
   // Season computation
-  const fullCycleDuration = SEASON_DURATION * SEASONS.length;
-  const seasonIndex = Math.floor((elapsed % fullCycleDuration) / SEASON_DURATION);
-  const seasonProgress = (elapsed % SEASON_DURATION) / SEASON_DURATION;
+  const fullCycleDuration = seasonDuration * SEASONS.length;
+  const seasonIndex = Math.floor((elapsed % fullCycleDuration) / seasonDuration);
+  const seasonProgress = (elapsed % seasonDuration) / seasonDuration;
 
-  // Day computation
-  const dayProgress = (elapsed % DAY_DURATION) / DAY_DURATION;
+  // Day computation (with offset for time jumping)
+  const rawDayProgress = ((elapsed + dayOffsetRef.current) % dayDuration) / dayDuration;
+  const dayProgress = rawDayProgress < 0 ? rawDayProgress + 1 : rawDayProgress;
   const timeOfDay = getTimeOfDay(dayProgress);
 
   // Resolved season (override takes precedence)
@@ -80,6 +141,55 @@ export function useAtmosphere(): UseAtmosphereReturn {
     }
   }, []);
 
+  const setSeasonDuration = useCallback((ms: number) => {
+    setSeasonDurationState(ms);
+    localStorage.setItem(SEASON_DURATION_KEY, String(ms));
+  }, []);
+
+  const setDayDuration = useCallback((ms: number) => {
+    setDayDurationState(ms);
+    localStorage.setItem(DAY_DURATION_KEY, String(ms));
+  }, []);
+
+  const setDayProgress = useCallback((progress: number) => {
+    // Calculate offset so that current elapsed maps to the desired progress
+    const currentElapsed = Date.now() - startTimeRef.current;
+    const targetMs = progress * dayDuration;
+    const currentMs = currentElapsed % dayDuration;
+    dayOffsetRef.current = targetMs - currentMs;
+    // Force re-render
+    setTick((t) => t + 1);
+  }, [dayDuration]);
+
+  const setWeatherEnabled = useCallback((enabled: boolean) => {
+    setWeatherEnabledState(enabled);
+    localStorage.setItem(WEATHER_KEY, String(enabled));
+  }, []);
+
+  const setWeatherOverrides = useCallback((overrides: WeatherOverrides) => {
+    setWeatherOverridesState(overrides);
+    localStorage.setItem(WEATHER_OVERRIDES_KEY, JSON.stringify(overrides));
+  }, []);
+
+  const resetWeatherOverrides = useCallback(() => {
+    setWeatherOverridesState({});
+    localStorage.removeItem(WEATHER_OVERRIDES_KEY);
+  }, []);
+
+  const resetToDefaults = useCallback(() => {
+    setOverrideState(null);
+    setSeasonDurationState(DEFAULT_SEASON_DURATION);
+    setDayDurationState(DEFAULT_DAY_DURATION);
+    setWeatherEnabledState(true);
+    setWeatherOverridesState({});
+    dayOffsetRef.current = 0;
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(SEASON_DURATION_KEY);
+    localStorage.removeItem(DAY_DURATION_KEY);
+    localStorage.removeItem(WEATHER_KEY);
+    localStorage.removeItem(WEATHER_OVERRIDES_KEY);
+  }, []);
+
   // Suppress unused variable warning — tick drives re-renders
   void tick;
 
@@ -90,5 +200,16 @@ export function useAtmosphere(): UseAtmosphereReturn {
     dayProgress,
     override,
     setOverride,
+    seasonDuration,
+    dayDuration,
+    setSeasonDuration,
+    setDayDuration,
+    setDayProgress,
+    weatherEnabled,
+    setWeatherEnabled,
+    weatherOverrides,
+    setWeatherOverrides,
+    resetWeatherOverrides,
+    resetToDefaults,
   };
 }

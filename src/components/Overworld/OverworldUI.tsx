@@ -10,6 +10,7 @@ type Props = {
   onDialogCancel: () => void;
   onToggleAudio: () => void;
   onToggleContrast: () => void;
+  onToggleSettings: () => void;
   transitioning: boolean;
 };
 
@@ -19,6 +20,7 @@ export function OverworldUI({
   onDialogCancel,
   onToggleAudio,
   onToggleContrast,
+  onToggleSettings,
   transitioning,
 }: Props) {
   const { describeScene, speaking } = useAudioDescription();
@@ -108,6 +110,16 @@ export function OverworldUI({
         type="button"
       >
         HC
+      </button>
+
+      {/* Settings toggle */}
+      <button
+        className="overworld__settings-toggle"
+        onClick={onToggleSettings}
+        aria-label="Village settings (Cmd+K)"
+        type="button"
+      >
+        {'\u2699'}
       </button>
 
       {/* Fade overlay */}

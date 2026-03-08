@@ -21,6 +21,8 @@ export type AtmosphereState = {
   override: Season | null;
 };
 
+export type { WeatherOverrides } from '../Overworld/weatherPresets';
+
 export type SeasonPalette = {
   primary: string;
   primaryLight: string;

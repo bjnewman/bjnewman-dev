@@ -90,6 +90,67 @@ describe('useAtmosphere', () => {
     expect(result.current.dayProgress).toBeGreaterThanOrEqual(0);
     expect(result.current.dayProgress).toBeLessThanOrEqual(1);
   });
+
+  it('should initialize weatherOverrides as empty object', () => {
+    const { result } = renderHook(() => useAtmosphere());
+    expect(result.current.weatherOverrides).toEqual({});
+  });
+
+  it('should persist weatherOverrides to localStorage', () => {
+    const { result } = renderHook(() => useAtmosphere());
+
+    act(() => {
+      result.current.setWeatherOverrides({ count: 2, speed: 0.5 });
+    });
+
+    expect(result.current.weatherOverrides).toEqual({ count: 2, speed: 0.5 });
+    expect(localStorage.getItem('atmosphere-weather-overrides')).toBe(
+      JSON.stringify({ count: 2, speed: 0.5 }),
+    );
+  });
+
+  it('should restore weatherOverrides from localStorage', () => {
+    localStorage.setItem(
+      'atmosphere-weather-overrides',
+      JSON.stringify({ wind: -1, size: 3 }),
+    );
+    const { result } = renderHook(() => useAtmosphere());
+    expect(result.current.weatherOverrides).toEqual({ wind: -1, size: 3 });
+  });
+
+  it('should reset weatherOverrides via resetWeatherOverrides', () => {
+    const { result } = renderHook(() => useAtmosphere());
+
+    act(() => {
+      result.current.setWeatherOverrides({ count: 2 });
+    });
+    expect(result.current.weatherOverrides).toEqual({ count: 2 });
+
+    act(() => {
+      result.current.resetWeatherOverrides();
+    });
+    expect(result.current.weatherOverrides).toEqual({});
+    expect(localStorage.getItem('atmosphere-weather-overrides')).toBeNull();
+  });
+
+  it('should clear weatherOverrides on resetToDefaults', () => {
+    const { result } = renderHook(() => useAtmosphere());
+
+    act(() => {
+      result.current.setWeatherOverrides({ speed: 3 });
+      result.current.setOverride('winter');
+      result.current.setWeatherEnabled(false);
+    });
+
+    act(() => {
+      result.current.resetToDefaults();
+    });
+
+    expect(result.current.weatherOverrides).toEqual({});
+    expect(result.current.override).toBeNull();
+    expect(result.current.weatherEnabled).toBe(true);
+    expect(localStorage.getItem('atmosphere-weather-overrides')).toBeNull();
+  });
 });
 
 describe('applySeasonPalette', () => {
