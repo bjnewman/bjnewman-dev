@@ -44,3 +44,6 @@ yarn.lock
 
 # Wrangler
 wrangler.toml
+
+# Large media files
+*.webm
