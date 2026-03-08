@@ -454,33 +454,3 @@
     font-size: 0.9rem;
   }
 }
-
-/* Theme-specific styles */
-.theme-brutalist .fun-fields {
-  border: 3px solid #000;
-  border-radius: 0;
-}
-
-.theme-brutalist .fun-mode-toggle--active {
-  border-color: #000;
-  background: #000;
-}
-
-.theme-terminal .fun-fields {
-  border-color: #00ff00;
-  background: rgba(0, 20, 0, 0.8);
-}
-
-.theme-terminal .fun-mode-toggle--active {
-  background: #00ff00;
-  color: #000;
-}
-
-.theme-vaporwave .fun-fields {
-  border-color: #ff71ce;
-  background: rgba(45, 27, 105, 0.8);
-}
-
-.theme-vaporwave .fun-mode-toggle--active {
-  background: linear-gradient(135deg, #ff71ce, #01cdfe);
-}

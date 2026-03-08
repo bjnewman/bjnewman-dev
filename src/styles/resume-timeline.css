@@ -207,50 +207,6 @@
   }
 }
 
-/* Theme-specific styles */
-.theme-brutalist .timeline__header {
-  border: 2px solid #000;
-  border-radius: 0;
-}
-
-.theme-brutalist .timeline__details {
-  border: 2px solid #000;
-  border-top: none;
-  border-radius: 0;
-}
-
-.theme-brutalist .timeline__item--expanded .timeline__header {
-  border-color: #000;
-}
-
-.theme-terminal .timeline__header {
-  border-color: #00ff00;
-  background: rgba(0, 20, 0, 0.8);
-}
-
-.theme-terminal .timeline__header:hover {
-  box-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
-}
-
-.theme-terminal .timeline__details {
-  border-color: #00ff00;
-  background: rgba(0, 20, 0, 0.8);
-}
-
-.theme-vaporwave .timeline__header {
-  border-color: #ff71ce;
-  background: rgba(45, 27, 105, 0.8);
-}
-
-.theme-vaporwave .timeline__header:hover {
-  box-shadow: 0 0 12px rgba(255, 113, 206, 0.5);
-}
-
-.theme-vaporwave .timeline__details {
-  border-color: #ff71ce;
-  background: rgba(45, 27, 105, 0.8);
-}
-
 /* Skills Grid */
 .skills-grid {
   display: grid;
@@ -654,65 +610,6 @@
 @keyframes question-pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.7; transform: scale(1.2); }
-}
-
-/* Theme overrides for skills and education */
-.theme-brutalist .skills-category {
-  border: 2px solid #000;
-  border-radius: 0;
-}
-
-.theme-brutalist .education-card__header {
-  border: 2px solid #000;
-  border-radius: 0;
-}
-
-.theme-brutalist .education-card__details {
-  border: 2px solid #000;
-  border-top: none;
-  border-radius: 0;
-}
-
-.theme-brutalist .education-card--expanded .education-card__header {
-  border-color: #000;
-}
-
-.theme-terminal .skills-category {
-  border-color: #00ff00;
-  background: rgba(0, 20, 0, 0.8);
-}
-
-.theme-terminal .education-card__header {
-  border-color: #00ff00;
-  background: rgba(0, 20, 0, 0.8);
-}
-
-.theme-terminal .education-card__header:hover {
-  box-shadow: 0 0 8px rgba(0, 255, 0, 0.3);
-}
-
-.theme-terminal .education-card__details {
-  border-color: #00ff00;
-  background: rgba(0, 20, 0, 0.8);
-}
-
-.theme-vaporwave .skills-category {
-  border-color: #ff71ce;
-  background: rgba(45, 27, 105, 0.8);
-}
-
-.theme-vaporwave .education-card__header {
-  border-color: #ff71ce;
-  background: rgba(45, 27, 105, 0.8);
-}
-
-.theme-vaporwave .education-card__header:hover {
-  box-shadow: 0 0 12px rgba(255, 113, 206, 0.5);
-}
-
-.theme-vaporwave .education-card__details {
-  border-color: #ff71ce;
-  background: rgba(45, 27, 105, 0.8);
 }
 
 /* Mobile adjustments */

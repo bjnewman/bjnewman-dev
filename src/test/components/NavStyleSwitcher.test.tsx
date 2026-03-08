@@ -67,27 +67,25 @@ describe('useNavStyleSwitcher', () => {
     expect(result.current.isOverridden).toBe(true);
   });
 
-  describe('theme integration', () => {
-    it('should have correct default nav styles for each theme', () => {
-      expect(themeNavDefaults['professional']).toBe('filing-tabs');
-      expect(themeNavDefaults['brutalist']).toBe('index-cards');
-      expect(themeNavDefaults['terminal']).toBe('cli-prompt');
-      expect(themeNavDefaults['vaporwave']).toBe('neon-float');
-      expect(themeNavDefaults['90s']).toBe('win95');
-      expect(themeNavDefaults['minimalist']).toBe('minimal');
+  describe('season integration', () => {
+    it('should have correct default nav styles for each season', () => {
+      expect(themeNavDefaults['spring']).toBe('filing-tabs');
+      expect(themeNavDefaults['summer']).toBe('filing-tabs');
+      expect(themeNavDefaults['fall']).toBe('filing-tabs');
+      expect(themeNavDefaults['winter']).toBe('filing-tabs');
     });
 
-    it('should update nav style when theme changes (no override)', () => {
+    it('should update nav style when season changes (no override)', () => {
       const { result } = renderHook(() => useNavStyleSwitcher());
 
       act(() => {
-        result.current.setNavStyleFromTheme('terminal');
+        result.current.setNavStyleFromTheme('summer');
       });
 
-      expect(result.current.currentNavStyle.id).toBe('cli-prompt');
+      expect(result.current.currentNavStyle.id).toBe('filing-tabs');
     });
 
-    it('should NOT update nav style when theme changes if user has override', () => {
+    it('should NOT update nav style when season changes if user has override', () => {
       localStorage.setItem('bjnewman-nav-style-override', 'true');
       localStorage.setItem('bjnewman-nav-style', 'neon-float');
 
@@ -97,14 +95,14 @@ describe('useNavStyleSwitcher', () => {
       expect(result.current.currentNavStyle.id).toBe('neon-float');
 
       act(() => {
-        result.current.setNavStyleFromTheme('terminal');
+        result.current.setNavStyleFromTheme('winter');
       });
 
       // Should still be neon-float because user override is active
       expect(result.current.currentNavStyle.id).toBe('neon-float');
     });
 
-    it('should reset to theme default and clear override', () => {
+    it('should reset to season default and clear override', () => {
       const { result } = renderHook(() => useNavStyleSwitcher());
 
       // User manually overrides
@@ -114,13 +112,13 @@ describe('useNavStyleSwitcher', () => {
       expect(result.current.isOverridden).toBe(true);
       expect(result.current.currentNavStyle.id).toBe('neon-float');
 
-      // Reset to theme default for terminal theme
+      // Reset to season default
       act(() => {
-        result.current.resetToThemeDefault('terminal');
+        result.current.resetToThemeDefault('fall');
       });
 
       expect(result.current.isOverridden).toBe(false);
-      expect(result.current.currentNavStyle.id).toBe('cli-prompt');
+      expect(result.current.currentNavStyle.id).toBe('filing-tabs');
       expect(localStorage.getItem('bjnewman-nav-style-override')).toBeNull();
     });
   });

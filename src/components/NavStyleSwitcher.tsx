@@ -46,19 +46,12 @@ export const navStyles: NavStyle[] = [
   },
 ];
 
-// Theme to nav style default mappings
+// Season to nav style default mappings
 export const themeNavDefaults: Record<string, string> = {
-  professional: 'filing-tabs',
-  sunset: 'filing-tabs',
-  ocean: 'filing-tabs',
-  forest: 'filing-tabs',
-  dark: 'filing-tabs',
-  pastel: 'filing-tabs',
-  brutalist: 'index-cards',
-  terminal: 'cli-prompt',
-  vaporwave: 'neon-float',
-  '90s': 'win95',
-  minimalist: 'minimal',
+  spring: 'filing-tabs',
+  summer: 'filing-tabs',
+  fall: 'filing-tabs',
+  winter: 'filing-tabs',
 };
 
 const NAV_STYLE_STORAGE_KEY = 'bjnewman-nav-style';

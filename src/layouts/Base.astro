@@ -56,47 +56,44 @@ const currentPath = Astro.url.pathname;
     <!-- View Transitions -->
     <ViewTransitions />
 
-    <!-- Prevent FOUC by applying saved theme and nav style before render -->
+    <!-- Prevent FOUC by applying saved season palette and dark mode before render -->
     <script is:inline>
       (function() {
-        // Theme handling
-        const savedThemeId = localStorage.getItem('bjnewman-theme');
-        if (savedThemeId) {
-          const themes = {
-            'professional': { primary: '#6366f1', primaryLight: '#818cf8', primaryDark: '#4f46e5', accent: '#ec4899', accentLight: '#f472b6', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #f8fafc 0%, #e0e7ff 50%, #fce7f3 100%)', bgPrimary: '#ffffff', bgSecondary: '#f8fafc', bgTertiary: '#f1f5f9' },
-            'sunset': { primary: '#f97316', primaryLight: '#fb923c', primaryDark: '#ea580c', accent: '#f59e0b', accentLight: '#fbbf24', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fecaca 100%)', bgPrimary: '#ffffff', bgSecondary: '#f8fafc', bgTertiary: '#f1f5f9' },
-            'ocean': { primary: '#0ea5e9', primaryLight: '#38bdf8', primaryDark: '#0284c7', accent: '#06b6d4', accentLight: '#22d3ee', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #ddd6fe 100%)', bgPrimary: '#ffffff', bgSecondary: '#f8fafc', bgTertiary: '#f1f5f9' },
-            'forest': { primary: '#10b981', primaryLight: '#34d399', primaryDark: '#059669', accent: '#14b8a6', accentLight: '#2dd4bf', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #bfdbfe 100%)', bgPrimary: '#ffffff', bgSecondary: '#f8fafc', bgTertiary: '#f1f5f9' },
-            'dark': { primary: '#818cf8', primaryLight: '#a5b4fc', primaryDark: '#6366f1', accent: '#f472b6', accentLight: '#f9a8d4', textPrimary: '#f1f5f9', textSecondary: '#cbd5e1', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)', bgPrimary: '#1e293b', bgSecondary: '#334155', bgTertiary: '#475569' },
-            'pastel': { primary: '#E6D1FF', primaryLight: '#F5E6FF', primaryDark: '#D1B3FF', accent: '#FFD1DC', accentLight: '#FFE6ED', textPrimary: '#4A4A4A', textSecondary: '#757575', textMuted: '#999999', bgGradient: 'linear-gradient(135deg, #BFDFFF 0%, #FFD1DC 100%)', bgPrimary: '#ffffff', bgSecondary: '#f8fafc', bgTertiary: '#f1f5f9' },
-            'brutalist': { primary: '#000000', primaryLight: '#333333', primaryDark: '#000000', accent: '#ff0000', accentLight: '#ff3333', textPrimary: '#000000', textSecondary: '#333333', textMuted: '#666666', bgGradient: 'linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%)', bgPrimary: '#ffffff', bgSecondary: '#f5f5f5', bgTertiary: '#eeeeee', className: 'theme-brutalist' },
-            '90s': { primary: '#ff00ff', primaryLight: '#ff66ff', primaryDark: '#cc00cc', accent: '#00ffff', accentLight: '#66ffff', textPrimary: '#0000ff', textSecondary: '#ff00ff', textMuted: '#00ff00', bgGradient: 'linear-gradient(135deg, #ffff00 0%, #ff00ff 50%, #00ffff 100%)', bgPrimary: '#ffffff', bgSecondary: '#ffffcc', bgTertiary: '#ffccff', className: 'theme-90s' },
-            'vaporwave': { primary: '#ff71ce', primaryLight: '#ff8fd8', primaryDark: '#e653b3', accent: '#01cdfe', accentLight: '#34d9ff', textPrimary: '#ffffff', textSecondary: '#e0e0e0', textMuted: '#b0b0b0', bgGradient: 'linear-gradient(180deg, #2d1b69 0%, #5b2a86 50%, #ff71ce 100%)', bgPrimary: '#2d1b69', bgSecondary: '#3d2b79', bgTertiary: '#4d3b89', className: 'theme-vaporwave' },
-            'minimalist': { primary: '#1a1a1a', primaryLight: '#333333', primaryDark: '#000000', accent: '#666666', accentLight: '#999999', textPrimary: '#333333', textSecondary: '#666666', textMuted: '#999999', bgGradient: 'linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%)', bgPrimary: '#ffffff', bgSecondary: '#fafafa', bgTertiary: '#f5f5f5', className: 'theme-minimalist' },
-            'terminal': { primary: '#00ff00', primaryLight: '#66ff66', primaryDark: '#00aa00', accent: '#00ff00', accentLight: '#66ff66', textPrimary: '#00ff00', textSecondary: '#00aa00', textMuted: '#008800', bgGradient: 'linear-gradient(135deg, #000000 0%, #001100 100%)', bgPrimary: '#000000', bgSecondary: '#001100', bgTertiary: '#002200', className: 'theme-terminal' }
-          };
-          const theme = themes[savedThemeId];
-          if (theme) {
-            const root = document.documentElement;
-            root.style.setProperty('--primary', theme.primary);
-            root.style.setProperty('--primary-light', theme.primaryLight);
-            root.style.setProperty('--primary-dark', theme.primaryDark);
-            root.style.setProperty('--accent', theme.accent);
-            root.style.setProperty('--accent-light', theme.accentLight);
-            root.style.setProperty('--text-primary', theme.textPrimary);
-            root.style.setProperty('--text-secondary', theme.textSecondary);
-            root.style.setProperty('--text-muted', theme.textMuted);
-            root.style.setProperty('--bg-primary', theme.bgPrimary);
-            root.style.setProperty('--bg-secondary', theme.bgSecondary);
-            root.style.setProperty('--bg-tertiary', theme.bgTertiary);
-            document.body.style.background = theme.bgGradient;
-            document.body.style.backgroundAttachment = 'fixed';
-            // Apply theme className if present
-            if (theme.className) {
-              document.body.classList.add(theme.className);
-            }
-          }
+        // Season palette handling
+        const palettes = {
+          spring: { primary: '#10b981', primaryLight: '#34d399', primaryDark: '#059669', accent: '#ec4899', accentLight: '#f472b6', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #d1fae5 0%, #fce7f3 50%, #e0f2fe 100%)', bgPrimary: '#ffffff', bgSecondary: '#f0fdf4', bgTertiary: '#ecfdf5' },
+          summer: { primary: '#f59e0b', primaryLight: '#fbbf24', primaryDark: '#d97706', accent: '#0ea5e9', accentLight: '#38bdf8', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #fef3c7 0%, #e0f2fe 50%, #fff7ed 100%)', bgPrimary: '#ffffff', bgSecondary: '#fffbeb', bgTertiary: '#fef9c3' },
+          fall: { primary: '#ea580c', primaryLight: '#f97316', primaryDark: '#c2410c', accent: '#a855f7', accentLight: '#c084fc', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #fff7ed 0%, #fef2f2 50%, #faf5ff 100%)', bgPrimary: '#ffffff', bgSecondary: '#fff7ed', bgTertiary: '#ffedd5' },
+          winter: { primary: '#6366f1', primaryLight: '#818cf8', primaryDark: '#4f46e5', accent: '#06b6d4', accentLight: '#22d3ee', textPrimary: '#1e293b', textSecondary: '#64748b', textMuted: '#94a3b8', bgGradient: 'linear-gradient(135deg, #e0e7ff 0%, #e0f2fe 50%, #f0f9ff 100%)', bgPrimary: '#ffffff', bgSecondary: '#f0f9ff', bgTertiary: '#e0f2fe' }
+        };
+        const darkOverrides = { textPrimary: '#f1f5f9', textSecondary: '#cbd5e1', textMuted: '#94a3b8', bgPrimary: '#1e293b', bgSecondary: '#334155', bgTertiary: '#475569', bgGradient: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)' };
+
+        const savedSeason = localStorage.getItem('atmosphere-override');
+        const isDark = localStorage.getItem('bjnewman-dark-mode') === 'true';
+        const season = savedSeason && palettes[savedSeason] ? savedSeason : null;
+
+        if (season || isDark) {
+          const palette = Object.assign({}, palettes[season || 'winter']);
+          if (isDark) Object.assign(palette, darkOverrides);
+          const root = document.documentElement;
+          root.style.setProperty('--primary', palette.primary);
+          root.style.setProperty('--primary-light', palette.primaryLight);
+          root.style.setProperty('--primary-dark', palette.primaryDark);
+          root.style.setProperty('--accent', palette.accent);
+          root.style.setProperty('--accent-light', palette.accentLight);
+          root.style.setProperty('--text-primary', palette.textPrimary);
+          root.style.setProperty('--text-secondary', palette.textSecondary);
+          root.style.setProperty('--text-muted', palette.textMuted);
+          root.style.setProperty('--bg-primary', palette.bgPrimary);
+          root.style.setProperty('--bg-secondary', palette.bgSecondary);
+          root.style.setProperty('--bg-tertiary', palette.bgTertiary);
+          document.body.style.background = palette.bgGradient;
+          document.body.style.backgroundAttachment = 'fixed';
         }
+
+        // Clean up old theme data
+        localStorage.removeItem('bjnewman-theme');
+        localStorage.removeItem('bjnewman-previous-theme');
 
         // Nav style handling - apply once nav element exists
         const savedNavStyle = localStorage.getItem('bjnewman-nav-style');
@@ -105,11 +102,10 @@ const currentPath = Astro.url.pathname;
           const applyNavStyle = () => {
             const nav = document.querySelector('.site-nav');
             if (nav) {
-              navStyles.forEach(cls => nav.classList.remove(cls));
+              navStyles.forEach((cls) => nav.classList.remove(cls));
               nav.classList.add('nav-' + savedNavStyle);
             }
           };
-          // Try immediately (for cached pages), or wait for DOM
           if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', applyNavStyle);
           } else {

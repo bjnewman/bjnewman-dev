@@ -10,6 +10,15 @@ vi.mock('../../components/ThemeSwitcher', () => ({
   useThemeSwitcher: () => ({
     isDarkMode: mockIsDarkMode,
     toggleDarkMode: mockToggleDarkMode,
+    currentSeason: 'spring',
+    setSeasonOverride: vi.fn(),
+    override: null,
+    seasons: [
+      { id: 'spring', name: 'Spring' },
+      { id: 'summer', name: 'Summer' },
+      { id: 'fall', name: 'Fall' },
+      { id: 'winter', name: 'Winter' },
+    ],
   }),
 }));
 

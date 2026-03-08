@@ -1,166 +1,140 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { renderHook, act } from '@testing-library/react';
 import { useThemeSwitcher } from '../../components/ThemeSwitcher';
 
-describe('useThemeSwitcher - Dark Mode Toggle', () => {
+// Mock useAtmosphere
+const mockSetOverride = vi.fn();
+let mockSeason = 'spring';
+let mockOverride: string | null = null;
+
+vi.mock('../../components/Atmosphere/useAtmosphere', () => ({
+  useAtmosphere: () => ({
+    season: mockSeason,
+    setOverride: mockSetOverride,
+    override: mockOverride,
+    timeOfDay: 'midday',
+    seasonProgress: 0.5,
+    dayProgress: 0.5,
+  }),
+}));
+
+// Mock applySeasonPalette
+const mockApplySeasonPalette = vi.fn();
+vi.mock('../../components/Atmosphere/applySeasonPalette', () => ({
+  applySeasonPalette: (...args: unknown[]) => mockApplySeasonPalette(...args),
+}));
+
+describe('useThemeSwitcher - Seasonal Atmosphere', () => {
   beforeEach(() => {
-    // Clear localStorage before each test
     localStorage.clear();
-    // Reset document styles
     document.documentElement.style.cssText = '';
     document.body.style.cssText = '';
     document.body.className = '';
+    mockSeason = 'spring';
+    mockOverride = null;
+    mockSetOverride.mockClear();
+    mockApplySeasonPalette.mockClear();
   });
 
-  it('should initialize with professional theme by default', () => {
+  it('should return the current season from atmosphere', () => {
     const { result } = renderHook(() => useThemeSwitcher());
-    expect(result.current.currentTheme.id).toBe('professional');
+    expect(result.current.currentSeason).toBe('spring');
+  });
+
+  it('should return all four seasons', () => {
+    const { result } = renderHook(() => useThemeSwitcher());
+    expect(result.current.seasons).toHaveLength(4);
+    expect(result.current.seasons.map((s) => s.id)).toEqual([
+      'spring',
+      'summer',
+      'fall',
+      'winter',
+    ]);
+  });
+
+  it('should capitalize season names', () => {
+    const { result } = renderHook(() => useThemeSwitcher());
+    expect(result.current.seasons[0].name).toBe('Spring');
+    expect(result.current.seasons[2].name).toBe('Fall');
+  });
+
+  it('should delegate season override to useAtmosphere', () => {
+    const { result } = renderHook(() => useThemeSwitcher());
+    act(() => {
+      result.current.setSeasonOverride('winter');
+    });
+    expect(mockSetOverride).toHaveBeenCalledWith('winter');
+  });
+
+  it('should apply season palette on mount', () => {
+    renderHook(() => useThemeSwitcher());
+    expect(mockApplySeasonPalette).toHaveBeenCalledWith('spring', false);
+  });
+
+  it('should initialize isDarkMode as false by default', () => {
+    const { result } = renderHook(() => useThemeSwitcher());
     expect(result.current.isDarkMode).toBe(false);
   });
 
-  it('should toggle from light theme to dark mode', () => {
+  it('should toggle dark mode', () => {
     const { result } = renderHook(() => useThemeSwitcher());
 
-    // Start on professional (light)
-    expect(result.current.currentTheme.id).toBe('professional');
     expect(result.current.isDarkMode).toBe(false);
 
-    // Toggle to dark
     act(() => {
       result.current.toggleDarkMode();
     });
 
-    expect(result.current.currentTheme.id).toBe('dark');
     expect(result.current.isDarkMode).toBe(true);
   });
 
-  it('should toggle from dark mode back to the previous light theme', () => {
+  it('should persist dark mode to localStorage', () => {
     const { result } = renderHook(() => useThemeSwitcher());
 
-    // Start on professional
-    expect(result.current.currentTheme.id).toBe('professional');
-
-    // Toggle to dark
     act(() => {
       result.current.toggleDarkMode();
     });
-    expect(result.current.currentTheme.id).toBe('dark');
 
-    // Toggle back - should return to professional
+    expect(localStorage.getItem('bjnewman-dark-mode')).toBe('true');
+
     act(() => {
       result.current.toggleDarkMode();
     });
-    expect(result.current.currentTheme.id).toBe('professional');
+
+    expect(localStorage.getItem('bjnewman-dark-mode')).toBe('false');
   });
 
-  it('should remember the light theme when toggling from a non-default theme', () => {
-    const { result } = renderHook(() => useThemeSwitcher());
-
-    // Switch to ocean theme via secret menu
-    act(() => {
-      result.current.switchTheme('ocean');
-    });
-    expect(result.current.currentTheme.id).toBe('ocean');
-
-    // Toggle to dark
-    act(() => {
-      result.current.toggleDarkMode();
-    });
-    expect(result.current.currentTheme.id).toBe('dark');
-
-    // Toggle back - should return to ocean, NOT professional
-    act(() => {
-      result.current.toggleDarkMode();
-    });
-    expect(result.current.currentTheme.id).toBe('ocean');
-  });
-
-  it('should remember theme across different hook instances (multi-component scenario)', () => {
-    // Simulates real app: SecretFeatures and ThemeToggle use separate hook instances
-    const { result: secretMenuHook } = renderHook(() => useThemeSwitcher());
-    const { result: toggleHook } = renderHook(() => useThemeSwitcher());
-
-    // User changes theme via secret menu
-    act(() => {
-      secretMenuHook.current.switchTheme('ocean');
-    });
-    expect(localStorage.getItem('bjnewman-theme')).toBe('ocean');
-
-    // User clicks toggle button (different component)
-    act(() => {
-      toggleHook.current.toggleDarkMode();
-    });
-    expect(localStorage.getItem('bjnewman-theme')).toBe('dark');
-
-    // User clicks toggle again - should return to ocean
-    act(() => {
-      toggleHook.current.toggleDarkMode();
-    });
-    expect(localStorage.getItem('bjnewman-theme')).toBe('ocean');
-  });
-
-  it('should NOT be affected by secret menu theme changes while in dark mode', () => {
-    const { result } = renderHook(() => useThemeSwitcher());
-
-    // Start on professional, toggle to dark
-    act(() => {
-      result.current.toggleDarkMode();
-    });
-    expect(result.current.currentTheme.id).toBe('dark');
-
-    // Toggle back to light - should be professional
-    act(() => {
-      result.current.toggleDarkMode();
-    });
-    expect(result.current.currentTheme.id).toBe('professional');
-  });
-
-  it('should use current light theme as "previous" when loading fresh (not in dark mode)', () => {
-    // Simulate stale localStorage from a previous session
-    localStorage.setItem('bjnewman-theme', 'ocean');
-    localStorage.setItem('bjnewman-previous-theme', '90s'); // Stale data!
+  it('should load dark mode from localStorage', () => {
+    localStorage.setItem('bjnewman-dark-mode', 'true');
 
     const { result } = renderHook(() => useThemeSwitcher());
-
-    // Should load ocean theme
-    expect(result.current.currentTheme.id).toBe('ocean');
-
-    // Toggle to dark
-    act(() => {
-      result.current.toggleDarkMode();
-    });
-    expect(result.current.currentTheme.id).toBe('dark');
-
-    // Toggle back - should return to OCEAN (current theme), NOT 90s (stale data)
-    act(() => {
-      result.current.toggleDarkMode();
-    });
-    expect(result.current.currentTheme.id).toBe('ocean');
+    expect(result.current.isDarkMode).toBe(true);
   });
 
-  it('should go to professional (default) when toggling from dark after page reload', () => {
-    // User was in dark mode when they reloaded the page
-    localStorage.setItem('bjnewman-theme', 'dark');
-
+  it('should apply palette with dark mode when toggled', () => {
     const { result } = renderHook(() => useThemeSwitcher());
-    expect(result.current.currentTheme.id).toBe('dark');
 
-    // Toggle back - should go to professional (the default), not any previous theme
+    mockApplySeasonPalette.mockClear();
+
     act(() => {
       result.current.toggleDarkMode();
     });
-    expect(result.current.currentTheme.id).toBe('professional');
+
+    expect(mockApplySeasonPalette).toHaveBeenCalledWith('spring', true);
   });
 
-  it('should clean up stale localStorage keys from previous implementation', () => {
-    // Set up stale data from old implementation
-    localStorage.setItem('bjnewman-theme', 'forest');
-    localStorage.setItem('bjnewman-previous-theme', '90s');
+  it('should remove old theme classes on effect', () => {
+    document.body.classList.add('theme-brutalist', 'theme-90s');
 
-    // Load the hook
     renderHook(() => useThemeSwitcher());
 
-    // Stale previous-theme key should be removed
-    expect(localStorage.getItem('bjnewman-previous-theme')).toBeNull();
+    expect(document.body.classList.contains('theme-brutalist')).toBe(false);
+    expect(document.body.classList.contains('theme-90s')).toBe(false);
+  });
+
+  it('should expose the override from atmosphere', () => {
+    mockOverride = 'winter';
+    const { result } = renderHook(() => useThemeSwitcher());
+    expect(result.current.override).toBe('winter');
   });
 });

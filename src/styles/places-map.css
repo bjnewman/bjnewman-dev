@@ -232,31 +232,3 @@
     animation: fadeSlideIn 0.2s ease;
   }
 }
-
-/* Theme overrides */
-.theme-brutalist .places-map__card {
-  border: 2px solid #000;
-  border-radius: 0;
-}
-
-.theme-brutalist .places-map__pin-dot {
-  border-radius: 0;
-}
-
-.theme-terminal .places-map__card {
-  border-color: #00ff00;
-  background: rgba(0, 20, 0, 0.8);
-}
-
-.theme-terminal .places-map__pin-dot {
-  background: #00ff00;
-}
-
-.theme-vaporwave .places-map__card {
-  border-color: #ff71ce;
-  background: rgba(45, 27, 105, 0.8);
-}
-
-.theme-vaporwave .places-map__pin-dot {
-  background: #ff71ce;
-}

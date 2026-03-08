@@ -1,7 +1,7 @@
 import { SecretMenu } from './components/SecretMenu';
 import { useConfetti } from './components/ConfettiCannon';
 import { useMusicPlayer } from './components/MusicPlayer';
-import { useThemeSwitcher, themes } from './components/ThemeSwitcher';
+import { useThemeSwitcher } from './components/ThemeSwitcher';
 import { useNavStyleSwitcher, navStyles } from './components/NavStyleSwitcher';
 import { useHollandDecorations } from './components/HollandDecorations';
 import { useHollandSounds } from './components/HollandSounds';
@@ -12,11 +12,10 @@ import { useState, useEffect, useRef } from 'react';
 function SecretFeatures() {
   const { fireConfetti, ConfettiRender } = useConfetti();
   const { toggleMusic, isPlaying, MusicIndicator, preloadAudio } = useMusicPlayer();
-  const { currentTheme, switchTheme } = useThemeSwitcher();
+  const { currentSeason, setSeasonOverride, seasons, isDarkMode, toggleDarkMode } = useThemeSwitcher();
   const {
     currentNavStyle,
     switchNavStyle,
-    setNavStyleFromTheme,
     resetToThemeDefault,
     isOverridden,
   } = useNavStyleSwitcher();
@@ -114,18 +113,25 @@ function SecretFeatures() {
     trackConfettiFired();
   };
 
-  const handleSwitchTheme = (themeId: string) => {
-    switchTheme(themeId);
-    setNavStyleFromTheme(themeId);
-    trackThemeExplored(themeId);
+  const handleSwitchSeason = (seasonId: string) => {
+    setSeasonOverride(seasonId as import('./components/Atmosphere/types').Season);
+    trackThemeExplored(seasonId);
   };
 
-  // Create theme menu items
-  const themeItems = themes.map((theme) => ({
-    id: `theme-${theme.id}`,
-    label: theme.name,
-    emoji: theme.emoji,
-    action: () => handleSwitchTheme(theme.id),
+  // Season emojis for the menu
+  const seasonEmojis: Record<string, string> = {
+    spring: '🌸',
+    summer: '☀️',
+    fall: '🍂',
+    winter: '❄️',
+  };
+
+  // Create season menu items (replaces old theme items)
+  const seasonItems = seasons.map((s) => ({
+    id: `season-${s.id}`,
+    label: `${s.name}${currentSeason === s.id ? ' \u2713' : ''}`,
+    emoji: seasonEmojis[s.id] || '🎨',
+    action: () => handleSwitchSeason(s.id),
   }));
 
   // Create nav style menu items
@@ -150,12 +156,18 @@ function SecretFeatures() {
       action: toggleMusic,
     },
     {
-      id: 'themes-divider',
-      label: '— Themes —',
+      id: 'dark-mode',
+      label: isDarkMode ? 'Light Mode' : 'Dark Mode',
+      emoji: isDarkMode ? '☀️' : '🌙',
+      action: toggleDarkMode,
+    },
+    {
+      id: 'seasons-divider',
+      label: '— Seasons —',
       emoji: '🎨',
       action: () => {}, // Divider, no action
     },
-    ...themeItems,
+    ...seasonItems,
     {
       id: 'nav-styles-divider',
       label: '— Navigation Style —',
@@ -169,7 +181,7 @@ function SecretFeatures() {
             id: 'nav-reset',
             label: 'Reset to Theme Default',
             emoji: '↩️',
-            action: () => resetToThemeDefault(currentTheme.id),
+            action: () => resetToThemeDefault(currentSeason),
           },
         ]
       : []),
@@ -263,7 +275,7 @@ function SecretFeatures() {
       {menuDiscovered && (
         <div className="secret-menu-floating-hint">
           <span>
-            💡 Press Cmd+K for secret menu • {currentTheme.emoji} {currentTheme.name} • {currentNavStyle.emoji} {currentNavStyle.name}
+            💡 Press Cmd+K for secret menu • {seasonEmojis[currentSeason]} {currentSeason.charAt(0).toUpperCase() + currentSeason.slice(1)} • {currentNavStyle.emoji} {currentNavStyle.name}
           </span>
         </div>
       )}
