@@ -20,7 +20,8 @@
     "prepare": "husky",
     "lighthouse": "lhci autorun",
     "lighthouse:api": "bun run scripts/lighthouse.ts",
-    "lighthouse:api:desktop": "bun run scripts/lighthouse.ts --desktop"
+    "lighthouse:api:desktop": "bun run scripts/lighthouse.ts --desktop",
+    "generate-sprites": "bun run scripts/generate-seasonal-sprites.ts"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
@@ -44,6 +45,7 @@
     "@astrojs/react": "^4.1.1",
     "@eslint/js": "^9.33.0",
     "@lhci/cli": "^0.15.1",
+    "@napi-rs/canvas": "^0.1.96",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.1.0",
     "@testing-library/user-event": "^14.5.2",

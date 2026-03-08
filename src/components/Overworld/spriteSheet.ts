@@ -1,5 +1,6 @@
 import { TileType } from './types';
 import type { Direction } from './types';
+import type { Season } from '../Atmosphere/types';
 import { TILE_SIZE } from './constants';
 
 // --- Terrain tileset ---
@@ -72,3 +73,20 @@ export const DECORATIONS = {
   rock1: '/assets/overworld/decorations/rock1.png',
   rock2: '/assets/overworld/decorations/rock2.png',
 } as const;
+
+// --- Seasonal asset path helpers ---
+// Only fall and winter have generated sprite variants; spring/summer use base assets
+
+export function seasonalBuildingAssetUrl(spriteAsset: string, season: Season): string {
+  if (season === 'fall' || season === 'winter') {
+    return `/assets/overworld/${spriteAsset.replace('.png', `-${season}.png`)}`;
+  }
+  return buildingAssetUrl(spriteAsset);
+}
+
+export function seasonalDecorationPath(basePath: string, season: Season): string {
+  if (season === 'fall' || season === 'winter') {
+    return basePath.replace('.png', `-${season}.png`);
+  }
+  return basePath;
+}

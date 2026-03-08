@@ -74,23 +74,23 @@ export const OverworldCanvas = forwardRef<HTMLDivElement, Props>(function Overwo
         <container>
           <container filters={[seasonFilter]}>
             <OverworldMap />
-            <AmbientEffects />
+            <AmbientEffects season={season} />
+            <BuildingSprites season={season} />
+            <BuildingZones nearbyBuilding={state.nearbyBuilding} />
+            <EasterEggs playSound={playSound} />
+            <CarlosCompanion
+              playerX={state.player.x}
+              playerY={state.player.y}
+              playerDirection={state.player.direction}
+            />
+            <PlayerSprite
+              x={state.player.x}
+              y={state.player.y}
+              direction={state.player.direction}
+              isMoving={state.player.isMoving}
+              scale={playerScale}
+            />
           </container>
-          <BuildingSprites />
-          <BuildingZones nearbyBuilding={state.nearbyBuilding} />
-          <EasterEggs playSound={playSound} />
-          <CarlosCompanion
-            playerX={state.player.x}
-            playerY={state.player.y}
-            playerDirection={state.player.direction}
-          />
-          <PlayerSprite
-            x={state.player.x}
-            y={state.player.y}
-            direction={state.player.direction}
-            isMoving={state.player.isMoving}
-            scale={playerScale}
-          />
           {weatherEnabled && <WeatherParticles season={season} overrides={weatherOverrides} />}
           <DayNightOverlay dayProgress={dayProgress} />
         </container>

@@ -8,20 +8,23 @@ import {
   Rectangle,
 } from 'pixi.js';
 import { TILE_SIZE, CANVAS_WIDTH } from './constants';
+import { seasonalDecorationPath } from './spriteSheet';
 import { tileMap } from './mapData';
 import { TileType } from './types';
+import type { Season } from '../Atmosphere/types';
 
 extend({ AnimatedSprite: PixiAnimatedSprite, Sprite: PixiSprite });
 
 // --- Swaying Trees ---
 
-function SwayingTree({ x, y, variant }: { x: number; y: number; variant: 1 | 2 }) {
+function SwayingTree({ x, y, variant, season }: { x: number; y: number; variant: 1 | 2; season: Season }) {
   const spriteRef = useRef<PixiAnimatedSprite>(null);
   const [textures, setTextures] = useState<Texture[] | null>(null);
 
   useEffect(() => {
     const load = async () => {
-      const path = `/assets/overworld/decorations/tree${variant}.png`;
+      const basePath = `/assets/overworld/decorations/tree${variant}.png`;
+      const path = seasonalDecorationPath(basePath, season);
       const base = await Assets.load(path);
       const frames = Array.from({ length: 8 }, (_, i) =>
         new Texture({ source: base.source, frame: new Rectangle(i * 192, 0, 192, 256) })
@@ -29,7 +32,7 @@ function SwayingTree({ x, y, variant }: { x: number; y: number; variant: 1 | 2 }
       setTextures(frames);
     };
     load();
-  }, [variant]);
+  }, [variant, season]);
 
   // Manually start animation once textures are loaded
   useEffect(() => {
@@ -93,7 +96,7 @@ function DriftingCloud({ src, startX, y, speed, scale, alpha = 0.6 }: {
 
 // --- Main Ambient Effects Component ---
 
-export function AmbientEffects() {
+export function AmbientEffects({ season }: { season: Season }) {
   const treePositions: Array<{ x: number; y: number; variant: 1 | 2 }> = [];
   for (let row = 0; row < tileMap.length; row++) {
     for (let col = 0; col < tileMap[row].length; col++) {
@@ -123,7 +126,7 @@ export function AmbientEffects() {
   return (
     <>
       {treePositions.map((t, i) => (
-        <SwayingTree key={`tree-${i}`} x={t.x} y={t.y} variant={t.variant} />
+        <SwayingTree key={`tree-${i}`} x={t.x} y={t.y} variant={t.variant} season={season} />
       ))}
 
       {clouds.map((c, i) => (

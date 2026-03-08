@@ -2,19 +2,20 @@ import { useEffect, useState } from 'react';
 import { extend } from '@pixi/react';
 import { Sprite as PixiSprite, Assets, Texture } from 'pixi.js';
 import { buildings } from './mapData';
-import { buildingAssetUrl } from './spriteSheet';
+import { seasonalBuildingAssetUrl } from './spriteSheet';
+import type { Season } from '../Atmosphere/types';
 import { TILE_SIZE } from './constants';
 
 extend({ Sprite: PixiSprite });
 
-export function BuildingSprites() {
+export function BuildingSprites({ season }: { season: Season }) {
   const [textures, setTextures] = useState<Map<string, Texture>>(new Map());
 
   useEffect(() => {
     const load = async () => {
       const results = await Promise.allSettled(
         buildings.map(async (building) => {
-          const url = buildingAssetUrl(building.spriteAsset);
+          const url = seasonalBuildingAssetUrl(building.spriteAsset, season);
           const texture = await Assets.load(url);
           return { id: building.id, texture } as { id: string; texture: Texture };
         })
@@ -29,7 +30,7 @@ export function BuildingSprites() {
       setTextures(loaded);
     };
     load();
-  }, []);
+  }, [season]);
 
   return (
     <>
