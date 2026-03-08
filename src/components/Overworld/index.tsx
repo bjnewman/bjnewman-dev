@@ -22,7 +22,7 @@ export function Overworld() {
   const { keys, clickTarget, handleCanvasClick, clearClickTarget, clearInteract, clearEscape, setDirectionKey } = useInput();
   const { muted, toggleMute, playDialogOpen, playConfirm, playCancel, playTransition, playSound } = useSoundEffects();
   const { dayProgress, season } = useAtmosphere();
-  const [transitioning, setTransitioning] = useState(false);
+  const [doorTransition, setDoorTransition] = useState<{ active: boolean; x: number; y: number; url: string } | null>(null);
   const [textMode, setTextMode] = useState(false);
   
   // Welcome modal state
@@ -208,15 +208,24 @@ export function Overworld() {
   const handleDialogConfirm = useCallback(() => {
     if (!state.dialog.building) return;
     playConfirm();
-    setTransitioning(true);
 
-    const url = state.dialog.building.page;
+    const building = state.dialog.building;
+    localStorage.setItem('overworld-spawn', building.id);
+
+    // Start iris-out centered on building entrance
+    const cx = building.entranceX * TILE_SIZE + TILE_SIZE / 2;
+    const cy = building.entranceY * TILE_SIZE;
+    setDoorTransition({ active: true, x: cx, y: cy, url: building.page });
+
+    dispatch({ type: 'CLOSE_DIALOG' });
     playTransition();
-
-    setTimeout(() => {
-      window.location.href = url;
-    }, 300);
   }, [state.dialog.building, playConfirm, playTransition]);
+
+  const handleDoorTransitionComplete = useCallback(() => {
+    if (doorTransition) {
+      window.location.href = doorTransition.url;
+    }
+  }, [doorTransition]);
 
   const handleBuildingDoubleClick = useCallback((building: Building) => {
     if (state.dialog.open) return;
@@ -290,14 +299,14 @@ export function Overworld() {
 
       {/* Canvas + UI overlay (overlays positioned relative to canvas) */}
       <div className="overworld__game-area" role="img" aria-label="Interactive pixel art village — use arrow keys or WASD to move, press E near buildings to interact">
-        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} onBuildingDoubleClick={handleBuildingDoubleClick} playSound={playSound} playerScale={playerScale} dayProgress={dayProgress} season={season} />
+        <OverworldCanvas state={state} onCanvasClick={handleCanvasClick} onBuildingDoubleClick={handleBuildingDoubleClick} playSound={playSound} playerScale={playerScale} dayProgress={dayProgress} season={season} doorTransition={doorTransition} onDoorTransitionComplete={handleDoorTransitionComplete} />
         <OverworldUI
           state={state}
           onDialogConfirm={handleDialogConfirm}
           onDialogCancel={handleDialogCancel}
           onToggleAudio={handleToggleAudio}
           onToggleContrast={handleToggleContrast}
-          transitioning={transitioning}
+          transitioning={false}
         />
       </div>
 

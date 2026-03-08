@@ -9,6 +9,7 @@ import { CarlosCompanion } from './CarlosCompanion';
 import { EasterEggs } from './EasterEggs';
 import { DayNightOverlay } from './DayNightOverlay';
 import { WeatherParticles } from './WeatherParticles';
+import { DoorTransition } from './DoorTransition';
 import { useSeasonalFilter } from './SeasonalFilters';
 import { getBuildingAtPixel } from './useCollision';
 import type { Building, GameState } from './types';
@@ -25,9 +26,11 @@ type Props = {
   playerScale?: number;
   dayProgress: number;
   season: Season;
+  doorTransition: { active: boolean; x: number; y: number } | null;
+  onDoorTransitionComplete: () => void;
 };
 
-export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, playSound, playerScale, dayProgress, season }: Props) {
+export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, playSound, playerScale, dayProgress, season, doorTransition, onDoorTransitionComplete }: Props) {
   const toWorld = (e: React.PointerEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const scaleX = CANVAS_WIDTH / rect.width;
@@ -89,6 +92,14 @@ export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, p
           />
           <WeatherParticles season={season} />
           <DayNightOverlay dayProgress={dayProgress} />
+          {doorTransition && (
+            <DoorTransition
+              active={doorTransition.active}
+              centerX={doorTransition.x}
+              centerY={doorTransition.y}
+              onComplete={onDoorTransitionComplete}
+            />
+          )}
         </container>
       </Application>
     </div>
