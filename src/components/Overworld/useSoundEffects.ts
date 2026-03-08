@@ -12,6 +12,24 @@ const SOUND_PATHS = {
 
 type SoundName = keyof typeof SOUND_PATHS;
 
+// Synthesized sounds (Web Audio API, no file needed)
+type SynthSoundFn = (ctx: AudioContext) => void;
+
+const SYNTH_SOUNDS: Record<string, SynthSoundFn> = {
+  quack: (ctx) => {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(800, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.15);
+    gain.gain.setValueAtTime(0.15, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + 0.2);
+  },
+};
+
 export function useSoundEffects() {
   const [muted, setMuted] = useState(() => {
     if (typeof window === 'undefined') return true;
@@ -64,7 +82,7 @@ export function useSoundEffects() {
     localStorage.setItem(STORAGE_KEY, muted.toString());
   }, [muted]);
 
-  const playSound = useCallback(
+  const playFileSound = useCallback(
     async (name: SoundName) => {
       if (muted) return;
       try {
@@ -94,18 +112,41 @@ export function useSoundEffects() {
     [muted, getAudioContext, preloadSounds]
   );
 
+  const playSound = useCallback(
+    (name: string) => {
+      if (muted) return;
+      try {
+        const synthFn = SYNTH_SOUNDS[name];
+        if (synthFn) {
+          const ctx = getAudioContext();
+          synthFn(ctx);
+          return;
+        }
+
+        // Fall through to file-based playback
+        if (name in SOUND_PATHS) {
+          playFileSound(name as SoundName);
+        }
+      } catch {
+        // Silently fail — audio is non-essential
+      }
+    },
+    [muted, getAudioContext, playFileSound]
+  );
+
   const toggleMute = useCallback(() => {
     setMuted((prev) => !prev);
   }, []);
 
-  const playDialogOpen = useCallback(() => playSound('dialogOpen'), [playSound]);
-  const playConfirm = useCallback(() => playSound('confirm'), [playSound]);
-  const playCancel = useCallback(() => playSound('cancel'), [playSound]);
-  const playTransition = useCallback(() => playSound('transition'), [playSound]);
+  const playDialogOpen = useCallback(() => playFileSound('dialogOpen'), [playFileSound]);
+  const playConfirm = useCallback(() => playFileSound('confirm'), [playFileSound]);
+  const playCancel = useCallback(() => playFileSound('cancel'), [playFileSound]);
+  const playTransition = useCallback(() => playFileSound('transition'), [playFileSound]);
 
   return {
     muted,
     toggleMute,
+    playSound,
     playDialogOpen,
     playConfirm,
     playCancel,

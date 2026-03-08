@@ -47,3 +47,30 @@ describe('useSoundEffects', () => {
     expect(typeof result.current.playTransition).toBe('function');
   });
 });
+
+describe('useSoundEffects — centralized playSound', () => {
+  beforeEach(() => {
+    localStorage.clear();
+  });
+
+  it('should expose a generic playSound function', () => {
+    const { result } = renderHook(() => useSoundEffects());
+    expect(typeof result.current.playSound).toBe('function');
+  });
+
+  it('should not throw when playing a synthesized sound while muted', () => {
+    const { result } = renderHook(() => useSoundEffects());
+    // Should be muted by default, calling playSound should be a no-op
+    expect(() => result.current.playSound('quack')).not.toThrow();
+  });
+
+  it('should register and play custom synthesized sounds', () => {
+    const { result } = renderHook(() => useSoundEffects());
+    // Unmute first
+    act(() => {
+      result.current.toggleMute();
+    });
+    // Playing a synthesized sound should not throw
+    expect(() => result.current.playSound('quack')).not.toThrow();
+  });
+});
