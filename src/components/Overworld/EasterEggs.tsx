@@ -12,7 +12,7 @@ extend({ Sprite: PixiSprite });
 
 // --- Rubber Duck ---
 
-function RubberDuck({ x, y }: { x: number; y: number }) {
+function RubberDuck({ x, y, playSound }: { x: number; y: number; playSound: (name: string) => void }) {
   const spriteRef = useRef<PixiSprite>(null);
   const [texture, setTexture] = useState<Texture | null>(null);
   const bobPhase = useRef(Math.random() * Math.PI * 2);
@@ -45,24 +45,7 @@ function RubberDuck({ x, y }: { x: number; y: number }) {
       height={32}
       eventMode="static"
       cursor="pointer"
-      onPointerDown={() => {
-        // Quack via Web Audio API
-        try {
-          const ctx = new AudioContext();
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = 'square';
-          osc.frequency.setValueAtTime(800, ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(400, ctx.currentTime + 0.15);
-          gain.gain.setValueAtTime(0.15, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
-          osc.connect(gain).connect(ctx.destination);
-          osc.start();
-          osc.stop(ctx.currentTime + 0.2);
-        } catch {
-          // Audio not available
-        }
-      }}
+      onPointerDown={() => playSound('quack')}
     />
   );
 }
@@ -112,14 +95,8 @@ export function useKonamiCode(onActivate: () => void) {
 
 // --- Easter Eggs Component ---
 
-export function EasterEggs() {
-  // Place rubber duck in a quiet corner of the map
+export function EasterEggs({ playSound }: { playSound: (name: string) => void }) {
   const duckX = 5 * TILE_SIZE + 16;
   const duckY = 11 * TILE_SIZE + 16;
-
-  return (
-    <>
-      <RubberDuck x={duckX} y={duckY} />
-    </>
-  );
+  return <RubberDuck x={duckX} y={duckY} playSound={playSound} />;
 }

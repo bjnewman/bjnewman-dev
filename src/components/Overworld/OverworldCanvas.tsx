@@ -17,10 +17,11 @@ type Props = {
   state: GameState;
   onCanvasClick: (worldX: number, worldY: number) => void;
   onBuildingDoubleClick: (building: Building) => void;
+  playSound: (name: string) => void;
   playerScale?: number;
 };
 
-export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, playerScale }: Props) {
+export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, playSound, playerScale }: Props) {
   const toWorld = (e: React.PointerEvent<HTMLDivElement> | React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const scaleX = CANVAS_WIDTH / rect.width;
@@ -63,7 +64,7 @@ export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, p
           <AmbientEffects />
           <BuildingSprites />
           <BuildingZones nearbyBuilding={state.nearbyBuilding} />
-          <EasterEggs />
+          <EasterEggs playSound={playSound} />
           <CarlosCompanion
             playerX={state.player.x}
             playerY={state.player.y}
