@@ -9,6 +9,7 @@ import { CarlosCompanion } from './CarlosCompanion';
 import { EasterEggs } from './EasterEggs';
 import { DayNightOverlay } from './DayNightOverlay';
 import { WeatherParticles } from './WeatherParticles';
+import { useSeasonalFilter } from './SeasonalFilters';
 import { getBuildingAtPixel } from './useCollision';
 import type { Building, GameState } from './types';
 import type { Season } from '../Atmosphere/types';
@@ -50,6 +51,8 @@ export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, p
     }
   };
 
+  const seasonFilter = useSeasonalFilter(season);
+
   return (
     <div
       className="overworld__canvas-wrapper"
@@ -65,8 +68,10 @@ export function OverworldCanvas({ state, onCanvasClick, onBuildingDoubleClick, p
         className="overworld__canvas"
       >
         <container>
-          <OverworldMap />
-          <AmbientEffects />
+          <container filters={[seasonFilter]}>
+            <OverworldMap />
+            <AmbientEffects />
+          </container>
           <BuildingSprites />
           <BuildingZones nearbyBuilding={state.nearbyBuilding} />
           <EasterEggs playSound={playSound} />
