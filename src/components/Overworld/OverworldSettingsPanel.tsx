@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SEASONS } from '../Atmosphere/useAtmosphere';
 import type { UseAtmosphereReturn } from '../Atmosphere/useAtmosphere';
 import type { Season } from '../Atmosphere/types';
@@ -36,6 +36,21 @@ type Props = {
 };
 
 export function OverworldSettingsPanel({ atmosphere, isOpen, onToggle }: Props) {
+  const [pauseToast, setPauseToast] = useState(false);
+
+  const handlePause = () => {
+    setPauseToast(true);
+    console.info(
+      '%c⏸ To actually pause time, run: %cpauseTime()%c in the console.\n' +
+      'Resume with: %cresumeTime()',
+      'color: #e0c97f; font-weight: bold',
+      'color: #7fffe0; font-family: monospace',
+      'color: #e0c97f; font-weight: bold',
+      'color: #7fffe0; font-family: monospace',
+    );
+    setTimeout(() => setPauseToast(false), 2500);
+  };
+
   // Keyboard shortcut: Cmd+K / Ctrl+K
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -90,7 +105,21 @@ export function OverworldSettingsPanel({ atmosphere, isOpen, onToggle }: Props) 
         {/* Current status */}
         <div className="ow-settings__status">
           {SEASON_LABELS[season]} &middot; {TIME_LABELS[timeOfDay] ?? timeOfDay}
+          <button
+            className="ow-settings__pause-btn"
+            onClick={handlePause}
+            type="button"
+            aria-label="Pause time"
+            title="Pause"
+          >
+            ⏸
+          </button>
         </div>
+        {pauseToast && (
+          <div className="ow-settings__toast" role="status">
+            Time waits for no mortal.
+          </div>
+        )}
 
         {/* Season picker */}
         <div className="ow-settings__section" role="group" aria-label="Season">

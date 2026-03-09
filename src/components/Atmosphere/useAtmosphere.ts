@@ -108,13 +108,37 @@ export function useAtmosphere(): UseAtmosphereReturn {
   // Offset added when user jumps to a specific day progress
   const dayOffsetRef = useRef(0);
 
+  // Paused state — controlled via window.__weatherPause() / __weatherResume()
+  const [paused, setPaused] = useState(false);
+  const pausedAtRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const w = window as Window & { pauseTime?: () => void; resumeTime?: () => void };
+    w.pauseTime = () => {
+      pausedAtRef.current = Date.now();
+      setPaused(true);
+      console.info('%c⏸ Time paused.', 'color: #e0c97f; font-weight: bold');
+    };
+    w.resumeTime = () => {
+      if (pausedAtRef.current !== null) {
+        // Shift startTime forward by paused duration so time doesn't jump
+        startTimeRef.current += Date.now() - pausedAtRef.current;
+        pausedAtRef.current = null;
+      }
+      setPaused(false);
+      console.info('%c▶ Time resumed.', 'color: #7fffe0; font-weight: bold');
+    };
+    return () => { delete w.pauseTime; delete w.resumeTime; };
+  }, []);
+
   // Tick interval to drive re-computation
   useEffect(() => {
+    if (paused) return;
     const id = setInterval(() => {
       setTick((t) => t + 1);
     }, TICK_INTERVAL);
     return () => clearInterval(id);
-  }, []);
+  }, [paused]);
 
   // Compute elapsed time from startTime ref — works with vi.useFakeTimers
   const elapsed = Date.now() - startTimeRef.current;

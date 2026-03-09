@@ -517,10 +517,38 @@
 }
 
 .ow-settings__status {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   font-size: 0.8rem;
   color: #b8a06a;
   margin-bottom: 1rem;
+}
+
+.ow-settings__pause-btn {
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #b8a06a;
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0.1rem 0.25rem;
+  line-height: 1;
+  transition: border-color 0.2s;
+}
+
+.ow-settings__pause-btn:hover {
+  border-color: #e0c97f;
+}
+
+.ow-settings__toast {
+  text-align: center;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: #e0c97f;
+  margin-bottom: 0.75rem;
+  animation: ow-fadeIn 0.3s ease;
 }
 
 .ow-settings__section {
