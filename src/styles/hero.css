@@ -47,6 +47,7 @@
 /* Code Block */
 .typewriter-container {
   background: #1e1e1e;
+  border: none;
   border-radius: 8px;
   padding: 1.5rem;
   font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
@@ -54,6 +55,9 @@
   line-height: 1.6;
   overflow-x: auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  text-align: left;
+  color: inherit;
 }
 
 .typewriter-code {
@@ -120,6 +124,9 @@
   border-radius: 12px;
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font: inherit;
+  color: inherit;
+  width: 100%;
 }
 
 .stat-card:hover {

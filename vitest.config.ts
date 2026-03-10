@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      'astro:transitions/client': path.resolve(__dirname, 'src/test/mocks/astro-transitions.ts'),
+      'astro:transitions/client': path.resolve(import.meta.dirname, 'src/test/mocks/astro-transitions.ts'),
     },
   },
   test: {

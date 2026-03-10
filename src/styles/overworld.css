@@ -495,7 +495,9 @@
 }
 
 .ow-settings__header {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
   border-bottom: 2px solid rgba(224, 201, 127, 0.3);
@@ -510,10 +512,25 @@
   letter-spacing: 0.1em;
 }
 
-.ow-settings__hint {
-  margin: 0.25rem 0 0;
-  font-size: 0.7rem;
-  color: #b8a06a;
+.ow-settings__close-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  color: #e0c97f;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.ow-settings__close-btn:hover,
+.ow-settings__close-btn:focus-visible {
+  border-color: #e0c97f;
 }
 
 .ow-settings__status {
@@ -690,6 +707,12 @@
 }
 
 @media (max-width: 600px) {
+  .ow-settings {
+    margin: 1rem;
+    width: calc(100% - 2rem);
+    max-height: calc(100vh - 2rem);
+  }
+
   .ow-settings__settings-toggle {
     min-height: 44px;
     min-width: 44px;
@@ -826,5 +849,52 @@
   }
   .welcome-modal__actions {
     flex-direction: column-reverse;
+  }
+}
+
+/* Portrait orientation prompt — touch devices only */
+.overworld__rotate-prompt {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(15, 15, 30, 0.95);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: #e0c97f;
+  font-family: 'JetBrains Mono', monospace;
+  text-align: center;
+  padding: 2rem;
+}
+
+.overworld__rotate-icon {
+  font-size: 3rem;
+  animation: ow-rotate-hint 2s ease-in-out infinite;
+}
+
+.overworld__rotate-prompt p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #d0d0d0;
+  max-width: 240px;
+  line-height: 1.5;
+}
+
+@keyframes ow-rotate-hint {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(90deg); }
+}
+
+@media (pointer: coarse) and (orientation: portrait) {
+  .overworld__rotate-prompt {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overworld__rotate-icon {
+    animation: none;
   }
 }

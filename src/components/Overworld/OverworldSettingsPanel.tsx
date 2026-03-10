@@ -99,7 +99,14 @@ export function OverworldSettingsPanel({ atmosphere, isOpen, onToggle }: Props) 
       <div className="ow-settings" onClick={(e) => e.stopPropagation()}>
         <div className="ow-settings__header">
           <h3 id="ow-settings-title">Village Settings</h3>
-          <p className="ow-settings__hint">Cmd+K to toggle</p>
+          <button
+            className="ow-settings__close-btn"
+            onClick={() => onToggle(false)}
+            type="button"
+            aria-label="Close settings"
+          >
+            ×
+          </button>
         </div>
 
         {/* Current status */}

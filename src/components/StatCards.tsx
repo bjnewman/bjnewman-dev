@@ -14,22 +14,13 @@ export function StatCards() {
     setRestartKeys((prev) => ({ ...prev, [key]: prev[key] + 1 }));
   };
 
-  const handleKeyDown = (key: keyof typeof restartKeys) => (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      restartAnimation(key);
-    }
-  };
-
   return (
     <div className="stat-cards" aria-label="Key statistics">
       {/* Transactions - Sparkline */}
-      <div
+      <button
         className="stat-card stat-card-clickable"
-        role="button"
-        tabIndex={0}
         onClick={() => restartAnimation('transactions')}
-        onKeyDown={handleKeyDown('transactions')}
+        type="button"
         title="Click to replay animation"
       >
         <div className="stat-sparkline">
@@ -41,15 +32,13 @@ export function StatCards() {
         </div>
         <div className="stat-value">10M+</div>
         <div className="stat-label">transactions/day</div>
-      </div>
+      </button>
 
       {/* Users - Crowd */}
-      <div
+      <button
         className="stat-card stat-card-clickable"
-        role="button"
-        tabIndex={0}
         onClick={() => restartAnimation('users')}
-        onKeyDown={handleKeyDown('users')}
+        type="button"
         title="Click to replay animation"
       >
         <div className="stat-sparkline">
@@ -57,15 +46,13 @@ export function StatCards() {
         </div>
         <div className="stat-value">100k+</div>
         <div className="stat-label">daily users</div>
-      </div>
+      </button>
 
       {/* Years - Clock */}
-      <div
+      <button
         className="stat-card stat-card-clickable"
-        role="button"
-        tabIndex={0}
         onClick={() => restartAnimation('years')}
-        onKeyDown={handleKeyDown('years')}
+        type="button"
         title="Click to replay animation"
       >
         <div className="stat-sparkline">
@@ -73,7 +60,7 @@ export function StatCards() {
         </div>
         <div className="stat-value">7+</div>
         <div className="stat-label">years experience</div>
-      </div>
+      </button>
     </div>
   );
 }

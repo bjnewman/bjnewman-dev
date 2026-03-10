@@ -352,6 +352,12 @@ export function Overworld() {
       <ConfettiRender />
       */}
 
+      {/* Portrait orientation prompt — CSS-only, shown on mobile portrait */}
+      <div className="overworld__rotate-prompt" aria-hidden="true">
+        <span className="overworld__rotate-icon">↻</span>
+        <p>Rotate your device for the best experience</p>
+      </div>
+
       {/* noscript fallback */}
       <noscript>
         <TextOnlyFallback />

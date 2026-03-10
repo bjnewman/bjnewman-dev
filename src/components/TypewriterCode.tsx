@@ -116,24 +116,17 @@ export function TypewriterCode({ restartKey = 0 }: TypewriterCodeProps) {
   };
 
   return (
-    <div
+    <button
       className="typewriter-container typewriter-clickable"
-      role="button"
       aria-label="Code snippet showing: building reliable systems with React, Java, and AWS stack, handling 10M+ transactions per day"
-      tabIndex={0}
       onClick={restartAnimation}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          restartAnimation();
-        }
-      }}
+      type="button"
       title="Click to replay animation"
     >
       <code className="typewriter-code">
         {renderCode()}
         {!isComplete && <span className="typewriter-cursor" aria-hidden="true" />}
       </code>
-    </div>
+    </button>
   );
 }
