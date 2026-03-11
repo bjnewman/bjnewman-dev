@@ -17,6 +17,19 @@
   background: #2a5a1e;
 }
 
+/* Mobile landscape: allow scrolling when viewport height is too short */
+@media (pointer: coarse) and (orientation: landscape) {
+  .overworld-page {
+    overflow-y: auto;
+  }
+
+  .overworld {
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: auto;
+  }
+}
+
 /* Game area — contains canvas + all position-dependent overlays */
 .overworld__game-area {
   position: relative;
