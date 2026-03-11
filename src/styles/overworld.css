@@ -865,6 +865,39 @@
   }
 }
 
+@media (pointer: coarse) and (orientation: landscape) {
+  .welcome-modal__overlay {
+    position: fixed;
+    overflow-y: auto;
+  }
+
+  .welcome-modal {
+    max-height: none;
+    margin: 1rem auto;
+  }
+
+  .welcome-modal__title {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .welcome-modal__content {
+    margin-bottom: 0.75rem;
+  }
+
+  .welcome-modal__content p {
+    margin-bottom: 0.5rem;
+  }
+
+  .welcome-modal__controls {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .welcome-modal__btn {
+    min-height: 44px;
+  }
+}
+
 /* Portrait orientation prompt — touch devices only */
 .overworld__rotate-prompt {
   display: none;
