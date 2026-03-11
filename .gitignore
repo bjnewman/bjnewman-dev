@@ -47,3 +47,7 @@ wrangler.toml
 
 # Large media files
 *.webm
+*.mp4
+*.mov
+*.avi
+*.mkv
