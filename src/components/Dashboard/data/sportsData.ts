@@ -54,8 +54,8 @@ export function getCubsStatus(): TeamStatus {
 }
 
 /**
- * Get Bulls status - Play-in tournament probability.
- * The model is infallible.
+ * Get Bulls status - Failed to make the play-in.
+ * The model was wrong. An unprecedented failure.
  */
 export function getBullsStatus(): TeamStatus {
   return {
@@ -63,13 +63,13 @@ export function getBullsStatus(): TeamStatus {
     name: 'Chicago Bulls',
     emoji: '🐂',
     metric: {
-      label: 'Play-in Probability',
-      value: 100,
+      label: 'Play-in Result',
+      value: 0,
       unit: '%',
-      description: 'Statistical models cannot account for organizational decisions',
+      description: 'Failed to make the play-in tournament for the first time since 2021',
     },
     sentiment: 'misery',
-    funFact: 'The model has never been wrong. Every year: play-in bound.',
+    funFact: 'The Internal Model™ was wrong for the first time. We are in uncharted territory.',
     color: '#ce1141', // Bulls red
   };
 }

@@ -201,7 +201,7 @@ describe('BullsModels', () => {
     expect(svg).toHaveAttribute('role', 'img');
     expect(svg).toHaveAttribute(
       'aria-label',
-      expect.stringContaining('Bulls play-in probability')
+      expect.stringContaining('Bulls play-in probability postmortem')
     );
   });
 
@@ -209,7 +209,7 @@ describe('BullsModels', () => {
     render(<BullsModels />);
 
     expect(
-      screen.getByText('Play-in Tournament Probability')
+      screen.getByText('Play-in Probability vs Reality')
     ).toBeInTheDocument();
   });
 
@@ -226,7 +226,7 @@ describe('BullsModels', () => {
     render(<BullsModels />);
 
     expect(
-      screen.getByText(/has correctly predicted play-in every season/)
+      screen.getByText(/was wrong for the first time since 2021/)
     ).toBeInTheDocument();
   });
 });

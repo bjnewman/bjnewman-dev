@@ -9,12 +9,13 @@ interface PredictionModel {
   name: string;
   probability: number;
   isInternal: boolean;
+  isActual?: boolean;
   note?: string;
 }
 
 /**
- * Mock external model predictions (these would vary year to year).
- * Our internal model is always 100% and has "never been wrong".
+ * Preseason predictions vs actual result.
+ * Every model was wrong. Our model was the most wrong.
  */
 const PREDICTION_MODELS: PredictionModel[] = [
   { name: 'ESPN BPI', probability: 67, isInternal: false },
@@ -25,7 +26,13 @@ const PREDICTION_MODELS: PredictionModel[] = [
     name: 'Internal Model™',
     probability: 100,
     isInternal: true,
-    note: 'Never been wrong',
+    note: 'Wrong for the first time',
+  },
+  {
+    name: 'Actual Result',
+    probability: 0,
+    isInternal: false,
+    isActual: true,
   },
 ];
 
@@ -37,7 +44,7 @@ interface BullsModelsChartProps {
  * Inner chart component that receives width from ParentSize.
  */
 function BullsModelsChart({ width }: BullsModelsChartProps) {
-  const height = 200;
+  const height = 230;
   const margin = { top: 20, right: 40, bottom: 30, left: 90 };
   const innerWidth = Math.max(width - margin.left - margin.right, 100);
   const innerHeight = height - margin.top - margin.bottom;
@@ -63,14 +70,14 @@ function BullsModelsChart({ width }: BullsModelsChartProps) {
 
   return (
     <div className="bulls-models">
-      <h4 className="bulls-models__title">Play-in Tournament Probability</h4>
+      <h4 className="bulls-models__title">Play-in Probability vs Reality</h4>
 
       <svg
         width="100%"
         height={height}
         viewBox={`0 0 ${width} ${height}`}
         role="img"
-        aria-label="Bulls play-in probability by model: External models range 58-72%, Internal Model at 100%"
+        aria-label="Bulls play-in probability postmortem: all models predicted 58-100%, actual result was 0%"
       >
         <Group left={margin.left} top={margin.top}>
           {/* Grid lines */}
@@ -88,22 +95,40 @@ function BullsModelsChart({ width }: BullsModelsChartProps) {
 
           {/* Bars */}
           {PREDICTION_MODELS.map((model) => {
-            const barWidth = xScale(model.probability);
+            const barWidth = Math.max(xScale(model.probability), 0);
             const barY = yScale(model.name) ?? 0;
             const barHeight = yScale.bandwidth();
 
+            const fill = model.isActual
+              ? 'var(--text-muted)'
+              : model.isInternal
+                ? '#ce1141'
+                : 'var(--text-muted)';
+
             return (
               <Group key={model.name}>
-                {/* Bar */}
-                <Bar
-                  x={0}
-                  y={barY}
-                  width={barWidth}
-                  height={barHeight}
-                  fill={model.isInternal ? '#ce1141' : 'var(--text-muted)'}
-                  rx={4}
-                  className={model.isInternal ? 'bulls-models__bar--internal' : ''}
-                />
+                {/* Bar — actual result is 0%, show a thin line */}
+                {model.isActual ? (
+                  <line
+                    x1={0}
+                    x2={0}
+                    y1={barY}
+                    y2={barY + barHeight}
+                    stroke="var(--text-muted)"
+                    strokeWidth={3}
+                  />
+                ) : (
+                  <Bar
+                    x={0}
+                    y={barY}
+                    width={barWidth}
+                    height={barHeight}
+                    fill={fill}
+                    rx={4}
+                    opacity={model.isInternal ? 1 : 0.5}
+                    className={model.isInternal ? 'bulls-models__bar--internal' : ''}
+                  />
+                )}
 
                 {/* Model name label */}
                 <Text
@@ -112,21 +137,33 @@ function BullsModelsChart({ width }: BullsModelsChartProps) {
                   textAnchor="end"
                   verticalAnchor="middle"
                   fontSize={10}
-                  fill={model.isInternal ? '#ce1141' : 'var(--text-secondary)'}
-                  fontWeight={model.isInternal ? 700 : 400}
+                  fill={
+                    model.isActual
+                      ? 'var(--text-primary)'
+                      : model.isInternal
+                        ? '#ce1141'
+                        : 'var(--text-secondary)'
+                  }
+                  fontWeight={model.isInternal || model.isActual ? 700 : 400}
                 >
                   {model.name}
                 </Text>
 
                 {/* Percentage label */}
                 <Text
-                  x={barWidth + 4}
+                  x={model.isActual ? 8 : barWidth + 4}
                   y={barY + barHeight / 2}
                   textAnchor="start"
                   verticalAnchor="middle"
                   fontSize={11}
-                  fill={model.isInternal ? '#ce1141' : 'var(--text-primary)'}
-                  fontWeight={model.isInternal ? 700 : 500}
+                  fill={
+                    model.isActual
+                      ? 'var(--text-primary)'
+                      : model.isInternal
+                        ? '#ce1141'
+                        : 'var(--text-primary)'
+                  }
+                  fontWeight={model.isInternal || model.isActual ? 700 : 500}
                 >
                   {`${model.probability}%`}
                 </Text>
@@ -151,16 +188,16 @@ function BullsModelsChart({ width }: BullsModelsChartProps) {
       </svg>
 
       <p className="bulls-models__note">
-        <span className="bulls-models__badge">Internal Model™</span> has correctly
-        predicted play-in every season since 2021.
+        <span className="bulls-models__badge">Internal Model™</span> was wrong
+        for the first time since 2021. We are recalibrating.
       </p>
     </div>
   );
 }
 
 /**
- * Bulls Play-in Probability comparison chart.
- * Shows external models vs our infallible internal prediction.
+ * Bulls Play-in Probability postmortem chart.
+ * Shows preseason predictions vs the grim reality.
  */
 export function BullsModels() {
   return (
